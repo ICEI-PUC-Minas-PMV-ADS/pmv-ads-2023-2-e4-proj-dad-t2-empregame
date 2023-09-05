@@ -73,51 +73,64 @@ Obs.: todas as informações para gerar os indicadores devem estar no diagrama d
 
 ## Requisitos
 
-As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto. Para determinar a prioridade de requisitos, aplicar uma técnica de priorização de requisitos e detalhar como a técnica foi aplicada.
+No projeto, sua estrutura e suas funções são determinadas a partir dos requisitos funcionais e não-funcionais. 
+
+Os requisitos funcionais podem ser definidos como a descrição das funções que os usuários poderão utilizar para satisfazer suas necessidades. Já os requisitos não funcionais são aqueles que descrevem as características de usabilidade e outros aspectos que o site necessita apresentar de maneira geral. 
+
+Portanto, com os estudos das personas e histórias dos usuários identificadas para o projeto, foram definidos os seguintes requisitos.
 
 ### Requisitos Funcionais
 
+Os requisitos funcionais do projeto e seus respectivos níveis de prioridade de entrega são apresentados na tabela a seguir.
+
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+|RF-001| A aplicação deve permitir a criação de usuários recrutadores, com os seguintes campos de preenchimento: Nome, e-mail, senha, telefone e opcionalmente o link do LinkedIn pessoal. | ALTA | 
+|RF-002| A aplicação deve permitir a criação de usuários candidatos, com os seguintes campos de preenchimento: Nome, e-mail, senha, telefone, telefone, Hardskills, Softskills e opcionalmente as Experiências Profissionais, Faculdade, Cursos, link do GitHub, LinkedIn, Instagram e Site(Portfólio).  | ALTO |
+|RF-003| A aplicação deve permitir o login de recrutadores e candidatos utilizando e-mail e senha.  | ALTO |
+|RF-004| A aplicação deve permitir recuperação de senha para recrutadores e candidatos.  | MÉDIA |
+|RF-005| A aplicação deve ter a opção do recrutador ou candidato editar seus dados cadastrais e excluir seu perfil.  | MÉDIA |
+|RF-006| A aplicação deve possuir uma listagem de vagas para candidatos, com cada vaga contendo os dados da empresa, requisitos da vaga, data de publicação, benefícios e remuneração.  | ALTO |
+|RF-007| A aplicação deverá dar a opção do candidato curtir a vaga, mostrando interesse nela. | ALTO |
+|RF-008| A aplicação terá filtro para o candidato buscar a vaga por linguagem de programação ou pelo nome na barra de pesquisa.  | BAIXA |
+|RF-009| A aplicação deve permitir o recrutador criar postagens de vaga, com os dados da empresa, requisitos necessários (Hardskill e Softskills) para a vaga, benefícios e remuneração.  | ALTO |
+|RF-010| A aplicação deverá ter uma lista com as vagas que o recrutador postou.  | ALTO |
+|RF-011| Para cada vaga, a aplicação deverá listar os candidatos que curtiram a vaga.  | ALTO |
+|RF-012| A aplicação deverá ter a opção para o recrutador curtir o candidato que desejar da lista de candidatos que curtiram a vaga, criando uma conexão para conversar via Chat (que a primeira mensagem pode ser iniciada pelo candidato ou pelo recrutador).  | ALTO |
+|RF-013| A aplicação deverá ter a opção de o recrutador encerrar a publicação da vaga quando desejar.  | MÉDIA |
+|RF-014| A aplicação terá que disponibilizar para os recrutadores a listagem de todos os candidatos cadastrados na plataforma, com a opção de buscar com auxilia de filtro de linguagem de programação ou barra de pesquisa.  | MÉDIA |
 
 ### Requisitos não Funcionais
 
+Os requisitos não funcionais que a equipe deverá seguir durante o desenvolvimento, como também seus respectivos níveis de prioridade de entrega são apresentados na tabela a seguir.
+
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
-
-Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-- [Requisitos Funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos Não Funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-Lembre-se que cada requisito deve corresponder à uma e somente uma
-característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
+|RNF-001| A aplicação deve funcionar 7 dias por semana, 24h por dia. | ALTA | 
+|RNF-002| O banco de dados da aplicação terá senhas criptografadas. |  MÉDIA |
+|RNF-003| A aplicação deverá funcionar em IOS e Android.  |  ALTA | 
+|RNF-005| O site deve ser compatível com os principais navegadores do mercado (Google Chrome, Firefox, Opera).  |  ALTA | 
+|RNF-006| A interface deve ser agradável, intuitiva, de fácil utilização para o usuário e deve ser organizado de tal maneira que os erros dos usuários sejam minimizados.  |  MÉDIA | 
+|RNF-007| Os formulários devem informar ao usuário quais são os campos de preenchimento obrigatório.  |  MÉDIA | 
+|RNF-008| Utilizar símbolo e ícone para ajudar no entendimento e conseguir uma associação imediata sobre aplicações de reconhecimento.  |  MÉDIA | 
 
 ## Restrições
 
-O projeto está restrito pelos itens apresentados na tabela a seguir.
+A tabela a seguir apresenta as condições que limitam a execução desse projeto.
 
 |ID| Restrição                                             |
 |--|-------------------------------------------------------|
-|01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
+|RE-01| O projeto deve ser entregue até dia 10/12/2023.  |
+|RE-02 | A equipe não pode contratar terceiros para o desenvolvimento do projeto.         |
+|RE-03 | O site deve ser desenvolvido utilizando linguagens de programação para banco de dados relacional, mais especificamente SQL.       |
+|RE-04 | O site deve ser desenvolvido utilizando linguagens de programação Back-end, mais especificamente TypeScript juntamente com o framework Nest.js e os frameworks Express e Prisma para a construção da API.     |
+|RE-05 |  site deve ser desenvolvido utilizando linguagens de programação Web, mais especificamente CSS, HTML, TypeScript e bem como o framework React.        |
+|RE-06 | O site deve ser desenvolvido utilizando linguagens de programação Mobile, mais especificamente CSS, TypeScript e bem como o framework React Native.       |
 
-Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
+## Técnica de Priorização de Requisitos
+Ao usar a matriz GUT na tecnologia, é possível avaliar fatores como a complexidade do projeto, a qualidade do código, a experiência da equipe de desenvolvimento e a disponibilidade de recursos. Cada um desses fatores pode ser avaliado de acordo com sua importância relativa para o sucesso do projeto, permitindo que a equipe de gerenciamento de projetos priorize os recursos e o tempo de acordo com as necessidades do projeto.
 
-> **Links Úteis**:
-> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
+![GUT](img/matriz-gut.png)
 
 ## Diagrama de Casos de Uso
 
