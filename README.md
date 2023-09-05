@@ -1,23 +1,23 @@
-# TÍTULO DO PROJETO
+# EMPREGAME
 
-`CURSO`
+`ANÁLISE E DESENVOLVIMENTO DE SISTEMAS`
 
-`DISCIPLINA`
+`Desenvolvimento de uma Aplicação Distribuída`
 
-`SEMESTRE`
+`4° SEMESTRE`
 
 Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
+* Jessica Gonçalves dos Santos 
+* João Paulo Jorges da Silva 
+* Mariano Teixeira Barbosa Contin 
 * Nome completo do aluno 4
 
 ## Orientador
 
-* Nome completo do professor 1
+* Leonardo Vilela Cardoso
 
 ## Instruções de utilização
 
