@@ -2,7 +2,7 @@
 
 `ANÁLISE E DESENVOLVIMENTO DE SISTEMAS`
 
-`Desenvolvimento de uma Aplicação Distribuída`
+`DESENVOLVIMENTO DE UMA APLICAÇÃO DISTRIBUÍDA`
 
 `4° SEMESTRE`
 
@@ -10,14 +10,14 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 
 ## Integrantes
 
-* Jessica Gonçalves dos Santos 
-* João Paulo Jorges da Silva 
-* Mariano Teixeira Barbosa Contin 
-* Nome completo do aluno 4
+- Jessica Gonçalves dos Santos
+- João Paulo Jorges da Silva
+- Mariano Teixeira Barbosa Contin
+- Nome completo do aluno 4
 
 ## Orientador
 
-* Leonardo Vilela Cardoso
+- Leonardo Vilela Cardoso
 
 ## Instruções de utilização
 

@@ -1,87 +1,94 @@
-
 # Metodologia
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a></span>
-
-Descreva aqui a metodologia de trabalho do grupo para atacar o problema. Definições sobre os ambiente de trabalho utilizados pela  equipe para desenvolver o projeto. Abrange a relação de ambientes utilizados, a estrutura para gestão do código fonte, além da definição do processo e ferramenta através dos quais a equipe se organiza (Gestão de Times).
+A metodologia adotada neste projeto busca seguir uma ordem para sua eficiência e organização, a qual é detalhada nos tópicos seguintes.
 
 ## Relação de Ambientes de Trabalho
 
-Os artefatos do projeto são desenvolvidos a partir de diversas plataformas e a relação dos ambientes com seu respectivo propósito deverá ser apresentada em uma tabela que especifica que detalha Ambiente, Plataforma e Link de Acesso. 
-Nota: Vide documento modelo do estudo de caso "Portal de Notícias" e defina também os ambientes e frameworks que serão utilizados no desenvolvimento de aplicações móveis.
+Os artefatos do projeto foram desenvolvidos utilizando:
+
+1. Código-fonte: Visual Studio Code
+
+2. Script de banco de dados: Firebase
+
+3. Documentação do projeto: Word
+
+4. Artefatos de design: Figma
 
 ## Controle de Versão
 
-A ferramenta de controle de versão adotada no projeto foi o
-[Git](https://git-scm.com/), sendo que o [Github](https://github.com)
-foi utilizado para hospedagem do repositório.
+O controle de versão torna possível rastrear e gerenciar as alterações em um código de software. As ferramentas de controle de versão auxiliam, portanto, o gerenciamento das equipes por conta das alterações ao código-fonte ao longo do tempo. O controle de versão e a ferramenta adotados no projeto são, respectivamente, o Git e o GitHub.
 
-O projeto segue a seguinte convenção para o nome de branches:
+Os sistemas de SCM - Source Control Management (ou Gerenciamento de controle do código-fonte) disponibilizam um histórico de execuções e manutenções de desenvolvimento no código, assim como ajudam a resolver conflitos durante a mesclagem de contribuições de várias origens.
 
-- `main`: versão estável já testada do software
-- `unstable`: versão já testada do software, porém instável
-- `testing`: versão em testes do software
-- `dev`: versão de desenvolvimento do software
+Assim sendo, o projeto segue a seguinte convenção para o nome de branches:
 
-Quanto à gerência de issues, o projeto adota a seguinte convenção para
-etiquetas:
+`main`: versão estável já testada do software;
 
-- `documentation`: melhorias ou acréscimos à documentação
-- `bug`: uma funcionalidade encontra-se com problemas
-- `enhancement`: uma funcionalidade precisa ser melhorada
-- `feature`: uma nova funcionalidade precisa ser introduzida
+`hotfix`: versão usada para corrigir os lançamentos de produção;
 
-Discuta como a configuração do projeto foi feita na ferramenta de versionamento escolhida. Exponha como a gerência de tags, merges, commits e branchs é realizada. Discuta como a gerência de issues foi realizada.
+`release`: versão em testes do software;
 
-> **Links Úteis**:
-> - [Microfundamento: Gerência de Configuração](https://pucminas.instructure.com/courses/87878/)
-> - [Tutorial GitHub](https://guides.github.com/activities/hello-world/)
-> - [Git e Github](https://www.youtube.com/playlist?list=PLHz_AreHm4dm7ZULPAmadvNhH6vk9oNZA)
->  - [Comparando fluxos de trabalho](https://www.atlassian.com/br/git/tutorials/comparing-workflows)
-> - [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
-> - [The gitflow workflow - in less than 5 mins](https://www.youtube.com/watch?v=1SXpE08hvGs)
+`develop`: versão de desenvolvimento do software;
+
+`feature`: uma nova funcionalidade do site ou atualização da documentação que precisa ser introduzida.
+
+![GitFlow](img/fluxo-de-controle-de-vers%C3%A3o.png)
 
 ## Gerenciamento de Projeto
 
 ### Divisão de Papéis
 
-Apresente a divisão de papéis entre os membros do grupo.
+Para o gerenciamento do projeto, a equipe optou pelo Scrum, metodologia ágil na otimização do processo de desenvolvimento.
 
-Exemplificação: A equipe utiliza metodologias ágeis, tendo escolhido o Scrum como base para definição do processo de desenvolvimento. A equipe está organizada da seguinte maneira:
-- Scrum Master: Felipe Domingos;
-- Product Owner: Rommel Carneiro;
-- Equipe de Desenvolvimento: Pedro Penna, Pedro Ivo, Rodrigo Richard;
-- Equipe de Design: Simone Nogueira.
+A equipe está organizada da seguinte forma:
 
-> **Links Úteis**:
-> - [11 Passos Essenciais para Implantar Scrum no seu Projeto](https://mindmaster.com.br/scrum-11-passos/)
-> - [Scrum em 9 minutos](https://www.youtube.com/watch?v=XfvQWnRgxG0)
-> - [Os papéis do Scrum e a verdade sobre cargos nessa técnica](https://www.atlassian.com/br/agile/scrum/roles)
+- Scrum Master: Jéssica Gonçalves
+- Product Owner: João Paulo
+- Equipe de Desenvolvimento: Mariano Teixeira
+- Equipe de Design: Thiago Terra
 
 ### Processo
 
-Coloque  informações sobre detalhes da implementação do Scrum seguido pelo grupo. O grupo deverá fazer uso do recurso de gerenciamento de projeto oferecido pelo GitHub, que permite acompanhar o andamento do projeto, a execução das tarefas e o status de desenvolvimento da solução.
- 
-> **Links Úteis**:
-> - [Planejamento e Gestáo Ágil de Projetos](https://pucminas.instructure.com/courses/87878/pages/unidade-2-tema-2-utilizacao-de-ferramentas-para-controle-de-versoes-de-software)
-> - [Sobre quadros de projeto](https://docs.github.com/pt/issues/organizing-your-work-with-project-boards/managing-project-boards/about-project-boards)
-> - [Project management, made simple](https://github.com/features/project-management/)
-> - [Sobre quadros de projeto](https://docs.github.com/pt/github/managing-your-work-on-github/about-project-boards)
-> - [Como criar Backlogs no Github](https://www.youtube.com/watch?v=RXEy6CFu9Hk)
-> - [Tutorial Slack](https://slack.com/intl/en-br/)
+A equipe utiliza o Scrum, essa metodologia Ágil se diferencia porque promove a junção de profissionais com diferentes papéis em um único time, dessa forma todos participam do desenvolvimento do projeto, sendo, de fato, uma só equipe.
+
+O time ágil é organizado de forma que pessoas fiquem responsáveis por garantir a qualidade, eficácia e eficiência do projeto. Isso é alcançado através dos pequenos ciclos de atividades e reuniões constantes para que a equipe possa alinhar o que vem fazendo e pensar formas de melhorar o processo com agilidade.
+
+Inicialmente, o P.O reuniu a equipe e apresentou o pacote de funcionalidades do projeto (o product backlog). A partir disso, as Sprints (os ciclos) foram definidas para a realização das tarefas. A Daily Scrum do grupo acontecia às 21:00 e, no início de cada sprint, acontecia a Sprint Planning Meeting para o planejamento e priorização dos itens do Product Backlog para aquele período.
+
+A equipe utiliza o Kanban disponível na aba projects no repositório do GitHub Classroom com as seguintes colunas:
+
+- Meetings: esta coluna apresenta os dias que aconteceram as reuniões da equipe, assim como os principais tópicos tratados.
+
+- Backlog: esta coluna apresenta as atividades a serem desenvolvidas, ou seja, o Product Backlog. Todas as atividades que acontecerão no projeto estarão dispostas nessa coluna.
+
+- To Do: esta coluna representa o Sprint Backlog. Este é o Sprint atual que estamos trabalhando.
+
+- In progress: quando uma tarefa tiver sido iniciada é movida para esta coluna.
+
+- Testing: esta coluna é para checar a qualidade do que está sendo produzido. Antes de qualquer entrega todos os tópicos dessa coluna deverão ser finalizados.
+
+- Done: nesta coluna são colocadas as tarefas que passaram pelos testes e controle de qualidade e estão prontos para ser entregues ao usuário.
 
 ### Ferramentas
 
 As ferramentas empregadas no projeto são:
 
-- Editor de código.
-- Ferramentas de comunicação
-- Ferramentas de desenho de tela (_wireframing_)
+- Editor de código: Visual Studio Code.
 
-O editor de código foi escolhido porque ele possui uma integração com o sistema de versão. As ferramentas de comunicação utilizadas possuem integração semelhante e por isso foram selecionadas. Por fim, para criar diagramas utilizamos essa ferramenta por melhor captar as necessidades da nossa solução.
+O editor de código escolhido foi o Visual Studio Code por conta da facilidade no manuseio por parte de quem está iniciando na área.
 
-Liste quais ferramentas foram empregadas no desenvolvimento do projeto, justificando a escolha delas, sempre que possível.
- 
-> **Possíveis Ferramentas que auxiliarão no gerenciamento**: 
-> - [Slack](https://slack.com/)
-> - [Github](https://github.com/)
+- Ferramentas de comunicação: Teams.
+
+A ferramenta de comunicação utilizada entre o grupo é o Microsoft Teams, disponibilizado pela PUC Minas, para reuniões de planejamento do projeto.
+
+- Ferramentas de desenho de tela (wireframing) e prototipação: Figma.
+
+O projeto em Wireframe foi criado na plataforma de prototipagem Figma, e a mesma ferramenta será utilizada para o protótipo de baixa fidelidade do projeto.
+
+- Ferramenta de backup dos documentos: OneDrive.
+
+O backup dos documentos está sendo feito no OneDrive para facilitar o compartilhamento dos arquivos entre a equipe.
+
+- Ferramenta de gerenciamento de projeto: GitHub.
+
+O quadro Kanban do grupo no GitHub Classroom foi organizado e distribuído com as tarefas conforme a Figura W. A definição desta estrutura se baseou na proposta feita por Littlefield (2016) e a mesma está [disponível aqui](https://github.com/orgs/ICEI-PUC-Minas-PMV-ADS/projects/533/views/1).
