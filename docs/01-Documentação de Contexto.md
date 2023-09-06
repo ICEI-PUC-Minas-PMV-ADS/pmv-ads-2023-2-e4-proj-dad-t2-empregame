@@ -1,5 +1,9 @@
 ## INTRODUÇÃO
 
+Neste trabalho, abordaremos os principais elementos do projeto que visa melhorar o processo de recrutamento de profissionais de tecnologia. O recrutamento tradicional muitas vezes é moroso e ineficiente, levando empresas a gastarem recursos significativos na busca por candidatos adequados. Este projeto tem como objetivo desenvolver um aplicativo inovador que utiliza classificação de habilidades para agilizar e aprimorar a identificação de candidatos qualificados. 
+
+Ao longo deste documento, exploraremos o problema do recrutamento tradicional, os objetivos do projeto, sua justificativa e o público-alvo que se beneficiará deste sistema. Vamos analisar como o mercado de tecnologia em constante crescimento torna o recrutamento de profissionais qualificados uma tarefa cada vez mais desafiadora e como este projeto oferece uma solução promissora para reduzir o tempo e os custos associados ao processo de recrutamento. 
+
 ### 1.1 Problema
 
 O processo de recrutamento tradicional é lento e pouco eficiente, pois as empresas geralmente precisam analisar um grande número de currículos para encontrar candidatos que tenham as habilidades necessárias para a vaga. Isso pode levar a um desperdício de tempo e recursos, além de aumentar o risco de contratar um candidato que não seja adequado para a posição.
