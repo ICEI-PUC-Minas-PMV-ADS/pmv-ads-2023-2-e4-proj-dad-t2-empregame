@@ -1,0 +1,162 @@
+<mxfile host="app.diagrams.net" modified="2023-09-06T18:35:16.683Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" etag="6msIfnUGt8VTYmm5q7RS" version="21.7.2" type="device" pages="3">
+  <diagram name="Cadastro" id="lwsic8dQmecZoKoQE_oe">
+    <mxGraphModel dx="1434" dy="750" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="q20c37088e8rleNogX4Y-1" value="Fluxo para candidatos - Cadastro" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=1;startSize=20;horizontalStack=0;html=1;" vertex="1" parent="1">
+          <mxGeometry x="157" y="153" width="601" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-2" value="Candidato" style="swimlane;startSize=20;horizontal=0;html=1;" vertex="1" parent="q20c37088e8rleNogX4Y-1">
+          <mxGeometry y="20" width="601" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="q20c37088e8rleNogX4Y-2" source="q20c37088e8rleNogX4Y-13" target="q20c37088e8rleNogX4Y-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="102" y="64" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-13" value="" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=standard;symbol=general;" vertex="1" parent="q20c37088e8rleNogX4Y-2">
+          <mxGeometry x="50" y="51" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="q20c37088e8rleNogX4Y-2" source="q20c37088e8rleNogX4Y-15" target="q20c37088e8rleNogX4Y-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-15" value="Fazer download da aplicação" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="q20c37088e8rleNogX4Y-2">
+          <mxGeometry x="103" y="34" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="q20c37088e8rleNogX4Y-2" source="q20c37088e8rleNogX4Y-16" target="q20c37088e8rleNogX4Y-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-16" value="Efetuar o cadastro" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="q20c37088e8rleNogX4Y-2">
+          <mxGeometry x="221" y="34" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="q20c37088e8rleNogX4Y-2" source="q20c37088e8rleNogX4Y-17" target="q20c37088e8rleNogX4Y-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-17" value="Preencher suas habilidades" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="q20c37088e8rleNogX4Y-2">
+          <mxGeometry x="340" y="34" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-20" value="Publicar perfil&amp;nbsp;" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="q20c37088e8rleNogX4Y-2">
+          <mxGeometry x="459" y="34" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-6" value="Fluxo para recrutadores - Cadastro" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=1;startSize=20;horizontalStack=0;html=1;" vertex="1" parent="1">
+          <mxGeometry x="157" y="331" width="604" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-7" value="Recrutador" style="swimlane;startSize=20;horizontal=0;html=1;" vertex="1" parent="q20c37088e8rleNogX4Y-6">
+          <mxGeometry y="20" width="604" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="q20c37088e8rleNogX4Y-7" source="q20c37088e8rleNogX4Y-14" target="q20c37088e8rleNogX4Y-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-14" value="" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=standard;symbol=general;" vertex="1" parent="q20c37088e8rleNogX4Y-7">
+          <mxGeometry x="46" y="47.5" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="q20c37088e8rleNogX4Y-7" source="q20c37088e8rleNogX4Y-22" target="q20c37088e8rleNogX4Y-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-22" value="Fazer download da aplicação" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="q20c37088e8rleNogX4Y-7">
+          <mxGeometry x="90" y="30.5" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="q20c37088e8rleNogX4Y-7" source="q20c37088e8rleNogX4Y-23" target="q20c37088e8rleNogX4Y-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-23" value="Efetuar o cadastro da vaga" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="q20c37088e8rleNogX4Y-7">
+          <mxGeometry x="206" y="30.5" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="q20c37088e8rleNogX4Y-7" source="q20c37088e8rleNogX4Y-24" target="q20c37088e8rleNogX4Y-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-24" value="Preencher habilidades necessárias" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="q20c37088e8rleNogX4Y-7">
+          <mxGeometry x="338" y="30.5" width="88" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="q20c37088e8rleNogX4Y-25" value="Publicar a vaga" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="q20c37088e8rleNogX4Y-7">
+          <mxGeometry x="456" y="30.5" width="89" height="59" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Utilização" id="Fke4sNGM0-lnR5zUGiEE">
+    <mxGraphModel dx="1434" dy="750" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-0" />
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-1" parent="YSeM_KEvUy1cvF96Ik2r-0" />
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-2" value="Fluxo para candidatos - Cadastro" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=1;startSize=20;horizontalStack=0;html=1;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-1">
+          <mxGeometry x="157" y="153" width="601" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-3" value="Candidato" style="swimlane;startSize=20;horizontal=0;html=1;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-2">
+          <mxGeometry y="20" width="601" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="YSeM_KEvUy1cvF96Ik2r-3" source="YSeM_KEvUy1cvF96Ik2r-5" target="YSeM_KEvUy1cvF96Ik2r-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="102" y="64" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-5" value="" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=standard;symbol=general;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-3">
+          <mxGeometry x="50" y="51" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="YSeM_KEvUy1cvF96Ik2r-3" source="YSeM_KEvUy1cvF96Ik2r-7" target="YSeM_KEvUy1cvF96Ik2r-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-7" value="Fazer download da aplicação" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-3">
+          <mxGeometry x="103" y="34" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="YSeM_KEvUy1cvF96Ik2r-3" source="YSeM_KEvUy1cvF96Ik2r-9" target="YSeM_KEvUy1cvF96Ik2r-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-9" value="Efetuar o cadastro" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-3">
+          <mxGeometry x="221" y="34" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="YSeM_KEvUy1cvF96Ik2r-3" source="YSeM_KEvUy1cvF96Ik2r-11" target="YSeM_KEvUy1cvF96Ik2r-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-11" value="Preencher suas habilidades" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-3">
+          <mxGeometry x="340" y="34" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-12" value="Publicar perfil&amp;nbsp;" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-3">
+          <mxGeometry x="459" y="34" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-13" value="Fluxo para recrutadores - Cadastro" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=1;startSize=20;horizontalStack=0;html=1;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-1">
+          <mxGeometry x="157" y="331" width="604" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-14" value="Recrutador" style="swimlane;startSize=20;horizontal=0;html=1;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-13">
+          <mxGeometry y="20" width="604" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="YSeM_KEvUy1cvF96Ik2r-14" source="YSeM_KEvUy1cvF96Ik2r-16" target="YSeM_KEvUy1cvF96Ik2r-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-16" value="" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=standard;symbol=general;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-14">
+          <mxGeometry x="46" y="47.5" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="YSeM_KEvUy1cvF96Ik2r-14" source="YSeM_KEvUy1cvF96Ik2r-18" target="YSeM_KEvUy1cvF96Ik2r-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-18" value="Fazer download da aplicação" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-14">
+          <mxGeometry x="90" y="30.5" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="YSeM_KEvUy1cvF96Ik2r-14" source="YSeM_KEvUy1cvF96Ik2r-20" target="YSeM_KEvUy1cvF96Ik2r-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-20" value="Efetuar o cadastro da vaga" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-14">
+          <mxGeometry x="206" y="30.5" width="89" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="YSeM_KEvUy1cvF96Ik2r-14" source="YSeM_KEvUy1cvF96Ik2r-22" target="YSeM_KEvUy1cvF96Ik2r-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-22" value="Preencher habilidades necessárias" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-14">
+          <mxGeometry x="338" y="30.5" width="88" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="YSeM_KEvUy1cvF96Ik2r-23" value="Publicar a vaga" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=user;" vertex="1" parent="YSeM_KEvUy1cvF96Ik2r-14">
+          <mxGeometry x="456" y="30.5" width="89" height="59" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="7xcVcS7LI2u6HWfsIKFe" name="Cancelamento de conta / vaga">
+    <mxGraphModel dx="1434" dy="750" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
