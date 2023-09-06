@@ -2,7 +2,7 @@
 
 <span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
 
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
+Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
 
 Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
 
@@ -13,6 +13,7 @@ Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se de
 Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
 
 > **Links Úteis**:
+>
 > - [Rock Content](https://rockcontent.com/blog/personas/)
 > - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
 > - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
@@ -20,31 +21,32 @@ Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos 
 > - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
 > - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
 >
-Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
+> Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
 
 ## Histórias de Usuários
 
 Com base na análise das personas forma identificadas as seguintes histórias de usuários:
 
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
+| EU COMO... `PERSONA` | QUERO/PRECISO ... `FUNCIONALIDADE` | PARA ... `MOTIVO/VALOR`                |
+| -------------------- | ---------------------------------- | -------------------------------------- |
+| Usuário do sistema   | Registrar minhas tarefas           | Não esquecer de fazê-las               |
+| Administrador        | Alterar permissões                 | Permitir que possam administrar contas |
 
 Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
 
 > **Links Úteis**:
+>
 > - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
 > - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
 > - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
 > - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
 > - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
 
-## Modelagem do Processo de Negócio 
+## Modelagem do Processo de Negócio
 
 ### Análise da Situação Atual
 
-Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional. 
+Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional.
 
 ### Descrição Geral da Proposta
 
@@ -52,7 +54,7 @@ Apresente aqui uma descrição da sua proposta abordando seus limites e suas lig
 
 ### Processo 1 – NOME DO PROCESSO
 
-Apresente aqui o nome e as oportunidades de melhorias para o processo 1. Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN. 
+Apresente aqui o nome e as oportunidades de melhorias para o processo 1. Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN.
 
 ![Processo 1](img/02-bpmn-proc1.png)
 
@@ -64,18 +66,18 @@ Apresente aqui o nome e as oportunidades de melhorias para o processo 2. Em segu
 
 ## Indicadores de Desempenho
 
-Apresente aqui os principais indicadores de desempenho e algumas metas para o processo. Atenção: as informações necessárias para gerar os indicadores devem estar contempladas no diagrama de classe. Colocar no mínimo 5 indicadores. 
+Apresente aqui os principais indicadores de desempenho e algumas metas para o processo. Atenção: as informações necessárias para gerar os indicadores devem estar contempladas no diagrama de classe. Colocar no mínimo 5 indicadores.
 
-Usar o seguinte modelo: 
+Usar o seguinte modelo:
 
 ![Indicadores de Desempenho](img/02-indic-desemp.png)
-Obs.: todas as informações para gerar os indicadores devem estar no diagrama de classe a ser apresentado a posteriori. 
+Obs.: todas as informações para gerar os indicadores devem estar no diagrama de classe a ser apresentado a posteriori.
 
 ## Requisitos
 
-No projeto, sua estrutura e suas funções são determinadas a partir dos requisitos funcionais e não-funcionais. 
+No projeto, sua estrutura e suas funções são determinadas a partir dos requisitos funcionais e não-funcionais.
 
-Os requisitos funcionais podem ser definidos como a descrição das funções que os usuários poderão utilizar para satisfazer suas necessidades. Já os requisitos não funcionais são aqueles que descrevem as características de usabilidade e outros aspectos que o site necessita apresentar de maneira geral. 
+Os requisitos funcionais podem ser definidos como a descrição das funções que os usuários poderão utilizar para satisfazer suas necessidades. Já os requisitos não funcionais são aqueles que descrevem as características de usabilidade e outros aspectos que o site necessita apresentar de maneira geral.
 
 Portanto, com os estudos das personas e histórias dos usuários identificadas para o projeto, foram definidos os seguintes requisitos.
 
@@ -83,62 +85,64 @@ Portanto, com os estudos das personas e histórias dos usuários identificadas p
 
 Os requisitos funcionais do projeto e seus respectivos níveis de prioridade de entrega são apresentados na tabela a seguir.
 
-|ID    | Descrição do Requisito  | Prioridade |
-|------|-----------------------------------------|----|
-|RF-001| A aplicação deve permitir a criação de usuários recrutadores, com os seguintes campos de preenchimento: Nome, e-mail, senha, telefone e opcionalmente o link do LinkedIn pessoal. | ALTA | 
-|RF-002| A aplicação deve permitir a criação de usuários candidatos, com os seguintes campos de preenchimento: Nome, e-mail, senha, telefone, telefone, Hardskills, Softskills e opcionalmente as Experiências Profissionais, Faculdade, Cursos, link do GitHub, LinkedIn, Instagram e Site(Portfólio).  | ALTO |
-|RF-003| A aplicação deve permitir o login de recrutadores e candidatos utilizando e-mail e senha.  | ALTO |
-|RF-004| A aplicação deve permitir recuperação de senha para recrutadores e candidatos.  | MÉDIA |
-|RF-005| A aplicação deve ter a opção do recrutador ou candidato editar seus dados cadastrais e excluir seu perfil.  | MÉDIA |
-|RF-006| A aplicação deve possuir uma listagem de vagas para candidatos, com cada vaga contendo os dados da empresa, requisitos da vaga, data de publicação, benefícios e remuneração.  | ALTO |
-|RF-007| A aplicação deverá dar a opção do candidato curtir a vaga, mostrando interesse nela. | ALTO |
-|RF-008| A aplicação terá filtro para o candidato buscar a vaga por linguagem de programação ou pelo nome na barra de pesquisa.  | BAIXA |
-|RF-009| A aplicação deve permitir o recrutador criar postagens de vaga, com os dados da empresa, requisitos necessários (Hardskill e Softskills) para a vaga, benefícios e remuneração.  | ALTO |
-|RF-010| A aplicação deverá ter uma lista com as vagas que o recrutador postou.  | ALTO |
-|RF-011| Para cada vaga, a aplicação deverá listar os candidatos que curtiram a vaga.  | ALTO |
-|RF-012| A aplicação deverá ter a opção para o recrutador curtir o candidato que desejar da lista de candidatos que curtiram a vaga, criando uma conexão para conversar via Chat (que a primeira mensagem pode ser iniciada pelo candidato ou pelo recrutador).  | ALTO |
-|RF-013| A aplicação deverá ter a opção de o recrutador encerrar a publicação da vaga quando desejar.  | MÉDIA |
-|RF-014| A aplicação terá que disponibilizar para os recrutadores a listagem de todos os candidatos cadastrados na plataforma, com a opção de buscar com auxilia de filtro de linguagem de programação ou barra de pesquisa.  | MÉDIA |
+| ID     | Descrição do Requisito                                                                                                                                                                                                                                                                         | Prioridade |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| RF-001 | A aplicação deve permitir a criação de usuários recrutadores, com os seguintes campos de preenchimento: Nome, e-mail, senha, telefone e opcionalmente o link do LinkedIn pessoal.                                                                                                              | ALTA       |
+| RF-002 | A aplicação deve permitir a criação de usuários candidatos, com os seguintes campos de preenchimento: Nome, e-mail, senha, telefone, telefone, Hardskills, Softskills e opcionalmente as Experiências Profissionais, Faculdade, Cursos, link do GitHub, LinkedIn, Instagram e Site(Portfólio). | ALTO       |
+| RF-003 | A aplicação deve permitir o login de recrutadores e candidatos utilizando e-mail e senha.                                                                                                                                                                                                      | ALTO       |
+| RF-004 | A aplicação deve permitir recuperação de senha para recrutadores e candidatos.                                                                                                                                                                                                                 | MÉDIA      |
+| RF-005 | A aplicação deve ter a opção do recrutador ou candidato editar seus dados cadastrais e excluir seu perfil.                                                                                                                                                                                     | MÉDIA      |
+| RF-006 | A aplicação deve possuir uma listagem de vagas para candidatos, com cada vaga contendo os dados da empresa, requisitos da vaga, data de publicação, benefícios e remuneração.                                                                                                                  | ALTO       |
+| RF-007 | A aplicação deverá dar a opção do candidato curtir a vaga, mostrando interesse nela.                                                                                                                                                                                                           | ALTO       |
+| RF-008 | A aplicação terá filtro para o candidato buscar a vaga por linguagem de programação ou pelo nome na barra de pesquisa.                                                                                                                                                                         | BAIXA      |
+| RF-009 | A aplicação deve permitir o recrutador criar postagens de vaga, com os dados da empresa, requisitos necessários (Hardskill e Softskills) para a vaga, benefícios e remuneração.                                                                                                                | ALTO       |
+| RF-010 | A aplicação deverá ter uma lista com as vagas que o recrutador postou.                                                                                                                                                                                                                         | ALTO       |
+| RF-011 | Para cada vaga, a aplicação deverá listar os candidatos que curtiram a vaga.                                                                                                                                                                                                                   | ALTO       |
+| RF-012 | A aplicação deverá ter a opção para o recrutador curtir o candidato que desejar da lista de candidatos que curtiram a vaga, criando uma conexão para conversar via Chat (que a primeira mensagem pode ser iniciada pelo candidato ou pelo recrutador).                                         | ALTO       |
+| RF-013 | A aplicação deverá ter a opção de o recrutador encerrar a publicação da vaga quando desejar.                                                                                                                                                                                                   | MÉDIA      |
+| RF-014 | A aplicação terá que disponibilizar para os recrutadores a listagem de todos os candidatos cadastrados na plataforma, com a opção de buscar com auxilia de filtro de linguagem de programação ou barra de pesquisa.                                                                            | MÉDIA      |
 
 ### Requisitos não Funcionais
 
 Os requisitos não funcionais que a equipe deverá seguir durante o desenvolvimento, como também seus respectivos níveis de prioridade de entrega são apresentados na tabela a seguir.
 
-|ID     | Descrição do Requisito  |Prioridade |
-|-------|-------------------------|----|
-|RNF-001| A aplicação deve funcionar 7 dias por semana, 24h por dia. | ALTA | 
-|RNF-002| O banco de dados da aplicação terá senhas criptografadas. |  MÉDIA |
-|RNF-003| A aplicação deverá funcionar em IOS e Android.  |  ALTA | 
-|RNF-005| O site deve ser compatível com os principais navegadores do mercado (Google Chrome, Firefox, Opera).  |  ALTA | 
-|RNF-006| A interface deve ser agradável, intuitiva, de fácil utilização para o usuário e deve ser organizado de tal maneira que os erros dos usuários sejam minimizados.  |  MÉDIA | 
-|RNF-007| Os formulários devem informar ao usuário quais são os campos de preenchimento obrigatório.  |  MÉDIA | 
-|RNF-008| Utilizar símbolo e ícone para ajudar no entendimento e conseguir uma associação imediata sobre aplicações de reconhecimento.  |  MÉDIA | 
+| ID      | Descrição do Requisito                                                                                                                                          | Prioridade |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| RNF-001 | A aplicação deve funcionar 7 dias por semana, 24h por dia.                                                                                                      | ALTA       |
+| RNF-002 | O banco de dados da aplicação terá senhas criptografadas.                                                                                                       | MÉDIA      |
+| RNF-003 | A aplicação deverá funcionar em IOS e Android.                                                                                                                  | ALTA       |
+| RNF-005 | O site deve ser compatível com os principais navegadores do mercado (Google Chrome, Firefox, Opera).                                                            | ALTA       |
+| RNF-006 | A interface deve ser agradável, intuitiva, de fácil utilização para o usuário e deve ser organizado de tal maneira que os erros dos usuários sejam minimizados. | MÉDIA      |
+| RNF-007 | Os formulários devem informar ao usuário quais são os campos de preenchimento obrigatório.                                                                      | MÉDIA      |
+| RNF-008 | Utilizar símbolo e ícone para ajudar no entendimento e conseguir uma associação imediata sobre aplicações de reconhecimento.                                    | MÉDIA      |
 
 ## Restrições
 
 A tabela a seguir apresenta as condições que limitam a execução desse projeto.
 
-|ID| Restrição                                             |
-|--|-------------------------------------------------------|
-|RE-01| O projeto deve ser entregue até dia 10/12/2023.  |
-|RE-02 | A equipe não pode contratar terceiros para o desenvolvimento do projeto.         |
-|RE-03 | O site deve ser desenvolvido utilizando linguagens de programação para banco de dados relacional, mais especificamente SQL.       |
-|RE-04 | O site deve ser desenvolvido utilizando linguagens de programação Back-end, mais especificamente TypeScript juntamente com o framework Nest.js e os frameworks Express e Prisma para a construção da API.     |
-|RE-05 |  site deve ser desenvolvido utilizando linguagens de programação Web, mais especificamente CSS, HTML, TypeScript e bem como o framework React.        |
-|RE-06 | O site deve ser desenvolvido utilizando linguagens de programação Mobile, mais especificamente CSS, TypeScript e bem como o framework React Native.       |
+| ID    | Restrição                                                                                                                                                                                                 |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RE-01 | O projeto deve ser entregue até dia 10/12/2023.                                                                                                                                                           |
+| RE-02 | A equipe não pode contratar terceiros para o desenvolvimento do projeto.                                                                                                                                  |
+| RE-03 | O site deve ser desenvolvido utilizando linguagens de programação para banco de dados relacional, mais especificamente SQL.                                                                               |
+| RE-04 | O site deve ser desenvolvido utilizando linguagens de programação Back-end, mais especificamente TypeScript juntamente com o framework Nest.js e os frameworks Express e Prisma para a construção da API. |
+| RE-05 | site deve ser desenvolvido utilizando linguagens de programação Web, mais especificamente CSS, HTML, TypeScript e bem como o framework React.                                                             |
+| RE-06 | O site deve ser desenvolvido utilizando linguagens de programação Mobile, mais especificamente CSS, TypeScript e bem como o framework React Native.                                                       |
 
 ## Técnica de Priorização de Requisitos
+
 Ao usar a matriz GUT na tecnologia, é possível avaliar fatores como a complexidade do projeto, a qualidade do código, a experiência da equipe de desenvolvimento e a disponibilidade de recursos. Cada um desses fatores pode ser avaliado de acordo com sua importância relativa para o sucesso do projeto, permitindo que a equipe de gerenciamento de projetos priorize os recursos e o tempo de acordo com as necessidades do projeto.
 
 ![GUT](img/matriz-gut.png)
 
 ## Diagrama de Casos de Uso
 
-O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos. 
+O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos.
 
 As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Casos de Uso”.
 
 > **Links Úteis**:
+>
 > - [Criando Casos de Uso](https://www.ibm.com/docs/pt-br/elm/6.0?topic=requirements-creating-use-cases)
 > - [Como Criar Diagrama de Caso de Uso: Tutorial Passo a Passo](https://gitmind.com/pt/fazer-diagrama-de-caso-uso.html/)
 > - [Lucidchart](https://www.lucidchart.com/)
@@ -147,17 +151,9 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de
 
 # Matriz de Rastreabilidade
 
-A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualização dos relacionamento entre requisitos e outros artefatos ou objetos, permitindo a rastreabilidade entre os requisitos e os objetivos de negócio. 
+Para identificarmos a correlação entre os requisitos utilizamos a método a Matrix de Rastreabilidade entre Funcionalidades, representada no quadro abaixo:
 
-A matriz deve contemplar todos os elementos relevantes que fazem parte do sistema, conforme a figura meramente ilustrativa apresentada a seguir.
-
-![Exemplo de matriz de rastreabilidade](img/02-matriz-rastreabilidade.png)
-
-> **Links Úteis**:
-> - [Artigo Engenharia de Software 13 - Rastreabilidade](https://www.devmedia.com.br/artigo-engenharia-de-software-13-rastreabilidade/12822/)
-> - [Verificação da rastreabilidade de requisitos usando a integração do IBM Rational RequisitePro e do IBM ClearQuest Test Manager](https://developer.ibm.com/br/tutorials/requirementstraceabilityverificationusingrrpandcctm/)
-> - [IBM Engineering Lifecycle Optimization – Publishing](https://www.ibm.com/br-pt/products/engineering-lifecycle-optimization/publishing/)
-
+![Matriz de rastreabilidade](img/matriz-de-rastreabilidade.png)
 
 # Gerenciamento de Projeto
 
@@ -175,7 +171,7 @@ O gráfico de Gantt ou diagrama de Gantt também é uma ferramenta visual utiliz
 
 ## Gerenciamento de Equipe
 
-O gerenciamento adequado de tarefas contribuirá para que o projeto alcance altos níveis de produtividade. Por isso, é fundamental que ocorra a gestão de tarefas e de pessoas, de modo que os times envolvidos no projeto possam ser facilmente gerenciados. 
+O gerenciamento adequado de tarefas contribuirá para que o projeto alcance altos níveis de produtividade. Por isso, é fundamental que ocorra a gestão de tarefas e de pessoas, de modo que os times envolvidos no projeto possam ser facilmente gerenciados.
 
 ![Simple Project Timeline](img/02-project-timeline.png)
 
