@@ -13,7 +13,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 - Jessica Gonçalves dos Santos
 - João Paulo Jorges da Silva
 - Mariano Teixeira Barbosa Contin
-- Nome completo do aluno 4
+- Thiago Terra
 
 ## Orientador
 
