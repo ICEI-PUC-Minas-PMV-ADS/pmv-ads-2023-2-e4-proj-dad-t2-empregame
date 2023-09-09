@@ -1,46 +1,65 @@
 # Especificações do Projeto
 
-<span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
+Por meio da técnica de observação e brainstorming foram analisadas as necessidades dos usuários do sistema de forma a atender suas demandas. 
 
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
-
-Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
+A partir das informações coletadas, foram determinadas as personas e histórias de usuários que serão de suma importância para a definição das funcionalidades.
 
 ## Personas
 
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
+As personas, ou seja, os usuários ideais do site foram definidos abaixo: 
 
-Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
+**Isabela:**  
 
-> **Links Úteis**:
->
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
-> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
->
-> Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
+- Isabela tem 35 anos, mora em São Paulo e atua como Tech Recruiter em uma empresa de sua região. 
+- Ela recebeu uma solicitação do setor de RH da empresa para contratar alguns profissionais com perfil voltado para a área de tecnologia. 
+- Isabela verificou que os candidatos devem possuir algumas habilidades em linguagens de programação específicas. 
+- Ela então necessita de um meio para divulgar as vagas e assim receber candidaturas para a mesma. 
+- Isabela precisa verificar quem se interessou na vaga e se o perfil desta pessoa se encaixa na vaga, para possível contato.
+
+**Fernando:** 
+
+- Fernando tem 26 anos, atualmente mora em Belo Horizonte, atua como gestor de uma equipe de desenvolvedores em uma empresa de sua região. 
+- Ele percebe que necessita de mais um desenvolvedor .NET, pois o projeto está escalando e precisará de algumas alterações no sistema. 
+- Fernando então decide fazer uma busca ativa por candidatos que possuam conhecimento em .NET abertos ao mercado de trabalho. 
+- Ele após encontrar algum perfil que se enquadra na vaga, precisa entrar em contato com o candidato para apresentar a proposta. 
+
+**Felipe:** 
+
+- Felipe, mora em Belo Horizonte e possui 19 anos. 
+- Ele cursa Análise e Desenvolvimento de Sistemas e está em busca de sua primeira oportunidade como desenvolvedor. 
+- Felipe realizou diversos cursos direcionados para desenvolvimento web Frontend, criou seu portfólio e atuou como freelancer em alguns projetos da área. 
+- Ele então decide buscar vagas com o tema “Desenvolvedor Frontend”. 
+- Fernando, após encontrar alguma vaga interessante, tem a necessidade de demonstrar esse interesse para o recrutador, para que o mesmo possa analisar seu perfil.
+
+**Bianca:**
+
+- Bianca possui 23 anos, mora em São Paulo e atua como desenvolvedora Python. 
+- Ela está buscando uma recolocação na mesma linguagem de programação, porém em uma outra empresa. 
+- Bianca então deseja visualizar diversas vagas com esse tema, bem como os requisitos e benefícios, para assim tomar verificar se está vaga seria de seu interesse. 
+- Ela após encontrar uma vaga interessante, gostaria de demonstrar que está aberta a participar do processo de seleção. 
+- Bianca então, caso o recrutador goste do seu perfil, gostaria de entrar em contato para solucionar algumas dúvidas que restaram sobre a vaga. 
 
 ## Histórias de Usuários
 
-Com base na análise das personas forma identificadas as seguintes histórias de usuários:
+Com a observação do cotidiano das personas e a compreensão de suas necessidades, foram definidas as seguintes histórias de usuários.  
 
 | EU COMO... `PERSONA` | QUERO/PRECISO ... `FUNCIONALIDADE` | PARA ... `MOTIVO/VALOR`                |
 | -------------------- | ---------------------------------- | -------------------------------------- |
-| Usuário do sistema   | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-| Administrador        | Alterar permissões                 | Permitir que possam administrar contas |
-
-Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
-
-> **Links Úteis**:
->
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
+| Isabela | Realizar o seu cadastro e login no sistema como uma recrutadora. | Poder publicar vagas abertas em sua empresa ou encontrar candidatos de forma ativa. |
+|Felipe | Realizar o seu cadastro no aplicativo como um candidato. | Encontrar vagas relacionadas ao seu perfil e demostrar interesse nas mesmas. |
+| Fernando | Fazer alterações em seus dados cadastrais. | Ajustar o seu nível de habilidade em desenvolvimento Frontend. |
+| Bianca | Visualizar diversas vagas de trabalho no mercado de tecnologia. |Analisar requisitos das vagas, modelo de trabalho e remuneração. |
+| Bianca | Deletar seu perfil. | Encontrou a vaga que desejava. |
+| Felipe | Demostrar interesse em uma determinada vaga que se encaixou em seu perfil. |Mostrar ao recrutador seu interesse na vaga. |
+| Bianca | Filtrar as vagas que possuam requisitos relacionados a linguagem de programação que utiliza. | Possui preferência por vagas relacionadas a linguagem Python. |
+| Isabela | Criar uma postagem de vaga aberta em sua empresa. | Receber candidaturas pra que possa selecionar a pessoa ideal para a vaga. |
+| Fernando | Buscar candidatos com habilidades em uma linguagem de programação específica. | Procura alguém especializado em .NET C#. |
+| Isabela | Encerrar uma vaga aberta postada anteriormente na plataforma. | Encontrou o candidato que precisava. |
+| Fernando | Entrar em contato com um candidato que se enquadrou no perfil que buscava. | Solicitar mais informações ao candidato e marcar uma entrevista. |
+| Isabela | Verificar os candidatos interessados na vaga. | Selecionar os melhores perfis. |
+| Felipe | Recuperar sua senha. | Não se lembra da senha anterior. |
+| Isabela | Visualizar todas as vagas que postou na plataforma. | Controle de vagas abertas e encerradas. |
+| Fernando | Demonstrar interesse em um candidato. | Demonstrar ao candidato que gostou do seu perfil. |
 
 ## Modelagem do Processo de Negócio
 
