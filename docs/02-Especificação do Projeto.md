@@ -162,7 +162,7 @@ Em linhas gerais, o diagrama de casos de uso documenta o que o sistema deve faze
 
 O diagrama a seguir diz respeito ao projeto em questão:
 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/cbd27ae2-ea33-4e65-a37b-2d442384e6a6)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/81aef75b-25bb-42b9-a0fc-5aca7a8487b1)
 
 
 # Matriz de Rastreabilidade
