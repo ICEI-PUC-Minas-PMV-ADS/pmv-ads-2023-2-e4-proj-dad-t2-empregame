@@ -1,0 +1,161 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id         Int      @id @default(autoincrement()) @db.Integer
+  created_at DateTime @default(now()) @db.Timestamp
+  updated_at DateTime @updatedAt @db.Timestamp
+  nome       String   @db.VarChar(255)
+  tipo       String   @db.VarChar(255) // RECRUTADOR, CANDIDATO
+  senha      String   @db.VarChar(511)
+  email      String   @db.VarChar(255)
+  telefone   String?  @db.VarChar(255)
+  linkedin   String?  @db.VarChar(511)
+  github     String?  @db.VarChar(511)
+  portfolio  String?  @db.VarChar(511)
+
+  usuario_hardskill UsuarioHardskill[]
+  usuario_softskill UsuarioSoftskill[]
+  vaga_hardskill    VagaHardskill[]
+  vaga_softskill    VagaSoftskill[]
+  vaga_candidato    VagaCandidato[]
+  mensagem          Mensagem[]
+
+  @@map("usuario")
+}
+
+model Vaga {
+  id             Int       @id @default(autoincrement()) @db.Integer
+  created_at     DateTime  @default(now()) @db.Timestamp
+  updated_at     DateTime  @updatedAt @db.Timestamp
+  disabled_at    DateTime? @updatedAt @db.Timestamp
+  nome           String    @db.VarChar(255)
+  descricao      String    @db.Text
+  salario        String    @db.VarChar(255)
+  beneficios     String?   @db.Text
+  empresa_nome   String    @db.VarChar(255)
+  empresa_cidade String    @db.VarChar(255)
+  empresa_estado String    @db.VarChar(255)
+  situacao       String    @default("ATIVO") @db.VarChar(255) // ATIVO, INATIVO
+
+  vaga_candidato VagaCandidato[]
+
+  @@map("vaga")
+}
+
+model Hardskill {
+  id         Int      @id @default(autoincrement()) @db.Integer
+  created_at DateTime @default(now()) @db.Timestamp
+  nome       String   @db.VarChar(255)
+
+  usuario_hardskill UsuarioHardskill[]
+  vaga_hardskill    VagaHardskill[]
+
+  @@map("hardskill")
+}
+
+model Softskill {
+  id         Int      @id @default(autoincrement()) @db.Integer
+  created_at DateTime @default(now()) @db.Timestamp
+  nome       String   @db.VarChar(255)
+
+  usuario_softskill UsuarioSoftskill[]
+  vaga_softskill    VagaSoftskill[]
+
+  @@map("softskill")
+}
+
+model UsuarioHardskill {
+  id                Int      @id @default(autoincrement()) @db.Integer
+  created_at        DateTime @default(now()) @db.Timestamp
+  updated_at        DateTime @updatedAt @db.Timestamp
+  nivel_experiencia Int      @db.SmallInt // 1,2,3,4,5
+
+  id_usuario Int     @db.Integer
+  usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  id_hardskill Int       @db.Integer
+  hardskill    Hardskill @relation(fields: [id_hardskill], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("usuario_hardskill")
+}
+
+model UsuarioSoftskill {
+  id                Int      @id @default(autoincrement()) @db.Integer
+  created_at        DateTime @default(now()) @db.Timestamp
+  updated_at        DateTime @updatedAt @db.Timestamp
+  nivel_experiencia Int      @db.SmallInt // 1,2,3,4,5
+
+  id_usuario Int     @db.Integer
+  usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  id_softskill Int       @db.Integer
+  softskill    Softskill @relation(fields: [id_softskill], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("usuario_softskill")
+}
+
+model VagaHardskill {
+  id         Int      @id @default(autoincrement()) @db.Integer
+  created_at DateTime @default(now()) @db.Timestamp
+  updated_at DateTime @updatedAt @db.Timestamp
+
+  id_usuario Int     @db.Integer
+  usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  id_hardskill Int       @db.Integer
+  hardskill    Hardskill @relation(fields: [id_hardskill], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("vaga_hardskill")
+}
+
+model VagaSoftskill {
+  id         Int      @id @default(autoincrement()) @db.Integer
+  created_at DateTime @default(now()) @db.Timestamp
+  updated_at DateTime @updatedAt @db.Timestamp
+
+  id_usuario Int     @db.Integer
+  usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  id_softskill Int       @db.Integer
+  softskill    Softskill @relation(fields: [id_softskill], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("vaga_softskill")
+}
+
+model VagaCandidato {
+  id         Int      @id @default(autoincrement()) @db.Integer
+  created_at DateTime @default(now()) @db.Timestamp
+  updated_at DateTime @updatedAt @db.Timestamp
+  match      Boolean  @default(false)
+
+  id_usuario Int     @db.Integer
+  usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  id_vaga Int  @db.Integer
+  vaga    Vaga @relation(fields: [id_vaga], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  mensagem Mensagem[]
+
+  @@map("vaga_candidato")
+}
+
+model Mensagem {
+  id         Int      @id @default(autoincrement()) @db.Integer
+  created_at DateTime @default(now()) @db.Timestamp
+  conteudo   String   @db.Text
+
+  id_usuario Int     @db.Integer
+  usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  id_vaga_candidato Int           @db.Integer
+  vaga_candidato    VagaCandidato @relation(fields: [id_vaga_candidato], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("mensagem")
+}
