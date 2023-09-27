@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "usuario" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
     "nome" VARCHAR(255) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE "usuario" (
 
 -- CreateTable
 CREATE TABLE "vaga" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
     "disabled_at" TIMESTAMP,
@@ -35,7 +35,7 @@ CREATE TABLE "vaga" (
 
 -- CreateTable
 CREATE TABLE "hardskill" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "nome" VARCHAR(255) NOT NULL,
 
@@ -44,7 +44,7 @@ CREATE TABLE "hardskill" (
 
 -- CreateTable
 CREATE TABLE "softskill" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "nome" VARCHAR(255) NOT NULL,
 
@@ -53,69 +53,69 @@ CREATE TABLE "softskill" (
 
 -- CreateTable
 CREATE TABLE "usuario_hardskill" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
     "nivel_experiencia" SMALLINT NOT NULL,
-    "id_usuario" BIGINT NOT NULL,
-    "id_hardskill" BIGINT NOT NULL,
+    "id_usuario" INTEGER NOT NULL,
+    "id_hardskill" INTEGER NOT NULL,
 
     CONSTRAINT "usuario_hardskill_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "usuario_softskill" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
     "nivel_experiencia" SMALLINT NOT NULL,
-    "id_usuario" BIGINT NOT NULL,
-    "id_softskill" BIGINT NOT NULL,
+    "id_usuario" INTEGER NOT NULL,
+    "id_softskill" INTEGER NOT NULL,
 
     CONSTRAINT "usuario_softskill_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "vaga_hardskill" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
-    "id_usuario" BIGINT NOT NULL,
-    "id_hardskill" BIGINT NOT NULL,
+    "id_usuario" INTEGER NOT NULL,
+    "id_hardskill" INTEGER NOT NULL,
 
     CONSTRAINT "vaga_hardskill_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "vaga_softskill" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
-    "id_usuario" BIGINT NOT NULL,
-    "id_softskill" BIGINT NOT NULL,
+    "id_usuario" INTEGER NOT NULL,
+    "id_softskill" INTEGER NOT NULL,
 
     CONSTRAINT "vaga_softskill_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "vaga_candidato" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
     "match" BOOLEAN NOT NULL DEFAULT false,
-    "id_usuario" BIGINT NOT NULL,
-    "id_vaga" BIGINT NOT NULL,
+    "id_usuario" INTEGER NOT NULL,
+    "id_vaga" INTEGER NOT NULL,
 
     CONSTRAINT "vaga_candidato_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "mensagem" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "conteudo" TEXT NOT NULL,
-    "id_usuario" BIGINT NOT NULL,
-    "id_vaga_candidato" BIGINT NOT NULL,
+    "id_usuario" INTEGER NOT NULL,
+    "id_vaga_candidato" INTEGER NOT NULL,
 
     CONSTRAINT "mensagem_pkey" PRIMARY KEY ("id")
 );

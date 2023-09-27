@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Usuario {
-  id         BigInt   @id @default(autoincrement()) @db.BigInt
+  id         Int      @id @default(autoincrement()) @db.Integer
   created_at DateTime @default(now()) @db.Timestamp
   updated_at DateTime @updatedAt @db.Timestamp
   nome       String   @db.VarChar(255)
@@ -31,7 +31,7 @@ model Usuario {
 }
 
 model Vaga {
-  id             BigInt    @id @default(autoincrement()) @db.BigInt
+  id             Int       @id @default(autoincrement()) @db.Integer
   created_at     DateTime  @default(now()) @db.Timestamp
   updated_at     DateTime  @updatedAt @db.Timestamp
   disabled_at    DateTime? @updatedAt @db.Timestamp
@@ -50,7 +50,7 @@ model Vaga {
 }
 
 model Hardskill {
-  id         BigInt   @id @default(autoincrement()) @db.BigInt
+  id         Int      @id @default(autoincrement()) @db.Integer
   created_at DateTime @default(now()) @db.Timestamp
   nome       String   @db.VarChar(255)
 
@@ -61,7 +61,7 @@ model Hardskill {
 }
 
 model Softskill {
-  id         BigInt   @id @default(autoincrement()) @db.BigInt
+  id         Int      @id @default(autoincrement()) @db.Integer
   created_at DateTime @default(now()) @db.Timestamp
   nome       String   @db.VarChar(255)
 
@@ -72,74 +72,74 @@ model Softskill {
 }
 
 model UsuarioHardskill {
-  id                BigInt   @id @default(autoincrement()) @db.BigInt
+  id                Int      @id @default(autoincrement()) @db.Integer
   created_at        DateTime @default(now()) @db.Timestamp
   updated_at        DateTime @updatedAt @db.Timestamp
   nivel_experiencia Int      @db.SmallInt // 1,2,3,4,5
 
-  id_usuario BigInt  @db.BigInt
+  id_usuario Int     @db.Integer
   usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  id_hardskill BigInt    @db.BigInt
+  id_hardskill Int       @db.Integer
   hardskill    Hardskill @relation(fields: [id_hardskill], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("usuario_hardskill")
 }
 
 model UsuarioSoftskill {
-  id                BigInt   @id @default(autoincrement()) @db.BigInt
+  id                Int      @id @default(autoincrement()) @db.Integer
   created_at        DateTime @default(now()) @db.Timestamp
   updated_at        DateTime @updatedAt @db.Timestamp
   nivel_experiencia Int      @db.SmallInt // 1,2,3,4,5
 
-  id_usuario BigInt  @db.BigInt
+  id_usuario Int     @db.Integer
   usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  id_softskill BigInt    @db.BigInt
+  id_softskill Int       @db.Integer
   softskill    Softskill @relation(fields: [id_softskill], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("usuario_softskill")
 }
 
 model VagaHardskill {
-  id         BigInt   @id @default(autoincrement()) @db.BigInt
+  id         Int      @id @default(autoincrement()) @db.Integer
   created_at DateTime @default(now()) @db.Timestamp
   updated_at DateTime @updatedAt @db.Timestamp
 
-  id_usuario BigInt  @db.BigInt
+  id_usuario Int     @db.Integer
   usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  id_hardskill BigInt    @db.BigInt
+  id_hardskill Int       @db.Integer
   hardskill    Hardskill @relation(fields: [id_hardskill], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("vaga_hardskill")
 }
 
 model VagaSoftskill {
-  id         BigInt   @id @default(autoincrement()) @db.BigInt
+  id         Int      @id @default(autoincrement()) @db.Integer
   created_at DateTime @default(now()) @db.Timestamp
   updated_at DateTime @updatedAt @db.Timestamp
 
-  id_usuario BigInt  @db.BigInt
+  id_usuario Int     @db.Integer
   usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  id_softskill BigInt    @db.BigInt
+  id_softskill Int       @db.Integer
   softskill    Softskill @relation(fields: [id_softskill], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("vaga_softskill")
 }
 
 model VagaCandidato {
-  id         BigInt   @id @default(autoincrement()) @db.BigInt
+  id         Int      @id @default(autoincrement()) @db.Integer
   created_at DateTime @default(now()) @db.Timestamp
   updated_at DateTime @updatedAt @db.Timestamp
   match      Boolean  @default(false)
 
-  id_usuario BigInt  @db.BigInt
+  id_usuario Int     @db.Integer
   usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  id_vaga BigInt @db.BigInt
-  vaga    Vaga   @relation(fields: [id_vaga], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id_vaga Int  @db.Integer
+  vaga    Vaga @relation(fields: [id_vaga], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   mensagem Mensagem[]
 
@@ -147,14 +147,14 @@ model VagaCandidato {
 }
 
 model Mensagem {
-  id         BigInt   @id @default(autoincrement()) @db.BigInt
+  id         Int      @id @default(autoincrement()) @db.Integer
   created_at DateTime @default(now()) @db.Timestamp
   conteudo   String   @db.Text
 
-  id_usuario BigInt  @db.BigInt
+  id_usuario Int     @db.Integer
   usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  id_vaga_candidato BigInt        @db.BigInt
+  id_vaga_candidato Int           @db.Integer
   vaga_candidato    VagaCandidato @relation(fields: [id_vaga_candidato], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("mensagem")
