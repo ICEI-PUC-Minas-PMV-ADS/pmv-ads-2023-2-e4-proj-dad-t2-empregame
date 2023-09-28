@@ -6,9 +6,10 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
+import { VagaModule } from './vaga/vaga.module';
 
 @Module({
-  imports: [PrismaModule, UsuarioModule, AuthModule],
+  imports: [PrismaModule, UsuarioModule, AuthModule, VagaModule],
   controllers: [AppController],
   providers: [
     AppService,
