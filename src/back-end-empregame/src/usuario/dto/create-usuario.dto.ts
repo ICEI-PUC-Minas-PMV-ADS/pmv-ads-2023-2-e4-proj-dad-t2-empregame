@@ -1,14 +1,20 @@
-import { IsOptional, IsString } from '@nestjs/class-validator';
+import { IsEnum, IsOptional, IsString } from '@nestjs/class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+
+enum UsuarioTipo {
+  RECRUTADOR = 'RECRUTADOR',
+  CANDIDATO = 'CANDIDATO',
+}
 
 export class CreateUsuarioDto {
   @ApiProperty()
   @IsString()
   nome: string;
 
-  @ApiProperty()
+  @ApiProperty({ enum: UsuarioTipo })
   @IsString()
-  tipo: string;
+  @IsEnum(UsuarioTipo)
+  tipo: UsuarioTipo;
 
   @ApiProperty()
   @IsString()

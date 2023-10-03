@@ -10,14 +10,10 @@ import {
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import {
-  ApiBearerAuth,
-  ApiCreatedResponse,
-  ApiOkResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Usuario } from './entities/usuario.entity';
 import { Public } from 'decorators/is-public.decorator';
+import { AuthUser, IAuthUser } from 'utils/decorators/auth.decorator';
 
 @Controller('usuario')
 @ApiTags('usuario')
@@ -26,7 +22,7 @@ export class UsuarioController {
 
   @Public()
   @Post()
-  create(@Body() createUsuarioDto: CreateUsuarioDto) {
+  async create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuarioService.create(createUsuarioDto);
   }
 
@@ -36,8 +32,14 @@ export class UsuarioController {
     type: Usuario,
     isArray: true,
   })
-  findAll() {
+  async findAll() {
     return this.usuarioService.findAll();
+  }
+
+  @ApiBearerAuth()
+  @Get('hardskills')
+  async findHardskills(@AuthUser() user: IAuthUser) {
+    return this.usuarioService.findAllHardskills(user.usuario.id);
   }
 
   @ApiBearerAuth()
@@ -45,19 +47,22 @@ export class UsuarioController {
   @ApiOkResponse({
     type: Usuario,
   })
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.usuarioService.findOne(+id);
   }
 
   @ApiBearerAuth()
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateUsuarioDto: UpdateUsuarioDto,
+  ) {
     return this.usuarioService.update(+id, updateUsuarioDto);
   }
 
   @ApiBearerAuth()
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.usuarioService.remove(+id);
   }
 }

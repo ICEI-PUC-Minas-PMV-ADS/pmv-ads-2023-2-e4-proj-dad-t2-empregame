@@ -37,4 +37,12 @@ export class UsuarioService {
     await this.prisma.usuario.delete({ where: { id } });
     return;
   }
+
+  async findAllHardskills(id_usuario: number): Promise<any> {
+    const hardskills = await this.prisma.usuarioHardskill.findMany({
+      where: { id_usuario },
+    });
+
+    return hardskills;
+  }
 }

@@ -1,5 +1,10 @@
-import { IsOptional, IsString } from '@nestjs/class-validator';
+import { IsEnum, IsOptional, IsString } from '@nestjs/class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+
+enum VagaSituacao {
+  ATIVO = 'ATIVO',
+  INATIVO = 'INATIVO',
+}
 
 export class CreateVagaDto {
   @ApiProperty()
@@ -31,7 +36,8 @@ export class CreateVagaDto {
   @IsString()
   empresa_estado: string;
 
-  @ApiProperty()
+  @ApiProperty({enum: VagaSituacao})
   @IsString()
-  situacao: string;
+  @IsEnum(VagaSituacao)
+  situacao: VagaSituacao;
 }
