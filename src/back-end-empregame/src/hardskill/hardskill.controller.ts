@@ -1,12 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { HardskillService } from './hardskill.service';
 import { CreateHardskillDto } from './dto/create-hardskill.dto';
 import { UpdateHardskillDto } from './dto/update-hardskill.dto';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Hardskill } from './entities/hardskill.entity';
 
-@Controller('hardskill')
-@ApiTags('hardskill')
+@Controller('hardskills')
+@ApiTags('hardskills')
 @ApiBearerAuth()
 export class HardskillController {
   constructor(private readonly hardskillService: HardskillService) {}
@@ -17,13 +25,13 @@ export class HardskillController {
   }
 
   @Get()
-  @ApiOkResponse({type:Hardskill, isArray:true})
+  @ApiOkResponse({ type: Hardskill, isArray: true })
   findAll() {
     return this.hardskillService.findAll();
   }
 
   @Get(':id')
-  @ApiOkResponse({type:Hardskill})
+  @ApiOkResponse({ type: Hardskill })
   findOne(@Param('id') id: string) {
     return this.hardskillService.findOne(+id);
   }

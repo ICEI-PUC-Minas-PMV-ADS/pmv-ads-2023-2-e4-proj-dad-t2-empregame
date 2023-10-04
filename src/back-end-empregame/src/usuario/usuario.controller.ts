@@ -14,16 +14,20 @@ import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Usuario } from './entities/usuario.entity';
 import { Public } from 'decorators/is-public.decorator';
 import { AuthUser, IAuthUser } from 'utils/decorators/auth.decorator';
+import { CreateUsuarioHardskillDto } from './dto/create-usuario-hardskill.dto';
+import { UsuarioHardSkill } from './entities/usuario-hardskill.entity';
+import { CreateUsuarioSoftskillDto } from './dto/create-usuario-softskill.dto';
+import { UsuarioSoftSkill } from './entities/usuario-softskill.entity';
 
-@Controller('usuario')
-@ApiTags('usuario')
+@Controller('usuarios')
+@ApiTags('usuarios')
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
   @Public()
   @Post()
-  async create(@Body() createUsuarioDto: CreateUsuarioDto) {
-    return this.usuarioService.create(createUsuarioDto);
+  async create(@Body() data: CreateUsuarioDto) {
+    return this.usuarioService.create(data);
   }
 
   @ApiBearerAuth()
@@ -33,13 +37,62 @@ export class UsuarioController {
     isArray: true,
   })
   async findAll() {
-    return this.usuarioService.findAll();
+    const usuarios = await this.usuarioService.findAll();
+    return usuarios;
+  }
+
+  @ApiBearerAuth()
+  @Post('hardskills')
+  async createUsuarioHardskills(@Body() data: CreateUsuarioHardskillDto) {
+    await this.usuarioService.createUsuarioHardskill(data);
+    return;
   }
 
   @ApiBearerAuth()
   @Get('hardskills')
-  async findHardskills(@AuthUser() user: IAuthUser) {
-    return this.usuarioService.findAllHardskills(user.usuario.id);
+  @ApiOkResponse({
+    type: UsuarioHardSkill,
+    isArray: true,
+  })
+  async findUsuarioHardskills(@AuthUser() user: IAuthUser) {
+    const hardskills = await this.usuarioService.findAllUsuarioHardskills(
+      user.usuario.id,
+    );
+    return hardskills;
+  }
+
+  @ApiBearerAuth()
+  @Delete('hardskills/:id')
+  async removeUsuarioHardskills(@Param('id') id: string) {
+    await this.usuarioService.removeUsuarioHardskills(+id);
+    return;
+  }
+
+  @ApiBearerAuth()
+  @Post('softskills')
+  async createUsuarioSoftskills(@Body() data: CreateUsuarioSoftskillDto) {
+    await this.usuarioService.createUsuarioSoftskill(data);
+    return;
+  }
+
+  @ApiBearerAuth()
+  @Get('softskills')
+  @ApiOkResponse({
+    type: UsuarioSoftSkill,
+    isArray: true,
+  })
+  async findUsuarioSoftskills(@AuthUser() user: IAuthUser) {
+    const softskills = await this.usuarioService.findAllUsuarioSoftskills(
+      user.usuario.id,
+    );
+    return softskills;
+  }
+
+  @ApiBearerAuth()
+  @Delete('softskills/:id')
+  async removeUsuarioSoftskills(@Param('id') id: string) {
+    await this.usuarioService.removeUsuarioSoftskills(+id);
+    return;
   }
 
   @ApiBearerAuth()
@@ -52,17 +105,16 @@ export class UsuarioController {
   }
 
   @ApiBearerAuth()
-  @Patch(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateUsuarioDto: UpdateUsuarioDto,
-  ) {
-    return this.usuarioService.update(+id, updateUsuarioDto);
+  @Patch()
+  async update(@AuthUser() user: IAuthUser, @Body() data: UpdateUsuarioDto) {
+    await this.usuarioService.update(user.usuario.id, data);
+    return;
   }
 
   @ApiBearerAuth()
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.usuarioService.remove(+id);
+  @Delete()
+  async remove(@AuthUser() user: IAuthUser) {
+    await this.usuarioService.remove(user.usuario.id);
+    return;
   }
 }

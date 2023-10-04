@@ -7,8 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { VagaModule } from './vaga/vaga.module';
 import { HardskillModule } from './hardskill/hardskill.module';
 import { SoftskillModule } from './softskill/softskill.module';
-import { APP_GUARD } from '@nestjs/core';
-import { RedisGuard } from './auth/auth.guard';
+import { MensagemModule } from './mensagem/mensagem.module';
 
 @Module({
   imports: [
@@ -18,6 +17,7 @@ import { RedisGuard } from './auth/auth.guard';
     VagaModule,
     HardskillModule,
     SoftskillModule,
+    MensagemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

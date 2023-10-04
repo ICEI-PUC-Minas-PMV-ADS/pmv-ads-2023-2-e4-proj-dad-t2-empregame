@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Vaga as VagaModel } from '@prisma/client';
 
-export class Vaga {
+export class Vaga implements VagaModel {
   @ApiProperty()
   id: number;
 
@@ -36,4 +37,7 @@ export class Vaga {
 
   @ApiProperty()
   situacao: string;
+
+  @ApiProperty()
+  id_usuario: number;
 }

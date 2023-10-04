@@ -1,12 +1,13 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
+import { Softskill as SoftskillModel } from '@prisma/client';
 
-export class Softskill {
-    @ApiProperty()
-    id: number;
-    
-    @ApiProperty()
-    created_at: Date;
- 
-    @ApiProperty()
-    nome: string;
+export class Softskill implements SoftskillModel {
+  @ApiProperty()
+  id: number;
+
+  @ApiProperty()
+  created_at: Date;
+
+  @ApiProperty()
+  nome: string;
 }

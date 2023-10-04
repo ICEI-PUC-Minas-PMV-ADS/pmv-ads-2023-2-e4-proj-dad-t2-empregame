@@ -22,6 +22,7 @@ model Usuario {
 
   usuario_hardskill UsuarioHardskill[]
   usuario_softskill UsuarioSoftskill[]
+  vaga              Vaga[]
   vaga_hardskill    VagaHardskill[]
   vaga_softskill    VagaSoftskill[]
   vaga_candidato    VagaCandidato[]
@@ -43,6 +44,9 @@ model Vaga {
   empresa_cidade String    @db.VarChar(255)
   empresa_estado String    @db.VarChar(255)
   situacao       String    @default("ATIVO") @db.VarChar(255) // ATIVO, INATIVO
+
+  id_usuario Int     @db.Integer
+  usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   vaga_candidato VagaCandidato[]
 

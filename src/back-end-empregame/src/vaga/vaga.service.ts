@@ -8,8 +8,8 @@ import { Vaga } from './entities/vaga.entity';
 export class VagaService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateVagaDto): Promise<void> {
-    await this.prisma.vaga.create({ data });
+  async create(id_usuario: number, data: CreateVagaDto): Promise<void> {
+    await this.prisma.vaga.create({ data: { id_usuario, ...data } });
     return;
   }
 
@@ -23,13 +23,17 @@ export class VagaService {
     return vaga;
   }
 
-  async update(id: number, data: UpdateVagaDto): Promise<void> {
-    await this.prisma.vaga.update({ where: { id }, data });
+  async update(
+    id_usuario: number,
+    id: number,
+    data: UpdateVagaDto,
+  ): Promise<void> {
+    await this.prisma.vaga.update({ where: { id_usuario, id }, data });
     return;
   }
 
-  async remove(id: number): Promise<void> {
-    await this.prisma.vaga.delete({ where: { id } });
+  async remove(id_usuario: number, id: number): Promise<void> {
+    await this.prisma.vaga.delete({ where: { id_usuario, id } });
     return;
   }
 }

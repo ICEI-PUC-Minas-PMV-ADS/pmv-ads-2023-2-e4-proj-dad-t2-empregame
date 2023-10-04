@@ -1,12 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SoftskillService } from './softskill.service';
 import { CreateSoftskillDto } from './dto/create-softskill.dto';
 import { UpdateSoftskillDto } from './dto/update-softskill.dto';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Softskill } from './entities/softskill.entity';
 
-@Controller('softskill')
-@ApiTags('softskill')
+@Controller('softskills')
+@ApiTags('softskills')
 @ApiBearerAuth()
 export class SoftskillController {
   constructor(private readonly softskillService: SoftskillService) {}
@@ -17,13 +25,13 @@ export class SoftskillController {
   }
 
   @Get()
-  @ApiOkResponse({type:Softskill, isArray:true})
+  @ApiOkResponse({ type: Softskill, isArray: true })
   findAll() {
     return this.softskillService.findAll();
   }
 
   @Get(':id')
-  @ApiOkResponse({type:Softskill})
+  @ApiOkResponse({ type: Softskill })
   findOne(@Param('id') id: string) {
     return this.softskillService.findOne(+id);
   }
@@ -31,7 +39,6 @@ export class SoftskillController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() data: UpdateSoftskillDto) {
     return this.softskillService.update(+id, data);
-    
   }
 
   @Delete(':id')

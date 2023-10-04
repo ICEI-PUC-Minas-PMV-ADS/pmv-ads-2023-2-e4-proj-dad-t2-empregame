@@ -12,37 +12,47 @@ import { CreateVagaDto } from './dto/create-vaga.dto';
 import { UpdateVagaDto } from './dto/update-vaga.dto';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Vaga } from './entities/vaga.entity';
+import { AuthUser, IAuthUser } from 'utils/decorators/auth.decorator';
 
-@Controller('vaga')
-@ApiTags('vaga')
+@Controller('vagas')
+@ApiTags('vagas')
 @ApiBearerAuth()
 export class VagaController {
   constructor(private readonly vagaService: VagaService) {}
 
   @Post()
-  create(@Body() data: CreateVagaDto) {
-    return this.vagaService.create(data);
+  async create(@AuthUser() user: IAuthUser, @Body() data: CreateVagaDto) {
+    await this.vagaService.create(user.usuario.id, data);
+    return;
   }
 
   @Get()
   @ApiOkResponse({ type: Vaga, isArray: true })
-  findAll() {
-    return this.vagaService.findAll();
+  async findAll() {
+    const vagas = await this.vagaService.findAll();
+    return vagas;
   }
 
   @Get(':id')
   @ApiOkResponse({ type: Vaga })
-  findOne(@Param('id') id: string) {
-    return this.vagaService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const vaga = await this.vagaService.findOne(+id);
+    return vaga;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() data: UpdateVagaDto) {
-    return this.vagaService.update(+id, data);
+  async update(
+    @AuthUser() user: IAuthUser,
+    @Param('id') id: string,
+    @Body() data: UpdateVagaDto,
+  ) {
+    this.vagaService.update(user.usuario.id, +id, data);
+    return;
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.vagaService.remove(+id);
+  async remove(@AuthUser() user: IAuthUser, @Param('id') id: string) {
+    this.vagaService.remove(user.usuario.id, +id);
+    return;
   }
 }
