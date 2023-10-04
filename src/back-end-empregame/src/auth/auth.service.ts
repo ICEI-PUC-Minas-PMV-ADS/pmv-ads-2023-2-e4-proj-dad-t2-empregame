@@ -4,12 +4,15 @@ import { AppError } from 'utils/app-error';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { signInDto } from './dto/sign-in.dto';
+import Redis from 'ioredis';
+import { InjectRedis } from '@liaoliaots/nestjs-redis';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
+    @InjectRedis() private readonly redis: Redis,
   ) {}
 
   async signIn({ email, password }: signInDto): Promise<any> {
@@ -25,6 +28,18 @@ export class AuthService {
 
     const payload = { sub: usuario.id, email: usuario.email };
 
-    return { access_token: await this.jwtService.signAsync(payload) };
+    const access_token = await this.jwtService.signAsync(payload);
+
+    await this.redis.set(
+      access_token,
+      JSON.stringify({
+        access_token,
+        usuario: usuario,
+      }),
+      'EX',
+      60 * 60 * 24 * 7, // 7 dias,
+    );
+
+    return { access_token, usuario };
   }
 }

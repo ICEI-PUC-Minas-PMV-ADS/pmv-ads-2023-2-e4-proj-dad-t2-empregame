@@ -5,12 +5,15 @@ import { jwtConstants } from './contants';
 import { AppError } from 'utils/app-error';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from 'decorators/is-public.decorator';
+import { InjectRedis } from '@liaoliaots/nestjs-redis';
+import Redis from 'ioredis';
+import { IAuthUser } from 'utils/decorators/auth.decorator';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class RedisGuard implements CanActivate {
   constructor(
-    private jwtService: JwtService,
     private reflector: Reflector,
+    @InjectRedis() private readonly redis: Redis,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -22,24 +25,30 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    const request = context.switchToHttp().getRequest();
-    const token = this.extractTokenFromHeader(request);
-    if (!token) {
-      throw new AppError('Token inválido', 403);
-    }
-    try {
-      const payload = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret,
-      });
-      request['usuario'] = payload;
-    } catch {
-      throw new AppError('Token inválido', 403);
-    }
-    return true;
-  }
+    const contextArgs = context.getArgs()[0];
+    const bearerToken: string = contextArgs.headers['authorization'];
 
-  private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : undefined;
+    if (!bearerToken) throw new AppError('Token inválido', 403);
+
+    const partsToken = bearerToken.split(' ');
+
+    // valida se token e bearer existem
+    if (partsToken.length !== 2) throw new AppError('Token inválido', 403);
+
+    const [scheme, token] = partsToken;
+
+    if (!/^Bearer$/i.test(scheme)) throw new AppError('Token inválido', 403);
+
+    if (token) {
+      const user: IAuthUser = JSON.parse(await this.redis.get(token));
+
+      if (!user) throw new AppError('Usuário não autenticado', 401);
+
+      contextArgs.user = user;
+
+      return true;
+    }
+
+    throw new AppError('Token inválido', 403);
   }
 }
