@@ -29,6 +29,7 @@ CREATE TABLE "vaga" (
     "empresa_cidade" VARCHAR(255) NOT NULL,
     "empresa_estado" VARCHAR(255) NOT NULL,
     "situacao" VARCHAR(255) NOT NULL DEFAULT 'ATIVO',
+    "id_usuario" INTEGER NOT NULL,
 
     CONSTRAINT "vaga_pkey" PRIMARY KEY ("id")
 );
@@ -80,7 +81,7 @@ CREATE TABLE "vaga_hardskill" (
     "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
-    "id_usuario" INTEGER NOT NULL,
+    "id_vaga" INTEGER NOT NULL,
     "id_hardskill" INTEGER NOT NULL,
 
     CONSTRAINT "vaga_hardskill_pkey" PRIMARY KEY ("id")
@@ -91,7 +92,7 @@ CREATE TABLE "vaga_softskill" (
     "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
-    "id_usuario" INTEGER NOT NULL,
+    "id_vaga" INTEGER NOT NULL,
     "id_softskill" INTEGER NOT NULL,
 
     CONSTRAINT "vaga_softskill_pkey" PRIMARY KEY ("id")
@@ -121,6 +122,9 @@ CREATE TABLE "mensagem" (
 );
 
 -- AddForeignKey
+ALTER TABLE "vaga" ADD CONSTRAINT "vaga_id_usuario_fkey" FOREIGN KEY ("id_usuario") REFERENCES "usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
 ALTER TABLE "usuario_hardskill" ADD CONSTRAINT "usuario_hardskill_id_usuario_fkey" FOREIGN KEY ("id_usuario") REFERENCES "usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
@@ -133,13 +137,13 @@ ALTER TABLE "usuario_softskill" ADD CONSTRAINT "usuario_softskill_id_usuario_fke
 ALTER TABLE "usuario_softskill" ADD CONSTRAINT "usuario_softskill_id_softskill_fkey" FOREIGN KEY ("id_softskill") REFERENCES "softskill"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE "vaga_hardskill" ADD CONSTRAINT "vaga_hardskill_id_usuario_fkey" FOREIGN KEY ("id_usuario") REFERENCES "usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "vaga_hardskill" ADD CONSTRAINT "vaga_hardskill_id_vaga_fkey" FOREIGN KEY ("id_vaga") REFERENCES "vaga"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE "vaga_hardskill" ADD CONSTRAINT "vaga_hardskill_id_hardskill_fkey" FOREIGN KEY ("id_hardskill") REFERENCES "hardskill"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE "vaga_softskill" ADD CONSTRAINT "vaga_softskill_id_usuario_fkey" FOREIGN KEY ("id_usuario") REFERENCES "usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "vaga_softskill" ADD CONSTRAINT "vaga_softskill_id_vaga_fkey" FOREIGN KEY ("id_vaga") REFERENCES "vaga"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE "vaga_softskill" ADD CONSTRAINT "vaga_softskill_id_softskill_fkey" FOREIGN KEY ("id_softskill") REFERENCES "softskill"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;

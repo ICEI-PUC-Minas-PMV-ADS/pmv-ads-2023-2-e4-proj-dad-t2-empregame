@@ -3,6 +3,11 @@ import { CreateVagaDto } from './dto/create-vaga.dto';
 import { UpdateVagaDto } from './dto/update-vaga.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Vaga } from './entities/vaga.entity';
+import { CreateVagaHardskillDto } from './dto/create-vaga-hardskill.dto';
+import { VagaSoftSkill } from './entities/vaga-softskill.entity';
+import { VagaHardSkill } from './entities/vaga-hardskill.entity';
+import { CreateSoftskillDto } from 'src/softskill/dto/create-softskill.dto';
+import { CreateVagaSoftskillDto } from './dto/create-vaga-softskill.dto';
 
 @Injectable()
 export class VagaService {
@@ -34,6 +39,40 @@ export class VagaService {
 
   async remove(id_usuario: number, id: number): Promise<void> {
     await this.prisma.vaga.delete({ where: { id_usuario, id } });
+    return;
+  }
+
+  async createVagaHardskill(data: CreateVagaHardskillDto): Promise<void> {
+    await this.prisma.vagaHardskill.createMany({ data });
+    return;
+  }
+
+  async findAllVagaHardskills(id_vaga: number): Promise<VagaHardSkill[]> {
+    const hardskills = await this.prisma.vagaHardskill.findMany({
+      where: { id_vaga },
+    });
+    return hardskills;
+  }
+
+  async removeVagaHardskills(id: number): Promise<void> {
+    await this.prisma.vagaHardskill.delete({ where: { id } });
+    return;
+  }
+
+  async createVagaSoftskill(data: CreateVagaSoftskillDto): Promise<void> {
+    await this.prisma.vagaSoftskill.createMany({ data });
+    return;
+  }
+
+  async findAllVagaSoftskills(id_vaga: number): Promise<VagaSoftSkill[]> {
+    const softskills = await this.prisma.vagaSoftskill.findMany({
+      where: { id_vaga },
+    });
+    return softskills;
+  }
+
+  async removeVagaSoftskills(id: number): Promise<void> {
+    await this.prisma.vagaSoftskill.delete({ where: { id } });
     return;
   }
 }

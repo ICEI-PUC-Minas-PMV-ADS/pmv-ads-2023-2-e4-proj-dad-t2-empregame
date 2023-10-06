@@ -27,7 +27,8 @@ export class UsuarioController {
   @Public()
   @Post()
   async create(@Body() data: CreateUsuarioDto) {
-    return this.usuarioService.create(data);
+    const usuario = await this.usuarioService.create(data);
+    return usuario;
   }
 
   @ApiBearerAuth()
@@ -36,7 +37,7 @@ export class UsuarioController {
     type: Usuario,
     isArray: true,
   })
-  async findAll() {
+  async findAll(): Promise<Usuario[]> {
     const usuarios = await this.usuarioService.findAll();
     return usuarios;
   }
@@ -49,15 +50,13 @@ export class UsuarioController {
   }
 
   @ApiBearerAuth()
-  @Get('hardskills')
+  @Get('hardskills/:id')
   @ApiOkResponse({
     type: UsuarioHardSkill,
     isArray: true,
   })
-  async findUsuarioHardskills(@AuthUser() user: IAuthUser) {
-    const hardskills = await this.usuarioService.findAllUsuarioHardskills(
-      user.usuario.id,
-    );
+  async findUsuarioHardskills(@Param('id') id: string) {
+    const hardskills = await this.usuarioService.findAllUsuarioHardskills(+id);
     return hardskills;
   }
 
@@ -70,7 +69,9 @@ export class UsuarioController {
 
   @ApiBearerAuth()
   @Post('softskills')
-  async createUsuarioSoftskills(@Body() data: CreateUsuarioSoftskillDto) {
+  async createUsuarioSoftskills(
+    @Body() data: CreateUsuarioSoftskillDto,
+  ): Promise<void> {
     await this.usuarioService.createUsuarioSoftskill(data);
     return;
   }
@@ -81,10 +82,8 @@ export class UsuarioController {
     type: UsuarioSoftSkill,
     isArray: true,
   })
-  async findUsuarioSoftskills(@AuthUser() user: IAuthUser) {
-    const softskills = await this.usuarioService.findAllUsuarioSoftskills(
-      user.usuario.id,
-    );
+  async findUsuarioSoftskills(@Param('id') id: string) {
+    const softskills = await this.usuarioService.findAllUsuarioSoftskills(+id);
     return softskills;
   }
 

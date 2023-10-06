@@ -13,11 +13,14 @@ import { UsuarioSoftSkill } from './entities/usuario-softskill.entity';
 export class UsuarioService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateUsuarioDto): Promise<void> {
+  async create(data: CreateUsuarioDto): Promise<{ id: number }> {
     const hash = await bcrypt.hash(data.senha, 10);
 
-    await this.prisma.usuario.create({ data: { ...data, senha: hash } });
-    return;
+    const usuario = await this.prisma.usuario.create({
+      data: { ...data, senha: hash },
+    });
+
+    return { id: usuario.id };
   }
 
   async findAll(): Promise<Usuario[]> {
@@ -43,7 +46,7 @@ export class UsuarioService {
   }
 
   async createUsuarioHardskill(data: CreateUsuarioHardskillDto): Promise<void> {
-    await this.prisma.usuarioHardskill.createMany({ data: data });
+    const hardskill = await this.prisma.usuarioHardskill.createMany({ data });
     return;
   }
 
@@ -62,7 +65,7 @@ export class UsuarioService {
   }
 
   async createUsuarioSoftskill(data: CreateUsuarioSoftskillDto): Promise<void> {
-    await this.prisma.usuarioSoftskill.createMany({ data: data });
+    await this.prisma.usuarioSoftskill.createMany({ data });
     return;
   }
 

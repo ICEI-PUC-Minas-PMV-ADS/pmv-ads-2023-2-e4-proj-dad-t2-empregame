@@ -13,6 +13,10 @@ import { UpdateVagaDto } from './dto/update-vaga.dto';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Vaga } from './entities/vaga.entity';
 import { AuthUser, IAuthUser } from 'utils/decorators/auth.decorator';
+import { CreateVagaHardskillDto } from './dto/create-vaga-hardskill.dto';
+import { VagaHardSkill } from './entities/vaga-hardskill.entity';
+import { CreateVagaSoftskillDto } from './dto/create-vaga-softskill.dto';
+import { VagaSoftSkill } from './entities/vaga-softskill.entity';
 
 @Controller('vagas')
 @ApiTags('vagas')
@@ -31,6 +35,58 @@ export class VagaController {
   async findAll() {
     const vagas = await this.vagaService.findAll();
     return vagas;
+  }
+
+  @ApiBearerAuth()
+  @Post('hardskills')
+  async createVagaHardskills(@Body() data: CreateVagaHardskillDto) {
+    await this.vagaService.createVagaHardskill(data);
+    return;
+  }
+
+  @ApiBearerAuth()
+  @Get('hardskills/:id')
+  @ApiOkResponse({
+    type: VagaHardSkill,
+    isArray: true,
+  })
+  async findVagaHardskills(@Param('id') id: string) {
+    const hardskills = await this.vagaService.findAllVagaHardskills(+id);
+    return hardskills;
+  }
+
+  @ApiBearerAuth()
+  @Delete('hardskills/:id')
+  async removeVagaHardskills(@Param('id') id: string) {
+    await this.vagaService.removeVagaHardskills(+id);
+    return;
+  }
+
+  @ApiBearerAuth()
+  @Post('softskills')
+  async createVagaSoftskills(
+    @Body() data: CreateVagaSoftskillDto,
+  ): Promise<void> {
+    await this.vagaService.createVagaSoftskill(data);
+    return;
+  }
+
+  @ApiBearerAuth()
+  @Get('softskills')
+  @ApiOkResponse({
+    type: VagaSoftSkill,
+    isArray: true,
+  })
+  async findVagaSoftskills(@Param('id') id: string) {
+    const softskills = await this.vagaService.findAllVagaSoftskills(+id);
+    return softskills;
+  }
+
+  @ApiBearerAuth()
+  @Delete('softskills/:id')
+  async removeVagaSoftskills(@Param('id') id: string) {
+    await this.vagaService.removeVagaSoftskills(+id);
+    return;
   }
 
   @Get(':id')

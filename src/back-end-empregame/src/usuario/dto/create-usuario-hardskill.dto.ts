@@ -1,6 +1,5 @@
-import { IsNumber, Min } from '@nestjs/class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Max } from 'class-validator';
+import { IsNumber, Max, Min } from 'class-validator';
 
 export class CreateUsuarioHardskillDto {
   @ApiProperty({ minimum: 1, maximum: 5 })
