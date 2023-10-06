@@ -23,8 +23,6 @@ model Usuario {
   usuario_hardskill UsuarioHardskill[]
   usuario_softskill UsuarioSoftskill[]
   vaga              Vaga[]
-  vaga_hardskill    VagaHardskill[]
-  vaga_softskill    VagaSoftskill[]
   vaga_candidato    VagaCandidato[]
   mensagem          Mensagem[]
 
@@ -49,6 +47,8 @@ model Vaga {
   usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   vaga_candidato VagaCandidato[]
+  vaga_hardskill VagaHardskill[]
+  vaga_softskill VagaSoftskill[]
 
   @@map("vaga")
 }
@@ -110,8 +110,8 @@ model VagaHardskill {
   created_at DateTime @default(now()) @db.Timestamp
   updated_at DateTime @updatedAt @db.Timestamp
 
-  id_usuario Int     @db.Integer
-  usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id_vaga Int  @db.Integer
+  vaga Vaga @relation(fields: [id_vaga], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   id_hardskill Int       @db.Integer
   hardskill    Hardskill @relation(fields: [id_hardskill], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -124,8 +124,8 @@ model VagaSoftskill {
   created_at DateTime @default(now()) @db.Timestamp
   updated_at DateTime @updatedAt @db.Timestamp
 
-  id_usuario Int     @db.Integer
-  usuario    Usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id_vaga Int  @db.Integer
+  vaga Vaga @relation(fields: [id_vaga], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   id_softskill Int       @db.Integer
   softskill    Softskill @relation(fields: [id_softskill], references: [id], onDelete: NoAction, onUpdate: NoAction)

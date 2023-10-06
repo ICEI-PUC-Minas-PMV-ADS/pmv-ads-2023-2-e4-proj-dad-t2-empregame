@@ -1,13 +1,12 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { Request } from 'express';
-import { jwtConstants } from './contants';
-import { AppError } from 'utils/app-error';
+
 import { Reflector } from '@nestjs/core';
-import { IS_PUBLIC_KEY } from 'decorators/is-public.decorator';
+
 import { InjectRedis } from '@liaoliaots/nestjs-redis';
 import Redis from 'ioredis';
-import { IAuthUser } from 'utils/decorators/auth.decorator';
+import { IS_PUBLIC_KEY } from '../../utils/decorators/is-public.decorator';
+import { AppError } from '../../utils/app-error';
+import { IAuthUser } from '../../utils/decorators/auth.decorator';
 
 @Injectable()
 export class RedisGuard implements CanActivate {

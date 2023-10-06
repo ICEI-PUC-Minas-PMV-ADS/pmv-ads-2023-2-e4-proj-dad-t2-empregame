@@ -20,29 +20,34 @@ export class HardskillController {
   constructor(private readonly hardskillService: HardskillService) {}
 
   @Post()
-  create(@Body() data: CreateHardskillDto) {
-    return this.hardskillService.create(data);
+  async create(@Body() data: CreateHardskillDto) {
+    await this.hardskillService.create(data);
+    return;
   }
 
   @Get()
   @ApiOkResponse({ type: Hardskill, isArray: true })
-  findAll() {
-    return this.hardskillService.findAll();
+  async findAll() {
+    const hardskills = await this.hardskillService.findAll();
+    return hardskills;
   }
 
   @Get(':id')
   @ApiOkResponse({ type: Hardskill })
-  findOne(@Param('id') id: string) {
-    return this.hardskillService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const hardskill = await this.hardskillService.findOne(+id);
+    return hardskill;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() data: UpdateHardskillDto) {
-    return this.hardskillService.update(+id, data);
+  async update(@Param('id') id: string, @Body() data: UpdateHardskillDto) {
+    await this.hardskillService.update(+id, data);
+    return;
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.hardskillService.remove(+id);
+  async remove(@Param('id') id: string) {
+    await this.hardskillService.remove(+id);
+    return;
   }
 }

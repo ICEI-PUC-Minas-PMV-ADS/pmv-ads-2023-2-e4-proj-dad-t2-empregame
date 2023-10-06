@@ -10,8 +10,9 @@ import {
 import { MensagemService } from './mensagem.service';
 import { CreateMensagemDto } from './dto/create-mensagem.dto';
 import { UpdateMensagemDto } from './dto/update-mensagem.dto';
-import { AuthUser, IAuthUser } from 'utils/decorators/auth.decorator';
+
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthUser, IAuthUser } from '../../utils/decorators/auth.decorator';
 
 @Controller('mensagens')
 @ApiTags('mensagens')

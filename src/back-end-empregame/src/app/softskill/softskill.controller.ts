@@ -20,29 +20,34 @@ export class SoftskillController {
   constructor(private readonly softskillService: SoftskillService) {}
 
   @Post()
-  create(@Body() data: CreateSoftskillDto) {
-    return this.softskillService.create(data);
+  async create(@Body() data: CreateSoftskillDto) {
+    await this.softskillService.create(data);
+    return;
   }
 
   @Get()
   @ApiOkResponse({ type: Softskill, isArray: true })
-  findAll() {
-    return this.softskillService.findAll();
+  async findAll() {
+    const softskills = await this.softskillService.findAll();
+    return softskills;
   }
 
   @Get(':id')
   @ApiOkResponse({ type: Softskill })
-  findOne(@Param('id') id: string) {
-    return this.softskillService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const vaga = await this.softskillService.findOne(+id);
+    return vaga;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() data: UpdateSoftskillDto) {
-    return this.softskillService.update(+id, data);
+  async update(@Param('id') id: string, @Body() data: UpdateSoftskillDto) {
+    await this.softskillService.update(+id, data);
+    return;
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.softskillService.remove(+id);
+  async remove(@Param('id') id: string) {
+    await this.softskillService.remove(+id);
+    return;
   }
 }
