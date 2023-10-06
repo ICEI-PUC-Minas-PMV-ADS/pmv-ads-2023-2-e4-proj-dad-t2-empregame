@@ -1,7 +1,7 @@
 {
   "name": "back-end-empregame",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Back-end do projeto EmpregaMe",
   "author": "",
   "private": true,
   "license": "UNLICENSED",

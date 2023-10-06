@@ -6,7 +6,6 @@ import { Vaga } from './entities/vaga.entity';
 import { CreateVagaHardskillDto } from './dto/create-vaga-hardskill.dto';
 import { VagaSoftSkill } from './entities/vaga-softskill.entity';
 import { VagaHardSkill } from './entities/vaga-hardskill.entity';
-import { CreateSoftskillDto } from 'src/softskill/dto/create-softskill.dto';
 import { CreateVagaSoftskillDto } from './dto/create-vaga-softskill.dto';
 
 @Injectable()

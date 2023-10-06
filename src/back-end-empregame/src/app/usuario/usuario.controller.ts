@@ -12,12 +12,13 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Usuario } from './entities/usuario.entity';
-import { Public } from 'decorators/is-public.decorator';
-import { AuthUser, IAuthUser } from 'utils/decorators/auth.decorator';
+
 import { CreateUsuarioHardskillDto } from './dto/create-usuario-hardskill.dto';
 import { UsuarioHardSkill } from './entities/usuario-hardskill.entity';
 import { CreateUsuarioSoftskillDto } from './dto/create-usuario-softskill.dto';
 import { UsuarioSoftSkill } from './entities/usuario-softskill.entity';
+import { Public } from '../../utils/decorators/is-public.decorator';
+import { AuthUser, IAuthUser } from '../../utils/decorators/auth.decorator';
 
 @Controller('usuarios')
 @ApiTags('usuarios')
@@ -77,7 +78,7 @@ export class UsuarioController {
   }
 
   @ApiBearerAuth()
-  @Get('softskills')
+  @Get('softskills/:id')
   @ApiOkResponse({
     type: UsuarioSoftSkill,
     isArray: true,

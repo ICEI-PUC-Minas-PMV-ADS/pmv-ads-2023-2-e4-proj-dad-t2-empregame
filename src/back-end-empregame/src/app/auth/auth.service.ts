@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { AppError } from 'utils/app-error';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { signInDto } from './dto/sign-in.dto';
 import Redis from 'ioredis';
 import { InjectRedis } from '@liaoliaots/nestjs-redis';
+import { AppError } from '../../utils/app-error';
 
 @Injectable()
 export class AuthService {

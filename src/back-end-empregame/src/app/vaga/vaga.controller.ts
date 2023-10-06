@@ -12,11 +12,12 @@ import { CreateVagaDto } from './dto/create-vaga.dto';
 import { UpdateVagaDto } from './dto/update-vaga.dto';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Vaga } from './entities/vaga.entity';
-import { AuthUser, IAuthUser } from 'utils/decorators/auth.decorator';
+
 import { CreateVagaHardskillDto } from './dto/create-vaga-hardskill.dto';
 import { VagaHardSkill } from './entities/vaga-hardskill.entity';
 import { CreateVagaSoftskillDto } from './dto/create-vaga-softskill.dto';
 import { VagaSoftSkill } from './entities/vaga-softskill.entity';
+import { AuthUser, IAuthUser } from '../../utils/decorators/auth.decorator';
 
 @Controller('vagas')
 @ApiTags('vagas')
@@ -72,7 +73,7 @@ export class VagaController {
   }
 
   @ApiBearerAuth()
-  @Get('softskills')
+  @Get('softskills/:id')
   @ApiOkResponse({
     type: VagaSoftSkill,
     isArray: true,
