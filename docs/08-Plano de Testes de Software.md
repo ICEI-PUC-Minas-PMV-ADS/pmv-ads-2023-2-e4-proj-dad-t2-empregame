@@ -44,7 +44,7 @@ Para realizar os testes das rotas implementadas durante o desenvolvimento do pro
 
 ![image](img/testes/softskills/get_soft.png)
 
-## Plano de teste rotas softskills:
+## Plano de teste rotas mensagens:
 
 ![image](img/testes/mensagem/create_msg.png)
 
