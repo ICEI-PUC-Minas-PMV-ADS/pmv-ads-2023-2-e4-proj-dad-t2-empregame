@@ -31,3 +31,15 @@ Para realizar os testes das rotas implementadas durante o desenvolvimento do pro
 ![image](img/testes/vaga/get_relation_vaga_hard_soft.png)
 
 ![image](img/testes/vaga/plan_delete_vaga.png)
+
+## Plano de teste rotas hardskills:
+
+![image](img/testes/hardskills/create_hard.png)
+
+![image](img/testes/hardskills/get_hard.png)
+
+## Plano de teste rotas softskills:
+
+![image](img/testes/softskills/create_soft.png)
+
+![image](img/testes/softskills/get_soft.png)
