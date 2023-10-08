@@ -13,16 +13,14 @@ export class MensagemService {
     return;
   }
 
-  async findAll(id_vaga_candidato: number): Promise<Mensagem[]> {
-    const mensagens = await this.prisma.mensagem.findMany({
-      where: { id_vaga_candidato },
-    });
+  async findAll(): Promise<Mensagem[]> {
+    const mensagens = await this.prisma.mensagem.findMany();
     return mensagens;
   }
 
-  async findOne(id_vaga_candidato: number, id: number): Promise<Mensagem> {
+  async findOne(id: number): Promise<Mensagem> {
     const mensagem = await this.prisma.mensagem.findFirst({
-      where: { id, id_vaga_candidato },
+      where: { id },
     });
     return mensagem;
   }

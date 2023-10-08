@@ -63,8 +63,11 @@ export class UsuarioController {
 
   @ApiBearerAuth()
   @Delete('hardskills/:id')
-  async removeUsuarioHardskills(@Param('id') id: string) {
-    await this.usuarioService.removeUsuarioHardskills(+id);
+  async removeUsuarioHardskills(
+    @AuthUser() user: IAuthUser,
+    @Param('id') id: string,
+  ) {
+    await this.usuarioService.removeUsuarioHardskills(user.usuario.id, +id);
     return;
   }
 
@@ -90,8 +93,11 @@ export class UsuarioController {
 
   @ApiBearerAuth()
   @Delete('softskills/:id')
-  async removeUsuarioSoftskills(@Param('id') id: string) {
-    await this.usuarioService.removeUsuarioSoftskills(+id);
+  async removeUsuarioSoftskills(
+    @AuthUser() user: IAuthUser,
+    @Param('id') id: string,
+  ) {
+    await this.usuarioService.removeUsuarioSoftskills(user.usuario.id, +id);
     return;
   }
 

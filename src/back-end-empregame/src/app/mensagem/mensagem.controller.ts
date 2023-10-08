@@ -26,21 +26,15 @@ export class MensagemController {
     return;
   }
 
-  @Get(':id_vaga_candidato')
-  async findAll(@Param(':id_vaga_candidato') id_vaga_candidato: string) {
-    const mensagens = await this.mensagemService.findAll(+id_vaga_candidato);
+  @Get()
+  async findAll() {
+    const mensagens = await this.mensagemService.findAll();
     return mensagens;
   }
 
-  @Get(':id_vaga_candidato/:id')
-  async findOne(
-    @Param(':id_vaga_candidato') id_vaga_candidato: string,
-    @Param('id') id: string,
-  ) {
-    const mensagem = await this.mensagemService.findOne(
-      +id_vaga_candidato,
-      +id,
-    );
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    const mensagem = await this.mensagemService.findOne(+id);
     return mensagem;
   }
 

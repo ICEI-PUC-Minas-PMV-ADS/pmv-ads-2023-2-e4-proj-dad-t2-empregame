@@ -53,8 +53,10 @@ export class VagaService {
     return hardskills;
   }
 
-  async removeVagaHardskills(id: number): Promise<void> {
-    await this.prisma.vagaHardskill.delete({ where: { id } });
+  async removeVagaHardskills(id_usuario: number, id: number): Promise<void> {
+    await this.prisma.vagaHardskill.delete({
+      where: { id, vaga: { id_usuario } },
+    });
     return;
   }
 
@@ -70,8 +72,10 @@ export class VagaService {
     return softskills;
   }
 
-  async removeVagaSoftskills(id: number): Promise<void> {
-    await this.prisma.vagaSoftskill.delete({ where: { id } });
+  async removeVagaSoftskills(id_usuario: number, id: number): Promise<void> {
+    await this.prisma.vagaSoftskill.delete({
+      where: { id, vaga: { id_usuario } },
+    });
     return;
   }
 }
