@@ -108,7 +108,7 @@ Nesta seção constam os registros fotográficos dos testes descritos nos casos 
 
 ![image](img/testes/mensagem/findUnique_mensagem.png)
 
-## CT-021 - Editar dados cadastrais de usuários Recrutadores e Candidatos
+## CT-021 - Listar as hardskills e softkills associadas a uma vaga
 
 ![image](img/testes/vaga/findAll_vaga_hardskill.png)
 
