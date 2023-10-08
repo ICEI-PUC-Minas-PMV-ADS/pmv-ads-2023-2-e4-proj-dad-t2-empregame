@@ -26,13 +26,9 @@ Nesta seção constam os registros fotográficos dos testes descritos nos casos 
 
 ![image](img/testes/vaga/delete_vaga_softskill.png)
 
-## CT-005 - Listar as hardskills e softkills associadas a uma vaga
+## CT-005 - Editar dados cadastrais de usuários Recrutadores e Candidatos
 
-![image](img/testes/vaga/findAll_vaga_hardskill.png)
-
-![image](img/testes/vaga/findAll_vaga_softskill.png)
-
-![image](img/testes/vaga/findUnique_vaga.png)
+![image](img/testes/usuario/update_usuario.png)
 
 ## CT-006 - Listagem de vagas para usuários Candidatos
 
@@ -44,7 +40,7 @@ Nesta seção constam os registros fotográficos dos testes descritos nos casos 
 
 ## CT-008 - Criar uma nova hardskill
 
-![image](img/testes/hardskills/create_hard.png)
+![image](img/testes/hardskills/create_hardskill.png)
 
 ## CT-009 - Criar uma vaga caso o usuário seja do tipo Recrutador
 
@@ -111,3 +107,11 @@ Nesta seção constam os registros fotográficos dos testes descritos nos casos 
 ![image](img/testes/mensagem/findAll_mensagem.png)
 
 ![image](img/testes/mensagem/findUnique_mensagem.png)
+
+## CT-021 - Editar dados cadastrais de usuários Recrutadores e Candidatos
+
+![image](img/testes/vaga/findAll_vaga_hardskill.png)
+
+![image](img/testes/vaga/findAll_vaga_softskill.png)
+
+![image](img/testes/vaga/findUnique_vaga.png)
