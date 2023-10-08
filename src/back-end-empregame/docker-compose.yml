@@ -9,20 +9,20 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - '5432:5432'
 
   api:
     depends_on:
       - postgres
     build: .
     environment:
-      - SERVER_PORT=3030
-      - DATABASE_URL=postgresql://postgres:postgres@5432:5432/empregame-dev-local
+      - SERVER_PORT=3000
+      - DATABASE_URL=postgres://postgres:postgres@5432:5432/empregame-dev-local
       - REDIS_HOST=redis-17958.c10.us-east-1-4.ec2.cloud.redislabs.com
       - REDIS_PASSWORD=N10VzpybRs3xCPXeMywZ4Dz3R9sdJAsN
       - REDIS_PORT=17958
     ports:
-      - 3030:3030
+      - 3000:3000
 
 volumes:
   postgres:

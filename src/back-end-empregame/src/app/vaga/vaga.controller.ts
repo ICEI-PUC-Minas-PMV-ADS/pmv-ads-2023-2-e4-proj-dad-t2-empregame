@@ -58,8 +58,11 @@ export class VagaController {
 
   @ApiBearerAuth()
   @Delete('hardskills/:id')
-  async removeVagaHardskills(@Param('id') id: string) {
-    await this.vagaService.removeVagaHardskills(+id);
+  async removeVagaHardskills(
+    @AuthUser() user: IAuthUser,
+    @Param('id') id: string,
+  ) {
+    await this.vagaService.removeVagaHardskills(user.usuario.id, +id);
     return;
   }
 
@@ -85,8 +88,11 @@ export class VagaController {
 
   @ApiBearerAuth()
   @Delete('softskills/:id')
-  async removeVagaSoftskills(@Param('id') id: string) {
-    await this.vagaService.removeVagaSoftskills(+id);
+  async removeVagaSoftskills(
+    @AuthUser() user: IAuthUser,
+    @Param('id') id: string,
+  ) {
+    await this.vagaService.removeVagaSoftskills(user.usuario.id, +id);
     return;
   }
 

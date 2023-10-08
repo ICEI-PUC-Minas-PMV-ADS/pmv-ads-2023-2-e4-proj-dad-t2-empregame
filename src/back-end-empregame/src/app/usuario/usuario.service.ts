@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { Usuario } from './entities/usuario.entity';
 import * as bcrypt from 'bcrypt';
 import { CreateUsuarioHardskillDto } from './dto/create-usuario-hardskill.dto';
@@ -46,7 +46,7 @@ export class UsuarioService {
   }
 
   async createUsuarioHardskill(data: CreateUsuarioHardskillDto): Promise<void> {
-    const hardskill = await this.prisma.usuarioHardskill.createMany({ data });
+    await this.prisma.usuarioHardskill.createMany({ data });
     return;
   }
 
@@ -59,8 +59,8 @@ export class UsuarioService {
     return hardskills;
   }
 
-  async removeUsuarioHardskills(id: number): Promise<void> {
-    await this.prisma.usuarioHardskill.delete({ where: { id } });
+  async removeUsuarioHardskills(id_usuario: number, id: number): Promise<void> {
+    await this.prisma.usuarioHardskill.delete({ where: { id, id_usuario } });
     return;
   }
 
@@ -78,8 +78,8 @@ export class UsuarioService {
     return softskills;
   }
 
-  async removeUsuarioSoftskills(id: number): Promise<void> {
-    await this.prisma.usuarioSoftskill.delete({ where: { id } });
+  async removeUsuarioSoftskills(id_usuario: number, id: number): Promise<void> {
+    await this.prisma.usuarioSoftskill.delete({ where: { id, id_usuario } });
     return;
   }
 }

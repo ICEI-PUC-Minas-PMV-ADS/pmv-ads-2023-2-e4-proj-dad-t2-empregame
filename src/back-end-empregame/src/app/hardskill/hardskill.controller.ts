@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { HardskillService } from './hardskill.service';
 import { CreateHardskillDto } from './dto/create-hardskill.dto';
-import { UpdateHardskillDto } from './dto/update-hardskill.dto';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Hardskill } from './entities/hardskill.entity';
 
@@ -37,17 +36,5 @@ export class HardskillController {
   async findOne(@Param('id') id: string) {
     const hardskill = await this.hardskillService.findOne(+id);
     return hardskill;
-  }
-
-  @Patch(':id')
-  async update(@Param('id') id: string, @Body() data: UpdateHardskillDto) {
-    await this.hardskillService.update(+id, data);
-    return;
-  }
-
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    await this.hardskillService.remove(+id);
-    return;
   }
 }
