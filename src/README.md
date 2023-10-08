@@ -1,6 +1,6 @@
 # Instruções de utilização
 
-## Instalação do Site
+## Instalação do Back-end da Aplicação
 
 O back-end da aplicação foi utilizado o framework NestJS e o ORM Prisma. Para instalar e rodar o servidor basta seguir as seguintes instruções:
 

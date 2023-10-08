@@ -1,4 +1,4 @@
-## Instalação
+## Instalação (necessário ter instalado o NodeJS, Yarn e Docker Desktop no computador)
 
 ```bash
 $ yarn install
