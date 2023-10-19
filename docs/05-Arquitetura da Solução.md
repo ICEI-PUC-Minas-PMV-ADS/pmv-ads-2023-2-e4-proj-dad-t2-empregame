@@ -32,8 +32,8 @@ O diagrama de classes é uma representação gráfica que visualiza a estrutura 
 
 ## Tecnologias Utilizadas
 
-a)	Editor de Código, Linguagens, Frameworks, Bibliotecas, Banco de Dados: VScode, Prisma, Redis, NestJs, Prisma, PostgresSQL, Docker. E para os teste a biblioteca JestJS.
-b)	Ferramentas de Desenho de Tela e diagrama): Figma, LucidChart.
+a)	Editor de Código, Linguagens, Frameworks, Bibliotecas, Banco de Dados: VScode, Prisma, Redis, Prisma, PostgresSQL, Docker. E para os teste a biblioteca JestJS.
+b)	Ferramentas de Desenho de Tela e diagrama): Figma, Miro.
 
 
 ## Qualidade de Software
@@ -59,9 +59,3 @@ A norma internacional ISO/IEC 25010, que é uma atualização da ISO/IEC 9126, i
 
 8. Compatibilidade: É o grau em que um produto, sistema ou componentes, e/ou realizar as suas funções necessárias, ao compartilhar o mesmo ambiente de hardware ou software.
 
-
-> **Links Úteis**:
->
-> - [ISO/IEC 25010:2011 - Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — System and software quality models](https://www.iso.org/standard/35733.html/)
-> - [Análise sobre a ISO 9126 – NBR 13596](https://www.tiespecialistas.com.br/analise-sobre-iso-9126-nbr-13596/)
-> - [Qualidade de Software - Engenharia de Software 29](https://www.devmedia.com.br/qualidade-de-software-engenharia-de-software-29/18209/)
