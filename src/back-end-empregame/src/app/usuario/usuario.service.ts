@@ -8,6 +8,7 @@ import { CreateUsuarioHardskillDto } from './dto/create-usuario-hardskill.dto';
 import { UsuarioHardSkill } from './entities/usuario-hardskill.entity';
 import { CreateUsuarioSoftskillDto } from './dto/create-usuario-softskill.dto';
 import { UsuarioSoftSkill } from './entities/usuario-softskill.entity';
+import { AppError } from '../../utils/app-error';
 
 @Injectable()
 export class UsuarioService {
@@ -15,6 +16,13 @@ export class UsuarioService {
 
   async create(data: CreateUsuarioDto): Promise<{ id: number }> {
     const hash = await bcrypt.hash(data.senha, 10);
+
+    const usuarioExistente = this.prisma.usuario.findFirst({
+      where: { email: data.email },
+    });
+
+    if (usuarioExistente)
+      throw new AppError('Já existe um usuário com o mesmo e-mail');
 
     const usuario = await this.prisma.usuario.create({
       data: { ...data, senha: hash },
