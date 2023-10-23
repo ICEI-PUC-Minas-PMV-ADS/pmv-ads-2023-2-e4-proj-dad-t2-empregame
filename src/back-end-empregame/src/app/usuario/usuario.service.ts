@@ -35,6 +35,47 @@ export class UsuarioService {
     return usuario;
   }
 
+  async search(
+    pesquisa?: string,
+    hardskill?: string,
+    softskill?: string,
+  ): Promise<Usuario[]> {
+    if (pesquisa || hardskill || softskill) {
+      const candidatosFiltradas = await this.prisma.usuario.findMany({
+        where: {
+          AND: [
+            { nome: { contains: pesquisa, mode: 'insensitive' } },
+            {
+              usuario_hardskill: {
+                every: {
+                  hardskill: {
+                    nome: { contains: hardskill, mode: 'insensitive' },
+                  },
+                },
+              },
+            },
+            {
+              usuario_softskill: {
+                every: {
+                  softskill: {
+                    nome: { contains: softskill, mode: 'insensitive' },
+                  },
+                },
+              },
+            },
+            { tipo: 'CANDIDATO' },
+          ],
+        },
+      });
+      return candidatosFiltradas;
+    } else {
+      const todasCandidatos = await this.prisma.usuario.findMany({
+        where: { tipo: 'CANDIDATO' },
+      });
+      return todasCandidatos;
+    }
+  }
+
   async update(id: number, data: UpdateUsuarioDto): Promise<void> {
     await this.prisma.usuario.update({ where: { id }, data });
     return;

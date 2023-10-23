@@ -7,6 +7,9 @@ import { CreateVagaHardskillDto } from './dto/create-vaga-hardskill.dto';
 import { VagaSoftSkill } from './entities/vaga-softskill.entity';
 import { VagaHardSkill } from './entities/vaga-hardskill.entity';
 import { CreateVagaSoftskillDto } from './dto/create-vaga-softskill.dto';
+import { CreateVagaCandidatoDto } from './dto/create-vaga-candidato.dto';
+import { UpdateVagaCandidatoDto } from './dto/update-vaga-candidato.dto';
+import { VagaCandidato } from './entities/vaga-candidato.entity';
 
 @Injectable()
 export class VagaService {
@@ -17,9 +20,44 @@ export class VagaService {
     return;
   }
 
-  async findAll(): Promise<Vaga[]> {
-    const vagas = await this.prisma.vaga.findMany();
-    return vagas;
+  async search(
+    pesquisa?: string,
+    hardskill?: string,
+    softskill?: string,
+    situacao?: string,
+  ): Promise<Vaga[]> {
+    if (pesquisa || hardskill || softskill || situacao) {
+      const vagasFiltradas = await this.prisma.vaga.findMany({
+        where: {
+          AND: [
+            { nome: { contains: pesquisa, mode: 'insensitive' } },
+            {
+              vaga_hardskill: {
+                some: {
+                  hardskill: {
+                    nome: { contains: hardskill, mode: 'insensitive' },
+                  },
+                },
+              },
+            },
+            {
+              vaga_softskill: {
+                some: {
+                  softskill: {
+                    nome: { contains: softskill, mode: 'insensitive' },
+                  },
+                },
+              },
+            },
+            { situacao: situacao },
+          ],
+        },
+      });
+      return vagasFiltradas;
+    } else {
+      const todasVagas = await this.prisma.vaga.findMany();
+      return todasVagas;
+    }
   }
 
   async findOne(id: number): Promise<Vaga | null> {
@@ -77,5 +115,25 @@ export class VagaService {
       where: { id, vaga: { id_usuario } },
     });
     return;
+  }
+
+  async createVagaCandidato(data: CreateVagaCandidatoDto): Promise<void> {
+    await this.prisma.vagaCandidato.create({ data });
+    return;
+  }
+
+  async updateVagaCandidato(
+    id: number,
+    data: UpdateVagaCandidatoDto,
+  ): Promise<void> {
+    await this.prisma.vagaCandidato.update({ where: { id }, data });
+    return;
+  }
+
+  async findAllVagaCandidatos(id_vaga: number): Promise<VagaCandidato[]> {
+    const candidatosInteressados = await this.prisma.vagaCandidato.findMany({
+      where: { id_vaga },
+    });
+    return candidatosInteressados;
   }
 }
