@@ -43,11 +43,7 @@ export class UsuarioService {
     return usuario;
   }
 
-  async search(
-    pesquisa?: string,
-    hardskill?: string,
-    softskill?: string,
-  ): Promise<Usuario[]> {
+  async search(pesquisa?: string, hardskill?: string, softskill?: string) {
     if (pesquisa || hardskill || softskill) {
       const candidatosFiltradas = await this.prisma.usuario.findMany({
         where: {
@@ -73,6 +69,10 @@ export class UsuarioService {
             },
             { tipo: 'CANDIDATO' },
           ],
+        },
+        include: {
+          usuario_hardskill: true,
+          usuario_softskill: true,
         },
       });
       return candidatosFiltradas;

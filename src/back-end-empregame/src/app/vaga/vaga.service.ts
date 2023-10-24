@@ -25,7 +25,7 @@ export class VagaService {
     hardskill?: string,
     softskill?: string,
     situacao?: string,
-  ): Promise<Vaga[]> {
+  ) {
     if (pesquisa || hardskill || softskill || situacao) {
       const vagasFiltradas = await this.prisma.vaga.findMany({
         where: {
@@ -51,6 +51,11 @@ export class VagaService {
             },
             { situacao: situacao },
           ],
+        },
+        include: {
+          vaga_hardskill: true,
+          vaga_softskill: true,
+          vaga_candidato: { select: { _count: true } },
         },
       });
       return vagasFiltradas;
