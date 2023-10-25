@@ -56,6 +56,7 @@ export class VagaService {
           vaga_hardskill: true,
           vaga_softskill: true,
           vaga_candidato: { select: { _count: true } },
+          usuario: { select: { nome: true, id: true } },
         },
       });
       return vagasFiltradas;
