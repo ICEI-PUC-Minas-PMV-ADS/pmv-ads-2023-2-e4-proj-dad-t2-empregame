@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 import { JwtService } from '@nestjs/jwt';
@@ -9,8 +9,9 @@ import { InjectRedis } from '@liaoliaots/nestjs-redis';
 import { AppError } from '../../utils/app-error';
 import { AuthRedefinirSenhaDto } from './dto/redefinir-senha.dto';
 import { BcryptService } from '../../utils/providers/bcrypt/bcrypt.service';
-import { AwsSesService } from '../../utils/providers/mail/aws-ses.service';
+
 import { AuthUpdateSenhaDto } from './dto/update-senha.dto';
+import { EmailsService } from '../../utils/providers/mail/email.service';
 
 interface IContentCodigo {
   id_usuario: number;
@@ -21,7 +22,7 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
-    private mail: AwsSesService,
+    private mail: EmailsService,
     private bcrypt: BcryptService,
     @InjectRedis() private readonly redis: Redis,
   ) {}
