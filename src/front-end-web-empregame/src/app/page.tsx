@@ -3,13 +3,9 @@
 import { Link } from "@chakra-ui/next-js";
 import { Box, Container, Flex, Heading, Image, Text } from "@chakra-ui/react";
 
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-
 export default function Home() {
   return (
     <main>
-      <Header />
       <section>
         <Box
           bgGradient={"linear-gradient(82deg, #7345D6 39.13%, #DA4FE2 112.59%)"}
@@ -44,7 +40,7 @@ export default function Home() {
                 color={"#7345D6"}
                 fontSize={"16px"}
                 fontWeight={"semibold"}
-                href={""}
+                href={"/cadastro"}
                 bg={"white"}
                 rounded={"full"}
                 py={"10px"}
@@ -144,7 +140,6 @@ export default function Home() {
           </Container>
         </Box>
       </section>
-      <Footer />
     </main>
   );
 }

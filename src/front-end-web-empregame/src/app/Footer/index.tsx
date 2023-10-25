@@ -1,3 +1,5 @@
+"use client";
+
 import { Container, Text, Image } from "@chakra-ui/react";
 
 export const Footer = () => {

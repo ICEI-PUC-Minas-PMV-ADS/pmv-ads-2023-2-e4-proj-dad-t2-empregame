@@ -1,3 +1,5 @@
+"use client"
+
 import { Link } from "@chakra-ui/next-js";
 import { Container, Divider, Flex, Image } from "@chakra-ui/react";
 
@@ -17,7 +19,7 @@ export const Header = () => {
               color={"#7345D6"}
               fontSize={"16px"}
               fontWeight={"semibold"}
-              href={"#home"}
+              href={"/#home"}
               _hover={{ color: "#2E2E2E", transition: "ease-in" }}
             >
               Home
@@ -26,7 +28,7 @@ export const Header = () => {
               color={"#7345D6"}
               fontSize={"16px"}
               fontWeight={"semibold"}
-              href={"#sobre-nos"}
+              href={"/#sobre-nos"}
               _hover={{ color: "#2E2E2E", transition: "ease-in" }}
             >
               Sobre
@@ -35,7 +37,7 @@ export const Header = () => {
               color={"#7345D6"}
               fontSize={"16px"}
               fontWeight={"semibold"}
-              href={"#contato"}
+              href={"/#contato"}
               _hover={{ color: "#2E2E2E", transition: "ease-in" }}
             >
               Contato
@@ -51,7 +53,7 @@ export const Header = () => {
               fontSize={"16px"}
               fontWeight={"semibold"}
               _hover={{ color: "#2E2E2E", transition: "ease-in" }}
-              href={""}
+              href={"/cadastro"}
             >
               Cadastre-se
             </Link>
