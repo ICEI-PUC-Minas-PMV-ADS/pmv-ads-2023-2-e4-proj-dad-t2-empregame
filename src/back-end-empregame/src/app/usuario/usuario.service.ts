@@ -17,7 +17,7 @@ export class UsuarioService {
   async create(data: CreateUsuarioDto): Promise<{ id: number }> {
     const hash = await bcrypt.hash(data.senha, 10);
 
-    const usuarioExistente = this.prisma.usuario.findFirst({
+    const usuarioExistente = await this.prisma.usuario.findFirst({
       where: { email: data.email },
     });
 
