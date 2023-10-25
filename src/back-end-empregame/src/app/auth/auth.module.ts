@@ -7,6 +7,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { RedisModule } from '@liaoliaots/nestjs-redis';
 import { APP_GUARD } from '@nestjs/core';
 import { RedisGuard } from './auth.guard';
+import { AwsSesService } from 'src/utils/providers/mail/aws-ses.service';
+import { BcryptService } from 'src/utils/providers/bcrypt/bcrypt.service';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { RedisGuard } from './auth.guard';
     }),
   ],
   providers: [
+    AwsSesService,
+    BcryptService,
     AuthService,
     PrismaService,
     {
