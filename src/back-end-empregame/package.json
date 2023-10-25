@@ -24,7 +24,6 @@
     "deploy": "yarn ci && yarn build && yarn start:prod"
   },
   "dependencies": {
-    "@aws-sdk/client-ses": "^3.433.0",
     "@liaoliaots/nestjs-redis": "^9.0.5",
     "@nestjs/class-validator": "0.13.1",
     "@nestjs/common": "^10.0.0",
