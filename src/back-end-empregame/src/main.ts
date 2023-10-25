@@ -19,6 +19,10 @@ async function bootstrap() {
 
   SwaggerModule.setup('api-doc', app, document);
 
+  app.enableCors({
+    methods: ['POST', 'PUT', 'DELETE', 'GET'],
+  });
+
   await app.listen(process.env.SERVER_PORT || 3000),
     () => {
       const logger = new Logger('Server');
