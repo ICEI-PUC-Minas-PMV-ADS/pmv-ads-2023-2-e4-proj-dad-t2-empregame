@@ -8,6 +8,7 @@ import { CreateUsuarioHardskillDto } from './dto/create-usuario-hardskill.dto';
 import { UsuarioHardSkill } from './entities/usuario-hardskill.entity';
 import { CreateUsuarioSoftskillDto } from './dto/create-usuario-softskill.dto';
 import { UsuarioSoftSkill } from './entities/usuario-softskill.entity';
+import { AppError } from '../../utils/app-error';
 
 @Injectable()
 export class UsuarioService {
@@ -15,6 +16,13 @@ export class UsuarioService {
 
   async create(data: CreateUsuarioDto): Promise<{ id: number }> {
     const hash = await bcrypt.hash(data.senha, 10);
+
+    const usuarioExistente = this.prisma.usuario.findFirst({
+      where: { email: data.email },
+    });
+
+    if (usuarioExistente)
+      throw new AppError('Já existe um usuário com o mesmo e-mail');
 
     const usuario = await this.prisma.usuario.create({
       data: { ...data, senha: hash },
@@ -33,6 +41,47 @@ export class UsuarioService {
     const usuario = await this.prisma.usuario.findUnique({ where: { id } });
 
     return usuario;
+  }
+
+  async search(pesquisa?: string, hardskill?: string, softskill?: string) {
+    if (pesquisa || hardskill || softskill) {
+      const candidatosFiltradas = await this.prisma.usuario.findMany({
+        where: {
+          AND: [
+            { nome: { contains: pesquisa, mode: 'insensitive' } },
+            {
+              usuario_hardskill: {
+                every: {
+                  hardskill: {
+                    nome: { contains: hardskill, mode: 'insensitive' },
+                  },
+                },
+              },
+            },
+            {
+              usuario_softskill: {
+                every: {
+                  softskill: {
+                    nome: { contains: softskill, mode: 'insensitive' },
+                  },
+                },
+              },
+            },
+            { tipo: 'CANDIDATO' },
+          ],
+        },
+        include: {
+          usuario_hardskill: true,
+          usuario_softskill: true,
+        },
+      });
+      return candidatosFiltradas;
+    } else {
+      const todasCandidatos = await this.prisma.usuario.findMany({
+        where: { tipo: 'CANDIDATO' },
+      });
+      return todasCandidatos;
+    }
   }
 
   async update(id: number, data: UpdateUsuarioDto): Promise<void> {

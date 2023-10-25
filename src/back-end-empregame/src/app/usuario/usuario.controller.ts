@@ -6,11 +6,18 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiQuery,
+  ApiTags,
+  OmitType,
+} from '@nestjs/swagger';
 import { Usuario } from './entities/usuario.entity';
 
 import { CreateUsuarioHardskillDto } from './dto/create-usuario-hardskill.dto';
@@ -41,6 +48,25 @@ export class UsuarioController {
   async findAll(): Promise<Usuario[]> {
     const usuarios = await this.usuarioService.findAll();
     return usuarios;
+  }
+
+  @ApiBearerAuth()
+  @Get('/candidatos')
+  @ApiOkResponse({ type: Usuario, isArray: true })
+  @ApiQuery({ name: 'pesquisa', required: false })
+  @ApiQuery({ name: 'hardskill', required: false })
+  @ApiQuery({ name: 'softskill', required: false })
+  async search(
+    @Query('pesquisa') pesquisa: string,
+    @Query('hardskill') hardskill: string,
+    @Query('softskill') softskill: string,
+  ) {
+    const candidatos = await this.usuarioService.search(
+      pesquisa,
+      hardskill,
+      softskill,
+    );
+    return candidatos;
   }
 
   @ApiBearerAuth()
