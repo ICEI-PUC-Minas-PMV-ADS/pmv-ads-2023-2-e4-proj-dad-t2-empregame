@@ -6,8 +6,12 @@ import {
   Container,
   Divider,
   Flex,
+  Grid,
   Heading,
   Image,
+  InputGroup,
+  InputRightElement,
+  SimpleGrid,
   Text,
 } from "@chakra-ui/react";
 
@@ -15,8 +19,11 @@ import { Link } from "@chakra-ui/next-js";
 import { InputForm } from "@/components/input-form";
 import { MouseEventHandler, SVGProps, useState } from "react";
 import { ButtonPrimary } from "@/components/button-primary";
+import { ButtonSelect } from "@/components/button-select";
+import { IUsuario } from "@/interface/IUsuario";
 
 const Cadastro = () => {
+  const [tipo, setTipo] = useState<"RECRUTADOR" | "CANDIDATO">("CANDIDATO");
   const [nome, setNome] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
@@ -24,12 +31,21 @@ const Cadastro = () => {
   const [github, setGithub] = useState<string>("");
   const [portfolio, setPortfolio] = useState<string>("");
   const [hardskill, setHardskill] = useState<string>("");
-  const [softskill, setSoftskill] = useState<string>("");
+  const [listHardskill, setListHardskill] = useState<
+    {
+      id: number;
+      nome: string;
+      nivel_experiencia: number;
+    }[]
+  >([]);
 
-  const [rating, setRating] = useState<number>(0);
-  const [hover, setHover] = useState<number>(0);
-
-  console.log(rating);
+  const adicionarHardskill = (hardskill: {
+    id: number;
+    nome: string;
+    nivel_experiencia: number;
+  }) => {
+    setListHardskill((old) => [...old, hardskill]);
+  };
 
   return (
     <main>
@@ -58,88 +74,166 @@ const Cadastro = () => {
               <Text color={"white"} fontSize={"24px"} fontWeight={"semibold"}>
                 Primeiro precisamos saber quem você é?
               </Text>
-              <Divider />
-              <Flex gap={"30px"}>
-                <Flex direction={"column"} gap={"16px"}>
-                  <InputForm
-                    placeholder="Nome *"
-                    onChange={(e) => setNome(e.target.value)}
-                  />
-                  <InputForm
-                    placeholder="E-mail *"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <InputForm
-                    placeholder="Senha *"
-                    onChange={(e) => setSenha(e.target.value)}
-                  />
-                </Flex>
-                <Flex direction={"column"} gap={"16px"}>
-                  <InputForm
-                    placeholder="Telefone"
-                    onChange={(e) => setTelefone(e.target.value)}
-                  />
-                  <InputForm
-                    placeholder="GitHub"
-                    onChange={(e) => setGithub(e.target.value)}
-                  />
-                  <InputForm
-                    placeholder="Portfólio"
-                    onChange={(e) => setPortfolio(e.target.value)}
-                  />
-                </Flex>
+              <Flex gap={"18px"}>
+                <ButtonSelect
+                  onClick={() => setTipo("CANDIDATO")}
+                  bg={tipo === "CANDIDATO" ? "#5A2DA4" : "none"}
+                  borderColor={tipo === "CANDIDATO" ? "none" : "white"}
+                  borderWidth={tipo === "CANDIDATO" ? "none" : "1px"}
+                  buttonText={"Candidato"}
+                  color={"white"}
+                />
+                <ButtonSelect
+                  onClick={() => setTipo("RECRUTADOR")}
+                  bg={tipo === "RECRUTADOR" ? "#5A2DA4" : "none"}
+                  borderColor={tipo === "RECRUTADOR" ? "none" : "white"}
+                  borderWidth={tipo === "RECRUTADOR" ? "none" : "1px"}
+                  buttonText={"Recrutador"}
+                  color={"white"}
+                />
               </Flex>
-              <Flex direction={"column"} gap={"12px"}>
+
+              <Divider />
+              <SimpleGrid columns={2} spacingY={"16px"} spacingX={"30px"}>
                 <InputForm
-                  placeholder="Hardskills"
+                  type="text"
+                  placeholder="Nome *"
+                  onChange={(e) => setNome(e.target.value)}
+                />
+                <InputForm
+                  type="email"
+                  placeholder="E-mail *"
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <Flex
-                  direction={"column"}
-                  bg={"#6D3BBF"}
-                  rounded={"12px"}
-                  py={"12px"}
-                  px={"20px"}
-                  gap={"8px"}
-                  maxW={"50%"}
-                >
-                  <Flex justifyContent={"space-between"}>
-                    <Text
-                      fontSize={"16px"}
-                      fontWeight={"medium"}
-                      color={"white"}
+                <InputForm
+                  type="password"
+                  placeholder="Senha *"
+                  onChange={(e) => setSenha(e.target.value)}
+                />
+                <InputForm
+                  type="tel"
+                  placeholder="Telefone"
+                  onChange={(e) => setTelefone(e.target.value)}
+                />
+                {tipo === "CANDIDATO" && (
+                  <>
+                    <InputForm
+                      type="text"
+                      placeholder="GitHub"
+                      onChange={(e) => setGithub(e.target.value)}
+                    />
+                    <InputForm
+                      type="text"
+                      placeholder="Portfólio"
+                      onChange={(e) => setPortfolio(e.target.value)}
+                    />
+                  </>
+                )}
+              </SimpleGrid>
+              <Flex direction={"column"} gap={"12px"}>
+                <InputGroup>
+                  <InputForm
+                    type="text"
+                    placeholder="Hardskills"
+                    onChange={(e) => setHardskill(e.target.value)}
+                  />
+                  <InputRightElement w={"25%"}>
+                    <Button
+                      onClick={() =>
+                        adicionarHardskill({
+                          id: Math.random() * 100,
+                          nome: hardskill,
+                          nivel_experiencia: 1,
+                        })
+                      }
+                      bg={"none"}
+                      rounded={"full"}
+                      h={"30px"}
+                      color={"#2E2E2E"}
                     >
-                      JavaScript
-                    </Text>
+                      <Image src="./icons/icon-mais.svg" pr={"10px"} />
+                      Adicionar
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
 
-                    <Image src="/icons/icon-close.svg" />
-                  </Flex>
-                  <Flex gap={"8px"}>
-                    {[...Array(5)].map((star, index) => {
-                      const currentRating = index + 1;
-                      return (
-                        <label>
-                          <input
-                            type="radio"
-                            name="rating"
-                            value={currentRating}
-                            onClick={() => setRating(currentRating)}
-                            style={{ display: "none", cursor: "pointer" }}
+                <SimpleGrid columns={2} gap={"15px"}>
+                  {listHardskill.map((hardskill) => (
+                    <Flex
+                      direction={"column"}
+                      bg={"#6D3BBF"}
+                      rounded={"12px"}
+                      py={"12px"}
+                      px={"20px"}
+                    >
+                      <Flex justifyContent={"space-between"}>
+                        <Text
+                          fontSize={"16px"}
+                          fontWeight={"medium"}
+                          color={"white"}
+                        >
+                          {hardskill.nome}
+                        </Text>
+                        <Button
+                          bg={"none"}
+                          _hover={{ bg: "#5A2DA4" }}
+                          position={"relative"}
+                          top={"-8px"}
+                          right={"-15px"}
+                          rounded={"full"}
+                          maxW={"10px"}
+                          onClick={() =>
+                            setListHardskill(
+                              listHardskill.filter((e) => e.id === hardskill.id)
+                            )
+                          }
+                        >
+                          <Image
+                            src="/icons/icon-close.svg"
+                            minH={"10px"}
+                            minW={"10px"}
                           />
-                          <IconStar
-                            fill={
-                              currentRating <= (hover || rating)
-                                ? "#FFB800"
-                                : "white"
-                            }
-                            onMouseEnter={() => setHover(currentRating)}
-                            onMouseLeave={() => setHover(0)}
-                          />
-                        </label>
-                      );
-                    })}
-                  </Flex>
-                </Flex>
+                        </Button>
+                      </Flex>
+                      <Flex gap={"8px"}>
+                        {[...Array(5)].map((star, index) => {
+                          const currentRating = index + 1;
+                          const hardskillIndex = listHardskill.findIndex(
+                            (e) => e.id === hardskill.id
+                          );
+                          return (
+                            <label>
+                              <input
+                                type="radio"
+                                name="rating"
+                                value={hardskill.nivel_experiencia}
+                                onClick={() => {
+                                  const tempHardskills = [...listHardskill];
+
+                                  tempHardskills[
+                                    hardskillIndex
+                                  ].nivel_experiencia = currentRating;
+
+                                  setListHardskill(tempHardskills);
+                                }}
+                                style={{ display: "none", cursor: "pointer" }}
+                              />
+                              <IconStar
+                                fill={
+                                  currentRating <=
+                                  listHardskill[hardskillIndex]
+                                    .nivel_experiencia
+                                    ? "#FFB800"
+                                    : "white"
+                                }
+                              />
+                            </label>
+                          );
+                        })}
+                      </Flex>
+                    </Flex>
+                  ))}
+                </SimpleGrid>
               </Flex>
 
               <Box textAlign={"center"}>
@@ -163,11 +257,7 @@ const Cadastro = () => {
 
 export default Cadastro;
 
-const IconStar = (props: {
-  fill: string;
-  onMouseEnter: MouseEventHandler<SVGSVGElement>;
-  onMouseLeave: MouseEventHandler<SVGSVGElement>;
-}) => {
+const IconStar = (props: { fill: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -175,8 +265,6 @@ const IconStar = (props: {
       height="16"
       viewBox="0 0 16 16"
       style={{ cursor: "pointer" }}
-      onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}
     >
       <g clip-path="url(#clip0_27_3091)">
         <path

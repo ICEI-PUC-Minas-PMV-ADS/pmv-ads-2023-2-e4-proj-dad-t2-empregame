@@ -1,9 +1,10 @@
-import { Input } from "@chakra-ui/react";
-import { ChangeEventHandler } from "react";
+import { Box, Input } from "@chakra-ui/react";
+import { ChangeEventHandler, HTMLInputTypeAttribute } from "react";
 
 export const InputForm = (props: {
   placeholder: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  type: HTMLInputTypeAttribute;
 }) => {
   return (
     <Input
@@ -18,6 +19,7 @@ export const InputForm = (props: {
       fontSize={"16px"}
       fontWeight={"medium"}
       focusBorderColor={"#5A2DA4"}
+      type={props.type}
     />
   );
 };

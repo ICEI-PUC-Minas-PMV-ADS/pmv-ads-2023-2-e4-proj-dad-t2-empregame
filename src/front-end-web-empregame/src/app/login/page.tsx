@@ -1,15 +1,60 @@
 "use client";
 
-import { Box, Container, Flex, Heading } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, useToast } from "@chakra-ui/react";
 
 import { Link } from "@chakra-ui/next-js";
 import { InputForm } from "@/components/input-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonPrimary } from "@/components/button-primary";
+import { api } from "@/utils/services/api";
+import { IUsuario } from "@/interface/IUsuario";
+import { useCookies } from "react-cookie";
+import { authToken } from "@/utils/config/authToken";
+import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
+import { useAppContext } from "@/utils/hooks/useContext";
 
 const Login = () => {
+  const { state: usuario, dispatch: dispatchAppContext } = useAppContext();
+  const toast = useToast();
+  const router = useRouter();
+  const [cookie, setCookie] = useCookies([authToken.nome]);
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
+
+  useEffect(() => {
+    if (usuario && cookie[authToken.nome]) {
+      router.push("/feed");
+    }
+  }, [usuario, router, cookie]);
+
+  const loginSubmit = () => {
+    api
+      .post("/auth/login", {
+        email: email,
+        password: senha,
+      })
+      .then((data) => {
+        const user = data.data as { access_token: string; usuario: IUsuario };
+
+        setCookie(authToken.nome, user.access_token);
+        dispatchAppContext({ payload: user.usuario, type: "SET_USUARIO" });
+        toast({
+          title: "Login realizado com sucesso!",
+          status: "success",
+          isClosable: true,
+        });
+        router.push("/feed");
+      })
+      .catch((err) => {
+        const error = err.response.data as AxiosError<{
+          statusCode: number;
+          message: string;
+        }>;
+        toast({ title: error.message, status: "error", isClosable: true });
+      });
+  };
+
   return (
     <main>
       <Box
@@ -35,11 +80,13 @@ const Login = () => {
             </Heading>
             <Flex direction={"column"} gap={"30px"}>
               <InputForm
+                type="email"
                 placeholder="E-mail"
                 onChange={(e) => setEmail(e.target.value)}
               />
               <Flex direction={"column"} gap={"5px"}>
                 <InputForm
+                  type="password"
                   placeholder="Senha"
                   onChange={(e) => setSenha(e.target.value)}
                 />
@@ -54,7 +101,10 @@ const Login = () => {
                 </Link>
               </Flex>
               <Box textAlign={"center"}>
-                <ButtonPrimary onClick={() => {}} buttonText="Acessar" />
+                <ButtonPrimary
+                  onClick={() => loginSubmit()}
+                  buttonText="Acessar"
+                />
                 <Link
                   href={""}
                   fontSize={"18px"}
