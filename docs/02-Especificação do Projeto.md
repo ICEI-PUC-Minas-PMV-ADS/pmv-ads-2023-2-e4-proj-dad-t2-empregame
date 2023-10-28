@@ -1,65 +1,65 @@
 # Especificações do Projeto
 
-Por meio da técnica de observação e brainstorming foram analisadas as necessidades dos usuários do sistema de forma a atender suas demandas. 
+Por meio da técnica de observação e brainstorming foram analisadas as necessidades dos usuários do sistema de forma a atender suas demandas.
 
 A partir das informações coletadas, foram determinadas as personas e histórias de usuários que serão de suma importância para a definição das funcionalidades.
 
 ## Personas
 
-As personas, ou seja, os usuários ideais do site foram definidos abaixo: 
+As personas, ou seja, os usuários ideais do site foram definidos abaixo:
 
-**Isabela:**  
+**Isabela:**
 
-- Isabela tem 35 anos, mora em São Paulo e atua como Tech Recruiter em uma empresa de sua região. 
-- Ela recebeu uma solicitação do setor de RH da empresa para contratar alguns profissionais com perfil voltado para a área de tecnologia. 
-- Isabela verificou que os candidatos devem possuir algumas habilidades em linguagens de programação específicas. 
-- Ela então necessita de um meio para divulgar as vagas e assim receber candidaturas para a mesma. 
+- Isabela tem 35 anos, mora em São Paulo e atua como Tech Recruiter em uma empresa de sua região.
+- Ela recebeu uma solicitação do setor de RH da empresa para contratar alguns profissionais com perfil voltado para a área de tecnologia.
+- Isabela verificou que os candidatos devem possuir algumas habilidades em linguagens de programação específicas.
+- Ela então necessita de um meio para divulgar as vagas e assim receber candidaturas para a mesma.
 - Isabela precisa verificar quem se interessou na vaga e se o perfil desta pessoa se encaixa na vaga, para possível contato.
 
-**Fernando:** 
+**Fernando:**
 
-- Fernando tem 26 anos, atualmente mora em Belo Horizonte, atua como gestor de uma equipe de desenvolvedores em uma empresa de sua região. 
-- Ele percebe que necessita de mais um desenvolvedor .NET, pois o projeto está escalando e precisará de algumas alterações no sistema. 
-- Fernando então decide fazer uma busca ativa por candidatos que possuam conhecimento em .NET abertos ao mercado de trabalho. 
-- Ele após encontrar algum perfil que se enquadra na vaga, precisa entrar em contato com o candidato para apresentar a proposta. 
+- Fernando tem 26 anos, atualmente mora em Belo Horizonte, atua como gestor de uma equipe de desenvolvedores em uma empresa de sua região.
+- Ele percebe que necessita de mais um desenvolvedor .NET, pois o projeto está escalando e precisará de algumas alterações no sistema.
+- Fernando então decide fazer uma busca ativa por candidatos que possuam conhecimento em .NET abertos ao mercado de trabalho.
+- Ele após encontrar algum perfil que se enquadra na vaga, precisa entrar em contato com o candidato para apresentar a proposta.
 
-**Felipe:** 
+**Felipe:**
 
-- Felipe, mora em Belo Horizonte e possui 19 anos. 
-- Ele cursa Análise e Desenvolvimento de Sistemas e está em busca de sua primeira oportunidade como desenvolvedor. 
-- Felipe realizou diversos cursos direcionados para desenvolvimento web Frontend, criou seu portfólio e atuou como freelancer em alguns projetos da área. 
-- Ele então decide buscar vagas com o tema “Desenvolvedor Frontend”. 
+- Felipe, mora em Belo Horizonte e possui 19 anos.
+- Ele cursa Análise e Desenvolvimento de Sistemas e está em busca de sua primeira oportunidade como desenvolvedor.
+- Felipe realizou diversos cursos direcionados para desenvolvimento web Frontend, criou seu portfólio e atuou como freelancer em alguns projetos da área.
+- Ele então decide buscar vagas com o tema “Desenvolvedor Frontend”.
 - Fernando, após encontrar alguma vaga interessante, tem a necessidade de demonstrar esse interesse para o recrutador, para que o mesmo possa analisar seu perfil.
 
 **Bianca:**
 
-- Bianca possui 23 anos, mora em São Paulo e atua como desenvolvedora Python. 
-- Ela está buscando uma recolocação na mesma linguagem de programação, porém em uma outra empresa. 
-- Bianca então deseja visualizar diversas vagas com esse tema, bem como os requisitos e benefícios, para assim tomar verificar se está vaga seria de seu interesse. 
-- Ela após encontrar uma vaga interessante, gostaria de demonstrar que está aberta a participar do processo de seleção. 
-- Bianca então, caso o recrutador goste do seu perfil, gostaria de entrar em contato para solucionar algumas dúvidas que restaram sobre a vaga. 
+- Bianca possui 23 anos, mora em São Paulo e atua como desenvolvedora Python.
+- Ela está buscando uma recolocação na mesma linguagem de programação, porém em uma outra empresa.
+- Bianca então deseja visualizar diversas vagas com esse tema, bem como os requisitos e benefícios, para assim tomar verificar se está vaga seria de seu interesse.
+- Ela após encontrar uma vaga interessante, gostaria de demonstrar que está aberta a participar do processo de seleção.
+- Bianca então, caso o recrutador goste do seu perfil, gostaria de entrar em contato para solucionar algumas dúvidas que restaram sobre a vaga.
 
 ## Histórias de Usuários
 
-Com a observação do cotidiano das personas e a compreensão de suas necessidades, foram definidas as seguintes histórias de usuários.  
+Com a observação do cotidiano das personas e a compreensão de suas necessidades, foram definidas as seguintes histórias de usuários.
 
-| EU COMO... `PERSONA` | QUERO/PRECISO ... `FUNCIONALIDADE` | PARA ... `MOTIVO/VALOR`                |
-| -------------------- | ---------------------------------- | -------------------------------------- |
-| Isabela | Realizar o seu cadastro e login no sistema como uma recrutadora. | Poder publicar vagas abertas em sua empresa ou encontrar candidatos de forma ativa. |
-|Felipe | Realizar o seu cadastro no aplicativo como um candidato. | Encontrar vagas relacionadas ao seu perfil e demostrar interesse nas mesmas. |
-| Fernando | Fazer alterações em seus dados cadastrais. | Ajustar o seu nível de habilidade em desenvolvimento Frontend. |
-| Bianca | Visualizar diversas vagas de trabalho no mercado de tecnologia. |Analisar requisitos das vagas, modelo de trabalho e remuneração. |
-| Bianca | Deletar seu perfil. | Encontrou a vaga que desejava. |
-| Felipe | Demostrar interesse em uma determinada vaga que se encaixou em seu perfil. |Mostrar ao recrutador seu interesse na vaga. |
-| Bianca | Filtrar as vagas que possuam requisitos relacionados a linguagem de programação que utiliza. | Possui preferência por vagas relacionadas a linguagem Python. |
-| Isabela | Criar uma postagem de vaga aberta em sua empresa. | Receber candidaturas pra que possa selecionar a pessoa ideal para a vaga. |
-| Fernando | Buscar candidatos com habilidades em uma linguagem de programação específica. | Procura alguém especializado em .NET C#. |
-| Isabela | Encerrar uma vaga aberta postada anteriormente na plataforma. | Encontrou o candidato que precisava. |
-| Fernando | Entrar em contato com um candidato que se enquadrou no perfil que buscava. | Solicitar mais informações ao candidato e marcar uma entrevista. |
-| Isabela | Verificar os candidatos interessados na vaga. | Selecionar os melhores perfis. |
-| Felipe | Recuperar sua senha. | Não se lembra da senha anterior. |
-| Isabela | Visualizar todas as vagas que postou na plataforma. | Controle de vagas abertas e encerradas. |
-| Fernando | Demonstrar interesse em um candidato. | Demonstrar ao candidato que gostou do seu perfil. |
+| EU COMO... `PERSONA` | QUERO/PRECISO ... `FUNCIONALIDADE`                                                           | PARA ... `MOTIVO/VALOR`                                                             |
+| -------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Isabela              | Realizar o seu cadastro e login no sistema como uma recrutadora.                             | Poder publicar vagas abertas em sua empresa ou encontrar candidatos de forma ativa. |
+| Felipe               | Realizar o seu cadastro no aplicativo como um candidato.                                     | Encontrar vagas relacionadas ao seu perfil e demostrar interesse nas mesmas.        |
+| Fernando             | Fazer alterações em seus dados cadastrais.                                                   | Ajustar o seu nível de habilidade em desenvolvimento Frontend.                      |
+| Bianca               | Visualizar diversas vagas de trabalho no mercado de tecnologia.                              | Analisar requisitos das vagas, modelo de trabalho e remuneração.                    |
+| Bianca               | Deletar seu perfil.                                                                          | Encontrou a vaga que desejava.                                                      |
+| Felipe               | Demostrar interesse em uma determinada vaga que se encaixou em seu perfil.                   | Mostrar ao recrutador seu interesse na vaga.                                        |
+| Bianca               | Filtrar as vagas que possuam requisitos relacionados a linguagem de programação que utiliza. | Possui preferência por vagas relacionadas a linguagem Python.                       |
+| Isabela              | Criar uma postagem de vaga aberta em sua empresa.                                            | Receber candidaturas pra que possa selecionar a pessoa ideal para a vaga.           |
+| Fernando             | Buscar candidatos com habilidades em uma linguagem de programação específica.                | Procura alguém especializado em .NET C#.                                            |
+| Isabela              | Encerrar uma vaga aberta postada anteriormente na plataforma.                                | Encontrou o candidato que precisava.                                                |
+| Fernando             | Entrar em contato com um candidato que se enquadrou no perfil que buscava.                   | Solicitar mais informações ao candidato e marcar uma entrevista.                    |
+| Isabela              | Verificar os candidatos interessados na vaga.                                                | Selecionar os melhores perfis.                                                      |
+| Felipe               | Recuperar sua senha.                                                                         | Não se lembra da senha anterior.                                                    |
+| Isabela              | Visualizar todas as vagas que postou na plataforma.                                          | Controle de vagas abertas e encerradas.                                             |
+| Fernando             | Demonstrar interesse em um candidato.                                                        | Demonstrar ao candidato que gostou do seu perfil.                                   |
 
 ## Modelagem do Processo de Negócio
 
@@ -143,9 +143,9 @@ A tabela a seguir apresenta as condições que limitam a execução desse projet
 | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | RE-01 | O projeto deve ser entregue até dia 10/12/2023.                                                                                                                                                           |
 | RE-02 | A equipe não pode contratar terceiros para o desenvolvimento do projeto.                                                                                                                                  |
-| RE-03 | O site deve ser desenvolvido utilizando linguagens de programação para banco de dados relacional, mais especificamente SQL.                                                                               |
+| RE-03 | O site deve ser desenvolvido utilizando linguagens de programação para banco de dados relacional e não relacional (SQL e NoSQL)                                                                           |
 | RE-04 | O site deve ser desenvolvido utilizando linguagens de programação Back-end, mais especificamente TypeScript juntamente com o framework Nest.js e os frameworks Express e Prisma para a construção da API. |
-| RE-05 | site deve ser desenvolvido utilizando linguagens de programação Web, mais especificamente CSS, HTML, TypeScript e bem como o framework React.                                                             |
+| RE-05 | site deve ser desenvolvido utilizando linguagens de programação Web, mais especificamente CSS, HTML, TypeScript e bem como o framework NextJS (Base React) e Chakra UI.                                   |
 | RE-06 | O site deve ser desenvolvido utilizando linguagens de programação Mobile, mais especificamente CSS, TypeScript e bem como o framework React Native.                                                       |
 
 ## Técnica de Priorização de Requisitos
@@ -163,7 +163,6 @@ Em linhas gerais, o diagrama de casos de uso documenta o que o sistema deve faze
 O diagrama a seguir diz respeito ao projeto em questão:
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/81aef75b-25bb-42b9-a0fc-5aca7a8487b1)
-
 
 # Matriz de Rastreabilidade
 
@@ -183,14 +182,11 @@ Para uma melhor gestão, foi construído um cronograma com as atividades necess�
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/17c4a062-f3a8-4cb1-9891-2c47fb04dccd)
 
-
-
 ## Gerenciamento de Equipe
 
 A equipe segue a metodologia Agile Scrum como abordagem principal para gerenciar projetos. Para monitorar o andamento do processo, o time faz uso do Kanban, que está disponível na seção "Projects" no repositório do GitHub Classroom. O Kanban é organizado em colunas específicas, incluindo as seguintes:
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/b8ba7f44-13b1-43a0-8758-99bb32250b59)
-
 
 ## Gestão de Orçamento
 

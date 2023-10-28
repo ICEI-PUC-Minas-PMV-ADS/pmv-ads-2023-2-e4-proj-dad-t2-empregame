@@ -35,12 +35,12 @@ O diagrama de classes é uma representação gráfica que visualiza a estrutura 
 
 ## Tecnologias Utilizadas
 
-a) IDE: VScode
-b) Banco de dados: PostgresSQL e Redis
-c) Desenvolvimento BackEnd: NestJS, Prisma, NodeJS
-d) Desenvolvimento FrontEnd: NextJS, React e Chakra UI
-b) Ferramentas de Desenho de Tela e diagrama: Figma, Miro.
-e) Infraestrutura: Docker, Render (Hospedagem dos Serviços do BackEnd e do Banco de dados), AWS (Hospedagem FrontEnd) e Umbler (Servidor de e-mail)
+- IDE: VScode
+- Banco de dados: PostgresSQL e Redis
+- Desenvolvimento BackEnd: NestJS, Prisma, NodeJS
+- Desenvolvimento FrontEnd: NextJS, React e Chakra UI
+- Ferramentas de Desenho de Tela e diagrama: Figma, Miro.
+- Infraestrutura: Docker, Render (Hospedagem dos Serviços do BackEnd e do Banco de dados), AWS (Hospedagem FrontEnd) e Umbler (Servidor de e-mail)
 
 ## Qualidade de Software
 
