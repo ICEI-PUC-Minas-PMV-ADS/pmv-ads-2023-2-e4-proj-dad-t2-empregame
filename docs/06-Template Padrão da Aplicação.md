@@ -16,7 +16,7 @@ O template padrão do site vai seguir a estrutura do Wireframe elaborado na seç
 
 - Tela de Cadastro Recrutador
 
-![Tela de Cadastro Recrutador](img/templates-ui/cadastro-inicial.png.png)
+![Tela de Cadastro Recrutador](img/templates-ui/cadastro-inicial.png)
 
 - Tela de Perfil Candidato
 
