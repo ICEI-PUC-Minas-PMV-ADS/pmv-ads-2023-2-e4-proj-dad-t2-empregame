@@ -1,5 +1,7 @@
 "use client";
 
+import { IUsuario } from "@/interface/IUsuario";
+import { useFetch } from "@/utils/hooks/useFetch";
 import {
   Box,
   Text,
@@ -9,9 +11,20 @@ import {
   Flex,
   Divider,
   SimpleGrid,
+  Link,
 } from "@chakra-ui/react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Perfil = () => {
+  const router = useRouter();
+  const query = useSearchParams();
+
+  const idUsuario = query.get("id");
+
+  const { data: usuario } = useFetch<IUsuario>("/usuarios/" + idUsuario, {
+    method: "GET",
+  });
+
   return (
     <Box
       bgGradient={"linear-gradient(82deg, #7345D6 39.13%, #DA4FE2 112.59%)"}
@@ -30,8 +43,9 @@ const Perfil = () => {
             color={"white"}
             _hover={{ bg: "#6d3bbf" }}
             rounded={"full"}
+            onClick={() => router.back()}
           >
-            <Image src={"./icons/icon-back.svg"} alt="icone voltar"></Image>
+            <Image src={"./icons/icon-back.svg"} alt="icone voltar" />
             Voltar
           </Button>
           <Flex gap={"40px"}>
@@ -42,7 +56,7 @@ const Perfil = () => {
               _hover={{ bg: "#6d3bbf" }}
               rounded={"full"}
             >
-              <Image src={"./icons/icon-edit.svg"} alt="icone editar"></Image>
+              <Image src={"./icons/icon-edit.svg"} alt="icone editar" />
               Editar informações
             </Button>
             <Button
@@ -52,10 +66,7 @@ const Perfil = () => {
               _hover={{ bg: "#6d3bbf" }}
               rounded={"full"}
             >
-              <Image
-                src={"./icons/icon-password.svg"}
-                alt="icone senha"
-              ></Image>
+              <Image src={"./icons/icon-password.svg"} alt="icone senha" />
               Alterar senha
             </Button>
             <Button
@@ -65,10 +76,7 @@ const Perfil = () => {
               _hover={{ bg: "#6d3bbf" }}
               rounded={"full"}
             >
-              <Image
-                src={"./icons/icon-delete.svg"}
-                alt="icone deletar"
-              ></Image>
+              <Image src={"./icons/icon-delete.svg"} alt="icone deletar" />
               Excluir conta
             </Button>
           </Flex>
@@ -76,7 +84,7 @@ const Perfil = () => {
         <Flex direction={"column"} gap={"32px"} width={"100%"}>
           <Flex gap={"15px"} direction={"column"}>
             <Text color={"white"} fontWeight={"semibold"} fontSize={"48px"}>
-              Mariano Contin
+              {usuario?.nome}
             </Text>
             <Box
               bg={"#5a2da4"}
@@ -88,66 +96,78 @@ const Perfil = () => {
               maxWidth={"200px"}
               textAlign={"center"}
             >
-              Candidato
+              {usuario?.tipo}
             </Box>
           </Flex>
-          <Divider></Divider>
+          <Divider />
           <SimpleGrid columns={5} spacing={"20px"}>
             <Box color={"white"} fontSize={"16px"}>
               <Text fontWeight={"normal"}>Telefone</Text>
-              <Text fontWeight={"semibold"}>005532998510205</Text>
+              <Text fontWeight={"semibold"}>{usuario?.telefone}</Text>
             </Box>
             <Box color={"white"} fontSize={"16px"}>
               <Text fontWeight={"normal"}>E-mail</Text>
-              <Text fontWeight={"semibold"}>mariano.contin@bol.com.br</Text>
+              <Text fontWeight={"semibold"}>{usuario?.email}</Text>
             </Box>
-            <Box color={"white"} fontSize={"16px"}>
-              <Text fontWeight={"normal"}>GitHub</Text>
-              <Text
-                fontWeight={"semibold"}
-                display={"flex"}
-                alignItems={"center"}
-              >
-                github.com/mariano.contin{" "}
-                <Image
-                  src="./icons/icon-share.svg"
-                  alt="icon redirecionavel"
-                  paddingLeft={"10px"}
-                ></Image>
-              </Text>
-            </Box>
-            <Box color={"white"} fontSize={"16px"}>
-              <Text fontWeight={"normal"}>Portifólio</Text>
-              <Text
-                fontWeight={"semibold"}
-                display={"flex"}
-                alignItems={"center"}
-              >
-                marianodev.com.br{" "}
-                <Image
-                  src="./icons/icon-share.svg"
-                  alt="icon redirecionavel"
-                  paddingLeft={"10px"}
-                ></Image>
-              </Text>
-            </Box>
-            <Box color={"white"} fontSize={"16px"}>
-              <Text fontWeight={"normal"}>LikedIn</Text>
-              <Text
-                fontWeight={"semibold"}
-                display={"flex"}
-                alignItems={"center"}
-              >
-                linkedin.com/marianocontin{" "}
-                <Image
-                  src="./icons/icon-share.svg"
-                  alt="icon redirecionavel"
-                  paddingLeft={"10px"}
-                ></Image>
-              </Text>
-            </Box>
+            {usuario?.github && (
+              <Box color={"white"} fontSize={"16px"}>
+                <Text fontWeight={"normal"}>GitHub</Text>
+                <a href={usuario.github} target="_blank">
+                  <Text
+                    fontWeight={"semibold"}
+                    display={"flex"}
+                    alignItems={"center"}
+                  >
+                    {usuario.github.replace("https://", "")}
+                    <Image
+                      src="./icons/icon-share.svg"
+                      alt="icon redirecionavel"
+                      paddingLeft={"10px"}
+                    />
+                  </Text>
+                </a>
+              </Box>
+            )}
+            {usuario?.portfolio && (
+              <Box color={"white"} fontSize={"16px"}>
+                <Text fontWeight={"normal"}>Portifólio</Text>
+                <a href={usuario.portfolio} target="_blank">
+                  <Text
+                    fontWeight={"semibold"}
+                    display={"flex"}
+                    alignItems={"center"}
+                  >
+                    {usuario.portfolio.replace("https://", "")}
+                    <Image
+                      src="./icons/icon-share.svg"
+                      alt="icon redirecionavel"
+                      paddingLeft={"10px"}
+                    />
+                  </Text>
+                </a>
+              </Box>
+            )}
+            {usuario?.linkedin && (
+              <Box color={"white"} fontSize={"16px"}>
+                <Text fontWeight={"normal"}>Linkedin</Text>
+                <a href={usuario.linkedin} target="_blank">
+                  <Text
+                    fontWeight={"semibold"}
+                    display={"flex"}
+                    alignItems={"center"}
+                  >
+                    {usuario.linkedin.replace("https://", "")}
+                    <Image
+                      src="./icons/icon-share.svg"
+                      alt="icon redirecionavel"
+                      paddingLeft={"10px"}
+                    />
+                  </Text>
+                </a>
+              </Box>
+            )}
           </SimpleGrid>
-          <Divider></Divider>
+          <Divider />
           <Flex gap={"45px"}>
             <Box width={"full"}>
               <Text color={"white"} fontSize={"16px"} paddingBottom={"5px"}>

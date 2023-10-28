@@ -29,7 +29,7 @@ export class AuthService {
 
   async signIn({ email, password }: signInDto): Promise<any> {
     const usuario = await this.prisma.usuario.findFirst({
-      where: { email: email },
+      where: { email: email, situacao: 'ATIVO' },
     });
 
     if (!usuario) throw new AppError('Usuário não encontrado');
@@ -38,7 +38,13 @@ export class AuthService {
 
     if (!isMatch) throw new AppError('Credenciais inválidas');
 
-    const payload = { sub: usuario.id, email: usuario.email };
+    const payload = {
+      sub: usuario.id,
+      email: usuario.email,
+      nome: usuario.nome,
+      id: usuario.id,
+      tipo: usuario.tipo,
+    };
 
     const access_token = await this.jwtService.signAsync(payload);
 
@@ -59,6 +65,7 @@ export class AuthService {
     const usuario = await this.prisma.usuario.findFirst({
       where: {
         email,
+        situacao: 'ATIVO',
       },
     });
 
@@ -99,6 +106,7 @@ export class AuthService {
     await this.prisma.usuario.update({
       where: {
         id: usuario.id,
+        situacao: 'ATIVO',
       },
       data: {
         senha: hash,
@@ -120,6 +128,7 @@ export class AuthService {
     const usuario = await this.prisma.usuario.findFirst({
       where: {
         id: id_usuario,
+        situacao: 'ATIVO',
       },
     });
 
@@ -134,6 +143,7 @@ export class AuthService {
     await this.prisma.usuario.update({
       where: {
         id: id_usuario,
+        situacao: 'ATIVO',
       },
       data: {
         senha: hash,

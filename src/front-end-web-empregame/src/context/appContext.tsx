@@ -1,7 +1,9 @@
 "use client";
 
 import { IUsuario } from "@/interface/IUsuario";
-import React, { Dispatch, createContext, useContext, useReducer } from "react";
+import { authToken } from "@/utils/config/authToken";
+import React, { Dispatch, createContext, useReducer } from "react";
+import { useCookies } from "react-cookie";
 
 interface IAppReducer {
   loading: boolean;

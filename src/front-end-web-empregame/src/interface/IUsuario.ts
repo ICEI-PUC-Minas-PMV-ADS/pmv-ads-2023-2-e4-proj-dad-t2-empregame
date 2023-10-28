@@ -1,10 +1,10 @@
 export interface IUsuario {
   id: number;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
   nome: string;
   tipo: "RECRUTADOR" | "CANDIDATO";
-  senha: string;
+  senha?: string;
   email: string;
   telefone?: string | null;
   linkedin?: string | null;
