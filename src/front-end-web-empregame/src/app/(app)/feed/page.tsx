@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { ButtonNavigation } from "@/components/button-navigation";
-import { ButtonPrimary } from "@/components/button-primary";
+import { ButtonNavigation } from '@/components/button-navigation'
+import { ButtonPrimary } from '@/components/button-primary'
 import {
   Box,
   Container,
@@ -11,104 +11,122 @@ import {
   InputRightElement,
   Text,
   Image,
-  Select,
-} from "@chakra-ui/react";
-import CardCandidato from "./components/CardCandidato";
+  Select
+} from '@chakra-ui/react'
+import CardCandidato from './components/CardCandidato'
 
-import { Button, Divider, Link } from "@chakra-ui/react";
-import { useState } from "react";
+import { Button, Divider, Link } from '@chakra-ui/react'
+import { useState } from 'react'
 
 const Feed = () => {
-  const [isLike, setIsLike] = useState<boolean>(false);
+  const [isLike, setIsLike] = useState<boolean>(false)
   return (
     <main>
-      <Box bg={"#FBFBFB"}>
+      <Box bg={'#FBFBFB'}>
         <Container
-          maxWidth={"1366px"}
-          display={"flex"}
-          gap={"50px"}
-          justifyContent={"space-between"}
-          paddingY={"60px"}
+          maxWidth={'1366px'}
+          display={'flex'}
+          gap={'50px'}
+          justifyContent={'space-between'}
+          paddingY={'60px'}
         >
-          <Flex direction={"column"} width={"20%"} gap={"18px"}>
+          <Flex direction={'column'} width={'20%'} gap={'18px'}>
             <ButtonNavigation
-              bg={"#5A2DA4"}
-              buttonText={"Feed"}
-              color={"white"}
-              href={"/feed"}
+              bg={'#5A2DA4'}
+              buttonText={'Feed'}
+              color={'white'}
+              href={'/feed'}
             />
             <ButtonNavigation
-              bg={"white"}
-              buttonText={"Vagas que Interessei"}
-              color={"#5A2DA4"}
-              href={"/feed"}
-              borderColor={"#5A2DA4"}
-              borderWidth={"1px"}
+              bg={'white'}
+              buttonText={'Vagas que Interessei'}
+              color={'#5A2DA4'}
+              href={'/feed'}
+              borderColor={'#5A2DA4'}
+              borderWidth={'1px'}
             />
           </Flex>
           <Flex
-            width={"60%"}
-            direction={"column"}
-            gap={"20px"}
-            alignItems={"center"}
+            width={'60%'}
+            direction={'column'}
+            gap={'20px'}
+            alignItems={'center'}
           >
             <Flex
-              direction={"column"}
-              py={"25px"}
-              px={"30px"}
-              gap={"25px"}
-              borderWidth={"1px"}
-              borderColor={"#E1E1E1"}
-              rounded={"13px"}
-              bg={"white"}
-              width={"100%"}
+              direction={'column'}
+              py={'25px'}
+              px={'30px'}
+              gap={'25px'}
+              borderWidth={'1px'}
+              borderColor={'#E1E1E1'}
+              rounded={'13px'}
+              bg={'white'}
+              width={'100%'}
             >
-              <Flex gap={"15px"} alignItems={"center"}>
-                <Image src={"./icons/icon-maleta.svg"} alt={"maleta"} />
-                <Text fontSize={"20px"} fontWeight={"bold"} color={"#2E2E2E"}>
-                  Vaga de Dev FrontEnd Júnior
-                </Text>
-              </Flex>
-              <Flex gap={"8px"} alignItems={"center"}>
+              <Flex justifyContent={'space-between'} alignItems={'center'}>
+                <Flex gap={'15px'} alignItems={'center'}>
+                  <Image src={'./icons/icon-maleta.svg'} alt={'maleta'} />
+                  <Text fontSize={'20px'} fontWeight={'bold'} color={'#2E2E2E'}>
+                    Vaga de Dev FrontEnd Júnior
+                  </Text>
+                </Flex>
                 <Box
-                  bg={"#5A2DA4"}
-                  py={"5px"}
-                  px={"10px"}
-                  fontSize={"14px"}
-                  color={"white"}
-                  fontWeight={"medium"}
-                  textAlign={"center"}
-                  rounded={"full"}
+                  bg={'#289C65'}
+                  py={'5px'}
+                  px={'10px'}
+                  fontSize={'14px'}
+                  color={'white'}
+                  fontWeight={'medium'}
+                  textAlign={'center'}
+                  rounded={'6px'}
+                >
+                  {' '}
+                  <Flex gap={'10px'}>
+                    <Image src={'./icons/icon-match.svg'} alt={'match'}></Image>
+                    <Text>Deu Match</Text>
+                  </Flex>
+                </Box>
+              </Flex>
+              <Flex gap={'8px'} alignItems={'center'}>
+                <Box
+                  bg={'#5A2DA4'}
+                  py={'5px'}
+                  px={'10px'}
+                  fontSize={'14px'}
+                  color={'white'}
+                  fontWeight={'medium'}
+                  textAlign={'center'}
+                  rounded={'full'}
                 >
                   Java
                 </Box>
                 <Box
-                  bg={"#5A2DA4"}
-                  py={"5px"}
-                  px={"10px"}
-                  fontSize={"14px"}
-                  color={"white"}
-                  fontWeight={"medium"}
-                  textAlign={"center"}
-                  rounded={"full"}
+                  bg={'#5A2DA4'}
+                  py={'5px'}
+                  px={'10px'}
+                  fontSize={'14px'}
+                  color={'white'}
+                  fontWeight={'medium'}
+                  textAlign={'center'}
+                  rounded={'full'}
                 >
                   Liderança
                 </Box>
               </Flex>
-              <Flex gap={"15px"}>
-                <Flex gap={"15px"} direction={"column"} w={"80%"} h={"full"}>
-                  <Flex gap={"5px"} direction={"column"}>
+              <Flex gap={'15px'}>
+                <Flex gap={'15px'} direction={'column'} w={'80%'} h={'full'}>
+                  <Flex gap={'5px'} direction={'column'}>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"semibold"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'semibold'}
                     >
                       Descrição
                     </Text>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"normal"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'normal'}
                     >
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -116,149 +134,253 @@ const Feed = () => {
                       ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </Text>
                   </Flex>
-                  <Flex gap={"5px"} direction={"column"}>
+                  <Flex gap={'5px'} direction={'column'}>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"semibold"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'semibold'}
                     >
                       Benefícios
                     </Text>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"normal"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'normal'}
                     >
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua.
                     </Text>
                   </Flex>
-                  <Flex gap={"7px"}>
+                  <Flex gap={'7px'}>
                     <Image
-                      src={"./icons/icon-person.svg"}
-                      alt={"pessoa"}
+                      src={'./icons/icon-person.svg'}
+                      alt={'pessoa'}
                     ></Image>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"normal"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'normal'}
                     >
                       25 pessoas interessadas
                     </Text>
                   </Flex>
                 </Flex>
                 <Divider
-                  orientation={"vertical"}
-                  w={"1px"}
-                  h={"full"}
-                  bg={"#E1E1E1"}
+                  orientation={'vertical'}
+                  w={'1px'}
+                  h={'full'}
+                  bg={'#E1E1E1'}
                 />
-                <Flex gap={"10px"} direction={"column"} w={"20%"} h={"full"}>
-                  <Flex gap={"2px"} direction={"column"}>
+                <Flex gap={'10px'} direction={'column'} w={'20%'} h={'full'}>
+                  <Flex gap={'2px'} direction={'column'}>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"semibold"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'semibold'}
                     >
                       Empresa
                     </Text>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"normal"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'normal'}
                     >
                       Google
                     </Text>
                   </Flex>
-                  <Flex gap={"2px"} direction={"column"}>
+                  <Flex gap={'2px'} direction={'column'}>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"semibold"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'semibold'}
                     >
                       Estado
                     </Text>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"normal"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'normal'}
                     >
                       Minas Gerais
                     </Text>
                   </Flex>
-                  <Flex gap={"2px"} direction={"column"}>
+                  <Flex gap={'2px'} direction={'column'}>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"semibold"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'semibold'}
                     >
                       Cidade
                     </Text>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"normal"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'normal'}
                     >
                       Belo Horizonte
                     </Text>
                   </Flex>
-                  <Flex gap={"2px"} direction={"column"}>
+                  <Flex gap={'2px'} direction={'column'}>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"semibold"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'semibold'}
                     >
                       Salário
                     </Text>
                     <Text
-                      fontSize={"14px"}
-                      color={"#2E2E2E"}
-                      fontWeight={"normal"}
+                      fontSize={'14px'}
+                      color={'#2E2E2E'}
+                      fontWeight={'normal'}
                     >
                       R$ 19.000,00
                     </Text>
                   </Flex>
                 </Flex>
               </Flex>
+              <Flex gap={'20px'}>
+                <Button
+                  onClick={() => {
+                    isLike ? setIsLike(false) : setIsLike(true)
+                  }}
+                  gap={'10px'}
+                  color={isLike ? 'white' : '#6D3BBF'}
+                  fontSize={'18px'}
+                  fontWeight={'semibold'}
+                  bg={isLike ? '#6D3BBF' : 'white'}
+                  borderColor={'#6D3BBF'}
+                  borderWidth={'2px'}
+                  rounded={'full'}
+                  textAlign={'center'}
+                  py={'10px'}
+                  px={'25px'}
+                  w={'full'}
+                  _hover={{
+                    bg: '#5A2DA4',
+                    transition: 'ease-in',
+                    boxShadow: 'lg',
+                    color: 'white',
+                    borderColor: '#5A2DA4'
+                  }}
+                >
+                  <IconCoracao
+                    fill={isLike ? '#FF5757' : 'white'}
+                    borderColor={'#6D3BBF'}
+                  />
+                  Me Interessei
+                </Button>
+                <Button
+                  onClick={() => {}}
+                  gap={'10px'}
+                  color={'#6D3BBF'}
+                  fontSize={'18px'}
+                  fontWeight={'semibold'}
+                  bg={'white'}
+                  borderColor={'#6D3BBF'}
+                  borderWidth={'2px'}
+                  rounded={'full'}
+                  textAlign={'center'}
+                  py={'10px'}
+                  px={'25px'}
+                  w={'full'}
+                  _hover={{
+                    bg: '#5A2DA4',
+                    transition: 'ease-in',
+                    boxShadow: 'lg',
+                    color: 'white',
+                    borderColor: '#5A2DA4'
+                  }}
+                >
+                  <IconChat fill={'#6D3BBF'}></IconChat>
+                  Chat
+                </Button>
+              </Flex>
               <Button
-                onClick={() => {
-                  isLike ? setIsLike(false) : setIsLike(true);
-                }}
-                gap={"10px"}
-                color={isLike ? "white" : "#6D3BBF"}
-                fontSize={"18px"}
-                fontWeight={"semibold"}
-                bg={isLike ? "#6D3BBF" : "white"}
-                borderColor={"#6D3BBF"}
-                borderWidth={"2px"}
-                rounded={"full"}
-                textAlign={"center"}
-                py={"10px"}
-                px={"25px"}
-                w={"full"}
+                onClick={() => {}}
+                gap={'10px'}
+                color={'white'}
+                fontSize={'18px'}
+                fontWeight={'semibold'}
+                bg={'#6D3BBF'}
+                borderColor={'#6D3BBF'}
+                borderWidth={'2px'}
+                rounded={'full'}
+                textAlign={'center'}
+                py={'10px'}
+                px={'25px'}
+                w={'full'}
                 _hover={{
-                  bg: "#5A2DA4",
-                  transition: "ease-in",
-                  boxShadow: "lg",
-                  color: "white",
-                  borderColor: "#5A2DA4",
+                  bg: '#5A2DA4',
+                  transition: 'ease-in',
+                  boxShadow: 'lg',
+                  color: 'white',
+                  borderColor: '#5A2DA4'
                 }}
               >
-                <IconCoracao
-                  fill={isLike ? "#FF5757" : "white"}
-                  borderColor={"#6D3BBF"}
-                />
-                Me Interessei
+                <IconCoracao fill={'#FF5757'} borderColor={'#6D3BBF'} />
+                25 Candidatos Interessados
               </Button>
-              <Flex justifyContent={"space-between"}>
-                <Text color={"#868686"} fontSize={"13px"} fontWeight={"normal"}>
+              <Flex gap={'25px'}>
+                <Button
+                  onClick={() => {}}
+                  gap={'10px'}
+                  color={'#6D3BBF'}
+                  fontSize={'18px'}
+                  fontWeight={'semibold'}
+                  bg={'white'}
+                  borderColor={'#6D3BBF'}
+                  borderWidth={'2px'}
+                  rounded={'full'}
+                  textAlign={'center'}
+                  py={'10px'}
+                  px={'25px'}
+                  w={'full'}
+                  _hover={{
+                    bg: '#5A2DA4',
+                    transition: 'ease-in',
+                    boxShadow: 'lg',
+                    color: 'white',
+                    borderColor: '#5A2DA4'
+                  }}
+                >
+                  <IconEdit fill={'#6D3BBF'}></IconEdit>
+                  Editar Vaga
+                </Button>
+                <Button
+                  onClick={() => {}}
+                  gap={'10px'}
+                  color={'#6D3BBF'}
+                  fontSize={'18px'}
+                  fontWeight={'semibold'}
+                  bg={'white'}
+                  borderColor={'#6D3BBF'}
+                  borderWidth={'2px'}
+                  rounded={'full'}
+                  textAlign={'center'}
+                  py={'10px'}
+                  px={'25px'}
+                  w={'full'}
+                  _hover={{
+                    bg: '#5A2DA4',
+                    transition: 'ease-in',
+                    boxShadow: 'lg',
+                    color: 'white',
+                    borderColor: '#5A2DA4'
+                  }}
+                >
+                  <IconDesativarVaga fill={'#6D3BBF'}></IconDesativarVaga>
+                  Inativar Vaga
+                </Button>
+              </Flex>
+              <Flex justifyContent={'space-between'}>
+                <Text color={'#868686'} fontSize={'13px'} fontWeight={'normal'}>
                   Publicado por
-                  <Link href={""} color={"#535353"} fontWeight={"medium"}>
+                  <Link href={''} color={'#535353'} fontWeight={'medium'}>
                     Jéssica Silva
                   </Link>
                 </Text>
-                <Text color={"#868686"} fontSize={"13px"} fontWeight={"normal"}>
+                <Text color={'#868686'} fontSize={'13px'} fontWeight={'normal'}>
                   12/10/2023 às 15:00hrs
                 </Text>
               </Flex>
@@ -267,66 +389,66 @@ const Feed = () => {
             <CardCandidato />
           </Flex>
 
-          <Flex width={"20%"} direction={"column"} gap={"18px"}>
-            <Text color={"#5A2DA4"} fontSize={"18px"} fontWeight={"semibold"}>
+          <Flex width={'20%'} direction={'column'} gap={'18px'}>
+            <Text color={'#5A2DA4'} fontSize={'18px'} fontWeight={'semibold'}>
               Pesquisar Vaga
             </Text>
-            <InputGroup marginBottom={"10px"}>
+            <InputGroup marginBottom={'10px'}>
               <Input
-                placeholder={"Digite aqui"}
+                placeholder={'Digite aqui'}
                 onChange={() => {}}
-                py={"10px"}
-                px={"25px"}
-                _placeholder={{ color: "#ADADAD" }}
-                color={"#2E2E2E"}
-                bg={"white"}
-                rounded={"full"}
-                fontSize={"16px"}
-                fontWeight={"medium"}
-                focusBorderColor={"#5A2DA4"}
-                borderColor={"#2E2E2E"}
+                py={'10px'}
+                px={'25px'}
+                _placeholder={{ color: '#ADADAD' }}
+                color={'#2E2E2E'}
+                bg={'white'}
+                rounded={'full'}
+                fontSize={'16px'}
+                fontWeight={'medium'}
+                focusBorderColor={'#5A2DA4'}
+                borderColor={'#2E2E2E'}
               />
-              <InputRightElement onClick={() => {}} cursor={"pointer"}>
-                <Image src={"./icons/icon-lupa.svg"} alt={"lupa"}></Image>
+              <InputRightElement onClick={() => {}} cursor={'pointer'}>
+                <Image src={'./icons/icon-lupa.svg'} alt={'lupa'}></Image>
               </InputRightElement>
             </InputGroup>
-            <Text color={"#5A2DA4"} fontSize={"18px"} fontWeight={"semibold"}>
+            <Text color={'#5A2DA4'} fontSize={'18px'} fontWeight={'semibold'}>
               Filtrar Vagas
             </Text>
-            <InputGroup flexDirection={"column"} gap={"5px"}>
-              <Text fontSize={"16px"} color={"#2E2E2E"} fontWeight={"medium"}>
+            <InputGroup flexDirection={'column'} gap={'5px'}>
+              <Text fontSize={'16px'} color={'#2E2E2E'} fontWeight={'medium'}>
                 HardSkill
               </Text>
               <Select
-                placeholder={"Selecionar"}
+                placeholder={'Selecionar'}
                 onChange={() => {}}
-                _placeholder={{ color: "#ADADAD" }}
-                color={"#2E2E2E"}
-                bg={"white"}
-                rounded={"full"}
-                fontSize={"16px"}
-                fontWeight={"medium"}
-                focusBorderColor={"#5A2DA4"}
-                borderColor={"#2E2E2E"}
+                _placeholder={{ color: '#ADADAD' }}
+                color={'#2E2E2E'}
+                bg={'white'}
+                rounded={'full'}
+                fontSize={'16px'}
+                fontWeight={'medium'}
+                focusBorderColor={'#5A2DA4'}
+                borderColor={'#2E2E2E'}
               >
                 <option>Javascript</option>
               </Select>
             </InputGroup>
-            <InputGroup flexDirection={"column"} gap={"5px"}>
-              <Text fontSize={"16px"} color={"#2E2E2E"} fontWeight={"medium"}>
+            <InputGroup flexDirection={'column'} gap={'5px'}>
+              <Text fontSize={'16px'} color={'#2E2E2E'} fontWeight={'medium'}>
                 SoftSkill
               </Text>
               <Select
-                placeholder={"Selecionar"}
+                placeholder={'Selecionar'}
                 onChange={() => {}}
-                _placeholder={{ color: "#ADADAD" }}
-                color={"#2E2E2E"}
-                bg={"white"}
-                rounded={"full"}
-                fontSize={"16px"}
-                fontWeight={"medium"}
-                focusBorderColor={"#5A2DA4"}
-                borderColor={"#2E2E2E"}
+                _placeholder={{ color: '#ADADAD' }}
+                color={'#2E2E2E'}
+                bg={'white'}
+                rounded={'full'}
+                fontSize={'16px'}
+                fontWeight={'medium'}
+                focusBorderColor={'#5A2DA4'}
+                borderColor={'#2E2E2E'}
               >
                 <option>Liderança</option>
               </Select>
@@ -336,10 +458,10 @@ const Feed = () => {
         </Container>
       </Box>
     </main>
-  );
-};
+  )
+}
 
-export default Feed;
+export default Feed
 
 const IconCoracao = (props: { fill: string; borderColor: string }) => {
   return (
@@ -357,8 +479,8 @@ const IconCoracao = (props: { fill: string; borderColor: string }) => {
         fill={props.fill}
       />
     </svg>
-  );
-};
+  )
+}
 
 const IconChat = (props: { fill: string }) => {
   return (
@@ -386,8 +508,8 @@ const IconChat = (props: { fill: string }) => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
 
 const IconEdit = (props: { fill: string }) => {
   return (
@@ -423,8 +545,8 @@ const IconEdit = (props: { fill: string }) => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
 
 const IconDesativarVaga = (props: { fill: string }) => {
   return (
@@ -452,5 +574,5 @@ const IconDesativarVaga = (props: { fill: string }) => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
