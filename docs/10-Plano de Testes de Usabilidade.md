@@ -21,6 +21,8 @@ O sistema deve armazenar as informações do recrutador no banco de dados, crian
 
 2- Teste: tela de login de recrutadores
 **Objetivo:** Verificar se a tela de login de recrutadores permite que os recrutadores acessem o sistema com sucesso e fornece segurança na autenticação.
+
+
 **Passos:** 
 1. Abra um navegador da web e vá para a página de login dos recrutadores.
 2. Verifique se a página de login está acessível e se a URL está correta.
@@ -28,6 +30,8 @@ O sistema deve armazenar as informações do recrutador no banco de dados, crian
 4. Digite um nome de usuário válido no campo "Nome de Usuário".
 5. Digite uma senha válida no campo "Senha".
 6. Clique no botão "Entrar" ou pressione a tecla "Enter" no teclado.
+
+
 **Resultado Esperado:**
 Se as informações estiverem corretas, o sistema deve redirecionar o recrutador para a página inicial do sistema.
 
