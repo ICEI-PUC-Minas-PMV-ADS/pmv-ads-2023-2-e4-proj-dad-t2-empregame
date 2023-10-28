@@ -8,7 +8,7 @@ O template padrão do site vai seguir a estrutura do Wireframe elaborado na seç
 
 - Tela de Login
 
-![Tela de Login](img/templates-ui/login-page.png)
+![Tela de Login](img/templates-ui/login.png)
 
 - Tela de Cadastro Candidato
 
@@ -16,7 +16,7 @@ O template padrão do site vai seguir a estrutura do Wireframe elaborado na seç
 
 - Tela de Cadastro Recrutador
 
-![Tela de Cadastro Recrutador](img/templates-ui/cadastro-page.png)
+![Tela de Cadastro Recrutador](img/templates-ui/cadastro-inicial.png.png)
 
 - Tela de Perfil Candidato
 
@@ -80,7 +80,7 @@ O template padrão do site vai seguir a estrutura do Wireframe elaborado na seç
 
 - Tela Excluir Conta
 
-![Tela Excluir Conta](img/templates-ui/exluir-conta.png)
+![Tela Excluir Conta](img/templates-ui/excluir-conta.png)
 
 - Tela Inativar Vaga
 
