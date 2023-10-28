@@ -88,7 +88,7 @@ O template padrão do site vai seguir a estrutura do Wireframe elaborado na seç
 
 - Tela Esqueceu a Senha
 
-![Tela Esqueceu a Senha](img/templates-ui/esqueceu-senha)
+![Tela Esqueceu a Senha](img/templates-ui/esqueceu-senha.png)
 
 - Tela Redefinição de Senha
 

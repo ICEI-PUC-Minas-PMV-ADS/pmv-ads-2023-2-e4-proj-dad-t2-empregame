@@ -98,7 +98,7 @@ Cada uma das telas representadas nos fluxos será detalhada nos itens que seguem
 
 - Tela Esqueceu a Senha
 
-![Tela Esqueceu a Senha](img/wireframes/esqueceu-senha)
+![Tela Esqueceu a Senha](img/wireframes/esqueceu-senha.png)
 
 - Tela Redefinição de Senha
 
