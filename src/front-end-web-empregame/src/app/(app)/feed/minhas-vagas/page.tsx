@@ -1,11 +1,7 @@
 "use client";
 
-import { useState } from "react";
-
-const Feed = () => {
-  const [isLike, setIsLike] = useState<boolean>(false);
-
-  return <div>teste</div>;
+const MinhasVagas = () => {
+  return <div>MinhasVagas</div>;
 };
 
-export default Feed;
+export default MinhasVagas;

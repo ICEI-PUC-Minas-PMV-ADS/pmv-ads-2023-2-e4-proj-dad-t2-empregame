@@ -2,7 +2,6 @@
 
 import { ButtonNavigation } from "@/components/button-navigation";
 import { ButtonPrimary } from "@/components/button-primary";
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Container,
@@ -13,17 +12,17 @@ import {
   Text,
   Image,
   Select,
-  Divider,
-  Button,
 } from "@chakra-ui/react";
+import CardCandidato from "./components/CardCandidato";
+
+import { Button, Divider, Link } from "@chakra-ui/react";
 import { useState } from "react";
 
 const Feed = () => {
   const [isLike, setIsLike] = useState<boolean>(false);
-
   return (
     <main>
-      <Box bg={"#FBFBFB"} height={"100vh"}>
+      <Box bg={"#FBFBFB"}>
         <Container
           maxWidth={"1366px"}
           display={"flex"}
@@ -47,10 +46,14 @@ const Feed = () => {
               borderWidth={"1px"}
             />
           </Flex>
-          <Flex width={"60%"} direction={"column"} gap={"20px"}>
+          <Flex
+            width={"60%"}
+            direction={"column"}
+            gap={"20px"}
+            alignItems={"center"}
+          >
             <Flex
               direction={"column"}
-              w={"full"}
               py={"25px"}
               px={"30px"}
               gap={"25px"}
@@ -58,6 +61,7 @@ const Feed = () => {
               borderColor={"#E1E1E1"}
               rounded={"13px"}
               bg={"white"}
+              width={"100%"}
             >
               <Flex gap={"15px"} alignItems={"center"}>
                 <Image src={"./icons/icon-maleta.svg"} alt={"maleta"} />
@@ -259,7 +263,10 @@ const Feed = () => {
                 </Text>
               </Flex>
             </Flex>
+
+            <CardCandidato />
           </Flex>
+
           <Flex width={"20%"} direction={"column"} gap={"18px"}>
             <Text color={"#5A2DA4"} fontSize={"18px"} fontWeight={"semibold"}>
               Pesquisar Vaga

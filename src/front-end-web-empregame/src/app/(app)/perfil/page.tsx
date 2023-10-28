@@ -2,6 +2,7 @@
 
 import { IUsuario } from "@/interface/IUsuario";
 import { useFetch } from "@/utils/hooks/useFetch";
+
 import {
   Box,
   Text,
@@ -11,9 +12,9 @@ import {
   Flex,
   Divider,
   SimpleGrid,
-  Link,
 } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
+import EditarInformacao from "./components/modalEditarInfo";
 
 const Perfil = () => {
   const router = useRouter();
@@ -49,16 +50,7 @@ const Perfil = () => {
             Voltar
           </Button>
           <Flex gap={"40px"}>
-            <Button
-              bg={"none"}
-              gap={"10px"}
-              color={"white"}
-              _hover={{ bg: "#6d3bbf" }}
-              rounded={"full"}
-            >
-              <Image src={"./icons/icon-edit.svg"} alt="icone editar" />
-              Editar informações
-            </Button>
+            {usuario && <EditarInformacao usuario={usuario} />}
             <Button
               bg={"none"}
               gap={"10px"}
@@ -101,14 +93,18 @@ const Perfil = () => {
           </Flex>
           <Divider />
           <SimpleGrid columns={5} spacing={"20px"}>
-            <Box color={"white"} fontSize={"16px"}>
-              <Text fontWeight={"normal"}>Telefone</Text>
-              <Text fontWeight={"semibold"}>{usuario?.telefone}</Text>
-            </Box>
-            <Box color={"white"} fontSize={"16px"}>
-              <Text fontWeight={"normal"}>E-mail</Text>
-              <Text fontWeight={"semibold"}>{usuario?.email}</Text>
-            </Box>
+            {usuario?.telefone && (
+              <Box color={"white"} fontSize={"16px"}>
+                <Text fontWeight={"normal"}>Telefone</Text>
+                <Text fontWeight={"semibold"}>{usuario.telefone}</Text>
+              </Box>
+            )}
+            {usuario?.email && (
+              <Box color={"white"} fontSize={"16px"}>
+                <Text fontWeight={"normal"}>E-mail</Text>
+                <Text fontWeight={"semibold"}>{usuario.email}</Text>
+              </Box>
+            )}
             {usuario?.github && (
               <Box color={"white"} fontSize={"16px"}>
                 <Text fontWeight={"normal"}>GitHub</Text>
@@ -173,34 +169,45 @@ const Perfil = () => {
               <Text color={"white"} fontSize={"16px"} paddingBottom={"5px"}>
                 Hardskills
               </Text>
-              <SimpleGrid columns={2} spacing={"12px"}>
-                <Flex
-                  direction={"column"}
-                  bg={"#6D3BBF"}
-                  rounded={"12px"}
-                  py={"12px"}
-                  px={"20px"}
-                  width={"full"}
-                  gap={"8px"}
-                >
-                  <Text fontSize={"16px"} fontWeight={"medium"} color={"white"}>
-                    JavaScript
-                  </Text>
 
-                  <Flex gap={"8px"}>
-                    {[...Array(5)].map((star, index) => {
-                      const currentRating = index + 1;
-                      return (
-                        // eslint-disable-next-line react/jsx-key
-                        <label key={index}>
-                          <IconStar
-                            fill={currentRating <= 3 ? "#FFB800" : "white"}
-                          />
-                        </label>
-                      );
-                    })}
+              <SimpleGrid columns={2} spacing={"12px"}>
+                {usuario?.usuario_hardskill?.map((hardskill) => (
+                  <Flex
+                    direction={"column"}
+                    bg={"#6D3BBF"}
+                    rounded={"12px"}
+                    py={"12px"}
+                    px={"20px"}
+                    width={"full"}
+                    gap={"8px"}
+                  >
+                    <Text
+                      fontSize={"16px"}
+                      fontWeight={"medium"}
+                      color={"white"}
+                    >
+                      {hardskill.hardskill.nome}
+                    </Text>
+
+                    <Flex gap={"8px"}>
+                      {[...Array(5)].map((star, index) => {
+                        const currentRating = index + 1;
+                        return (
+                          // eslint-disable-next-line react/jsx-key
+                          <label key={index}>
+                            <IconStar
+                              fill={
+                                currentRating <= hardskill.nivel_experiencia
+                                  ? "#FFB800"
+                                  : "white"
+                              }
+                            />
+                          </label>
+                        );
+                      })}
+                    </Flex>
                   </Flex>
-                </Flex>
+                ))}
               </SimpleGrid>
             </Box>
             <Box width={"full"}>
@@ -208,33 +215,43 @@ const Perfil = () => {
                 Softskills
               </Text>
               <SimpleGrid columns={2} spacing={"12px"}>
-                <Flex
-                  direction={"column"}
-                  bg={"#6D3BBF"}
-                  rounded={"12px"}
-                  py={"12px"}
-                  px={"20px"}
-                  width={"full"}
-                  gap={"8px"}
-                >
-                  <Text fontSize={"16px"} fontWeight={"medium"} color={"white"}>
-                    Liderança
-                  </Text>
+                {usuario?.usuario_softskill?.map((softskill) => (
+                  <Flex
+                    direction={"column"}
+                    bg={"#6D3BBF"}
+                    rounded={"12px"}
+                    py={"12px"}
+                    px={"20px"}
+                    width={"full"}
+                    gap={"8px"}
+                  >
+                    <Text
+                      fontSize={"16px"}
+                      fontWeight={"medium"}
+                      color={"white"}
+                    >
+                      {softskill.softskill.nome}
+                    </Text>
 
-                  <Flex gap={"8px"}>
-                    {[...Array(5)].map((star, index) => {
-                      const currentRating = index + 1;
-                      return (
-                        // eslint-disable-next-line react/jsx-key
-                        <label key={index}>
-                          <IconStar
-                            fill={currentRating <= 3 ? "#FFB800" : "white"}
-                          />
-                        </label>
-                      );
-                    })}
+                    <Flex gap={"8px"}>
+                      {[...Array(5)].map((star, index) => {
+                        const currentRating = index + 1;
+                        return (
+                          // eslint-disable-next-line react/jsx-key
+                          <label key={index}>
+                            <IconStar
+                              fill={
+                                currentRating <= softskill.nivel_experiencia
+                                  ? "#FFB800"
+                                  : "white"
+                              }
+                            />
+                          </label>
+                        );
+                      })}
+                    </Flex>
                   </Flex>
-                </Flex>
+                ))}
               </SimpleGrid>
             </Box>
           </Flex>

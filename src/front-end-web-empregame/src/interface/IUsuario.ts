@@ -21,6 +21,7 @@ interface UsuarioHardSkill {
   nivel_experiencia: number;
   id_usuario: number;
   id_hardskill: number;
+  hardskill: { nome: string };
 }
 
 interface UsuarioSoftSkill {
@@ -30,4 +31,5 @@ interface UsuarioSoftSkill {
   nivel_experiencia: number;
   id_usuario: number;
   id_softskill: number;
+  softskill: { nome: string };
 }

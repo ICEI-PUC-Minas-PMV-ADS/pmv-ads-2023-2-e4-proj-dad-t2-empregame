@@ -42,6 +42,14 @@ export class UsuarioService {
   async findOne(id: number): Promise<Usuario | null> {
     const usuario = await this.prisma.usuario.findUnique({
       where: { id, situacao: 'ATIVO' },
+      include: {
+        usuario_hardskill: {
+          include: { hardskill: { select: { nome: true } } },
+        },
+        usuario_softskill: {
+          include: { softskill: { select: { nome: true } } },
+        },
+      },
     });
 
     return usuario;
@@ -75,8 +83,12 @@ export class UsuarioService {
           ],
         },
         include: {
-          usuario_hardskill: true,
-          usuario_softskill: true,
+          usuario_hardskill: {
+            include: { hardskill: { select: { nome: true } } },
+          },
+          usuario_softskill: {
+            include: { softskill: { select: { nome: true } } },
+          },
         },
       });
       return candidatosFiltradas;
