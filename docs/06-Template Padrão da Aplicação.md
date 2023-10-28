@@ -85,3 +85,11 @@ O template padrão do site vai seguir a estrutura do Wireframe elaborado na seç
 - Tela Inativar Vaga
 
 ![Tela Inativar Vaga](img/templates-ui/inativar-vaga.png)
+
+- Tela Esqueceu a Senha
+
+![Tela Esqueceu a Senha](img/templates-ui/esqueceu-senha)
+
+- Tela Redefinição de Senha
+
+![Tela Redefiniçaõ se Senha](img/templates-ui/codigo-esqueceu-senha.png)

@@ -95,3 +95,11 @@ Cada uma das telas representadas nos fluxos será detalhada nos itens que seguem
 - Tela Inativar Vaga
 
 ![Tela Inativar Vaga](img/wireframes/inativar-vaga.png)
+
+- Tela Esqueceu a Senha
+
+![Tela Esqueceu a Senha](img/wireframes/esqueceu-senha)
+
+- Tela Redefinição de Senha
+
+![Tela Redefiniçaõ se Senha](img/wireframes/codigo-esqueceu-senha.png)
