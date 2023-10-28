@@ -3,17 +3,18 @@ import { HardskillService } from './hardskill.service';
 import { CreateHardskillDto } from './dto/create-hardskill.dto';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Hardskill } from './entities/hardskill.entity';
+import { Public } from 'src/utils/decorators/is-public.decorator';
 
 @Controller('hardskills')
 @ApiTags('hardskills')
-@ApiBearerAuth()
+@Public()
 export class HardskillController {
   constructor(private readonly hardskillService: HardskillService) {}
 
   @Post()
   async create(@Body() data: CreateHardskillDto) {
-    await this.hardskillService.create(data);
-    return;
+    const hardskill = await this.hardskillService.create(data);
+    return hardskill;
   }
 
   @Get()

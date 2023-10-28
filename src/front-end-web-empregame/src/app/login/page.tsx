@@ -56,69 +56,67 @@ const Login = () => {
   };
 
   return (
-    <main>
-      <Box
-        bgGradient={"linear-gradient(82deg, #7345D6 39.13%, #DA4FE2 112.59%)"}
-        height={"80vh"}
-        py={"40px"}
+    <Box
+      bgGradient={"linear-gradient(82deg, #7345D6 39.13%, #DA4FE2 112.59%)"}
+      height={"80vh"}
+      py={"40px"}
+    >
+      <Container
+        maxW={"1366px"}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        h={"full"}
       >
-        <Container
-          maxW={"1366px"}
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          h={"full"}
-        >
-          <Flex direction={"column"} minW={"340px"}>
-            <Heading
-              fontSize={"48px"}
-              fontWeight={"bold"}
-              pb={"35px"}
-              color={"white"}
-            >
-              Login
-            </Heading>
-            <Flex direction={"column"} gap={"30px"}>
+        <Flex direction={"column"} minW={"340px"}>
+          <Heading
+            fontSize={"48px"}
+            fontWeight={"bold"}
+            pb={"35px"}
+            color={"white"}
+          >
+            Login
+          </Heading>
+          <Flex direction={"column"} gap={"30px"}>
+            <InputForm
+              type="email"
+              placeholder="E-mail"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Flex direction={"column"} gap={"5px"}>
               <InputForm
-                type="email"
-                placeholder="E-mail"
-                onChange={(e) => setEmail(e.target.value)}
+                type="password"
+                placeholder="Senha"
+                onChange={(e) => setSenha(e.target.value)}
               />
-              <Flex direction={"column"} gap={"5px"}>
-                <InputForm
-                  type="password"
-                  placeholder="Senha"
-                  onChange={(e) => setSenha(e.target.value)}
-                />
-                <Link
-                  fontSize={"14px"}
-                  alignSelf={"flex-end"}
-                  color={"#DFC3FD"}
-                  fontWeight={"medium"}
-                  href={""}
-                >
-                  Esqueci a Senha
-                </Link>
-              </Flex>
-              <Box textAlign={"center"}>
-                <ButtonPrimary
-                  onClick={() => loginSubmit()}
-                  buttonText="Acessar"
-                />
-                <Link
-                  href={""}
-                  fontSize={"18px"}
-                  color={"white"}
-                  fontWeight={"semibold"}
-                >
-                  Cadastre-se agora
-                </Link>
-              </Box>
+              <Link
+                fontSize={"14px"}
+                alignSelf={"flex-end"}
+                color={"#DFC3FD"}
+                fontWeight={"medium"}
+                href={""}
+              >
+                Esqueci a Senha
+              </Link>
             </Flex>
+            <Box textAlign={"center"}>
+              <ButtonPrimary
+                onClick={() => loginSubmit()}
+                buttonText="Acessar"
+              />
+              <Link
+                href={""}
+                fontSize={"18px"}
+                color={"white"}
+                fontWeight={"semibold"}
+              >
+                Cadastre-se agora
+              </Link>
+            </Box>
           </Flex>
-        </Container>
-      </Box>
-    </main>
+        </Flex>
+      </Container>
+    </Box>
   );
 };
 

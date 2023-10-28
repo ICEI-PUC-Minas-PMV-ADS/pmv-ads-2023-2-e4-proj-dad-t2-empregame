@@ -19,7 +19,5 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     }
   }, [usuario, router, cookie]);
 
-  if (!usuario && !cookie[authToken.nome]) return null;
-
   return <div>{children}</div>;
 }
