@@ -65,11 +65,10 @@ Com a observação do cotidiano das personas e a compreensão de suas necessidad
 
 ### Análise da Situação Atual
 
-Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional.
 
 ### Descrição Geral da Proposta
 
-Fluxo inicial e geral do processo do negócio.
+Fluxo inicial e geral do processo do negócio que explica como surge o match e como o acontece o contato entre recrutador e candidato.
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/81448431/0d921978-f10d-468c-a69e-3975393787e0)
 
 ### Processo 1 – CADASTRO DO CANDIDATO
