@@ -63,15 +63,18 @@ Com a observação do cotidiano das personas e a compreensão de suas necessidad
 
 ## Modelagem do Processo de Negócio
 
+Propósito da Modelagem: O propósito da modelagem de processos é representar visualmente os fluxos de atividades, informações e decisões em uma organização, facilitando a compreensão, otimização e documentação dos processos para melhorar a eficiência e eficácia operacional.
+
 ### Análise da Situação Atual
 
+A análise da situação atual envolve a avaliação detalhada dos fatores presentes, identificação de problemas e oportunidades, e a base para tomada de decisões informadas, garantindo uma compreensão precisa do cenário atual para orientar ações futuras.
 
 ### Descrição Geral da Proposta
 
 Fluxo inicial e geral do processo do negócio que explica como surge o match e como o acontece o contato entre recrutador e candidato.
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/81448431/0d921978-f10d-468c-a69e-3975393787e0)
 
-### Processo 1 – CADASTRO DO CANDIDATO
+### Processo 1 – CADASTRO DO CANDIDATO E RECRUTADOR
 
 Processo de cadastro para candidatos e recrutadores em BPMN 2.0
 
