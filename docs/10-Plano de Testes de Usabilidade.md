@@ -51,21 +51,37 @@ Se as informações estiverem corretas, o sistema deve redirecionar o recrutador
 - O e-mail de recuperação de senha deve conter o token para a recuperação da senha.
 - Se o e-mail não estiver cadastrado, a mensagem "Usuário não encontrado" deve aparecer.
 - Se o código informado no token for incorreto, a mensagem "Código inválido" deve ser exibida.
+- Se o código informado no token for o correto, a tela para alteração de senha será exibida.
+
+-------------------------------------------------------------------------------------------------
+
+## 4. Teste: Utilizar Filtro de Pesquisa das Vagas
+
+**Objetivo:** Verificar se a funcionalidade de filtro de pesquisa de vagas permite aos recrutadores filtrar vagas de acordo com critérios específicos e fornece resultados precisos.
+
+**Passos:**
+1. Abra o navegador na página do feed de recrutadores.
+2. Vá até o canto direito da tela e teste as 3 opções de filtro.
+
+**Resultado Esperado:**
+Espera-se que, ao usar as opções de filtro, o sistema apresente resultados precisos de acordo com os critérios selecionados. Os resultados devem corresponder aos filtros aplicados.
 
 
 -------------------------------------------------------------------------------------------------
 
-4- Teste: utilizar filtro de pesquisa das vagas
-**Objetivo:** Verificar se a funcionalidade de filtro de pesquisa de vagas permite aos recrutadores de acordo com critérios específicos e fornece resultados precisos.
-**Passos:**
-**Resultado Esperado:**
+## 5. Teste: Editar Tela Perfil do Recrutador
 
--------------------------------------------------------------------------------------------------
+**Objetivo:** Verificar se a funcionalidade de edição do perfil do recrutador permite que o usuário atualize com sucesso as informações do seu perfil.
 
-5- Teste editar tela perfil do recrutador
-**Objetivo:**
 **Passos:**
+1. Abra o navegador e acesse a página de perfil do recrutador.
+2. Localize a opção de edição de perfil ou botão de "Editar" e clique nele.
+3. Edite as informações desejadas no perfil do recrutador, como nome, informações de contato, foto de perfil, ou outras informações relevantes.
+4. Salve as alterações clicando no botão "Salvar".
+
 **Resultado Esperado:**
+Espera-se que, após a conclusão dos passos acima, as informações do perfil do recrutador sejam atualizadas com sucesso. As informações editadas devem ser refletidas corretamente no perfil do recrutador, e o sistema deve fornecer uma confirmação de "Informações atualizadas com sucesso".
+
 
 -------------------------------------------------------------------------------------------------
 
