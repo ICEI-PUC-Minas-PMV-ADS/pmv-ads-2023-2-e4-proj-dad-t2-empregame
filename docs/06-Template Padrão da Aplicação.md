@@ -1,12 +1,87 @@
 # Template Padrão da Aplicação
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Especificação do Projeto</a></span>, <a href="3-Projeto de Interface.md"> Projeto de Interface</a>, <a href="4-Metodologia.md"> Metodologia</a>
+O template padrão do site vai seguir a estrutura do Wireframe elaborado na seção anterior, sendo composto pelas seguintes telas:
 
-Layout padrão da aplicação que será utilizado em todas as páginas com a definição de identidade visual, aspectos de responsividade e iconografia.
+- Tela Inicial
 
-> **Links Úteis**:
->
-> - [CSS Website Layout (W3Schools)](https://www.w3schools.com/css/css_website_layout.asp)
-> - [Website Page Layouts](http://www.cellbiol.com/bioinformatics_web_development/chapter-3-your-first-web-page-learning-html-and-css/website-page-layouts/)
-> - [Perfect Liquid Layout](https://matthewjamestaylor.com/perfect-liquid-layouts)
-> - [How and Why Icons Improve Your Web Design](https://usabilla.com/blog/how-and-why-icons-improve-you-web-design/)
+![Tela Inicial](img/templates-ui/home-page.png)
+
+- Tela de Login
+
+![Tela de Login](img/templates-ui/login-page.png)
+
+- Tela de Cadastro Candidato
+
+![Cadastro Candidato](img/templates-ui/cadastro-candidato.png)
+
+- Tela de Cadastro Recrutador
+
+![Tela de Cadastro Recrutador](img/templates-ui/cadastro-page.png)
+
+- Tela de Perfil Candidato
+
+![Tela de Perfil Canditado](img/templates-ui/perfil-candidato.png)
+
+- Tela de Perfil Recrutador
+
+![Tela de Perfil Recrutador](img/templates-ui/perfil-recrutador.png)
+
+- Tela de Edição Informações Candidato
+
+![Tela de Edição Informações Candidato](img/templates-ui/editar-infos.png)
+
+- Tela de Edição Informações Recrutador
+
+![Tela de Edição Informações Recrutador](img/templates-ui/editar-infos-2.png)
+
+- Tela de Publicação de Vaga
+
+![Tela de Publicação de Vaga](img/templates-ui/publicar-vaga.png)
+
+- Tela de Edição de Vaga
+
+![Tela de Edição de Vaga](img/templates-ui/editar-vaga.png)
+
+- Tela Vagas Publicadas por um usuário Recrutador
+
+![Telas Vagas Publicadas por um usuário Recrutador](img/templates-ui/recrutador-minhas-vagas.png)
+
+- Tela para o Recrutado Buscar Candidatos
+
+![Tela para o Recrutador Buscar Candidados](img/templates-ui/recrutador-buscar-candidatos.png)
+
+- Tela Candidados Interessados naquela Vaga
+
+![Tela Candidatod Interessados naquela Vaga](img/templates-ui/candidatos-interessados.png)
+
+- Tela Feed Recrutador
+
+![Tela Feed Recrutador](img/templates-ui/feed-recrutador.png)
+
+- Tela Feed Candidato
+
+![Tela Feed Candidato](img/templates-ui/feed-candidato.png)
+
+- Tela Vagas Marcadas como Interessante para aquele Candidato
+
+![Tela Vagas Marcadas como Intessante para aquele Candidato](img/templates-ui/cadastro-vagas-interessei.png)
+
+- Tela Exemplo de Chat
+
+![Tela Exemplo de Chat](img/templates-ui/chat-1.png)
+
+- Tela Exemplo de Chat
+
+![Tela Exemplo de Chat](img/templates-ui/chat-2.png)
+
+- Tela Alterar Senha
+
+![Tela Alterar Senha](img/templates-ui/alterar-senha.png)
+
+- Tela Excluir Conta
+
+![Tela Excluir Conta](img/templates-ui/exluir-conta.png)
+
+- Tela Inativar Vaga
+
+![Tela Inativar Vaga](img/templates-ui/inativar-vaga.png)
