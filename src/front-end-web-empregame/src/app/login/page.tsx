@@ -19,6 +19,7 @@ const Login = () => {
   const toast = useToast();
   const router = useRouter();
   const [cookie, setCookie] = useCookies([authToken.nome]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
 
@@ -28,8 +29,9 @@ const Login = () => {
     }
   }, [usuario, router, cookie]);
 
-  const loginSubmit = () => {
-    api
+  const loginSubmit = async () => {
+    setIsLoading(true);
+    await api
       .post("/auth/login", {
         email: email,
         password: senha,
@@ -53,6 +55,7 @@ const Login = () => {
         }>;
         toast({ title: error.message, status: "error", isClosable: true });
       });
+    setIsLoading(false);
   };
 
   return (
@@ -94,7 +97,7 @@ const Login = () => {
                 alignSelf={"flex-end"}
                 color={"#DFC3FD"}
                 fontWeight={"medium"}
-                href={""}
+                href={"/esqueci-senha"}
               >
                 Esqueci a Senha
               </Link>
@@ -103,6 +106,8 @@ const Login = () => {
               <ButtonPrimary
                 onClick={() => loginSubmit()}
                 buttonText="Acessar"
+                isLoading={isLoading}
+                loadingText="Acessando"
               />
               <Link
                 href={""}

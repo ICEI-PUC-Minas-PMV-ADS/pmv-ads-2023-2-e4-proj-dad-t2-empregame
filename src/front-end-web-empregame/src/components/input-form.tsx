@@ -5,6 +5,7 @@ export const InputForm = (props: {
   placeholder: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   type: HTMLInputTypeAttribute;
+  value?: string | number | readonly string[];
 }) => {
   return (
     <Input
@@ -20,6 +21,7 @@ export const InputForm = (props: {
       fontWeight={"medium"}
       focusBorderColor={"#5A2DA4"}
       type={props.type}
+      value={props.value}
     />
   );
 };

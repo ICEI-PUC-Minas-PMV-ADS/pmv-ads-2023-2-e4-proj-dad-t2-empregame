@@ -28,6 +28,7 @@ import { useAppContext } from "@/utils/hooks/useContext";
 import { useCookies } from "react-cookie";
 import { authToken } from "@/utils/config/authToken";
 import { useRouter } from "next/navigation";
+import { numberToPhone } from "@/utils/regex/numberToPhone";
 
 const Cadastro = () => {
   const { state: usuario, dispatch: dispatchAppContext } = useAppContext();
@@ -223,7 +224,8 @@ const Cadastro = () => {
               <InputForm
                 type="tel"
                 placeholder="Telefone"
-                onChange={(e) => setTelefone(e.target.value)}
+                value={telefone}
+                onChange={(e) => setTelefone(numberToPhone(e.target.value))}
               />
               {tipo === "CANDIDATO" && (
                 <>
