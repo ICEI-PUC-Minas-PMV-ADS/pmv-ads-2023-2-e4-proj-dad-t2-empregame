@@ -10,7 +10,7 @@ import { Footer } from "./Footer";
 import { parseJwt } from "@/utils/functions/parseJwt";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
+  /*   const router = useRouter();
   const [cookie] = useCookies([authToken.nome]);
   const {
     state: { usuario },
@@ -38,7 +38,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         type: "SET_USUARIO",
       });
     }
-  }, [usuario, router, cookie]);
+  }, [usuario, router, cookie]); */
 
   return (
     <div>
