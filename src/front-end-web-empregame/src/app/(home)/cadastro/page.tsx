@@ -31,7 +31,7 @@ import { useRouter } from "next/navigation";
 import { numberToPhone } from "@/utils/regex/numberToPhone";
 
 const Cadastro = () => {
-  const { state: usuario, dispatch: dispatchAppContext } = useAppContext();
+  const { dispatch: dispatchAppContext } = useAppContext();
   const toast = useToast();
   const router = useRouter();
   const [cookie, setCookie] = useCookies([authToken.nome]);

@@ -15,7 +15,19 @@ export function useFetch<T = unknown>(
     enable?: boolean; // caso esteja TRUE o useEffect será executado, caso contrario ele não será executado, usad para definir se uma consulta está pronta para ser executada
     delay?: number; // tempo de delay para executar a requisição
     onSuccess?: (data: { res: AxiosResponse<T>; data: T }) => void;
-    onError?: (error: AxiosError) => void;
+    onError?: (
+      error: AxiosError<
+        | {
+            response: {
+              data: {
+                statusCode: number;
+                message: string;
+              };
+            };
+          }
+        | any
+      >
+    ) => void;
   }
 ) {
   const fetchAPI = url[0] === "/" ? api : axios; // decide se a api vai ser a padrão ou requisição para outras
