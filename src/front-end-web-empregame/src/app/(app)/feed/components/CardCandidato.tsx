@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 
 const CardCandidato = () => {
   return (
@@ -13,12 +13,17 @@ const CardCandidato = () => {
       rounded={"13px"}
       bg={"white"}
     >
-      <Flex gap={"15px"} alignItems={"center"}>
-        <Image src={"./icons/icon-maleta.svg"} alt={"maleta"} />
-        <Text fontSize={"20px"} fontWeight={"bold"} color={"#2E2E2E"}>
-          Vaga de Dev FrontEnd Júnior
-        </Text>
+      <Flex justifyContent={"space-between"}> 
+        <Flex gap={"15px"} alignItems={"center"}>
+          <Image src={"./icons/icon-candidato.svg"} alt={"candidato"} />
+          <Text fontSize={"20px"} fontWeight={"bold"} color={"#2E2E2E"}>
+            Jessica
+          </Text>
       </Flex>
+      <Button gap={"10px"} color={"#2E2E2E"} bg={"none"} rounded={"full"}> Ver perfil <Image src={"./icons/icon-export.svg"} alt={"export"} /> </Button>
+
+      </Flex>
+      
       <Flex gap={"8px"} alignItems={"center"}>
         <Box
           bg={"#5A2DA4"}

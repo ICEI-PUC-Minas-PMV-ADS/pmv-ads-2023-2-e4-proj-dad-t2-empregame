@@ -38,12 +38,28 @@ const Feed = () => {
               href={'/feed'}
             />
             <ButtonNavigation
-              bg={'white'}
-              buttonText={'Vagas que Interessei'}
-              color={'#5A2DA4'}
-              href={'/feed'}
-              borderColor={'#5A2DA4'}
-              borderWidth={'1px'}
+              bg={"white"}
+              buttonText={"Vagas que Interessei"}
+              color={"#5A2DA4"}
+              href={"/feed/vagas-interessei"}
+              borderColor={"#5A2DA4"}
+              borderWidth={"1px"}
+            />
+            <ButtonNavigation
+              bg={"white"}
+              buttonText={"Buscar por candidato"}
+              color={"#5A2DA4"}
+              href={"/feed/buscar-candidato"}
+              borderColor={"#5A2DA4"}
+              borderWidth={"1px"}
+            />
+            <ButtonNavigation
+              bg={"white"}
+              buttonText={"Minhas vagas"}
+              color={"#5A2DA4"}
+              href={"/feed/minhas-vagas"}
+              borderColor={"#5A2DA4"}
+              borderWidth={"1px"}
             />
           </Flex>
           <Flex
@@ -52,6 +68,23 @@ const Feed = () => {
             gap={'20px'}
             alignItems={'center'}
           >
+            <Button
+              py={"30px"}
+              px={"30px"}
+              gap={"15px"}
+              borderWidth={"1px"}
+              borderColor={"#E1E1E1"}
+              rounded={"13px"}
+              bg={"white"}
+              width={"100%"}
+              color={"#6D3BBF"}
+              fontSize={"20px"}
+              fontWeight={"semibold"}
+              _hover={{ boxShadow: "lg" }}
+            >
+              <Image src={"./icons/icon-publicarVaga.svg"} alt={"publicar"} />
+              Publicar Vaga{" "}
+            </Button>
             <Flex
               direction={'column'}
               py={'25px'}
