@@ -15,6 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import EditarInformacao from "./components/modalEditarInfo";
+import AlterarSenha from "./components/modalAlterarSenha";
+import ExcluirConta from "./components/dialogExcluirConta";
 
 const Perfil = () => {
   const router = useRouter();
@@ -51,26 +53,8 @@ const Perfil = () => {
           </Button>
           <Flex gap={"40px"}>
             {usuario && <EditarInformacao usuario={usuario} />}
-            <Button
-              bg={"none"}
-              gap={"10px"}
-              color={"white"}
-              _hover={{ bg: "#6d3bbf" }}
-              rounded={"full"}
-            >
-              <Image src={"./icons/icon-password.svg"} alt="icone senha" />
-              Alterar senha
-            </Button>
-            <Button
-              bg={"none"}
-              gap={"10px"}
-              color={"white"}
-              _hover={{ bg: "#6d3bbf" }}
-              rounded={"full"}
-            >
-              <Image src={"./icons/icon-delete.svg"} alt="icone deletar" />
-              Excluir conta
-            </Button>
+            {usuario && <AlterarSenha />}
+            {usuario && <ExcluirConta />}
           </Flex>
         </Flex>
         <Flex direction={"column"} gap={"32px"} width={"100%"}>

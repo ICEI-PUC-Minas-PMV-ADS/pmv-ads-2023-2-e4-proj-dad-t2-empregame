@@ -134,7 +134,7 @@ export class AuthService {
 
     if (!usuario) throw new AppError('Usuário não encontrado');
 
-    const isMatch = this.bcrypt.compare(senha_atual, usuario.senha);
+    const isMatch = await this.bcrypt.compare(senha_atual, usuario.senha);
 
     if (!isMatch) throw new AppError('Senha atual inválida');
 
