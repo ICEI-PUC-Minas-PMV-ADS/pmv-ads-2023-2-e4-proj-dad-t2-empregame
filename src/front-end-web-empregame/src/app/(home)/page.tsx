@@ -55,7 +55,7 @@ export default function Home() {
                 Cadastre-se agora
               </Link>
             </Box>
-            <Image height={"600px"} src="./home-img-1.svg" />
+            <Image height={"600px"} src="./home-img-1.svg" alt="imagem site" />
           </Container>
         </Box>
       </section>
@@ -72,7 +72,7 @@ export default function Home() {
             alignItems={"center"}
             gap={"100px"}
           >
-            <Image src="./home-img-2.svg" />
+            <Image src="./home-img-2.svg" alt="imagem site" />
             <Box>
               <Heading
                 fontSize={"60px"}
@@ -118,13 +118,13 @@ export default function Home() {
               </Box>
               <Flex direction={"column"} gap={"25px"}>
                 <Flex gap={"20px"} alignItems={"center"}>
-                  <Image src="./home-icon-email.svg" />
+                  <Image src="./home-icon-email.svg" alt="imagem site" />
                   <Text fontSize={"20px"} fontWeight={"normal"} color={"white"}>
                     suporte@empregame.com.br
                   </Text>
                 </Flex>
                 <Flex gap={"20px"} alignItems={"center"}>
-                  <Image src="./home-icon-telefone.svg" />
+                  <Image src="./home-icon-telefone.svg" alt="imagem site" />
                   <Text fontSize={"20px"} fontWeight={"normal"} color={"white"}>
                     (35)99999-9999
                   </Text>
@@ -136,6 +136,7 @@ export default function Home() {
               alignSelf={"end"}
               bottom={"-8px"}
               position={"relative"}
+              alt="imagem site"
             />
           </Container>
         </Box>

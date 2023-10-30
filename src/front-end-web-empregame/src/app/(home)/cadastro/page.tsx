@@ -265,7 +265,11 @@ const Cadastro = () => {
                         h={"30px"}
                         color={"#2E2E2E"}
                       >
-                        <Image src="./icons/icon-mais.svg" pr={"10px"} />
+                        <Image
+                          src="./icons/icon-mais.svg"
+                          pr={"10px"}
+                          alt="icone mais"
+                        />
                         Adicionar
                       </Button>
                     </InputRightElement>
@@ -306,6 +310,7 @@ const Cadastro = () => {
                             }
                           >
                             <Image
+                            alt="icone mais"
                               src="/icons/icon-close.svg"
                               minH={"10px"}
                               minW={"10px"}
@@ -373,7 +378,7 @@ const Cadastro = () => {
                         h={"30px"}
                         color={"#2E2E2E"}
                       >
-                        <Image src="./icons/icon-mais.svg" pr={"10px"} />
+                        <Image src="./icons/icon-mais.svg" pr={"10px"}  alt="icone mais" />
                         Adicionar
                       </Button>
                     </InputRightElement>
@@ -418,6 +423,7 @@ const Cadastro = () => {
                               }
                             >
                               <Image
+                               alt="icone fechar"
                                 src="/icons/icon-close.svg"
                                 minH={"10px"}
                                 minW={"10px"}

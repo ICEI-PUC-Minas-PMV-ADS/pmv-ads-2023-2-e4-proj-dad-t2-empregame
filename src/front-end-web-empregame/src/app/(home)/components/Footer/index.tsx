@@ -16,7 +16,7 @@ export const Footer = () => {
         <Text>
           Desenvolvido pelo Grupo 4 | Turma 2 | 4° Período ADS | PUC Minas 2023
         </Text>
-        <Image src="./logo-empregame.svg" h={"45px"} />
+        <Image src="./logo-empregame.svg" h={"45px"} alt="logo" />
       </Container>
     </footer>
   );
