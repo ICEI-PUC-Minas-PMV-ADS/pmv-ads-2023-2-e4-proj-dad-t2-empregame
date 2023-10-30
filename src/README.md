@@ -34,7 +34,23 @@ $ yarn prisma studio
 
 Após realizar os comandos, basta acessar a documentação do Swagger pela url http://localhost:3000/api-doc e o banco de dados pela url http://localhost:5555/
 
-## Histórico de versões
+## Instalação do Front-end Web da Aplicação
+
+- Instalação (necessário ter instalado o NodeJS e Yarn no computador)
+
+```bash
+$ yarn install
+```
+
+- Start da Aplicação em Desenvolvimento Local
+
+```bash
+$ yarn dev
+```
+
+Após realizar os comandos, basta acessar a url http://localhost:3000/
+
+## Histórico de versões do Back-end
 
 ### [1.0.0] - 08/10/2023
 
@@ -42,3 +58,20 @@ Após realizar os comandos, basta acessar a documentação do Swagger pela url h
 
 - Banco de dados da aplicação.
 - Todos as rotas necessárias para o projeto foram criadas.
+
+### [1.1.0] - 29/10/2023
+
+#### Adicionado
+
+- Novas rotas
+- Melhorias no retorno das rotas de busca de vaga e usuário
+
+## Histórico de versões do Front-End Web
+
+### [1.0.0] - 08/10/2023
+
+#### Adicionado
+
+- Todas as telas da aplicação
+- Ligação com banco de dados em produção
+- Esquema de autenticação completo
