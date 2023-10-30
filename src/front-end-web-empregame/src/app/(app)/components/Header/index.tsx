@@ -40,6 +40,7 @@ export const Header = () => {
         >
           <Image
             src="../../logo-empregame.svg"
+            alt="logo"
             onClick={() => router.push("/feed")}
             cursor={"pointer"}
           />

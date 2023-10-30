@@ -38,6 +38,7 @@ const CardCandidato = (props: { candidato: IUsuario }) => {
       <Flex gap={"8px"} alignItems={"center"}>
         {props.candidato.usuario_hardskill?.map((hardskill) => (
           <Box
+            key={hardskill.id + hardskill.hardskill.nome}
             bg={"#5A2DA4"}
             py={"5px"}
             px={"10px"}
@@ -52,6 +53,7 @@ const CardCandidato = (props: { candidato: IUsuario }) => {
         ))}
         {props.candidato.usuario_softskill?.map((softskill) => (
           <Box
+            key={softskill.id + softskill.softskill.nome}
             bg={"#5A2DA4"}
             py={"5px"}
             px={"10px"}

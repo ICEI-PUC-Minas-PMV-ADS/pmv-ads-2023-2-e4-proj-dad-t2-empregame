@@ -180,6 +180,7 @@ const Perfil = () => {
                   <SimpleGrid columns={2} spacing={"12px"}>
                     {usuario?.usuario_hardskill?.map((hardskill) => (
                       <Flex
+                        key={hardskill.id + hardskill.hardskill.nome}
                         direction={"column"}
                         bg={"#6D3BBF"}
                         rounded={"12px"}
@@ -225,6 +226,7 @@ const Perfil = () => {
                   <SimpleGrid columns={2} spacing={"12px"}>
                     {usuario?.usuario_softskill?.map((softskill) => (
                       <Flex
+                        key={softskill.id + softskill.softskill.nome}
                         direction={"column"}
                         bg={"#6D3BBF"}
                         rounded={"12px"}

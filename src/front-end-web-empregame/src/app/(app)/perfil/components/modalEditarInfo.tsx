@@ -205,7 +205,11 @@ const EditarInformacao = (props: {
                           h={"30px"}
                           color={"#2E2E2E"}
                         >
-                          <Image src="./icons/icon-mais.svg" pr={"10px"} />
+                          <Image
+                            src="./icons/icon-mais.svg"
+                            pr={"10px"}
+                            alt="icone mais"
+                          />
                           Adicionar
                         </Button>
                       </InputRightElement>
@@ -249,6 +253,7 @@ const EditarInformacao = (props: {
                                 src="/icons/icon-close.svg"
                                 minH={"10px"}
                                 minW={"10px"}
+                                alt="icone fechar"
                               />
                             </Button>
                           </Flex>
@@ -316,7 +321,11 @@ const EditarInformacao = (props: {
                           h={"30px"}
                           color={"#2E2E2E"}
                         >
-                          <Image src="./icons/icon-mais.svg" pr={"10px"} />
+                          <Image
+                            src="./icons/icon-mais.svg"
+                            pr={"10px"}
+                            alt="icone mais"
+                          />
                           Adicionar
                         </Button>
                       </InputRightElement>
@@ -361,6 +370,7 @@ const EditarInformacao = (props: {
                                 }
                               >
                                 <Image
+                                  alt="icone fechar"
                                   src="/icons/icon-close.svg"
                                   minH={"10px"}
                                   minW={"10px"}

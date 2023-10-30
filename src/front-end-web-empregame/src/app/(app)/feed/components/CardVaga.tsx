@@ -84,6 +84,7 @@ const CardVaga = (props: { vaga?: IVaga | null; refetch: () => void }) => {
       <Flex gap={"8px"} alignItems={"center"}>
         {props.vaga?.vaga_hardskill?.map((hardskill) => (
           <Box
+            key={hardskill.id + hardskill.hardskill.nome}
             bg={"#5A2DA4"}
             py={"5px"}
             px={"10px"}
@@ -98,6 +99,7 @@ const CardVaga = (props: { vaga?: IVaga | null; refetch: () => void }) => {
         ))}
         {props.vaga?.vaga_softskill?.map((softskill) => (
           <Box
+            key={softskill.id + softskill.softskill.nome}
             bg={"#5A2DA4"}
             py={"5px"}
             px={"10px"}
