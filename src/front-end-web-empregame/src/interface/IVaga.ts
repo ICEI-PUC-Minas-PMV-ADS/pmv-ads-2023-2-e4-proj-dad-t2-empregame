@@ -14,6 +14,12 @@ export interface IVaga {
   id_usuario: number;
   vaga_hardskill?: VagaHardSkill[] | null;
   vaga_softskill?: VagaSoftSkill[] | null;
+  vaga_candidato?: VagaCandidato[] | null;
+
+  usuario: {
+    nome: string;
+    id: number;
+  };
 }
 
 interface VagaHardSkill {
@@ -22,6 +28,7 @@ interface VagaHardSkill {
   updated_at: Date;
   id_vaga: number;
   id_hardskill: number;
+  hardskill: { nome: string };
 }
 
 interface VagaSoftSkill {
@@ -30,4 +37,14 @@ interface VagaSoftSkill {
   updated_at: Date;
   id_vaga: number;
   id_softskill: number;
+  softskill: { nome: string };
+}
+
+interface VagaCandidato {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+  match: boolean;
+  id_usuario: number;
+  id_vaga: number;
 }

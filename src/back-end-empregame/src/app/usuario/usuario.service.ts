@@ -95,6 +95,14 @@ export class UsuarioService {
     } else {
       const todasCandidatos = await this.prisma.usuario.findMany({
         where: { tipo: 'CANDIDATO', situacao: 'ATIVO' },
+        include: {
+          usuario_hardskill: {
+            include: { hardskill: { select: { nome: true } } },
+          },
+          usuario_softskill: {
+            include: { softskill: { select: { nome: true } } },
+          },
+        },
       });
       return todasCandidatos;
     }

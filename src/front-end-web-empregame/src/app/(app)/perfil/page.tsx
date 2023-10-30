@@ -17,16 +17,28 @@ import { useRouter, useSearchParams } from "next/navigation";
 import EditarInformacao from "./components/modalEditarInfo";
 import AlterarSenha from "./components/modalAlterarSenha";
 import ExcluirConta from "./components/dialogExcluirConta";
+import { useAppContext } from "@/utils/hooks/useContext";
 
 const Perfil = () => {
   const router = useRouter();
   const query = useSearchParams();
+  const {
+    state: { usuario: usuarioLogado },
+    dispatch: dispatchAppContext,
+  } = useAppContext();
 
   const idUsuario = query.get("id");
 
-  const { data: usuario } = useFetch<IUsuario>("/usuarios/" + idUsuario, {
-    method: "GET",
-  });
+  const { data: usuario, refetch } = useFetch<IUsuario>(
+    "/usuarios/" + idUsuario,
+    {
+      method: "GET",
+      onSuccess: (data) => {
+        if (usuarioLogado?.id === data.data.id)
+          dispatchAppContext({ payload: data.data, type: "SET_USUARIO" });
+      },
+    }
+  );
 
   return (
     <Box
@@ -51,11 +63,20 @@ const Perfil = () => {
             <Image src={"./icons/icon-back.svg"} alt="icone voltar" />
             Voltar
           </Button>
-          <Flex gap={"40px"}>
-            {usuario && <EditarInformacao usuario={usuario} />}
-            {usuario && <AlterarSenha />}
-            {usuario && <ExcluirConta />}
-          </Flex>
+          {usuarioLogado?.id === usuario?.id && (
+            <Flex gap={"40px"}>
+              {usuario && (
+                <EditarInformacao
+                  usuario={usuario}
+                  refetch={() => {
+                    refetch();
+                  }}
+                />
+              )}
+              {usuario && <AlterarSenha />}
+              {usuario && <ExcluirConta />}
+            </Flex>
+          )}
         </Flex>
         <Flex direction={"column"} gap={"32px"} width={"100%"}>
           <Flex gap={"15px"} direction={"column"}>
@@ -147,98 +168,103 @@ const Perfil = () => {
               </Box>
             )}
           </SimpleGrid>
-          <Divider />
-          <Flex gap={"45px"}>
-            <Box width={"full"}>
-              <Text color={"white"} fontSize={"16px"} paddingBottom={"5px"}>
-                Hardskills
-              </Text>
+          {usuario?.tipo === "CANDIDATO" && (
+            <>
+              <Divider />
+              <Flex gap={"45px"}>
+                <Box width={"full"}>
+                  <Text color={"white"} fontSize={"16px"} paddingBottom={"5px"}>
+                    Hardskills
+                  </Text>
 
-              <SimpleGrid columns={2} spacing={"12px"}>
-                {usuario?.usuario_hardskill?.map((hardskill) => (
-                  <Flex
-                    direction={"column"}
-                    bg={"#6D3BBF"}
-                    rounded={"12px"}
-                    py={"12px"}
-                    px={"20px"}
-                    width={"full"}
-                    gap={"8px"}
-                  >
-                    <Text
-                      fontSize={"16px"}
-                      fontWeight={"medium"}
-                      color={"white"}
-                    >
-                      {hardskill.hardskill.nome}
-                    </Text>
+                  <SimpleGrid columns={2} spacing={"12px"}>
+                    {usuario?.usuario_hardskill?.map((hardskill) => (
+                      <Flex
+                        direction={"column"}
+                        bg={"#6D3BBF"}
+                        rounded={"12px"}
+                        py={"12px"}
+                        px={"20px"}
+                        width={"full"}
+                        gap={"8px"}
+                      >
+                        <Text
+                          fontSize={"16px"}
+                          fontWeight={"medium"}
+                          color={"white"}
+                        >
+                          {hardskill.hardskill.nome}
+                        </Text>
 
-                    <Flex gap={"8px"}>
-                      {[...Array(5)].map((star, index) => {
-                        const currentRating = index + 1;
-                        return (
-                          // eslint-disable-next-line react/jsx-key
-                          <label key={index}>
-                            <IconStar
-                              fill={
-                                currentRating <= hardskill.nivel_experiencia
-                                  ? "#FFB800"
-                                  : "white"
-                              }
-                            />
-                          </label>
-                        );
-                      })}
-                    </Flex>
-                  </Flex>
-                ))}
-              </SimpleGrid>
-            </Box>
-            <Box width={"full"}>
-              <Text color={"white"} fontSize={"16px"} paddingBottom={"5px"}>
-                Softskills
-              </Text>
-              <SimpleGrid columns={2} spacing={"12px"}>
-                {usuario?.usuario_softskill?.map((softskill) => (
-                  <Flex
-                    direction={"column"}
-                    bg={"#6D3BBF"}
-                    rounded={"12px"}
-                    py={"12px"}
-                    px={"20px"}
-                    width={"full"}
-                    gap={"8px"}
-                  >
-                    <Text
-                      fontSize={"16px"}
-                      fontWeight={"medium"}
-                      color={"white"}
-                    >
-                      {softskill.softskill.nome}
-                    </Text>
+                        <Flex gap={"8px"}>
+                          {[...Array(5)].map((star, index) => {
+                            const currentRating = index + 1;
+                            return (
+                              // eslint-disable-next-line react/jsx-key
+                              <label key={index}>
+                                <IconStar
+                                  fill={
+                                    currentRating <= hardskill.nivel_experiencia
+                                      ? "#FFB800"
+                                      : "white"
+                                  }
+                                />
+                              </label>
+                            );
+                          })}
+                        </Flex>
+                      </Flex>
+                    ))}
+                  </SimpleGrid>
+                </Box>
 
-                    <Flex gap={"8px"}>
-                      {[...Array(5)].map((star, index) => {
-                        const currentRating = index + 1;
-                        return (
-                          // eslint-disable-next-line react/jsx-key
-                          <label key={index}>
-                            <IconStar
-                              fill={
-                                currentRating <= softskill.nivel_experiencia
-                                  ? "#FFB800"
-                                  : "white"
-                              }
-                            />
-                          </label>
-                        );
-                      })}
-                    </Flex>
-                  </Flex>
-                ))}
-              </SimpleGrid>
-            </Box>
-          </Flex>
+                <Box width={"full"}>
+                  <Text color={"white"} fontSize={"16px"} paddingBottom={"5px"}>
+                    Softskills
+                  </Text>
+                  <SimpleGrid columns={2} spacing={"12px"}>
+                    {usuario?.usuario_softskill?.map((softskill) => (
+                      <Flex
+                        direction={"column"}
+                        bg={"#6D3BBF"}
+                        rounded={"12px"}
+                        py={"12px"}
+                        px={"20px"}
+                        width={"full"}
+                        gap={"8px"}
+                      >
+                        <Text
+                          fontSize={"16px"}
+                          fontWeight={"medium"}
+                          color={"white"}
+                        >
+                          {softskill.softskill.nome}
+                        </Text>
+
+                        <Flex gap={"8px"}>
+                          {[...Array(5)].map((star, index) => {
+                            const currentRating = index + 1;
+                            return (
+                              // eslint-disable-next-line react/jsx-key
+                              <label key={index}>
+                                <IconStar
+                                  fill={
+                                    currentRating <= softskill.nivel_experiencia
+                                      ? "#FFB800"
+                                      : "white"
+                                  }
+                                />
+                              </label>
+                            );
+                          })}
+                        </Flex>
+                      </Flex>
+                    ))}
+                  </SimpleGrid>
+                </Box>
+              </Flex>
+            </>
+          )}
         </Flex>
       </Container>
     </Box>

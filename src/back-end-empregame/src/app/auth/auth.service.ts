@@ -12,6 +12,7 @@ import { BcryptService } from '../../utils/providers/bcrypt/bcrypt.service';
 
 import { AuthUpdateSenhaDto } from './dto/update-senha.dto';
 import { EmailsService } from '../../utils/providers/mail/email.service';
+import { IAuthUser } from 'src/utils/decorators/auth.decorator';
 
 interface IContentCodigo {
   id_usuario: number;
@@ -60,6 +61,14 @@ export class AuthService {
 
     return { access_token, usuario };
   }
+
+  async recoverUser(token: string) {
+    const tokenRedis = await this.redis.get(token);
+
+    if (!tokenRedis) throw new AppError('Token não encontrado', 401);
+
+    return JSON.parse(tokenRedis) as IAuthUser;
+}
 
   async redefinirSenha({ email, codigo, senha }: AuthRedefinirSenhaDto) {
     const usuario = await this.prisma.usuario.findFirst({

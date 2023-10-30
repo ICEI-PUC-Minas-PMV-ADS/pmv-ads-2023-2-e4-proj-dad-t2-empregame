@@ -39,7 +39,7 @@ export const Header = () => {
           height={"140px"}
         >
           <Image
-            src="./logo-empregame.svg"
+            src="../../logo-empregame.svg"
             onClick={() => router.push("/feed")}
             cursor={"pointer"}
           />

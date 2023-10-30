@@ -2,13 +2,11 @@
 
 import { authToken } from "@/utils/config/authToken";
 import { useAppContext } from "@/utils/hooks/useContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-import { parseJwt } from "@/utils/functions/parseJwt";
-import { useMutation } from "@/utils/hooks/useMutation";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { IUsuario } from "@/interface/IUsuario";
 import { useToast } from "@chakra-ui/react";
 import { useFetch } from "@/utils/hooks/useFetch";
@@ -16,40 +14,22 @@ import { useFetch } from "@/utils/hooks/useFetch";
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const toast = useToast();
-  const [cookie] = useCookies([authToken.nome]);
-  const {
-    state: { usuario },
-    dispatch: dispatchAppContext,
-  } = useAppContext();
+  const [cookies, , removeCookie] = useCookies([authToken.nome]);
+  const { dispatch: dispatchAppContext } = useAppContext();
 
-  useEffect(() => {
-    if (!usuario && !cookie[authToken.nome]) {
+  useFetch("/auth/recover/" + cookies[authToken.nome], {
+    method: "GET",
+    enable: !!cookies[authToken.nome],
+    itensRefresh: [cookies[authToken.nome]],
+    onSuccess: (data) => {
+      const user = data.data as { access_token: string; usuario: IUsuario };
+      dispatchAppContext({ payload: user.usuario, type: "SET_USUARIO" });
+    },
+    onError: () => {
+      removeCookie(authToken.nome);
       router.push("/login");
-    }
-    if (!usuario?.id && cookie[authToken.nome]) {
-      const payloadJWT = parseJwt(cookie[authToken.nome]) as {
-        id: number;
-      };
-      useFetch<IUsuario>("/usuarios/" + payloadJWT.id, {
-        method: "GET",
-        onSuccess: (data) => {
-          dispatchAppContext({
-            payload: {
-              nome: data.data.nome,
-              id: data.data.id,
-              email: data.data.email,
-              tipo: data.data.tipo,
-            },
-            type: "SET_USUARIO",
-          });
-        },
-        onError: (err) => {
-          if (err.response?.data)
-            toast({ title: err.response.data.message, status: "error" });
-        },
-      });
-    }
-  }, [usuario, router, cookie]);
+    },
+  });
 
   return (
     <div>

@@ -42,7 +42,6 @@ export class VagaController {
 
   @ApiBearerAuth()
   @Get()
-  @ApiOkResponse({ type: Vaga, isArray: true })
   @ApiQuery({ name: 'pesquisa', required: false })
   @ApiQuery({ name: 'hardskill', required: false })
   @ApiQuery({ name: 'softskill', required: false })
@@ -134,6 +133,13 @@ export class VagaController {
     @Body() data: UpdateVagaCandidatoDto,
   ) {
     await this.vagaService.updateVagaCandidato(+id, data);
+    return;
+  }
+
+  @ApiBearerAuth()
+  @Delete('match/:id')
+  async removeVagaCandidato(@Param('id') id: string) {
+    await this.vagaService.removeVagaCandidatos(+id);
     return;
   }
 

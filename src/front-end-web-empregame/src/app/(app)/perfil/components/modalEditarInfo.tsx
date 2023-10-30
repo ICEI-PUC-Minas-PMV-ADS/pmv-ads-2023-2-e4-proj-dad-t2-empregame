@@ -23,8 +23,11 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-const EditarInformacao = (usuario: { usuario: IUsuario }) => {
-  const userAtual = usuario.usuario;
+const EditarInformacao = (props: {
+  usuario: IUsuario;
+  refetch: () => void;
+}) => {
+  const userAtual = props.usuario;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -93,9 +96,9 @@ const EditarInformacao = (usuario: { usuario: IUsuario }) => {
   } = useMutation<IUsuario>("/usuarios", {
     method: "PATCH",
     onSuccess: () => {
+      props.refetch();
       toast({ title: "Dados atualizado com sucesso!", status: "success" });
       onClose();
-      location.reload();
     },
     onError: (err) => {
       toast({ title: err.message, status: "error" });

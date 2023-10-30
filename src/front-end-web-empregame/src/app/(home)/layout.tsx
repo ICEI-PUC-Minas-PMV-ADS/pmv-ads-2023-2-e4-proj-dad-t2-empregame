@@ -1,7 +1,7 @@
 "use client";
 
-import { Footer } from "./Footer";
-import { Header } from "./Header";
+import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
