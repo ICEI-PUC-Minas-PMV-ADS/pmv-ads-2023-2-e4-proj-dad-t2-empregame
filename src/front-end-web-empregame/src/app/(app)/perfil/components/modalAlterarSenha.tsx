@@ -24,7 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-const AlterarSenha = () => {
+const ModalAlterarSenha = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -106,4 +106,4 @@ const AlterarSenha = () => {
   );
 };
 
-export default AlterarSenha;
+export default ModalAlterarSenha;

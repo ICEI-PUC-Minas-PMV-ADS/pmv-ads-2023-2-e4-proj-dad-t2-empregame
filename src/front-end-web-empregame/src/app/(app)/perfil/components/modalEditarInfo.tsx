@@ -23,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-const EditarInformacao = (props: {
+const ModalEditarInformacao = (props: {
   usuario: IUsuario;
   refetch: () => void;
 }) => {
@@ -439,7 +439,7 @@ const EditarInformacao = (props: {
   );
 };
 
-export default EditarInformacao;
+export default ModalEditarInformacao;
 
 const IconStar = (props: { fill: string }) => {
   return (
