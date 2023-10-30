@@ -34,4 +34,7 @@ export class Usuario implements UsuarioModel {
 
   @ApiProperty({ nullable: true })
   portfolio: string | null;
+
+  @ApiProperty()
+  situacao: string;
 }

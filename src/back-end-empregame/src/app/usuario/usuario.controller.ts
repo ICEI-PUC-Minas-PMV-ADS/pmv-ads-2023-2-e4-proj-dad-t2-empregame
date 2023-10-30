@@ -69,8 +69,8 @@ export class UsuarioController {
     return candidatos;
   }
 
-  @ApiBearerAuth()
   @Post('hardskills')
+  @Public()
   async createUsuarioHardskills(@Body() data: CreateUsuarioHardskillDto) {
     await this.usuarioService.createUsuarioHardskill(data);
     return;
@@ -97,8 +97,8 @@ export class UsuarioController {
     return;
   }
 
-  @ApiBearerAuth()
   @Post('softskills')
+  @Public()
   async createUsuarioSoftskills(
     @Body() data: CreateUsuarioSoftskillDto,
   ): Promise<void> {

@@ -7,9 +7,9 @@ import { Softskill } from './entities/softskill.entity';
 export class SoftskillService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateSoftskillDto): Promise<void> {
-    await this.prisma.softskill.create({ data });
-    return;
+  async create(data: CreateSoftskillDto): Promise<{ id: number }> {
+    const softskill = await this.prisma.softskill.create({ data });
+    return softskill;
   }
 
   async findAll(): Promise<Softskill[]> {

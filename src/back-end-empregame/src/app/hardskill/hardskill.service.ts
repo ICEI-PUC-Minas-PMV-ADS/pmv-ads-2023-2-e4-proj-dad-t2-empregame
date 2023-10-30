@@ -7,9 +7,9 @@ import { Hardskill } from './entities/hardskill.entity';
 export class HardskillService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateHardskillDto): Promise<void> {
-    await this.prisma.hardskill.create({ data });
-    return;
+  async create(data: CreateHardskillDto): Promise<{ id: number }> {
+    const hardskill = await this.prisma.hardskill.create({ data });
+    return hardskill;
   }
 
   async findAll(): Promise<Hardskill[]> {

@@ -1,4 +1,12 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { signInDto } from './dto/sign-in.dto';
 import { Public } from '../../utils/decorators/is-public.decorator';
@@ -35,5 +43,13 @@ export class AuthController {
     await this.authService.updateSenha(user.usuario.id, data);
 
     return;
+  }
+
+  @Public()
+  @Get('recover/:token')
+  async recoverUser(@Param('token') token: string) {
+    const user = await this.authService.recoverUser(token);
+
+    return user;
   }
 }

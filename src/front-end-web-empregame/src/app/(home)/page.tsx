@@ -5,7 +5,7 @@ import { Box, Container, Flex, Heading, Image, Text } from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <section>
         <Box
           bgGradient={"linear-gradient(82deg, #7345D6 39.13%, #DA4FE2 112.59%)"}
@@ -140,6 +140,6 @@ export default function Home() {
           </Container>
         </Box>
       </section>
-    </main>
+    </>
   );
 }
