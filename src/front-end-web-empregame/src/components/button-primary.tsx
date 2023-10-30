@@ -1,14 +1,16 @@
 import { Button } from "@chakra-ui/react";
-import { MouseEventHandler } from "react";
+import { KeyboardEventHandler, MouseEventHandler } from "react";
 
 export const ButtonPrimary = (props: {
   onClick: MouseEventHandler<HTMLButtonElement>;
   isLoading?: boolean;
   loadingText?: string;
   buttonText: string;
+  onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;
 }) => {
   return (
     <Button
+      onKeyDown={props.onKeyDown}
       onClick={props.onClick}
       isLoading={props.isLoading}
       loadingText={props.loadingText}

@@ -29,6 +29,7 @@ import { useCookies } from "react-cookie";
 import { authToken } from "@/utils/config/authToken";
 import { useRouter } from "next/navigation";
 import { numberToPhone } from "@/utils/regex/numberToPhone";
+import { InputPassword } from "@/components/input-password";
 
 const Cadastro = () => {
   const { dispatch: dispatchAppContext } = useAppContext();
@@ -216,8 +217,7 @@ const Cadastro = () => {
                 placeholder="E-mail *"
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <InputForm
-                type="password"
+              <InputPassword
                 placeholder="Senha *"
                 onChange={(e) => setSenha(e.target.value)}
               />
@@ -310,7 +310,7 @@ const Cadastro = () => {
                             }
                           >
                             <Image
-                            alt="icone mais"
+                              alt="icone mais"
                               src="/icons/icon-close.svg"
                               minH={"10px"}
                               minW={"10px"}
@@ -378,7 +378,11 @@ const Cadastro = () => {
                         h={"30px"}
                         color={"#2E2E2E"}
                       >
-                        <Image src="./icons/icon-mais.svg" pr={"10px"}  alt="icone mais" />
+                        <Image
+                          src="./icons/icon-mais.svg"
+                          pr={"10px"}
+                          alt="icone mais"
+                        />
                         Adicionar
                       </Button>
                     </InputRightElement>
@@ -423,7 +427,7 @@ const Cadastro = () => {
                               }
                             >
                               <Image
-                               alt="icone fechar"
+                                alt="icone fechar"
                                 src="/icons/icon-close.svg"
                                 minH={"10px"}
                                 minW={"10px"}

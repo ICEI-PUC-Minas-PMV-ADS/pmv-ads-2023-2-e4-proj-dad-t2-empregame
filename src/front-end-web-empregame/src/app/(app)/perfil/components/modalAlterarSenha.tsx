@@ -1,5 +1,6 @@
 import { ButtonPrimary } from "@/components/button-primary";
 import { InputForm } from "@/components/input-form";
+import { InputPassword } from "@/components/input-password";
 import { IUsuario } from "@/interface/IUsuario";
 import { useMutation } from "@/utils/hooks/useMutation";
 import { numberToPhone } from "@/utils/regex/numberToPhone";
@@ -80,13 +81,11 @@ const AlterarSenha = () => {
           <ModalCloseButton />
           <ModalBody>
             <Flex gap={"15px"} direction={"column"}>
-              <InputForm
-                type="password"
+              <InputPassword
                 placeholder="Senha Atual"
                 onChange={(e) => setAtualSenha(e.target.value)}
               />
-              <InputForm
-                type="password"
+              <InputPassword
                 placeholder="Nova Senha"
                 onChange={(e) => setNovaSenha(e.target.value)}
               />
