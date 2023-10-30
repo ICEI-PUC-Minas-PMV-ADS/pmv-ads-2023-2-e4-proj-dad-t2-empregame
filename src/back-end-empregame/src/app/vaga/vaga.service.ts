@@ -53,15 +53,30 @@ export class VagaService {
           ],
         },
         include: {
-          vaga_hardskill: true,
-          vaga_softskill: true,
-          vaga_candidato: { select: { _count: true } },
+          vaga_hardskill: {
+            include: { hardskill: { select: { nome: true } } },
+          },
+          vaga_softskill: {
+            include: { softskill: { select: { nome: true } } },
+          },
+          vaga_candidato: true,
           usuario: { select: { nome: true, id: true } },
         },
       });
       return vagasFiltradas;
     } else {
-      const todasVagas = await this.prisma.vaga.findMany();
+      const todasVagas = await this.prisma.vaga.findMany({
+        include: {
+          vaga_hardskill: {
+            include: { hardskill: { select: { nome: true } } },
+          },
+          vaga_softskill: {
+            include: { softskill: { select: { nome: true } } },
+          },
+          vaga_candidato: { select: { _count: true } },
+          usuario: { select: { nome: true, id: true } },
+        },
+      });
       return todasVagas;
     }
   }
@@ -141,5 +156,12 @@ export class VagaService {
       where: { id_vaga },
     });
     return candidatosInteressados;
+  }
+
+  async removeVagaCandidatos(id: number): Promise<void> {
+    await this.prisma.vagaCandidato.delete({
+      where: { id },
+    });
+    return;
   }
 }

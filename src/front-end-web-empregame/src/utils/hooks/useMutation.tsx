@@ -18,7 +18,19 @@ export function useMutation<TDataSend = unknown, TDataResponse = unknown>(
       res: AxiosResponse<TDataResponse>;
       data: TDataResponse;
     }) => void;
-    onError?: (error: AxiosError) => void;
+    onError?: (
+      error: AxiosError<
+        | {
+            response: {
+              data: {
+                statusCode: number;
+                message: string;
+              };
+            };
+          }
+        | any
+      >
+    ) => void;
   }
 ) {
   const mutateAPI = url[0] === "/" ? api : axios; // decide se a api vai ser a padrão ou requisição para outras
@@ -35,7 +47,6 @@ export function useMutation<TDataSend = unknown, TDataResponse = unknown>(
     mutateAPI(url, {
       params: options?.params,
       headers: {
-        "content-type": "text/plain",
         ...options?.headers,
       },
       method: options?.method,

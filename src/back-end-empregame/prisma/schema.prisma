@@ -19,6 +19,7 @@ model Usuario {
   linkedin   String?  @db.VarChar(511)
   github     String?  @db.VarChar(511)
   portfolio  String?  @db.VarChar(511)
+  situacao   String   @default("ATIVO") @db.VarChar(255) // ATIVO, INATIVO
 
   usuario_hardskill UsuarioHardskill[]
   usuario_softskill UsuarioSoftskill[]
@@ -111,7 +112,7 @@ model VagaHardskill {
   updated_at DateTime @updatedAt @db.Timestamp
 
   id_vaga Int  @db.Integer
-  vaga Vaga @relation(fields: [id_vaga], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  vaga    Vaga @relation(fields: [id_vaga], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   id_hardskill Int       @db.Integer
   hardskill    Hardskill @relation(fields: [id_hardskill], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -125,7 +126,7 @@ model VagaSoftskill {
   updated_at DateTime @updatedAt @db.Timestamp
 
   id_vaga Int  @db.Integer
-  vaga Vaga @relation(fields: [id_vaga], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  vaga    Vaga @relation(fields: [id_vaga], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   id_softskill Int       @db.Integer
   softskill    Softskill @relation(fields: [id_softskill], references: [id], onDelete: NoAction, onUpdate: NoAction)

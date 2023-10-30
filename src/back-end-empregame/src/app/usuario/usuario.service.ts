@@ -18,7 +18,7 @@ export class UsuarioService {
     const hash = await bcrypt.hash(data.senha, 10);
 
     const usuarioExistente = await this.prisma.usuario.findFirst({
-      where: { email: data.email },
+      where: { email: data.email, situacao: 'ATIVO' },
     });
 
     if (usuarioExistente)
@@ -32,13 +32,25 @@ export class UsuarioService {
   }
 
   async findAll(): Promise<Usuario[]> {
-    const usuarios = await this.prisma.usuario.findMany();
+    const usuarios = await this.prisma.usuario.findMany({
+      where: { situacao: 'ATIVO' },
+    });
 
     return usuarios;
   }
 
   async findOne(id: number): Promise<Usuario | null> {
-    const usuario = await this.prisma.usuario.findUnique({ where: { id } });
+    const usuario = await this.prisma.usuario.findUnique({
+      where: { id, situacao: 'ATIVO' },
+      include: {
+        usuario_hardskill: {
+          include: { hardskill: { select: { nome: true } } },
+        },
+        usuario_softskill: {
+          include: { softskill: { select: { nome: true } } },
+        },
+      },
+    });
 
     return usuario;
   }
@@ -71,26 +83,44 @@ export class UsuarioService {
           ],
         },
         include: {
-          usuario_hardskill: true,
-          usuario_softskill: true,
+          usuario_hardskill: {
+            include: { hardskill: { select: { nome: true } } },
+          },
+          usuario_softskill: {
+            include: { softskill: { select: { nome: true } } },
+          },
         },
       });
       return candidatosFiltradas;
     } else {
       const todasCandidatos = await this.prisma.usuario.findMany({
-        where: { tipo: 'CANDIDATO' },
+        where: { tipo: 'CANDIDATO', situacao: 'ATIVO' },
+        include: {
+          usuario_hardskill: {
+            include: { hardskill: { select: { nome: true } } },
+          },
+          usuario_softskill: {
+            include: { softskill: { select: { nome: true } } },
+          },
+        },
       });
       return todasCandidatos;
     }
   }
 
   async update(id: number, data: UpdateUsuarioDto): Promise<void> {
-    await this.prisma.usuario.update({ where: { id }, data });
+    await this.prisma.usuario.update({
+      where: { id, situacao: 'ATIVO' },
+      data,
+    });
     return;
   }
 
   async remove(id: number): Promise<void> {
-    await this.prisma.usuario.delete({ where: { id } });
+    await this.prisma.usuario.update({
+      where: { id },
+      data: { situacao: 'INATIVO' },
+    });
     return;
   }
 

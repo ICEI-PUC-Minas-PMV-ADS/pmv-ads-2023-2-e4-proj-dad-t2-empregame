@@ -6,6 +6,11 @@ enum UsuarioTipo {
   CANDIDATO = 'CANDIDATO',
 }
 
+enum UsuarioSituacao {
+  ATIVO = 'ATIVO',
+  INATIVO = 'INATIVO',
+}
+
 export class CreateUsuarioDto {
   @ApiProperty()
   @IsString()
@@ -43,4 +48,9 @@ export class CreateUsuarioDto {
   @IsString()
   @IsOptional()
   portfolio?: string;
+
+  @ApiProperty({ enum: UsuarioSituacao })
+  @IsString()
+  @IsEnum(UsuarioSituacao)
+  situacao: UsuarioSituacao;
 }

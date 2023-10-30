@@ -1,8 +1,7 @@
 "use client";
 
 import { IUsuario } from "@/interface/IUsuario";
-import React, { Dispatch, createContext, useContext, useReducer } from "react";
-
+import React, { Dispatch, createContext, useReducer } from "react";
 interface IAppReducer {
   loading: boolean;
   usuario: IUsuario | null;

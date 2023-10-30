@@ -1,3 +1,5 @@
+"use client";
+
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
@@ -11,11 +13,23 @@ export function useFetch<T = unknown>(
     params?: object; // parametros da consulta, req.query
     headers?: object; // cabecalho da consulta, req.headers
     body?: object; // corpo da consulta, req.body
-    itensRefresh?: never[]; // itens para recarregar a consulta
+    itensRefresh?: any[]; // itens para recarregar a consulta
     enable?: boolean; // caso esteja TRUE o useEffect será executado, caso contrario ele não será executado, usad para definir se uma consulta está pronta para ser executada
     delay?: number; // tempo de delay para executar a requisição
     onSuccess?: (data: { res: AxiosResponse<T>; data: T }) => void;
-    onError?: (error: AxiosError) => void;
+    onError?: (
+      error: AxiosError<
+        | {
+            response: {
+              data: {
+                statusCode: number;
+                message: string;
+              };
+            };
+          }
+        | any
+      >
+    ) => void;
   }
 ) {
   const fetchAPI = url[0] === "/" ? api : axios; // decide se a api vai ser a padrão ou requisição para outras
