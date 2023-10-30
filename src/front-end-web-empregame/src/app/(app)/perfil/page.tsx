@@ -201,7 +201,6 @@ const Perfil = () => {
                           {[...Array(5)].map((star, index) => {
                             const currentRating = index + 1;
                             return (
-                              // eslint-disable-next-line react/jsx-key
                               <label key={index}>
                                 <IconStar
                                   fill={
