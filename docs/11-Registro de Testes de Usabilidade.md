@@ -12,7 +12,8 @@ O registro de teste de usabilidade de software desempenha um papel importante na
 
 ![2  Recrutador cadastro](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/2ea74905-deb4-4602-a57d-88568f081030)
 
-![Imagem2](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/ce7869a0-8ff9-48a2-9cc6-6120a933017d)
+![fotor-2023103023181](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/14428a55-bb37-46e9-9c20-6e8e26a53a81)
+
 
 
 
