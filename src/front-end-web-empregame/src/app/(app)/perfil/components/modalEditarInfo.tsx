@@ -1,6 +1,6 @@
 import { ButtonPrimary } from "@/components/button-primary";
 import { InputForm } from "@/components/input-form";
-import { IUsuario } from "@/interface/IUsuario";
+import { IUsuario, IUsuarioHardSkill } from "@/interface/IUsuario";
 import { useMutation } from "@/utils/hooks/useMutation";
 import { numberToPhone } from "@/utils/regex/numberToPhone";
 import {
@@ -48,13 +48,9 @@ const ModalEditarInformacao = (props: {
     userAtual.linkedin
   );
   const [hardskill, setHardskill] = useState<string>("");
-  const [listHardskill, setListHardskill] = useState<
-    {
-      id: number;
-      nome: string;
-      nivel_experiencia: number;
-    }[]
-  >([]);
+  const [listHardskill, setListHardskill] = useState<IUsuarioHardSkill[]>(
+    userAtual.usuario_hardskill as IUsuarioHardSkill[]
+  );
 
   const [softskill, setSoftskill] = useState<string>("");
   const [listSoftskill, setListSoftskill] = useState<
@@ -65,11 +61,7 @@ const ModalEditarInformacao = (props: {
     }[]
   >([]);
 
-  const adicionarHardskill = (hardskill: {
-    id: number;
-    nome: string;
-    nivel_experiencia: number;
-  }) => {
+  const adicionarHardskill = (hardskill: IUsuarioHardSkill) => {
     setListHardskill((old) => [...old, hardskill]);
   };
 
@@ -84,11 +76,14 @@ const ModalEditarInformacao = (props: {
   const {
     mutate: mutateAtualizarUsuarioHardskills,
     isFetching: isFetchingAtualizarUsuarioHardskills,
-  } = useMutation<IUsuario>("/usuarios/hardskills", {
-    method: "PATCH",
-    onSuccess: ({ data }) => {},
-    onError: (err) => {},
-  });
+  } = useMutation<{ id: number; nivel_experiencia: number }>(
+    "/usuarios/hardskills/",
+    {
+      method: "PATCH",
+      onSuccess: ({ data }) => {},
+      onError: (err) => {},
+    }
+  );
 
   const {
     mutate: mutateAtualizarUsuario,
@@ -195,8 +190,7 @@ const ModalEditarInformacao = (props: {
                         <Button
                           onClick={() =>
                             adicionarHardskill({
-                              id: Math.random() * 100,
-                              nome: hardskill,
+                              hardskill: { nome: hardskill },
                               nivel_experiencia: 1,
                             })
                           }
@@ -216,88 +210,93 @@ const ModalEditarInformacao = (props: {
                     </InputGroup>
 
                     <SimpleGrid columns={2} gap={"15px"}>
-                      {listHardskill.map((hardskill) => (
-                        <Flex
-                          direction={"column"}
-                          bg={"#6D3BBF"}
-                          rounded={"12px"}
-                          py={"12px"}
-                          px={"20px"}
-                          key={hardskill.id}
-                        >
-                          <Flex justifyContent={"space-between"}>
-                            <Text
-                              fontSize={"16px"}
-                              fontWeight={"medium"}
-                              color={"white"}
-                            >
-                              {hardskill.nome}
-                            </Text>
-                            <Button
-                              bg={"none"}
-                              _hover={{ bg: "#5A2DA4" }}
-                              position={"relative"}
-                              top={"-8px"}
-                              right={"-15px"}
-                              rounded={"full"}
-                              maxW={"10px"}
-                              onClick={() =>
-                                setListHardskill(
-                                  listHardskill.filter(
-                                    (e) => e.id !== hardskill.id
+                      {listHardskill.map((hardskill) => {
+                        const hardskillIndex = listHardskill.findIndex(
+                          (e) => e === hardskill
+                        );
+                        return (
+                          <Flex
+                            direction={"column"}
+                            bg={"#6D3BBF"}
+                            rounded={"12px"}
+                            py={"12px"}
+                            px={"20px"}
+                            key={hardskill.id}
+                          >
+                            <Flex justifyContent={"space-between"}>
+                              <Text
+                                fontSize={"16px"}
+                                fontWeight={"medium"}
+                                color={"white"}
+                              >
+                                {hardskill.hardskill.nome}
+                              </Text>
+                              <Button
+                                bg={"none"}
+                                _hover={{ bg: "#5A2DA4" }}
+                                position={"relative"}
+                                top={"-8px"}
+                                right={"-15px"}
+                                rounded={"full"}
+                                maxW={"10px"}
+                                onClick={() =>
+                                  setListHardskill(
+                                    listHardskill.filter(
+                                      (e) => e.id !== hardskill.id
+                                    )
                                   )
-                                )
-                              }
-                            >
-                              <Image
-                                src="/icons/icon-close.svg"
-                                minH={"10px"}
-                                minW={"10px"}
-                                alt="icone fechar"
-                              />
-                            </Button>
-                          </Flex>
-                          <Flex gap={"8px"}>
-                            {[...Array(5)].map((star, index) => {
-                              const currentRating = index + 1;
-                              const hardskillIndex = listHardskill.findIndex(
-                                (e) => e.id === hardskill.id
-                              );
-                              return (
-                                <label key={Math.random() * index}>
-                                  <input
-                                    type="radio"
-                                    name="rating"
-                                    value={hardskill.nivel_experiencia}
-                                    onClick={() => {
-                                      const tempHardskills = [...listHardskill];
+                                }
+                              >
+                                <Image
+                                  src="/icons/icon-close.svg"
+                                  minH={"10px"}
+                                  minW={"10px"}
+                                  alt="icone fechar"
+                                />
+                              </Button>
+                            </Flex>
+                            <Flex gap={"8px"}>
+                              {[...Array(5)].map((star, index) => {
+                                const currentRating = index + 1;
 
-                                      tempHardskills[
-                                        hardskillIndex
-                                      ].nivel_experiencia = currentRating;
+                                return (
+                                  <label key={Math.random() * index}>
+                                    <input
+                                      type="radio"
+                                      name="rating"
+                                      value={hardskill.nivel_experiencia}
+                                      onClick={() => {
+                                        const tempHardskills = [
+                                          ...listHardskill,
+                                        ];
 
-                                      setListHardskill(tempHardskills);
-                                    }}
-                                    style={{
-                                      display: "none",
-                                      cursor: "pointer",
-                                    }}
-                                  />
-                                  <IconStar
-                                    fill={
-                                      currentRating <=
-                                      listHardskill[hardskillIndex]
-                                        .nivel_experiencia
-                                        ? "#FFB800"
-                                        : "white"
-                                    }
-                                  />
-                                </label>
-                              );
-                            })}
+                                        tempHardskills[
+                                          hardskillIndex
+                                        ].nivel_experiencia = currentRating;
+
+                                        setListHardskill(tempHardskills);
+                                      }}
+                                      style={{
+                                        display: "none",
+                                        cursor: "pointer",
+                                      }}
+                                    />
+                                    <IconStar
+                                      fill={
+                                        currentRating <=
+                                        listHardskill[hardskillIndex]
+                                          .nivel_experiencia
+                                          ? "#FFB800"
+                                          : "white"
+                                      }
+                                    />
+                                  </label>
+                                );
+                              })}
+                            </Flex>
                           </Flex>
-                        </Flex>
-                      ))}
+                        );
+                      })}
                     </SimpleGrid>
                   </Flex>
                   <Flex direction={"column"} gap={"12px"}>

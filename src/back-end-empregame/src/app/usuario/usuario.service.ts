@@ -9,6 +9,8 @@ import { UsuarioHardSkill } from './entities/usuario-hardskill.entity';
 import { CreateUsuarioSoftskillDto } from './dto/create-usuario-softskill.dto';
 import { UsuarioSoftSkill } from './entities/usuario-softskill.entity';
 import { AppError } from '../../utils/app-error';
+import { UpdateUsuarioHardskillDto } from './dto/update-usuario-hardskill.dto';
+import { UpdateUsuarioSoftskillDto } from './dto/update-usuario-softskill.dto';
 
 @Injectable()
 export class UsuarioService {
@@ -138,6 +140,17 @@ export class UsuarioService {
     return hardskills;
   }
 
+  async updateUsuarioHardskills(
+    id: number,
+    data: UpdateUsuarioHardskillDto,
+  ): Promise<void> {
+    await this.prisma.usuarioHardskill.update({
+      where: { id },
+      data,
+    });
+    return;
+  }
+
   async removeUsuarioHardskills(id_usuario: number, id: number): Promise<void> {
     await this.prisma.usuarioHardskill.delete({ where: { id, id_usuario } });
     return;
@@ -155,6 +168,17 @@ export class UsuarioService {
       where: { id_usuario },
     });
     return softskills;
+  }
+
+  async updateUsuarioSoftkills(
+    id: number,
+    data: UpdateUsuarioSoftskillDto,
+  ): Promise<void> {
+    await this.prisma.usuarioSoftskill.update({
+      where: { id },
+      data,
+    });
+    return;
   }
 
   async removeUsuarioSoftskills(id_usuario: number, id: number): Promise<void> {
