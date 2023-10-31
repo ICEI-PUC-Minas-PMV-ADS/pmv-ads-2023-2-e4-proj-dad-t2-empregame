@@ -136,6 +136,7 @@ export class UsuarioService {
   ): Promise<UsuarioHardSkill[]> {
     const hardskills = await this.prisma.usuarioHardskill.findMany({
       where: { id_usuario },
+      include: { hardskill: { select: { nome: true } } },
     });
     return hardskills;
   }
@@ -166,6 +167,7 @@ export class UsuarioService {
   ): Promise<UsuarioSoftSkill[]> {
     const softskills = await this.prisma.usuarioSoftskill.findMany({
       where: { id_usuario },
+      include: { softskill: { select: { nome: true } } },
     });
     return softskills;
   }
