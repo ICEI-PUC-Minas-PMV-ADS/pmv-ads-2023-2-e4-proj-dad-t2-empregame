@@ -10,21 +10,21 @@ export interface IUsuario {
   linkedin?: string | null;
   github?: string | null;
   portfolio?: string | null;
-  usuario_hardskill?: UsuarioHardSkill[] | null;
-  usuario_softskill?: UsuarioSoftSkill[] | null;
+  usuario_hardskill?: IUsuarioHardSkill[] | null;
+  usuario_softskill?: IUsuarioSoftSkill[] | null;
 }
 
-interface UsuarioHardSkill {
-  id: number;
-  created_at: Date;
-  updated_at: Date;
+export interface IUsuarioHardSkill {
+  id?: number;
+  created_at?: Date;
+  updated_at?: Date;
   nivel_experiencia: number;
-  id_usuario: number;
-  id_hardskill: number;
+  id_usuario?: number;
+  id_hardskill?: number;
   hardskill: { nome: string };
 }
 
-interface UsuarioSoftSkill {
+export interface IUsuarioSoftSkill {
   id: number;
   created_at: Date;
   updated_at: Date;
