@@ -24,7 +24,7 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 
-const ModalPublicarVaga = (props: { refetch: () => void }) => {
+const ModalEditarVaga = (props: { refetch: () => void }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
   const [nomeVaga, setNomeVaga] = useState<string>('')
@@ -82,7 +82,7 @@ const ModalPublicarVaga = (props: { refetch: () => void }) => {
     }
   })
 
-  const publicarVaga = () => {}
+  const editarVaga = () => {}
 
   return (
     <>
@@ -110,10 +110,10 @@ const ModalPublicarVaga = (props: { refetch: () => void }) => {
         <ModalContent>
           <ModalHeader display={'flex'} gap={'15px'} color={'#5A2DA4'}>
             <Image
-              src={'../../icons/icon-publicarVaga.svg'}
-              alt="icone publicar vaga"
+              src={'../../icons/icon-editar.svg'}
+              alt="icone editar vaga"
             />
-            Publicar Vaga
+            Editar Vaga
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -319,9 +319,9 @@ const ModalPublicarVaga = (props: { refetch: () => void }) => {
 
           <ModalFooter>
             <ButtonPrimary
-              onClick={() => publicarVaga()}
-              buttonText="Publicar"
-              loadingText="Publicando"
+              onClick={() => editarVaga()}
+              buttonText="Salvar"
+              loadingText="Salvando"
               isLoading={isFetchingAtualizarUsuario}
             />
           </ModalFooter>
@@ -331,4 +331,4 @@ const ModalPublicarVaga = (props: { refetch: () => void }) => {
   )
 }
 
-export default ModalPublicarVaga
+export default ModalEditarVaga
