@@ -14,11 +14,10 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
-
 import { useAppContext } from "@/utils/hooks/useContext";
-import ModalEditarInformacao from "./components/ModalEditarInfo";
-import ModalAlterarSenha from "./components/ModalAlterarSenha";
-import DialogExcluirConta from "./components/DialogExcluirConta";
+import ModalEditarInformacao from "./components/modalEditarInfo";
+import ModalAlterarSenha from "./components/modalAlterarSenha";
+import DialogExcluirConta from "./components/dialogExcluirConta";
 
 const Perfil = () => {
   const router = useRouter();

@@ -74,6 +74,7 @@ const ModalCandidatosInteressados = (props: {
               {candidatosInteressados?.map((candidato) => {
                 return (
                   <Flex
+                    key={candidato.id}
                     borderRadius={"10px"}
                     bg={"#F6F0FF"}
                     justifyContent={"space-between"}

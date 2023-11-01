@@ -41,7 +41,6 @@ const ModalEditarInformacao = (props: {
   const userAtual = props.usuario;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [nome, setNome] = useState<string>(userAtual.nome);
   const [email, setEmail] = useState<string | undefined | null>(
     userAtual.email
