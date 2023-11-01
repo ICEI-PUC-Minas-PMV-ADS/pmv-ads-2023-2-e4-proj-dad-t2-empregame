@@ -1,5 +1,6 @@
 import { ButtonPrimary } from "@/components/button-primary";
 import { InputForm } from "@/components/input-form";
+import { InputPassword } from "@/components/input-password";
 import { IUsuario } from "@/interface/IUsuario";
 import { useMutation } from "@/utils/hooks/useMutation";
 import { numberToPhone } from "@/utils/regex/numberToPhone";
@@ -23,7 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-const AlterarSenha = () => {
+const ModalAlterarSenha = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -80,13 +81,11 @@ const AlterarSenha = () => {
           <ModalCloseButton />
           <ModalBody>
             <Flex gap={"15px"} direction={"column"}>
-              <InputForm
-                type="password"
+              <InputPassword
                 placeholder="Senha Atual"
                 onChange={(e) => setAtualSenha(e.target.value)}
               />
-              <InputForm
-                type="password"
+              <InputPassword
                 placeholder="Nova Senha"
                 onChange={(e) => setNovaSenha(e.target.value)}
               />
@@ -107,4 +106,4 @@ const AlterarSenha = () => {
   );
 };
 
-export default AlterarSenha;
+export default ModalAlterarSenha;

@@ -13,6 +13,7 @@ import { authToken } from "@/utils/config/authToken";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { useAppContext } from "@/utils/hooks/useContext";
+import { InputPassword } from "@/components/input-password";
 
 const Login = () => {
   const { state: usuario, dispatch: dispatchAppContext } = useAppContext();
@@ -82,13 +83,18 @@ const Login = () => {
           </Heading>
           <Flex direction={"column"} gap={"30px"}>
             <InputForm
+              onKeyDown={(e) => {
+                if (e.key === "Enter") loginSubmit();
+              }}
               type="email"
               placeholder="E-mail"
               onChange={(e) => setEmail(e.target.value)}
             />
             <Flex direction={"column"} gap={"5px"}>
-              <InputForm
-                type="password"
+              <InputPassword
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") loginSubmit();
+                }}
                 placeholder="Senha"
                 onChange={(e) => setSenha(e.target.value)}
               />

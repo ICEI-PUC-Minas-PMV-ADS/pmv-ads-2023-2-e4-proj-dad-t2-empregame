@@ -18,7 +18,7 @@ import React from "react";
 import { useRef } from "react";
 import { useCookies } from "react-cookie";
 
-const ExcluirConta = () => {
+const DialogExcluirConta = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const cancelRef = useRef<any>();
@@ -94,4 +94,4 @@ const ExcluirConta = () => {
   );
 };
 
-export default ExcluirConta;
+export default DialogExcluirConta;

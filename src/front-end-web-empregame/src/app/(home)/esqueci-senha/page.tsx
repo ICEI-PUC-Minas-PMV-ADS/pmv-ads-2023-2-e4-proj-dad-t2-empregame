@@ -19,6 +19,7 @@ import { ButtonPrimary } from "@/components/button-primary";
 import { api } from "@/utils/services/api";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
+import { InputPassword } from "@/components/input-password";
 
 const EsqueciSenha = () => {
   const toast = useToast();
@@ -154,8 +155,7 @@ const EsqueciSenha = () => {
                     <PinInputField bg={"white"} />
                   </PinInput>
                 </HStack>
-                <InputForm
-                  type="password"
+                <InputPassword
                   placeholder="Nova senha"
                   onChange={(e) => setSenha(e.target.value)}
                 />

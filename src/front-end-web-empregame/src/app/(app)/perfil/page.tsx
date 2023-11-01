@@ -14,10 +14,11 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import EditarInformacao from "./components/modalEditarInfo";
-import AlterarSenha from "./components/modalAlterarSenha";
-import ExcluirConta from "./components/dialogExcluirConta";
+
 import { useAppContext } from "@/utils/hooks/useContext";
+import ModalEditarInformacao from "./components/ModalEditarInfo";
+import ModalAlterarSenha from "./components/ModalAlterarSenha";
+import DialogExcluirConta from "./components/DialogExcluirConta";
 
 const Perfil = () => {
   const router = useRouter();
@@ -66,15 +67,15 @@ const Perfil = () => {
           {usuarioLogado?.id === usuario?.id && (
             <Flex gap={"40px"}>
               {usuario && (
-                <EditarInformacao
+                <ModalEditarInformacao
                   usuario={usuario}
                   refetch={() => {
                     refetch();
                   }}
                 />
               )}
-              {usuario && <AlterarSenha />}
-              {usuario && <ExcluirConta />}
+              {usuario && <ModalAlterarSenha />}
+              {usuario && <DialogExcluirConta />}
             </Flex>
           )}
         </Flex>

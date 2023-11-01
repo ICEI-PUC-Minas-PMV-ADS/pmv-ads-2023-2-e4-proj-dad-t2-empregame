@@ -5,7 +5,6 @@ import { useFetch } from "@/utils/hooks/useFetch";
 import {
   useToast,
   Flex,
-  Button,
   InputGroup,
   Input,
   InputRightElement,
@@ -14,9 +13,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import CardCandidato from "../components/CardCandidato";
 import CardVaga from "../components/CardVaga";
 import { useAppContext } from "@/utils/hooks/useContext";
+import ModalPublicarVaga from "../components/ModalPublicarVaga";
+import ModalChat from "../components/ModalChat";
 
 const MinhasVagas = () => {
   const {
@@ -76,23 +76,7 @@ const MinhasVagas = () => {
         gap={"20px"}
         alignItems={"center"}
       >
-        <Button
-          py={"30px"}
-          px={"30px"}
-          gap={"15px"}
-          borderWidth={"1px"}
-          borderColor={"#E1E1E1"}
-          rounded={"13px"}
-          bg={"white"}
-          width={"100%"}
-          color={"#6D3BBF"}
-          fontSize={"20px"}
-          fontWeight={"semibold"}
-          _hover={{ boxShadow: "lg" }}
-        >
-          <Image src={"../../icons/icon-publicarVaga.svg"} alt={"publicar"} />
-          Publicar Vaga{" "}
-        </Button>
+        <ModalPublicarVaga refetch={() => refetch()} />
         {vagasFiltradas?.map((vaga) => (
           <CardVaga
             key={vaga.id + vaga.nome}

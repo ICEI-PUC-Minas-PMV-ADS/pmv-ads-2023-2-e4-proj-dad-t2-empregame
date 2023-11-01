@@ -9,6 +9,8 @@ import { UsuarioHardSkill } from './entities/usuario-hardskill.entity';
 import { CreateUsuarioSoftskillDto } from './dto/create-usuario-softskill.dto';
 import { UsuarioSoftSkill } from './entities/usuario-softskill.entity';
 import { AppError } from '../../utils/app-error';
+import { UpdateUsuarioHardskillDto } from './dto/update-usuario-hardskill.dto';
+import { UpdateUsuarioSoftskillDto } from './dto/update-usuario-softskill.dto';
 
 @Injectable()
 export class UsuarioService {
@@ -134,8 +136,20 @@ export class UsuarioService {
   ): Promise<UsuarioHardSkill[]> {
     const hardskills = await this.prisma.usuarioHardskill.findMany({
       where: { id_usuario },
+      include: { hardskill: { select: { nome: true } } },
     });
     return hardskills;
+  }
+
+  async updateUsuarioHardskills(
+    id: number,
+    data: UpdateUsuarioHardskillDto,
+  ): Promise<void> {
+    await this.prisma.usuarioHardskill.update({
+      where: { id },
+      data,
+    });
+    return;
   }
 
   async removeUsuarioHardskills(id_usuario: number, id: number): Promise<void> {
@@ -153,8 +167,20 @@ export class UsuarioService {
   ): Promise<UsuarioSoftSkill[]> {
     const softskills = await this.prisma.usuarioSoftskill.findMany({
       where: { id_usuario },
+      include: { softskill: { select: { nome: true } } },
     });
     return softskills;
+  }
+
+  async updateUsuarioSoftkills(
+    id: number,
+    data: UpdateUsuarioSoftskillDto,
+  ): Promise<void> {
+    await this.prisma.usuarioSoftskill.update({
+      where: { id },
+      data,
+    });
+    return;
   }
 
   async removeUsuarioSoftskills(id_usuario: number, id: number): Promise<void> {

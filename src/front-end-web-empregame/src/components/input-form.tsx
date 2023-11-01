@@ -1,14 +1,20 @@
 import { Box, Input } from "@chakra-ui/react";
-import { ChangeEventHandler, HTMLInputTypeAttribute } from "react";
+import {
+  ChangeEventHandler,
+  HTMLInputTypeAttribute,
+  KeyboardEventHandler,
+} from "react";
 
 export const InputForm = (props: {
   placeholder: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   type: HTMLInputTypeAttribute;
   value?: string | number | readonly string[];
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }) => {
   return (
     <Input
+      onKeyDown={props.onKeyDown}
       placeholder={props.placeholder}
       onChange={props.onChange}
       py={"10px"}

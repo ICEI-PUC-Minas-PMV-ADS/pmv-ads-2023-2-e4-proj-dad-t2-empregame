@@ -26,6 +26,8 @@ import { CreateUsuarioSoftskillDto } from './dto/create-usuario-softskill.dto';
 import { UsuarioSoftSkill } from './entities/usuario-softskill.entity';
 import { Public } from '../../utils/decorators/is-public.decorator';
 import { AuthUser, IAuthUser } from '../../utils/decorators/auth.decorator';
+import { UpdateUsuarioHardskillDto } from './dto/update-usuario-hardskill.dto';
+import { UpdateUsuarioSoftskillDto } from './dto/update-usuario-softskill.dto';
 
 @Controller('usuarios')
 @ApiTags('usuarios')
@@ -88,6 +90,16 @@ export class UsuarioController {
   }
 
   @ApiBearerAuth()
+  @Patch('hardskills/:id')
+  async updateUsuarioHardskills(
+    @Param('id') id: string,
+    @Body() data: UpdateUsuarioHardskillDto,
+  ) {
+    await this.usuarioService.updateUsuarioHardskills(+id, data);
+    return;
+  }
+
+  @ApiBearerAuth()
   @Delete('hardskills/:id')
   async removeUsuarioHardskills(
     @AuthUser() user: IAuthUser,
@@ -115,6 +127,16 @@ export class UsuarioController {
   async findUsuarioSoftskills(@Param('id') id: string) {
     const softskills = await this.usuarioService.findAllUsuarioSoftskills(+id);
     return softskills;
+  }
+
+  @ApiBearerAuth()
+  @Patch('softskills/:id')
+  async updateUsuarioSoftskills(
+    @Param('id') id: string,
+    @Body() data: UpdateUsuarioSoftskillDto,
+  ) {
+    await this.usuarioService.updateUsuarioSoftkills(+id, data);
+    return;
   }
 
   @ApiBearerAuth()

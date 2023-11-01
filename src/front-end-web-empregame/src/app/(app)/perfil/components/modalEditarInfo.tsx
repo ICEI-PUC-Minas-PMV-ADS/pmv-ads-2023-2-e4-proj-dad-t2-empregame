@@ -1,8 +1,15 @@
 import { ButtonPrimary } from "@/components/button-primary";
 import { InputForm } from "@/components/input-form";
-import { IUsuario } from "@/interface/IUsuario";
+import {
+  IUsuario,
+  IUsuarioHardSkill,
+  IUsuarioSoftSkill,
+} from "@/interface/IUsuario";
+import { authToken } from "@/utils/config/authToken";
+import { useFetch } from "@/utils/hooks/useFetch";
 import { useMutation } from "@/utils/hooks/useMutation";
 import { numberToPhone } from "@/utils/regex/numberToPhone";
+import { api } from "@/utils/services/api";
 import {
   Button,
   Modal,
@@ -22,11 +29,15 @@ import {
   ModalFooter,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 
-const EditarInformacao = (props: {
+const ModalEditarInformacao = (props: {
   usuario: IUsuario;
   refetch: () => void;
 }) => {
+  const [cookies] = useCookies([authToken.nome]);
+  api.defaults.headers.common["Authorization"] =
+    "Bearer " + cookies[authToken.nome];
   const userAtual = props.usuario;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -48,47 +59,56 @@ const EditarInformacao = (props: {
     userAtual.linkedin
   );
   const [hardskill, setHardskill] = useState<string>("");
-  const [listHardskill, setListHardskill] = useState<
-    {
-      id: number;
-      nome: string;
-      nivel_experiencia: number;
-    }[]
-  >([]);
 
   const [softskill, setSoftskill] = useState<string>("");
-  const [listSoftskill, setListSoftskill] = useState<
-    {
-      id: number;
-      nome: string;
-      nivel_experiencia: number;
-    }[]
-  >([]);
+
+  const { data: hardskillsAtuais, refetch: refetchHardSkill } = useFetch<
+    IUsuarioHardSkill[]
+  >("/usuarios/hardskills/" + userAtual.id);
 
   const adicionarHardskill = (hardskill: {
-    id: number;
     nome: string;
     nivel_experiencia: number;
   }) => {
-    setListHardskill((old) => [...old, hardskill]);
+    api
+      .post("/hardskills", {
+        nome: hardskill.nome,
+      })
+      .then((data: { data: { id: number } }) => {
+        const idHardskill = data.data.id;
+        api
+          .post("/usuarios/hardskills", {
+            nivel_experiencia: hardskill.nivel_experiencia,
+            id_usuario: userAtual.id,
+            id_hardskill: idHardskill,
+          })
+          .then(() => refetchHardSkill());
+      });
   };
+
+  const { data: softskillsAtuais, refetch: refetchSoftSkill } = useFetch<
+    IUsuarioSoftSkill[]
+  >("/usuarios/softskills/" + userAtual.id);
 
   const adicionarSoftskill = (softskill: {
-    id: number;
     nome: string;
     nivel_experiencia: number;
   }) => {
-    setListSoftskill((old) => [...old, softskill]);
+    api
+      .post("/softskills", {
+        nome: softskill.nome,
+      })
+      .then((data: { data: { id: number } }) => {
+        const idSoftskill = data.data.id;
+        api
+          .post("/usuarios/softskills", {
+            nivel_experiencia: softskill.nivel_experiencia,
+            id_usuario: userAtual.id,
+            id_softskill: idSoftskill,
+          })
+          .then(() => refetchSoftSkill());
+      });
   };
-
-  const {
-    mutate: mutateAtualizarUsuarioHardskills,
-    isFetching: isFetchingAtualizarUsuarioHardskills,
-  } = useMutation<IUsuario>("/usuarios/hardskills", {
-    method: "PATCH",
-    onSuccess: ({ data }) => {},
-    onError: (err) => {},
-  });
 
   const {
     mutate: mutateAtualizarUsuario,
@@ -195,7 +215,6 @@ const EditarInformacao = (props: {
                         <Button
                           onClick={() =>
                             adicionarHardskill({
-                              id: Math.random() * 100,
                               nome: hardskill,
                               nivel_experiencia: 1,
                             })
@@ -216,88 +235,91 @@ const EditarInformacao = (props: {
                     </InputGroup>
 
                     <SimpleGrid columns={2} gap={"15px"}>
-                      {listHardskill.map((hardskill) => (
-                        <Flex
-                          direction={"column"}
-                          bg={"#6D3BBF"}
-                          rounded={"12px"}
-                          py={"12px"}
-                          px={"20px"}
-                          key={hardskill.id}
-                        >
-                          <Flex justifyContent={"space-between"}>
-                            <Text
-                              fontSize={"16px"}
-                              fontWeight={"medium"}
-                              color={"white"}
+                      {hardskillsAtuais &&
+                        hardskillsAtuais.map((hardskill) => {
+                          return (
+                            <Flex
+                              direction={"column"}
+                              bg={"#6D3BBF"}
+                              rounded={"12px"}
+                              py={"12px"}
+                              px={"20px"}
+                              key={hardskill.id}
                             >
-                              {hardskill.nome}
-                            </Text>
-                            <Button
-                              bg={"none"}
-                              _hover={{ bg: "#5A2DA4" }}
-                              position={"relative"}
-                              top={"-8px"}
-                              right={"-15px"}
-                              rounded={"full"}
-                              maxW={"10px"}
-                              onClick={() =>
-                                setListHardskill(
-                                  listHardskill.filter(
-                                    (e) => e.id !== hardskill.id
-                                  )
-                                )
-                              }
-                            >
-                              <Image
-                                src="/icons/icon-close.svg"
-                                minH={"10px"}
-                                minW={"10px"}
-                                alt="icone fechar"
-                              />
-                            </Button>
-                          </Flex>
-                          <Flex gap={"8px"}>
-                            {[...Array(5)].map((star, index) => {
-                              const currentRating = index + 1;
-                              const hardskillIndex = listHardskill.findIndex(
-                                (e) => e.id === hardskill.id
-                              );
-                              return (
-                                <label key={Math.random() * index}>
-                                  <input
-                                    type="radio"
-                                    name="rating"
-                                    value={hardskill.nivel_experiencia}
-                                    onClick={() => {
-                                      const tempHardskills = [...listHardskill];
-
-                                      tempHardskills[
-                                        hardskillIndex
-                                      ].nivel_experiencia = currentRating;
-
-                                      setListHardskill(tempHardskills);
-                                    }}
-                                    style={{
-                                      display: "none",
-                                      cursor: "pointer",
-                                    }}
+                              <Flex justifyContent={"space-between"}>
+                                <Text
+                                  fontSize={"16px"}
+                                  fontWeight={"medium"}
+                                  color={"white"}
+                                >
+                                  {hardskill.hardskill.nome}
+                                </Text>
+                                <Button
+                                  bg={"none"}
+                                  _hover={{ bg: "#5A2DA4" }}
+                                  position={"relative"}
+                                  top={"-8px"}
+                                  right={"-15px"}
+                                  rounded={"full"}
+                                  maxW={"10px"}
+                                  onClick={() => {
+                                    api
+                                      .delete(
+                                        "/usuarios/hardskills/" + hardskill.id
+                                      )
+                                      .then(() => refetchHardSkill());
+                                  }}
+                                >
+                                  <Image
+                                    src="/icons/icon-close.svg"
+                                    minH={"10px"}
+                                    minW={"10px"}
+                                    alt="icone fechar"
                                   />
-                                  <IconStar
-                                    fill={
-                                      currentRating <=
-                                      listHardskill[hardskillIndex]
-                                        .nivel_experiencia
-                                        ? "#FFB800"
-                                        : "white"
-                                    }
-                                  />
-                                </label>
-                              );
-                            })}
-                          </Flex>
-                        </Flex>
-                      ))}
+                                </Button>
+                              </Flex>
+                              <Flex gap={"8px"}>
+                                {[...Array(5)].map((star, index) => {
+                                  const currentRating = index + 1;
+
+                                  return (
+                                    <label key={Math.random() * index}>
+                                      <input
+                                        type="radio"
+                                        name="rating"
+                                        value={hardskill.nivel_experiencia}
+                                        onClick={() => {
+                                          api
+                                            .patch(
+                                              "/usuarios/hardskills/" +
+                                                hardskill.id,
+                                              {
+                                                nivel_experiencia:
+                                                  currentRating,
+                                              }
+                                            )
+                                            .then(() => refetchHardSkill());
+                                        }}
+                                        style={{
+                                          display: "none",
+                                          cursor: "pointer",
+                                        }}
+                                      />
+                                      <IconStar
+                                        fill={
+                                          currentRating <=
+                                          hardskill.nivel_experiencia
+                                            ? "#FFB800"
+                                            : "white"
+                                        }
+                                      />
+                                    </label>
+                                  );
+                                })}
+                              </Flex>
+                            </Flex>
+                          );
+                        })}
                     </SimpleGrid>
                   </Flex>
                   <Flex direction={"column"} gap={"12px"}>
@@ -311,7 +333,6 @@ const EditarInformacao = (props: {
                         <Button
                           onClick={() =>
                             adicionarSoftskill({
-                              id: Math.random() * 100,
                               nome: softskill,
                               nivel_experiencia: 1,
                             })
@@ -332,92 +353,90 @@ const EditarInformacao = (props: {
                     </InputGroup>
 
                     <SimpleGrid columns={2} gap={"15px"}>
-                      {listSoftskill.map((softskill) => {
-                        const softskillIndex = listSoftskill.findIndex(
-                          (e) => e.id === softskill.id
-                        );
-                        return (
-                          <Flex
-                            direction={"column"}
-                            bg={"#6D3BBF"}
-                            rounded={"12px"}
-                            py={"12px"}
-                            px={"20px"}
-                            key={softskill.id}
-                          >
-                            <Flex justifyContent={"space-between"}>
-                              <Text
-                                fontSize={"16px"}
-                                fontWeight={"medium"}
-                                color={"white"}
-                              >
-                                {softskill.nome}
-                              </Text>
-                              <Button
-                                bg={"none"}
-                                _hover={{ bg: "#5A2DA4" }}
-                                position={"relative"}
-                                top={"-8px"}
-                                right={"-15px"}
-                                rounded={"full"}
-                                maxW={"10px"}
-                                onClick={() =>
-                                  setListSoftskill(
-                                    listSoftskill.filter(
-                                      (e) => e.id !== softskill.id
-                                    )
-                                  )
-                                }
-                              >
-                                <Image
-                                  alt="icone fechar"
-                                  src="/icons/icon-close.svg"
-                                  minH={"10px"}
-                                  minW={"10px"}
-                                />
-                              </Button>
+                      {softskillsAtuais &&
+                        softskillsAtuais.map((softskill) => {
+                          return (
+                            <Flex
+                              direction={"column"}
+                              bg={"#6D3BBF"}
+                              rounded={"12px"}
+                              py={"12px"}
+                              px={"20px"}
+                              key={softskill.id}
+                            >
+                              <Flex justifyContent={"space-between"}>
+                                <Text
+                                  fontSize={"16px"}
+                                  fontWeight={"medium"}
+                                  color={"white"}
+                                >
+                                  {softskill.softskill.nome}
+                                </Text>
+                                <Button
+                                  bg={"none"}
+                                  _hover={{ bg: "#5A2DA4" }}
+                                  position={"relative"}
+                                  top={"-8px"}
+                                  right={"-15px"}
+                                  rounded={"full"}
+                                  maxW={"10px"}
+                                  onClick={() => {
+                                    api
+                                      .delete(
+                                        "/usuarios/softskills/" + softskill.id
+                                      )
+                                      .then(() => refetchSoftSkill());
+                                  }}
+                                >
+                                  <Image
+                                    alt="icone fechar"
+                                    src="/icons/icon-close.svg"
+                                    minH={"10px"}
+                                    minW={"10px"}
+                                  />
+                                </Button>
+                              </Flex>
+                              <Flex gap={"8px"}>
+                                {[...Array(5)].map((star, index) => {
+                                  const currentRating = index + 1;
+                                  return (
+                                    <label key={Math.random() * index}>
+                                      <input
+                                        type="radio"
+                                        name="rating"
+                                        value={softskill.nivel_experiencia}
+                                        onClick={() => {
+                                          api
+                                            .patch(
+                                              "/usuarios/softskills/" +
+                                                softskill.id,
+                                              {
+                                                nivel_experiencia:
+                                                  currentRating,
+                                              }
+                                            )
+                                            .then(() => refetchSoftSkill());
+                                        }}
+                                        style={{
+                                          display: "none",
+                                          cursor: "pointer",
+                                        }}
+                                      />
+                                      <IconStar
+                                        fill={
+                                          currentRating <=
+                                          softskill.nivel_experiencia
+                                            ? "#FFB800"
+                                            : "white"
+                                        }
+                                      />
+                                    </label>
+                                  );
+                                })}
+                              </Flex>
                             </Flex>
-                            <Flex gap={"8px"}>
-                              {[...Array(5)].map((star, index) => {
-                                const currentRating = index + 1;
-                                return (
-                                  <label key={Math.random() * index}>
-                                    <input
-                                      type="radio"
-                                      name="rating"
-                                      value={softskill.nivel_experiencia}
-                                      onClick={() => {
-                                        const tempSoftskills = [
-                                          ...listSoftskill,
-                                        ];
-
-                                        tempSoftskills[
-                                          softskillIndex
-                                        ].nivel_experiencia = currentRating;
-
-                                        setListSoftskill(tempSoftskills);
-                                      }}
-                                      style={{
-                                        display: "none",
-                                        cursor: "pointer",
-                                      }}
-                                    />
-                                    <IconStar
-                                      fill={
-                                        currentRating <=
-                                        listSoftskill[softskillIndex]
-                                          .nivel_experiencia
-                                          ? "#FFB800"
-                                          : "white"
-                                      }
-                                    />
-                                  </label>
-                                );
-                              })}
-                            </Flex>
-                          </Flex>
-                        );
-                      })}
+                          );
+                        })}
                     </SimpleGrid>
                   </Flex>
                 </>
@@ -439,7 +458,7 @@ const EditarInformacao = (props: {
   );
 };
 
-export default EditarInformacao;
+export default ModalEditarInformacao;
 
 const IconStar = (props: { fill: string }) => {
   return (

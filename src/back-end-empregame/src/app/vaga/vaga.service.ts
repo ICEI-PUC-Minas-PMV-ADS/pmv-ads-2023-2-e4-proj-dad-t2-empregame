@@ -15,9 +15,14 @@ import { VagaCandidato } from './entities/vaga-candidato.entity';
 export class VagaService {
   constructor(private prisma: PrismaService) {}
 
-  async create(id_usuario: number, data: CreateVagaDto): Promise<void> {
-    await this.prisma.vaga.create({ data: { id_usuario, ...data } });
-    return;
+  async create(
+    id_usuario: number,
+    data: CreateVagaDto,
+  ): Promise<{ id: number }> {
+    const vaga = await this.prisma.vaga.create({
+      data: { id_usuario, ...data },
+    });
+    return { id: vaga.id };
   }
 
   async search(
@@ -154,6 +159,7 @@ export class VagaService {
   async findAllVagaCandidatos(id_vaga: number): Promise<VagaCandidato[]> {
     const candidatosInteressados = await this.prisma.vagaCandidato.findMany({
       where: { id_vaga },
+      include: { usuario: { select: { nome: true } } },
     });
     return candidatosInteressados;
   }
