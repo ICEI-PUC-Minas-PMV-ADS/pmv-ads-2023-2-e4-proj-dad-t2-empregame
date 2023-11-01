@@ -2,7 +2,7 @@ import { Select } from "@chakra-ui/react";
 import { ChangeEventHandler } from "react";
 
 const InputSelect = (props: {
-  children: string | JSX.Element | JSX.Element[];
+  children: string | JSX.Element | JSX.Element[] | any;
   placeholder: string;
   onChange: ChangeEventHandler<HTMLSelectElement>;
 }) => {

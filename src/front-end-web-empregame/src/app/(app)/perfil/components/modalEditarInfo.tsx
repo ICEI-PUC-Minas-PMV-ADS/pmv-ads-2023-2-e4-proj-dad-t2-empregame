@@ -61,13 +61,6 @@ const ModalEditarInformacao = (props: {
   const [hardskill, setHardskill] = useState<string>("");
 
   const [softskill, setSoftskill] = useState<string>("");
-  const [listSoftskill, setListSoftskill] = useState<
-    {
-      id: number;
-      nome: string;
-      nivel_experiencia: number;
-    }[]
-  >([]);
 
   const { data: hardskillsAtuais, refetch: refetchHardSkill } = useFetch<
     IUsuarioHardSkill[]

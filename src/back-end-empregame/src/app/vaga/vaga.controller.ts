@@ -36,8 +36,8 @@ export class VagaController {
 
   @Post()
   async create(@AuthUser() user: IAuthUser, @Body() data: CreateVagaDto) {
-    await this.vagaService.create(user.usuario.id, data);
-    return;
+    const vaga = await this.vagaService.create(user.usuario.id, data);
+    return vaga;
   }
 
   @ApiBearerAuth()
@@ -144,7 +144,7 @@ export class VagaController {
   }
 
   @ApiBearerAuth()
-  @Get('match')
+  @Get('match/:id')
   @ApiOkResponse({
     type: VagaCandidato,
     isArray: true,
