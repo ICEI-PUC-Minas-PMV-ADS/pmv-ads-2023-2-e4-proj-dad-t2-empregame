@@ -113,6 +113,7 @@ export class VagaService {
   async findAllVagaHardskills(id_vaga: number): Promise<VagaHardSkill[]> {
     const hardskills = await this.prisma.vagaHardskill.findMany({
       where: { id_vaga },
+      include: { hardskill: { select: { nome: true } } },
     });
     return hardskills;
   }
@@ -132,6 +133,7 @@ export class VagaService {
   async findAllVagaSoftskills(id_vaga: number): Promise<VagaSoftSkill[]> {
     const softskills = await this.prisma.vagaSoftskill.findMany({
       where: { id_vaga },
+      include: { softskill: { select: { nome: true } } },
     });
     return softskills;
   }

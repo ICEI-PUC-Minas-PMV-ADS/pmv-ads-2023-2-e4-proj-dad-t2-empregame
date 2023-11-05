@@ -27,38 +27,71 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-const ModalEditarVaga = (props: { refetch: () => void }) => {
+const ModalEditarVaga = (props: {
+  vaga?: IVaga | null;
+  refetch: () => void;
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const [nomeVaga, setNomeVaga] = useState<string>("");
-  const [descricao, setDescricao] = useState<string>("");
-  const [beneficios, setBeneficios] = useState<string>("");
-  const [empresa, setEmpresa] = useState<string>("");
-  const [estadoEmpresa, setEstadoEmpresa] = useState<string>("");
-  const [cidadeEmpresa, setCidadeEmpresa] = useState<string>("");
-  const [salario, setSalario] = useState<string>("");
+  const [nomeVaga, setNomeVaga] = useState<string>(props.vaga?.nome || "");
+  const [descricao, setDescricao] = useState<string>(
+    props.vaga?.descricao || ""
+  );
+  const [beneficios, setBeneficios] = useState<string>(
+    props.vaga?.beneficios || ""
+  );
+  const [empresa, setEmpresa] = useState<string>(
+    props.vaga?.empresa_nome || ""
+  );
+  const [estadoEmpresa, setEstadoEmpresa] = useState<string>(
+    props.vaga?.empresa_estado || ""
+  );
+  const [cidadeEmpresa, setCidadeEmpresa] = useState<string>(
+    props.vaga?.empresa_cidade || ""
+  );
+  const [salario, setSalario] = useState<string>(props.vaga?.salario || "");
   const [hardskill, setHardskill] = useState<string>("");
-  const [listHardskill, setListHardskill] = useState<
-    {
-      id: number;
-      nome: string;
-    }[]
-  >([]);
 
   const [softskill, setSoftskill] = useState<string>("");
-  const [listSoftskill, setListSoftskill] = useState<
-    {
-      id: number;
-      nome: string;
-    }[]
-  >([]);
 
-  const adicionarHardskill = (hardskill: { id: number; nome: string }) => {
-    setListHardskill((old) => [...old, hardskill]);
+  const { data: hardskillsAtuais, refetch: refetchHardSkill } = useFetch<
+    IVagaHardSkill[]
+  >("/vagas/hardskills/" + props.vaga?.id);
+
+  const adicionarHardskill = (hardskill: { nome: string }) => {
+    api
+      .post("/hardskills", {
+        nome: hardskill.nome,
+      })
+      .then((data: { data: { id: number } }) => {
+        const idHardskill = data.data.id;
+        api
+          .post("/vagas/hardskills", {
+            id_vaga: props.vaga?.id,
+            id_hardskill: idHardskill,
+          })
+          .then(() => refetchHardSkill());
+      });
   };
 
-  const adicionarSoftskill = (softskill: { id: number; nome: string }) => {
-    setListSoftskill((old) => [...old, softskill]);
+  const { data: softskillsAtuais, refetch: refetchSoftSkill } = useFetch<
+    IVagaSoftSkill[]
+  >("/vagas/softskills/" + props.vaga?.id);
+
+  const adicionarSoftskill = (softskill: { nome: string }) => {
+    api
+      .post("/softskills", {
+        nome: softskill.nome,
+      })
+      .then((data: { data: { id: number } }) => {
+        const idSoftskill = data.data.id;
+        api
+          .post("/vagas/softskills", {
+            id_vaga: props.vaga?.id,
+            id_softskill: idSoftskill,
+          })
+          .then(() => refetchSoftSkill());
+      });
   };
 
   const { data: estados } = useFetch<
@@ -81,49 +114,12 @@ const ModalEditarVaga = (props: { refetch: () => void }) => {
     { enable: !!idEstado, itensRefresh: [idEstado] }
   );
 
-  const {
-    mutate: mutateCriarVagaHardSkill,
-    isFetching: isFetchingCriarVagaHardSkill,
-  } = useMutation<IVagaHardSkill>("/vagas/hardskills", { method: "POST" });
-
-  const {
-    mutate: mutateCriarVagaSoftSkill,
-    isFetching: isFetchingCriarVagaSoftSkill,
-  } = useMutation<IVagaSoftSkill>("/vagas/softskills", { method: "POST" });
-
-  const { mutate: mutateCriarVaga, isFetching: isFetchingCriarVaga } =
-    useMutation<IVaga, { id: number }>("/vagas", {
-      method: "POST",
-      onSuccess: async (data) => {
-        const idVaga = data.data.id;
-        await listHardskill.map((hardskill) => {
-          api
-            .post("/hardskills", {
-              nome: hardskill.nome,
-            })
-            .then((data: { data: { id: number } }) => {
-              const idHardskill = data.data.id;
-              mutateCriarVagaHardSkill({
-                id_vaga: idVaga,
-                id_hardskill: idHardskill,
-              });
-            });
-        });
-        await listSoftskill.map((softskill) => {
-          api
-            .post("/softskills", {
-              nome: softskill.nome,
-            })
-            .then((data: { data: { id: number } }) => {
-              const idSoftskill = data.data.id;
-              mutateCriarVagaSoftSkill({
-                id_vaga: idVaga,
-                id_softskill: idSoftskill,
-              });
-            });
-        });
+  const { mutate: mutateAtualizarVaga, isFetching: isFetchingAtualizarVaga } =
+    useMutation<IVaga>("/vagas/" + props.vaga?.id, {
+      method: "PATCH",
+      onSuccess: () => {
         props.refetch();
-        toast({ title: "Vaga publicada com sucesso!", status: "success" });
+        toast({ title: "Vaga atualizada com sucesso!", status: "success" });
         onClose();
       },
       onError: (err) => {
@@ -132,7 +128,7 @@ const ModalEditarVaga = (props: { refetch: () => void }) => {
     });
 
   const publicarVaga = () => {
-    mutateCriarVaga({
+    mutateAtualizarVaga({
       nome: nomeVaga,
       descricao: descricao,
       salario: salario,
@@ -188,22 +184,26 @@ const ModalEditarVaga = (props: { refetch: () => void }) => {
               <InputForm
                 type="text"
                 placeholder="Nome da Vaga *"
+                value={nomeVaga}
                 onChange={(e) => setNomeVaga(e.target.value)}
               />
               <Textarea
                 borderRadius={"14px"}
                 placeholder="Descrição *"
+                value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
               />
               <Textarea
                 borderRadius={"14px"}
                 placeholder="Benefícios"
+                value={beneficios}
                 onChange={(e) => setBeneficios(e.target.value)}
               />
               <SimpleGrid columns={2} spacingY={"16px"} spacingX={"30px"}>
                 <InputForm
                   type="text"
                   placeholder="Empresa *"
+                  value={empresa}
                   onChange={(e) => setEmpresa(e.target.value)}
                 />
                 <InputForm
@@ -214,6 +214,7 @@ const ModalEditarVaga = (props: { refetch: () => void }) => {
                 />
                 <InputSelect
                   placeholder="Estado *"
+                  value={estadoEmpresa}
                   onChange={(e) => setEstadoEmpresa(e.target.value)}
                 >
                   {estados &&
@@ -225,6 +226,7 @@ const ModalEditarVaga = (props: { refetch: () => void }) => {
                 </InputSelect>
                 <InputSelect
                   placeholder="Cidade *"
+                  value={cidadeEmpresa}
                   onChange={(e) => setCidadeEmpresa(e.target.value)}
                 >
                   {cidades &&
@@ -248,7 +250,6 @@ const ModalEditarVaga = (props: { refetch: () => void }) => {
                       <Button
                         onClick={() =>
                           adicionarHardskill({
-                            id: Math.random() * 100,
                             nome: hardskill,
                           })
                         }
@@ -268,43 +269,44 @@ const ModalEditarVaga = (props: { refetch: () => void }) => {
                   </InputGroup>
 
                   <SimpleGrid columns={2} gap={"15px"}>
-                    {listHardskill.map((hardskill) => (
-                      <Flex
-                        bg={"#6D3BBF"}
-                        rounded={"12px"}
-                        py={"12px"}
-                        px={"20px"}
-                        key={hardskill.id}
-                        justifyContent={"space-between"}
-                        alignItems={"center"}
-                      >
-                        <Text
-                          fontSize={"16px"}
-                          fontWeight={"medium"}
-                          color={"white"}
+                    {hardskillsAtuais &&
+                      hardskillsAtuais.map((hardskill) => (
+                        <Flex
+                          bg={"#6D3BBF"}
+                          rounded={"12px"}
+                          py={"12px"}
+                          px={"20px"}
+                          key={hardskill.id}
+                          justifyContent={"space-between"}
+                          alignItems={"center"}
                         >
-                          {hardskill.nome}
-                        </Text>
-                        <Button
-                          bg={"none"}
-                          _hover={{ bg: "#5A2DA4" }}
-                          right={"-5px"}
-                          rounded={"full"}
-                          onClick={() =>
-                            setListHardskill(
-                              listHardskill.filter((e) => e.id !== hardskill.id)
-                            )
-                          }
-                        >
-                          <Image
-                            src="../../icons/icon-close.svg"
-                            minH={"10px"}
-                            minW={"10px"}
-                            alt="icone fechar"
-                          />
-                        </Button>
-                      </Flex>
-                    ))}
+                          <Text
+                            fontSize={"16px"}
+                            fontWeight={"medium"}
+                            color={"white"}
+                          >
+                            {hardskill.hardskill?.nome}
+                          </Text>
+                          <Button
+                            bg={"none"}
+                            _hover={{ bg: "#5A2DA4" }}
+                            right={"-5px"}
+                            rounded={"full"}
+                            onClick={() =>
+                              api
+                                .delete("/vagas/hardskills/" + hardskill.id)
+                                .then(() => refetchHardSkill())
+                            }
+                          >
+                            <Image
+                              src="../../icons/icon-close.svg"
+                              minH={"10px"}
+                              minW={"10px"}
+                              alt="icone fechar"
+                            />
+                          </Button>
+                        </Flex>
+                      ))}
                   </SimpleGrid>
                 </Flex>
                 <Flex direction={"column"} gap={"12px"}>
@@ -318,7 +320,6 @@ const ModalEditarVaga = (props: { refetch: () => void }) => {
                       <Button
                         onClick={() =>
                           adicionarSoftskill({
-                            id: Math.random() * 100,
                             nome: softskill,
                           })
                         }
@@ -338,47 +339,46 @@ const ModalEditarVaga = (props: { refetch: () => void }) => {
                   </InputGroup>
 
                   <SimpleGrid columns={2} gap={"15px"}>
-                    {listSoftskill.map((softskill) => {
-                      return (
-                        <Flex
-                          bg={"#6D3BBF"}
-                          rounded={"12px"}
-                          py={"12px"}
-                          px={"20px"}
-                          key={softskill.id}
-                          justifyContent={"space-between"}
-                          alignItems={"center"}
-                        >
-                          <Text
-                            fontSize={"16px"}
-                            fontWeight={"medium"}
-                            color={"white"}
+                    {softskillsAtuais &&
+                      softskillsAtuais.map((softskill) => {
+                        return (
+                          <Flex
+                            bg={"#6D3BBF"}
+                            rounded={"12px"}
+                            py={"12px"}
+                            px={"20px"}
+                            key={softskill.id}
+                            justifyContent={"space-between"}
+                            alignItems={"center"}
                           >
-                            {softskill.nome}
-                          </Text>
-                          <Button
-                            bg={"none"}
-                            _hover={{ bg: "#5A2DA4" }}
-                            right={"-5px"}
-                            rounded={"full"}
-                            onClick={() =>
-                              setListSoftskill(
-                                listSoftskill.filter(
-                                  (e) => e.id !== softskill.id
-                                )
-                              )
-                            }
-                          >
-                            <Image
-                              alt="icone fechar"
-                              src="../../icons/icon-close.svg"
-                              minH={"10px"}
-                              minW={"10px"}
-                            />
-                          </Button>
-                        </Flex>
-                      );
-                    })}
+                            <Text
+                              fontSize={"16px"}
+                              fontWeight={"medium"}
+                              color={"white"}
+                            >
+                              {softskill.softskill?.nome}
+                            </Text>
+                            <Button
+                              bg={"none"}
+                              _hover={{ bg: "#5A2DA4" }}
+                              right={"-5px"}
+                              rounded={"full"}
+                              onClick={() =>
+                                api
+                                  .delete("/vagas/softskills/" + softskill.id)
+                                  .then(() => refetchSoftSkill())
+                              }
+                            >
+                              <Image
+                                alt="icone fechar"
+                                src="../../icons/icon-close.svg"
+                                minH={"10px"}
+                                minW={"10px"}
+                              />
+                            </Button>
+                          </Flex>
+                        );
+                      })}
                   </SimpleGrid>
                 </Flex>
               </>
@@ -388,9 +388,9 @@ const ModalEditarVaga = (props: { refetch: () => void }) => {
           <ModalFooter>
             <ButtonPrimary
               onClick={() => publicarVaga()}
-              buttonText="Publicar"
-              loadingText="Publicando"
-              isLoading={isFetchingCriarVaga}
+              buttonText="Salvar"
+              loadingText="Salvando"
+              isLoading={isFetchingAtualizarVaga}
             />
           </ModalFooter>
         </ModalContent>
