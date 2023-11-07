@@ -5,6 +5,7 @@ const InputSelect = (props: {
   children: string | JSX.Element | JSX.Element[] | any;
   placeholder: string;
   onChange: ChangeEventHandler<HTMLSelectElement>;
+  value?: string | number | readonly string[];
 }) => {
   return (
     <Select
@@ -17,6 +18,7 @@ const InputSelect = (props: {
       fontSize={"16px"}
       fontWeight={"medium"}
       focusBorderColor={"#5A2DA4"}
+      value={props.value}
     >
       {props.children}
     </Select>

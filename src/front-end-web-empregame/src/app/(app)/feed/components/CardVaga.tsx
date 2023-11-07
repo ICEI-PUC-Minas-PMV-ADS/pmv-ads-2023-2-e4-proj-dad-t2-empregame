@@ -28,19 +28,30 @@ const CardVaga = (props: { vaga?: IVaga | null; refetch: () => void }) => {
 
   const [isLike, setIsLike] = useState<boolean>(isMatch ? true : false);
 
-  const { mutate: mutateTirarLike, isFetching: isFetchingTirarLike } =
-    useMutation<void>("/vagas/match/" + isMatch?.id, {
+  const { mutate: mutateTirarLike } = useMutation<void>(
+    "/vagas/match/" + isMatch?.id,
+    {
       method: "DELETE",
       onSuccess: () => {
         props.refetch();
       },
-    });
+    }
+  );
 
-  const { mutate: mutateAddLike, isFetching: isFetchingAddLike } = useMutation<{
+  const { mutate: mutateAddLike } = useMutation<{
     id_usuario?: number | null;
     id_vaga?: number | null;
   }>("/vagas/match", {
     method: "POST",
+    onSuccess: () => {
+      props.refetch();
+    },
+  });
+
+  const { mutate: mutateAtualizarSituacaoVaga } = useMutation<{
+    situacao: IVaga["situacao"];
+  }>("/vagas/" + props.vaga?.id, {
+    method: "PATCH",
     onSuccess: () => {
       props.refetch();
     },
@@ -227,14 +238,29 @@ const CardVaga = (props: { vaga?: IVaga | null; refetch: () => void }) => {
             qtdCandidatosInteressados={props.vaga?.vaga_candidato?.length}
           />
           <Flex gap={"25px"}>
-            <ModalEditarVaga refetch={() => {}} />
+            <ModalEditarVaga
+              vaga={props.vaga}
+              refetch={() => {
+                props.refetch();
+              }}
+            />
             <Button
-              onClick={() => {}}
+              onClick={() => {
+                if (props.vaga?.situacao === "ATIVO") {
+                  mutateAtualizarSituacaoVaga({
+                    situacao: "INATIVO",
+                  });
+                } else {
+                  mutateAtualizarSituacaoVaga({
+                    situacao: "ATIVO",
+                  });
+                }
+              }}
               gap={"10px"}
-              color={"#6D3BBF"}
+              color={props.vaga?.situacao === "ATIVO" ? "#6D3BBF" : "white"}
               fontSize={"18px"}
               fontWeight={"semibold"}
-              bg={"white"}
+              bg={props.vaga?.situacao === "ATIVO" ? "white" : "#6D3BBF"}
               borderColor={"#6D3BBF"}
               borderWidth={"2px"}
               rounded={"full"}
@@ -271,7 +297,7 @@ const CardVaga = (props: { vaga?: IVaga | null; refetch: () => void }) => {
         </Text>
         <Text color={"#868686"} fontSize={"13px"} fontWeight={"normal"}>
           {dayjs(props.vaga?.created_at).format("DD/MM/YYYY")} às{" "}
-          {dayjs(props.vaga?.created_at).format("h:mm")}hrs
+          {dayjs(props.vaga?.created_at).format("HH:mm")}
         </Text>
       </Flex>
     </Flex>

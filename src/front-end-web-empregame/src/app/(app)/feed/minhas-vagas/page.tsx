@@ -30,7 +30,7 @@ const MinhasVagas = () => {
   const [softskill, setSoftskill] = useState<string | null>(null);
 
   const { data: vagas, refetch } = useFetch<IVaga[]>("/vagas", {
-    params: { pesquisa, hardskill, softskill, situacao: "ATIVO" },
+    params: { pesquisa, hardskill, softskill },
     itensRefresh: [pesquisa, hardskill, softskill],
     onError: (err) => {
       if (err.response?.data)
