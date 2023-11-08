@@ -11,7 +11,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import dayjs from "dayjs";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ModalCandidatosInteressados from "./ModalCandidatosInteressados";
 import ModalChat from "./ModalChat";
@@ -227,14 +227,13 @@ const CardVaga = (props: { vaga?: IVaga | null; refetch: () => void }) => {
             />
             Me Interessei
           </Button>
-          {isMatch?.match === true && <ModalChat />}
+          {isMatch?.match === true && <ModalChat match={isMatch} />}
         </Flex>
       )}
       {usuario?.tipo === "RECRUTADOR" && patch !== "/feed" && (
         <>
           <ModalCandidatosInteressados
             idVaga={props.vaga?.id}
-            refetch={() => {}}
             qtdCandidatosInteressados={props.vaga?.vaga_candidato?.length}
           />
           <Flex gap={"25px"}>
