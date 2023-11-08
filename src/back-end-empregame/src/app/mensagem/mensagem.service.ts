@@ -18,11 +18,11 @@ export class MensagemService {
     return mensagens;
   }
 
-  async findOne(id: number): Promise<Mensagem> {
-    const mensagem = await this.prisma.mensagem.findFirst({
-      where: { id },
+  async findAllMensagemMatch(id: number): Promise<Mensagem[]> {
+    const mensagens = await this.prisma.mensagem.findMany({
+      where: { id_vaga_candidato: id },
     });
-    return mensagem;
+    return mensagens;
   }
 
   async update(id: number, data: UpdateMensagemDto): Promise<void> {

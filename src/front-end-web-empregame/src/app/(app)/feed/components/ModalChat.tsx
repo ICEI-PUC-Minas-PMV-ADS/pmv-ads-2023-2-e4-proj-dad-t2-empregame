@@ -1,6 +1,9 @@
 import { IMatch } from "@/interface/IMatch";
+import { IMensagem } from "@/interface/IMensagem";
 import { IVaga, IVagaCandidato } from "@/interface/IVaga";
 import { useAppContext } from "@/utils/hooks/useContext";
+import { useFetch } from "@/utils/hooks/useFetch";
+import { useMutation } from "@/utils/hooks/useMutation";
 import {
   Box,
   Button,
@@ -16,14 +19,37 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 const ModalChat = (props: { match?: IVagaCandidato }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const {
     state: { usuario },
   } = useAppContext();
+  const toast = useToast();
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [newMensagem, setNewMensagem] = useState<string>("");
+
+  const { data: mensagens, refetch } = useFetch<IMensagem[]>(
+    "/mensagens/" + props.match?.id,
+    { interval: 1000, enable: isOpen }
+  );
+
+  const { mutate: mutateNovaMensagem, isFetching: isFetchingNovaMensagem } =
+    useMutation<IMensagem>("/mensagens", {
+      method: "POST",
+      onSuccess: () => {
+        refetch();
+        setNewMensagem("");
+      },
+      onError: (err) => {
+        toast({ title: err.message, status: "error" });
+      },
+    });
+
   return (
     <>
       <Button
@@ -51,7 +77,7 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
         Chat
         <IconChat />
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size={"3xl"}>
+      <Modal isOpen={isOpen} onClose={onClose} size={"2xl"}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader display={"flex"} gap={"15px"} color={"#5A2DA4"}>
@@ -81,25 +107,76 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
             </Box>
           </ModalHeader>
           <ModalBody paddingBottom={"20px"}>
-            <Flex gap={"10px"}>
-              <Input
-                rounded={"full"}
-                border={"1px"}
-                borderColor={"#2E2E2E"}
-                placeholder={"Digite aqui"}
-              ></Input>
-              <Button
-                rounded={"full"}
-                bg={"#5A2DA4"}
-                py={"10px"}
-                px={"25px"}
-                color={"white"}
-                fontSize={"16px"}
-                fontWeight={"regular"}
-                _hover={{ boxShadow: "lg" }}
+            <Flex direction={"column"} gap={"30px"}>
+              <Flex
+                direction={"column"}
+                gap={"10px"}
+                overflow={"auto"}
+                maxH={"600px"}
               >
-                Enviar
-              </Button>
+                {mensagens?.map((msg) => (
+                  <Box
+                    maxW={"80%"}
+                    alignSelf={
+                      msg.id_usuario === usuario?.id ? "flex-end" : "flex-start"
+                    }
+                    bg={msg.id_usuario === usuario?.id ? "#6D3BBF" : "#F1E9FF"}
+                    px={"15px"}
+                    py={"10px"}
+                    color={msg.id_usuario === usuario?.id ? "white" : "#2E2E2E"}
+                    fontSize={"14px"}
+                    fontWeight={"medium"}
+                    rounded={
+                      msg.id_usuario === usuario?.id
+                        ? "11px 11px 0px 11px"
+                        : "11px 11px 11px 0px"
+                    }
+                    textAlign={
+                      msg.id_usuario === usuario?.id ? "right" : "left"
+                    }
+                  >
+                    {msg.conteudo}
+                  </Box>
+                ))}
+              </Flex>
+
+              <Flex gap={"10px"}>
+                <Input
+                  rounded={"full"}
+                  border={"1px"}
+                  borderColor={"#2E2E2E"}
+                  placeholder={"Digite aqui"}
+                  onChange={(e) => setNewMensagem(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      mutateNovaMensagem({
+                        conteudo: newMensagem,
+                        id_usuario: usuario?.id,
+                        id_vaga_candidato: props.match?.id,
+                      });
+                    }
+                  }}
+                ></Input>
+                <Button
+                  rounded={"full"}
+                  bg={"#5A2DA4"}
+                  py={"10px"}
+                  px={"25px"}
+                  color={"white"}
+                  fontSize={"16px"}
+                  fontWeight={"regular"}
+                  _hover={{ boxShadow: "lg" }}
+                  onClick={() => {
+                    mutateNovaMensagem({
+                      conteudo: newMensagem,
+                      id_usuario: usuario?.id,
+                      id_vaga_candidato: props.match?.id,
+                    });
+                  }}
+                >
+                  Enviar
+                </Button>
+              </Flex>
             </Flex>
           </ModalBody>
           <ModalCloseButton />
