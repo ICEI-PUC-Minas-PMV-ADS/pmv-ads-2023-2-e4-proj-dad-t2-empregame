@@ -1,9 +1,13 @@
+import { IMatch } from "@/interface/IMatch";
+import { IVaga, IVagaCandidato } from "@/interface/IVaga";
+import { useAppContext } from "@/utils/hooks/useContext";
 import {
   Box,
   Button,
   Flex,
   Image,
   Input,
+  Link,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,7 +18,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-const ModalChat = () => {
+const ModalChat = (props: { match?: IVagaCandidato }) => {
+  const {
+    state: { usuario },
+  } = useAppContext();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -50,10 +58,25 @@ const ModalChat = () => {
             <Image src={"../../icons/icon-chat.svg"} alt="icone chat" />
             <Box>
               <Text color={"#5A2DA4"} fontWeight={"bold"} fontSize={"20px"}>
-                Vaga de Dev FrontEnd React Junior
+                {props.match?.vaga?.nome}
               </Text>
               <Text color={"#606060"} fontWeight={"regular"} fontSize={"16px"}>
-                Conversando com Thiago Terra
+                Conversando com{" "}
+                {usuario?.id === props.match?.id_usuario ? (
+                  <Link
+                    href={"/perfil?id=" + props.match?.vaga?.usuario.id}
+                    target="_blank"
+                  >
+                    {props.match?.vaga?.usuario.nome}
+                  </Link>
+                ) : (
+                  <Link
+                    href={"/perfil?id=" + props.match?.usuario?.id}
+                    target="_blank"
+                  >
+                    {props.match?.usuario?.nome}
+                  </Link>
+                )}
               </Text>
             </Box>
           </ModalHeader>

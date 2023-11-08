@@ -161,7 +161,12 @@ export class VagaService {
   async findAllVagaCandidatos(id_vaga: number): Promise<VagaCandidato[]> {
     const candidatosInteressados = await this.prisma.vagaCandidato.findMany({
       where: { id_vaga },
-      include: { usuario: { select: { nome: true } } },
+      include: {
+        usuario: { select: { nome: true, id: true } },
+        vaga: {
+          select: { nome: true, usuario: { select: { nome: true, id: true } } },
+        },
+      },
     });
     return candidatosInteressados;
   }

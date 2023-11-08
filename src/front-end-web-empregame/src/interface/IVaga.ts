@@ -46,5 +46,15 @@ export interface IVagaCandidato {
   match: boolean;
   id_usuario: number;
   id_vaga: number;
-  usuario?: { nome: string };
+  usuario?: {
+    nome: string;
+    id: number;
+  };
+  vaga?: {
+    nome: string;
+    usuario: {
+      nome: string;
+      id: number;
+    };
+  };
 }
