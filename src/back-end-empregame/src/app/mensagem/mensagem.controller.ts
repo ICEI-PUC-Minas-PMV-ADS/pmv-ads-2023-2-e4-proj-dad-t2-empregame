@@ -34,8 +34,8 @@ export class MensagemController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    const mensagem = await this.mensagemService.findOne(+id);
-    return mensagem;
+    const mensagens = await this.mensagemService.findAllMensagemMatch(+id);
+    return mensagens;
   }
 
   @Patch(':id')

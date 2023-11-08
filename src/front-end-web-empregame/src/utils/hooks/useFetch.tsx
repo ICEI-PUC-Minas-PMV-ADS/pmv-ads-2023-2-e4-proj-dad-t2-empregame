@@ -16,6 +16,7 @@ export function useFetch<T = unknown>(
     itensRefresh?: any[]; // itens para recarregar a consulta
     enable?: boolean; // caso esteja TRUE o useEffect será executado, caso contrario ele não será executado, usad para definir se uma consulta está pronta para ser executada
     delay?: number; // tempo de delay para executar a requisição
+    interval?: number;
     onSuccess?: (data: { res: AxiosResponse<T>; data: T }) => void;
     onError?: (
       error: AxiosError<
@@ -93,6 +94,14 @@ export function useFetch<T = unknown>(
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, refetchUseEffect());
+
+  useEffect(() => {
+    if (options?.interval) {
+      let interval = setInterval(() => refetch(), options.interval);
+      //destroy interval on unmount
+      return () => clearInterval(interval);
+    }
+  });
 
   return {
     data,
