@@ -1,10 +1,5 @@
 import { Input } from "native-base";
-import { ChangeEventHandler } from "react";
-import {
-  KeyboardTypeOptions,
-  NativeSyntheticEvent,
-  TextInputChangeEventData,
-} from "react-native";
+import { KeyboardTypeOptions } from "react-native";
 
 export const InputForm = (props: {
   placeholder: string;

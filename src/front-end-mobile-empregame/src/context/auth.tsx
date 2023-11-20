@@ -16,7 +16,6 @@ interface IAuthContext {
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [user, setUser] = useState<IUsuario | null>(null);
 
@@ -68,7 +67,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }>;
           };
         }) => {
-          console.log(err.response.data.message);
           Toast.show({
             type: "error",
             text1: err.response.data.message,
@@ -77,12 +75,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
       );
     setIsLoading(false);
-    return;
   }
 
   async function deslogarSubmit() {
     setUser(null);
-    return;
+    await AsyncStorage.removeItem("@RNAuth:user");
+    await AsyncStorage.removeItem("@RNAuth:token");
   }
 
   return (

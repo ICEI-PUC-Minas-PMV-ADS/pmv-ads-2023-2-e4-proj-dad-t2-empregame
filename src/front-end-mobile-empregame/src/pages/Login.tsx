@@ -1,8 +1,5 @@
-import { useContext, useState } from "react";
-import { api } from "../utils/services/api";
-import { IUsuario } from "../interface/IUsuario";
-import { AxiosError } from "axios";
-import { Flex, VStack, View } from "native-base";
+import { useState } from "react";
+import { Button, Flex, Text, VStack, View } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import LogoEmpregame from "../components/logo";
 import { InputForm } from "../components/input-form";
@@ -10,7 +7,7 @@ import { InputPassword } from "../components/input-password";
 import { ButtonPrimary } from "../components/button-primary";
 import { useAuth } from "../context/auth";
 
-export const Login = () => {
+export const Login = ({ navigation }: any) => {
   const { loginSubmit } = useAuth();
 
   const [email, setEmail] = useState<string>("");
@@ -32,7 +29,7 @@ export const Login = () => {
         }}
       />
       <Flex
-        flex={6}
+        flex={4}
         padding={"35px"}
         justifyContent={"center"}
         alignItems={"center"}
@@ -48,16 +45,40 @@ export const Login = () => {
             setEmail(e);
           }}
         />
-        <InputPassword
-          placeholder="Senha"
-          onChange={(e) => {
-            setSenha(e);
-          }}
-        />
+        <VStack>
+          <InputPassword
+            placeholder="Senha"
+            onChange={(e) => {
+              setSenha(e);
+            }}
+          />
+          <Button
+            variant={"link"}
+            alignSelf={"flex-end"}
+            onPress={() => {
+              navigation.navigate("Esqueci a Senha");
+            }}
+          >
+            <Text fontFamily={"Outfit-600"} fontSize={"14px"} color={"#DFC3FD"}>
+              Esqueci a Senha
+            </Text>
+          </Button>
+        </VStack>
+
         <ButtonPrimary
           buttonText="Acessar"
           onPress={() => loginSubmit(email, senha)}
         />
+        <Button
+          variant={"link"}
+          onPress={() => {
+            navigation.navigate("Cadastro");
+          }}
+        >
+          <Text fontFamily={"Outfit-600"} fontSize={"18px"} color={"white"}>
+            Cadastre-se agora
+          </Text>
+        </Button>
       </VStack>
     </View>
   );

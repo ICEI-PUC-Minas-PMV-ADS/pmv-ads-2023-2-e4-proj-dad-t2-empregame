@@ -8,7 +8,7 @@ export const InputPassword = (props: {
   onChange: (text: string) => void | undefined;
   value?: string;
 }) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const handleClick = () => setShow(!show);
   return (
     <Input

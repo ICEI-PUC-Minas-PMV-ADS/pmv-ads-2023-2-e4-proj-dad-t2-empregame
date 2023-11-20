@@ -116,7 +116,7 @@ const Login = () => {
                 loadingText="Acessando"
               />
               <Link
-                href={""}
+                href={"/cadastro"}
                 fontSize={"18px"}
                 color={"white"}
                 fontWeight={"semibold"}
