@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { IUsuario } from "../interface/IUsuario";
 import { AxiosError } from "axios";
 import { api } from "../utils/services/api";
-import { Spinner, View, useToast } from "native-base";
+import { Spinner, View } from "native-base";
 import Toast from "react-native-toast-message";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

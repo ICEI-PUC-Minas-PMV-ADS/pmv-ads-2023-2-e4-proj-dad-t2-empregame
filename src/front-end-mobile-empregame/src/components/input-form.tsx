@@ -7,6 +7,7 @@ export const InputForm = (props: {
   type: "password" | "text" | undefined;
   value?: string | undefined;
   keyboardType?: KeyboardTypeOptions | undefined;
+  InputRightElement?: JSX.Element | JSX.Element[] | undefined;
 }) => {
   return (
     <Input
@@ -24,6 +25,7 @@ export const InputForm = (props: {
       type={props.type}
       value={props.value}
       keyboardType={props.keyboardType}
+      InputRightElement={props.InputRightElement}
     />
   );
 };
