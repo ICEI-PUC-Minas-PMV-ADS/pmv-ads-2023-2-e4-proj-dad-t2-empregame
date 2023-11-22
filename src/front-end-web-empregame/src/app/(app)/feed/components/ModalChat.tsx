@@ -1,9 +1,9 @@
-import { IMatch } from "@/interface/IMatch";
-import { IMensagem } from "@/interface/IMensagem";
-import { IVaga, IVagaCandidato } from "@/interface/IVaga";
-import { useAppContext } from "@/utils/hooks/useContext";
-import { useFetch } from "@/utils/hooks/useFetch";
-import { useMutation } from "@/utils/hooks/useMutation";
+import { IMatch } from '@/interface/IMatch'
+import { IMensagem } from '@/interface/IMensagem'
+import { IVaga, IVagaCandidato } from '@/interface/IVaga'
+import { useAppContext } from '@/utils/hooks/useContext'
+import { useFetch } from '@/utils/hooks/useFetch'
+import { useMutation } from '@/utils/hooks/useMutation'
 import {
   Box,
   Button,
@@ -19,85 +19,85 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
-  useToast,
-} from "@chakra-ui/react";
-import { useState } from "react";
+  useToast
+} from '@chakra-ui/react'
+import { useState } from 'react'
 
 const ModalChat = (props: { match?: IVagaCandidato }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const {
-    state: { usuario },
-  } = useAppContext();
-  const toast = useToast();
+    state: { usuario }
+  } = useAppContext()
+  const toast = useToast()
 
-  const [newMensagem, setNewMensagem] = useState<string>("");
+  const [newMensagem, setNewMensagem] = useState<string>('')
 
   const { data: mensagens, refetch } = useFetch<IMensagem[]>(
-    "/mensagens/" + props.match?.id,
+    '/mensagens/' + props.match?.id,
     { interval: 1000, enable: isOpen }
-  );
+  )
 
   const { mutate: mutateNovaMensagem, isFetching: isFetchingNovaMensagem } =
-    useMutation<IMensagem>("/mensagens", {
-      method: "POST",
+    useMutation<IMensagem>('/mensagens', {
+      method: 'POST',
       onSuccess: () => {
-        refetch();
-        setNewMensagem("");
+        refetch()
+        setNewMensagem('')
       },
       onError: (err) => {
-        toast({ title: err.message, status: "error" });
-      },
-    });
+        toast({ title: err.message, status: 'error' })
+      }
+    })
 
   return (
     <>
       <Button
         onClick={onOpen}
-        gap={"10px"}
-        color={"#6D3BBF"}
-        fontSize={"18px"}
-        fontWeight={"semibold"}
-        bg={"white"}
-        borderColor={"#6D3BBF"}
-        borderWidth={"2px"}
-        rounded={"full"}
-        textAlign={"center"}
-        py={"10px"}
-        px={"25px"}
-        w={"full"}
+        gap={'10px'}
+        color={'#6D3BBF'}
+        fontSize={'18px'}
+        fontWeight={'semibold'}
+        bg={'white'}
+        borderColor={'#6D3BBF'}
+        borderWidth={'2px'}
+        rounded={'full'}
+        textAlign={'center'}
+        py={'10px'}
+        px={'25px'}
+        w={'full'}
         _hover={{
-          bg: "#5A2DA4",
-          transition: "ease-in",
-          boxShadow: "lg",
-          color: "white",
-          borderColor: "#5A2DA4",
+          bg: '#5A2DA4',
+          transition: 'ease-in',
+          boxShadow: 'lg',
+          color: 'white',
+          borderColor: '#5A2DA4'
         }}
       >
         Chat
         <IconChat />
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size={"2xl"}>
+      <Modal isOpen={isOpen} onClose={onClose} size={'2xl'}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader display={"flex"} gap={"15px"} color={"#5A2DA4"}>
-            <Image src={"../../icons/icon-chat.svg"} alt="icone chat" />
+          <ModalHeader display={'flex'} gap={'15px'} color={'#5A2DA4'}>
+            <Image src={'../../icons/icon-chat.svg'} alt="icone chat" />
             <Box>
-              <Text color={"#5A2DA4"} fontWeight={"bold"} fontSize={"20px"}>
+              <Text color={'#5A2DA4'} fontWeight={'bold'} fontSize={'20px'}>
                 {props.match?.vaga?.nome}
               </Text>
-              <Text color={"#606060"} fontWeight={"regular"} fontSize={"16px"}>
-                Conversando com{" "}
+              <Text color={'#606060'} fontWeight={'regular'} fontSize={'16px'}>
+                Conversando com{' '}
                 {usuario?.id === props.match?.id_usuario ? (
                   <Link
-                    href={"/perfil?id=" + props.match?.vaga?.usuario.id}
+                    href={'/perfil?id=' + props.match?.vaga?.usuario.id}
                     target="_blank"
                   >
                     {props.match?.vaga?.usuario.nome}
                   </Link>
                 ) : (
                   <Link
-                    href={"/perfil?id=" + props.match?.usuario?.id}
+                    href={'/perfil?id=' + props.match?.usuario?.id}
                     target="_blank"
                   >
                     {props.match?.usuario?.nome}
@@ -106,33 +106,34 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
               </Text>
             </Box>
           </ModalHeader>
-          <ModalBody paddingBottom={"20px"}>
-            <Flex direction={"column"} gap={"30px"}>
+          <ModalBody paddingBottom={'20px'}>
+            <Flex direction={'column'} gap={'30px'}>
               <Flex
-                direction={"column"}
-                gap={"10px"}
-                overflow={"auto"}
-                maxH={"600px"}
+                direction={'column'}
+                gap={'10px'}
+                overflow={'auto'}
+                maxH={'600px'}
               >
                 {mensagens?.map((msg) => (
                   <Box
-                    maxW={"80%"}
+                    key={msg.id}
+                    maxW={'80%'}
                     alignSelf={
-                      msg.id_usuario === usuario?.id ? "flex-end" : "flex-start"
+                      msg.id_usuario === usuario?.id ? 'flex-end' : 'flex-start'
                     }
-                    bg={msg.id_usuario === usuario?.id ? "#6D3BBF" : "#F1E9FF"}
-                    px={"15px"}
-                    py={"10px"}
-                    color={msg.id_usuario === usuario?.id ? "white" : "#2E2E2E"}
-                    fontSize={"14px"}
-                    fontWeight={"medium"}
+                    bg={msg.id_usuario === usuario?.id ? '#6D3BBF' : '#F1E9FF'}
+                    px={'15px'}
+                    py={'10px'}
+                    color={msg.id_usuario === usuario?.id ? 'white' : '#2E2E2E'}
+                    fontSize={'14px'}
+                    fontWeight={'medium'}
                     rounded={
                       msg.id_usuario === usuario?.id
-                        ? "11px 11px 0px 11px"
-                        : "11px 11px 11px 0px"
+                        ? '11px 11px 0px 11px'
+                        : '11px 11px 11px 0px'
                     }
                     textAlign={
-                      msg.id_usuario === usuario?.id ? "right" : "left"
+                      msg.id_usuario === usuario?.id ? 'right' : 'left'
                     }
                   >
                     {msg.conteudo}
@@ -140,38 +141,38 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
                 ))}
               </Flex>
 
-              <Flex gap={"10px"}>
+              <Flex gap={'10px'}>
                 <Input
-                  rounded={"full"}
-                  border={"1px"}
-                  borderColor={"#2E2E2E"}
-                  placeholder={"Digite aqui"}
+                  rounded={'full'}
+                  border={'1px'}
+                  borderColor={'#2E2E2E'}
+                  placeholder={'Digite aqui'}
                   onChange={(e) => setNewMensagem(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") {
+                    if (e.key === 'Enter') {
                       mutateNovaMensagem({
                         conteudo: newMensagem,
                         id_usuario: usuario?.id,
-                        id_vaga_candidato: props.match?.id,
-                      });
+                        id_vaga_candidato: props.match?.id
+                      })
                     }
                   }}
                 ></Input>
                 <Button
-                  rounded={"full"}
-                  bg={"#5A2DA4"}
-                  py={"10px"}
-                  px={"25px"}
-                  color={"white"}
-                  fontSize={"16px"}
-                  fontWeight={"regular"}
-                  _hover={{ boxShadow: "lg" }}
+                  rounded={'full'}
+                  bg={'#5A2DA4'}
+                  py={'10px'}
+                  px={'25px'}
+                  color={'white'}
+                  fontSize={'16px'}
+                  fontWeight={'regular'}
+                  _hover={{ boxShadow: 'lg' }}
                   onClick={() => {
                     mutateNovaMensagem({
                       conteudo: newMensagem,
                       id_usuario: usuario?.id,
-                      id_vaga_candidato: props.match?.id,
-                    });
+                      id_vaga_candidato: props.match?.id
+                    })
                   }}
                 >
                   Enviar
@@ -183,10 +184,10 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
         </ModalContent>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default ModalChat;
+export default ModalChat
 
 const IconChat = () => {
   return (
@@ -195,7 +196,7 @@ const IconChat = () => {
       width="19"
       height="19"
       viewBox="0 0 19 19"
-      style={{ minWidth: "19px" }}
+      style={{ minWidth: '19px' }}
       fill="none"
     >
       <g clipPath="url(#clip0_34_538)">
@@ -215,5 +216,5 @@ const IconChat = () => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
