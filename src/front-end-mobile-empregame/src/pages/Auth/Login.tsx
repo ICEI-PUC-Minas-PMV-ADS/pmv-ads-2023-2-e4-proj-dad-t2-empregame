@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Button, Flex, Text, VStack, View } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
-import LogoEmpregame from "../components/logo";
-import { InputForm } from "../components/input-form";
-import { InputPassword } from "../components/input-password";
-import { ButtonPrimary } from "../components/button-primary";
-import { useAuth } from "../context/auth";
+import { InputForm } from "../../components/input-form";
+import { InputPassword } from "../../components/input-password";
+import { ButtonPrimary } from "../../components/button-primary";
+import { useAuth } from "../../context/auth";
+import { LogoEmpregame } from "../../components/logo";
 
 export const Login = ({ navigation }: any) => {
   const { loginSubmit } = useAuth();

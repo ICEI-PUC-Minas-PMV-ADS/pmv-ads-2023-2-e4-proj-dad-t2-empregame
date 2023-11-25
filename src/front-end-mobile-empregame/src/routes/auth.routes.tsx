@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Login } from "../pages/Login";
-import { Cadastro } from "../pages/Cadastro";
-import { EsqueciSenha } from "../pages/EsqueciSenha";
+import { Login } from "../pages/Auth/Login";
+import { Cadastro } from "../pages/Auth/Cadastro";
+import { EsqueciSenha } from "../pages/Auth/EsqueciSenha";
 
 const AuthStack = createNativeStackNavigator();
 const AuthRoutes = () => (

@@ -1,28 +1,31 @@
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Box,
+  Button,
   Divider,
   Flex,
   Pressable,
-  Radio,
   ScrollView,
   Select,
   Text,
   VStack,
   View,
 } from "native-base";
-import { SelectPrimary } from "../components/select-primary";
+import { SelectPrimary } from "../../components/select-primary";
 import React, { useState } from "react";
-import { api } from "../utils/services/api";
+import { api } from "../../utils/services/api";
 import { AxiosError } from "axios";
-import { useAuth } from "../context/auth";
+import { useAuth } from "../../context/auth";
 import Toast from "react-native-toast-message";
-import { InputForm } from "../components/input-form";
-import { InputPassword } from "../components/input-password";
-import { numberToPhone } from "../utils/regex/numberToPhone";
-import Svg, { SvgProps, Path, Defs, G, ClipPath } from "react-native-svg";
+import { InputForm } from "../../components/input-form";
+import { InputPassword } from "../../components/input-password";
+import { numberToPhone } from "../../utils/regex/numberToPhone";
 
-export const Cadastro = () => {
+import StarRating from "react-native-star-rating-widget";
+import { ButtonPrimary } from "../../components/button-primary";
+import { IconMais, IconClose } from "../../components/icons";
+
+export const Cadastro = ({ navigation }: any) => {
   const { loginSubmit } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [tipo, setTipo] = useState<"RECRUTADOR" | "CANDIDATO">("CANDIDATO");
@@ -229,98 +232,94 @@ export const Cadastro = () => {
                         bg={"none"}
                         rounded={"full"}
                         h={"30px"}
-                        color={"#2E2E2E"}
+                        display={"flex"}
+                        flexDirection={"row"}
+                        alignItems={"center"}
+                        pr={"20px"}
                       >
                         <IconMais />
-                        <Text>Adicionar</Text>
+                        <Text
+                          color={"#2E2E2E"}
+                          fontFamily={"Outfit-600"}
+                          pl={"10px"}
+                        >
+                          Adicionar
+                        </Text>
                       </Pressable>
                     }
                   />
 
                   <VStack space={"15px"}>
-                    {listHardskill.map((hardskill) => (
-                      <Flex
-                        direction={"column"}
-                        bg={"#6D3BBF"}
-                        rounded={"12px"}
-                        py={"12px"}
-                        px={"20px"}
-                        key={hardskill.id}
-                      >
-                        <Flex justifyContent={"space-between"}>
-                          <Text
-                            fontSize={"16px"}
-                            fontWeight={"medium"}
-                            color={"white"}
+                    {listHardskill.map((hardskill) => {
+                      const hardskillIndex = listHardskill.findIndex(
+                        (e) => e.id === hardskill.id
+                      );
+                      return (
+                        <VStack
+                          direction={"column"}
+                          bg={"#6D3BBF"}
+                          rounded={"12px"}
+                          py={"12px"}
+                          px={"20px"}
+                          key={hardskill.id}
+                          space={"8px"}
+                        >
+                          <Flex
+                            direction="row"
+                            alignItems={"center"}
+                            justifyContent={"space-between"}
                           >
-                            {hardskill.nome}
-                          </Text>
-                          <Pressable
-                            onPress={() =>
-                              setListHardskill(
-                                listHardskill.filter(
-                                  (e) => e.id !== hardskill.id
+                            <Text
+                              fontSize={"16px"}
+                              fontWeight={"medium"}
+                              color={"white"}
+                            >
+                              {hardskill.nome}
+                            </Text>
+                            <Pressable
+                              onPress={() =>
+                                setListHardskill(
+                                  listHardskill.filter(
+                                    (e) => e.id !== hardskill.id
+                                  )
                                 )
-                              )
-                            }
-                            bg={"none"}
-                            position={"relative"}
-                            top={"-8px"}
-                            right={"-15px"}
-                            rounded={"full"}
-                            maxW={"10px"}
-                          >
-                            <IconClose />
-                          </Pressable>
-                        </Flex>
-                        <VStack space={"8px"}>
-                          {[...Array(5)].map((star, index) => {
-                            const currentRating = index + 1;
-                            const hardskillIndex = listHardskill.findIndex(
-                              (e) => e.id === hardskill.id
-                            );
-                            return (
-                              <Box key={Math.random() * index}>
-                                <Radio
-                                  value={hardskill.nivel_experiencia.toString()}
-                                  onTouchStart={() => {
-                                    const tempHardskills = [...listHardskill];
+                              }
+                              bg={"none"}
+                              rounded={"full"}
+                              maxW={"10px"}
+                            >
+                              <IconClose />
+                            </Pressable>
+                          </Flex>
+                          <StarRating
+                            rating={hardskill.nivel_experiencia}
+                            onChange={(e) => {
+                              const tempHardskills = [...listHardskill];
 
-                                    tempHardskills[
-                                      hardskillIndex
-                                    ].nivel_experiencia = currentRating;
+                              tempHardskills[hardskillIndex].nivel_experiencia =
+                                e;
 
-                                    setListHardskill(tempHardskills);
-                                  }}
-                                  style={{ display: "none" }}
-                                />
-                                <IconStar
-                                  fill={
-                                    currentRating <=
-                                    listHardskill[hardskillIndex]
-                                      .nivel_experiencia
-                                      ? "#FFB800"
-                                      : "white"
-                                  }
-                                />
-                              </Box>
-                            );
-                          })}
+                              setListHardskill(tempHardskills);
+                            }}
+                            starStyle={{ borderRadius: 80 }}
+                            enableHalfStar={false}
+                            enableSwiping={false}
+                            animationConfig={{ delay: 0, duration: 0 }}
+                            color={"#FFB800"}
+                          />
                         </VStack>
-                      </Flex>
-                    ))}
+                      );
+                    })}
                   </VStack>
                 </VStack>
-                {/*                 <VStack space={"12px"}>
-                  <InputGroup>
-                    <InputForm
-                      type="text"
-                      placeholder="Softskills"
-                      onChange={(e) => setSoftskill(e.target.value)}
-                    />
-                    <InputRightElement w={"25%"}>
-                      <Button
-                        onClick={() =>
+                <VStack space={"12px"}>
+                  <InputForm
+                    type="text"
+                    placeholder="Softskills"
+                    onChange={(e) => setSoftskill(e)}
+                    InputRightElement={
+                      <Pressable
+                        onPress={() =>
                           adicionarSoftskill({
                             id: Math.random() * 100,
                             nome: softskill,
@@ -330,33 +329,43 @@ export const Cadastro = () => {
                         bg={"none"}
                         rounded={"full"}
                         h={"30px"}
-                        color={"#2E2E2E"}
+                        display={"flex"}
+                        flexDirection={"row"}
+                        alignItems={"center"}
+                        pr={"20px"}
                       >
-                        <Image
-                          src="./icons/icon-mais.svg"
-                          pr={"10px"}
-                          alt="icone mais"
-                        />
-                        Adicionar
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
+                        <IconMais />
+                        <Text
+                          color={"#2E2E2E"}
+                          fontFamily={"Outfit-600"}
+                          pl={"10px"}
+                        >
+                          Adicionar
+                        </Text>
+                      </Pressable>
+                    }
+                  />
 
-                  <SimpleGrid columns={2} gap={"15px"}>
+                  <VStack space={"15px"}>
                     {listSoftskill.map((softskill) => {
                       const softskillIndex = listSoftskill.findIndex(
                         (e) => e.id === softskill.id
                       );
                       return (
-                        <Flex
+                        <VStack
                           direction={"column"}
                           bg={"#6D3BBF"}
                           rounded={"12px"}
                           py={"12px"}
                           px={"20px"}
                           key={softskill.id}
+                          space={"8px"}
                         >
-                          <Flex justifyContent={"space-between"}>
+                          <Flex
+                            direction="row"
+                            alignItems={"center"}
+                            justifyContent={"space-between"}
+                          >
                             <Text
                               fontSize={"16px"}
                               fontWeight={"medium"}
@@ -364,117 +373,65 @@ export const Cadastro = () => {
                             >
                               {softskill.nome}
                             </Text>
-                            <Button
-                              bg={"none"}
-                              _hover={{ bg: "#5A2DA4" }}
-                              position={"relative"}
-                              top={"-8px"}
-                              right={"-15px"}
-                              rounded={"full"}
-                              maxW={"10px"}
-                              onClick={() =>
+                            <Pressable
+                              onPress={() =>
                                 setListSoftskill(
                                   listSoftskill.filter(
                                     (e) => e.id !== softskill.id
                                   )
                                 )
                               }
+                              bg={"none"}
+                              rounded={"full"}
+                              maxW={"10px"}
                             >
-                              <Image
-                                alt="icone fechar"
-                                src="/icons/icon-close.svg"
-                                minH={"10px"}
-                                minW={"10px"}
-                              />
-                            </Button>
+                              <IconClose />
+                            </Pressable>
                           </Flex>
-                          <Flex gap={"8px"}>
-                            {[...Array(5)].map((star, index) => {
-                              const currentRating = index + 1;
-                              return (
-                                <label key={Math.random() * index}>
-                                  <input
-                                    type="radio"
-                                    name="rating"
-                                    value={softskill.nivel_experiencia}
-                                    onClick={() => {
-                                      const tempSoftskills = [...listSoftskill];
+                          <StarRating
+                            rating={softskill.nivel_experiencia}
+                            onChange={(e) => {
+                              const tempSoftskills = [...listSoftskill];
 
-                                      tempSoftskills[
-                                        softskillIndex
-                                      ].nivel_experiencia = currentRating;
+                              tempSoftskills[softskillIndex].nivel_experiencia =
+                                e;
 
-                                      setListSoftskill(tempSoftskills);
-                                    }}
-                                    style={{
-                                      display: "none",
-                                      cursor: "pointer",
-                                    }}
-                                  />
-                                  <IconStar
-                                    fill={
-                                      currentRating <=
-                                      listSoftskill[softskillIndex]
-                                        .nivel_experiencia
-                                        ? "#FFB800"
-                                        : "white"
-                                    }
-                                  />
-                                </label>
-                              );
-                            })}
-                          </Flex>
-                        </Flex>
+                              setListSoftskill(tempSoftskills);
+                            }}
+                            starStyle={{ borderRadius: 80 }}
+                            enableHalfStar={false}
+                            enableSwiping={false}
+                            animationConfig={{ delay: 0, duration: 0 }}
+                            color={"#FFB800"}
+                          />
+                        </VStack>
                       );
                     })}
-                  </SimpleGrid>
-                </VStack> */}
+                  </VStack>
+                </VStack>
               </>
             )}
           </VStack>
+          <Box textAlign={"center"}>
+            <ButtonPrimary
+              onPress={() => cadastrar()}
+              buttonText="Cadastrar"
+              isLoading={isLoading}
+              loadingText="Cadastrando"
+            />
+            <Button
+              variant={"link"}
+              onPress={() => {
+                navigation.toBack();
+              }}
+            >
+              <Text fontFamily={"Outfit-600"} fontSize={"18px"} color={"white"}>
+                Já tem uma conta? Faça login
+              </Text>
+            </Button>
+          </Box>
         </Flex>
       </View>
     </ScrollView>
   );
 };
-
-const IconMais = (props: SvgProps) => (
-  <Svg width={13} height={12} fill="none" {...props}>
-    <Path
-      fill="#5A2DA4"
-      d="M12.188 5.25H7.311V.75C7.313.336 6.95 0 6.5 0c-.449 0-.813.336-.813.75v4.5H.813C.364 5.25 0 5.586 0 6s.364.75.813.75h4.875v4.5c0 .414.363.75.812.75.449 0 .813-.336.813-.75v-4.5h4.875c.448 0 .812-.336.812-.75s-.364-.75-.813-.75Z"
-    />
-  </Svg>
-);
-
-const IconClose = (props: SvgProps) => (
-  <Svg width={11} height={12} fill="none" {...props}>
-    <G clipPath="url(#a)">
-      <Path
-        fill="#fff"
-        d="M6.472 6 10.8 1.674a.688.688 0 0 0-.973-.973L5.5 5.028 1.174.7a.688.688 0 1 0-.973.973L4.528 6 .2 10.326a.688.688 0 0 0 .973.973L5.5 6.972 9.826 11.3a.688.688 0 0 0 .973-.973L6.472 6Z"
-      />
-    </G>
-    <Defs>
-      <ClipPath id="a">
-        <Path fill="#fff" d="M0 .5h11v11H0z" />
-      </ClipPath>
-    </Defs>
-  </Svg>
-);
-
-const IconStar = (props: { fill: string }) => (
-  <Svg width={16} height={16}>
-    <G clipPath="url(#a)">
-      <Path
-        fill={props.fill}
-        d="M.885 8.267 3.258 10l-.901 2.792a2.119 2.119 0 0 0 .789 2.408 2.118 2.118 0 0 0 2.533-.012L8 13.48l2.321 1.706a2.15 2.15 0 0 0 3.322-2.394L12.742 10l2.373-1.733a2.151 2.151 0 0 0-1.266-3.888h-2.916l-.884-2.757a2.152 2.152 0 0 0-4.098 0l-.884 2.757H2.154A2.151 2.151 0 0 0 .887 8.267H.885Z"
-      />
-    </G>
-    <Defs>
-      <ClipPath id="a">
-        <Path fill="#fff" d="M0 0h16v16H0z" />
-      </ClipPath>
-    </Defs>
-  </Svg>
-);
