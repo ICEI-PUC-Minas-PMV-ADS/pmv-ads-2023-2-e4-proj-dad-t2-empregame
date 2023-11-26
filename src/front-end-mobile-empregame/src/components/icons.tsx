@@ -290,3 +290,16 @@ export const IconInteressei = (props: SvgProps) => (
     </Defs>
   </Svg>
 );
+
+export const IconCandidato = (props: SvgProps) => (
+  <Svg width={31} height={30} fill="none" {...props}>
+    <G fill="#2E2E2E" clipPath="url(#a)">
+      <Path d="M20.722 17.5H10.278a6.52 6.52 0 0 0-4.525 1.817 6.104 6.104 0 0 0-1.878 4.38V30h23.25v-6.304a6.105 6.105 0 0 0-1.878-4.379 6.52 6.52 0 0 0-4.525-1.817ZM15.5 15c4.28 0 7.75-3.358 7.75-7.5 0-4.142-3.47-7.5-7.75-7.5-4.28 0-7.75 3.358-7.75 7.5 0 4.142 3.47 7.5 7.75 7.5Z" />
+    </G>
+    <Defs>
+      <ClipPath id="a">
+        <Path fill="#fff" d="M0 0h31v30H0z" />
+      </ClipPath>
+    </Defs>
+  </Svg>
+);
