@@ -42,7 +42,7 @@ As informações editadas devem ser refletidas corretamente no perfil do recruta
 
 ## 6. Teste: Chat
 
-## 7. Teste: Exclusão do Usuário
+## 7. Teste: Exclusão do Recrutador
 
 ![1  Tela perfil excluir recrutador](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/03200cfe-bffb-4dd5-add9-c54a720592c6)
 
@@ -52,7 +52,7 @@ As informações editadas devem ser refletidas corretamente no perfil do recruta
 **Resultado Esperado:**
 O sistema deve fornecer uma confirmação de "Conta excluída com sucesso! Você será desconectado".
 
-## 8. Teste: Alteração de Senha
+## 8. Teste: Alteração de Senha Recrutador
 
 ![1  Alterar senha recrutador](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/859f50ae-02cd-4f2b-a988-06537519fc47)
 
