@@ -1,7 +1,7 @@
 import { Box, Select } from "native-base";
 import { DropdownIcon } from "./icons";
 
-export const SelectPrimary = (props: {
+export const SelectSecondary = (props: {
   children?: React.ReactNode;
   defaultValue?: string | undefined;
   onValueChange: ((itemValue: string) => void) | undefined;
@@ -11,17 +11,16 @@ export const SelectPrimary = (props: {
     <Select
       placeholder={props.placeholder ? props.placeholder : "Selecionar"}
       fontFamily={"Outfit-500"}
-      color={"white"}
-      fontSize={"18px"}
-      bg={"#5A2DA4"}
-      rounded={"full"}
       py={"10px"}
       px={"25px"}
-      w={"full"}
-      borderWidth={"0px"}
+      placeholderTextColor={"#2E2E2E"}
+      color={"#2E2E2E"}
+      rounded={"full"}
+      fontSize={"16px"}
+      fontWeight={"medium"}
       dropdownIcon={
         <Box paddingRight={"15px"}>
-          <DropdownIcon />
+          <DropdownIcon fill="#2E2E2E" />
         </Box>
       }
       onValueChange={props.onValueChange}

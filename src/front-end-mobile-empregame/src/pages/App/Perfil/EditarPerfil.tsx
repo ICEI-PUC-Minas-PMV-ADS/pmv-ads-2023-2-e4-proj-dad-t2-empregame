@@ -1,4 +1,12 @@
-import { Button, Flex, Modal, Pressable, Text, VStack } from "native-base";
+import {
+  Button,
+  Flex,
+  KeyboardAvoidingView,
+  Modal,
+  Pressable,
+  Text,
+  VStack,
+} from "native-base";
 import { useState } from "react";
 import Toast from "react-native-toast-message";
 import { useMutation } from "../../../utils/hooks/useMutation";
@@ -14,6 +22,7 @@ import {
 } from "../../../interface/IUsuario";
 import { useFetch } from "../../../utils/hooks/useFetch";
 import { api } from "../../../utils/services/api";
+import { Platform } from "react-native";
 
 export const EditarPerfil = (props: {
   usuario: IUsuario;
@@ -133,247 +142,252 @@ export const EditarPerfil = (props: {
             </Text>
           </Modal.Header>
           <Modal.Body>
-            <VStack space={"16px"}>
-              <InputForm
-                type="text"
-                placeholder="Nome *"
-                value={nome}
-                onChange={(e) => setNome(e)}
-              />
-              <InputForm
-                keyboardType="email-address"
-                type="text"
-                placeholder="E-mail *"
-                value={email ? email : ""}
-                onChange={(e) => setEmail(e)}
-              />
-              <InputForm
-                keyboardType="phone-pad"
-                type="text"
-                placeholder="Telefone"
-                value={telefone ? telefone : ""}
-                onChange={(e) => setTelefone(numberToPhone(e))}
-              />
-              {userAtual.tipo === "CANDIDATO" && (
-                <>
-                  <InputForm
-                    type="text"
-                    placeholder="GitHub"
-                    value={github ? github : ""}
-                    onChange={(e) => setGithub(e)}
-                  />
-                  <InputForm
-                    type="text"
-                    placeholder="Portfólio"
-                    value={portfolio ? portfolio : ""}
-                    onChange={(e) => setPortfolio(e)}
-                  />
-                  <InputForm
-                    type="text"
-                    placeholder="Linkedin"
-                    value={linkedin ? linkedin : ""}
-                    onChange={(e) => setLinkedin(e)}
-                  />
-                </>
-              )}
-
-              {userAtual.tipo === "CANDIDATO" && (
-                <>
-                  <VStack space={"12px"}>
+            <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              flex={1}
+            >
+              <VStack space={"16px"}>
+                <InputForm
+                  type="text"
+                  placeholder="Nome *"
+                  value={nome}
+                  onChange={(e) => setNome(e)}
+                />
+                <InputForm
+                  keyboardType="email-address"
+                  type="text"
+                  placeholder="E-mail *"
+                  value={email ? email : ""}
+                  onChange={(e) => setEmail(e)}
+                />
+                <InputForm
+                  keyboardType="phone-pad"
+                  type="text"
+                  placeholder="Telefone"
+                  value={telefone ? telefone : ""}
+                  onChange={(e) => setTelefone(numberToPhone(e))}
+                />
+                {userAtual.tipo === "CANDIDATO" && (
+                  <>
                     <InputForm
                       type="text"
-                      placeholder="Hardskills"
-                      onChange={(e) => setHardskill(e)}
-                      InputRightElement={
-                        <Pressable
-                          onPress={() =>
-                            adicionarHardskill({
-                              nome: hardskill,
-                              nivel_experiencia: 1,
-                            })
-                          }
-                          bg={"none"}
-                          rounded={"full"}
-                          h={"30px"}
-                          display={"flex"}
-                          flexDirection={"row"}
-                          alignItems={"center"}
-                          pr={"20px"}
-                        >
-                          <IconMais />
-                          <Text
-                            color={"#2E2E2E"}
-                            fontFamily={"Outfit-600"}
-                            pl={"10px"}
-                          >
-                            Adicionar
-                          </Text>
-                        </Pressable>
-                      }
+                      placeholder="GitHub"
+                      value={github ? github : ""}
+                      onChange={(e) => setGithub(e)}
                     />
+                    <InputForm
+                      type="text"
+                      placeholder="Portfólio"
+                      value={portfolio ? portfolio : ""}
+                      onChange={(e) => setPortfolio(e)}
+                    />
+                    <InputForm
+                      type="text"
+                      placeholder="Linkedin"
+                      value={linkedin ? linkedin : ""}
+                      onChange={(e) => setLinkedin(e)}
+                    />
+                  </>
+                )}
 
-                    <VStack space={"15px"}>
-                      {hardskillsAtuais &&
-                        hardskillsAtuais.map((hardskill) => {
-                          return (
-                            <VStack
-                              direction={"column"}
-                              bg={"#6D3BBF"}
-                              rounded={"12px"}
-                              py={"12px"}
-                              px={"20px"}
-                              key={hardskill.id}
-                              space={"8px"}
+                {userAtual.tipo === "CANDIDATO" && (
+                  <>
+                    <VStack space={"12px"}>
+                      <InputForm
+                        type="text"
+                        placeholder="Hardskills"
+                        onChange={(e) => setHardskill(e)}
+                        InputRightElement={
+                          <Pressable
+                            onPress={() =>
+                              adicionarHardskill({
+                                nome: hardskill,
+                                nivel_experiencia: 1,
+                              })
+                            }
+                            bg={"none"}
+                            rounded={"full"}
+                            h={"30px"}
+                            display={"flex"}
+                            flexDirection={"row"}
+                            alignItems={"center"}
+                            pr={"20px"}
+                          >
+                            <IconMais />
+                            <Text
+                              color={"#2E2E2E"}
+                              fontFamily={"Outfit-600"}
+                              pl={"10px"}
                             >
-                              <Flex
-                                direction="row"
-                                alignItems={"center"}
-                                justifyContent={"space-between"}
+                              Adicionar
+                            </Text>
+                          </Pressable>
+                        }
+                      />
+
+                      <VStack space={"15px"}>
+                        {hardskillsAtuais &&
+                          hardskillsAtuais.map((hardskill) => {
+                            return (
+                              <VStack
+                                direction={"column"}
+                                bg={"#6D3BBF"}
+                                rounded={"12px"}
+                                py={"12px"}
+                                px={"20px"}
+                                key={hardskill.id}
+                                space={"8px"}
                               >
-                                <Text
-                                  fontSize={"16px"}
-                                  fontWeight={"medium"}
-                                  color={"white"}
+                                <Flex
+                                  direction="row"
+                                  alignItems={"center"}
+                                  justifyContent={"space-between"}
                                 >
-                                  {hardskill.hardskill.nome}
-                                </Text>
-                                <Pressable
-                                  onPress={() => {
+                                  <Text
+                                    fontSize={"16px"}
+                                    fontWeight={"medium"}
+                                    color={"white"}
+                                  >
+                                    {hardskill.hardskill.nome}
+                                  </Text>
+                                  <Pressable
+                                    onPress={() => {
+                                      api
+                                        .delete(
+                                          "/usuarios/hardskills/" + hardskill.id
+                                        )
+                                        .then(() => refetchHardSkill());
+                                    }}
+                                    bg={"none"}
+                                    rounded={"full"}
+                                    maxW={"10px"}
+                                  >
+                                    <IconClose />
+                                  </Pressable>
+                                </Flex>
+                                <StarRating
+                                  rating={hardskill.nivel_experiencia}
+                                  onChange={(e) => {
                                     api
-                                      .delete(
-                                        "/usuarios/hardskills/" + hardskill.id
+                                      .patch(
+                                        "/usuarios/hardskills/" + hardskill.id,
+                                        {
+                                          nivel_experiencia: e,
+                                        }
                                       )
                                       .then(() => refetchHardSkill());
                                   }}
-                                  bg={"none"}
-                                  rounded={"full"}
-                                  maxW={"10px"}
-                                >
-                                  <IconClose />
-                                </Pressable>
-                              </Flex>
-                              <StarRating
-                                rating={hardskill.nivel_experiencia}
-                                onChange={(e) => {
-                                  api
-                                    .patch(
-                                      "/usuarios/hardskills/" + hardskill.id,
-                                      {
-                                        nivel_experiencia: e,
-                                      }
-                                    )
-                                    .then(() => refetchHardSkill());
-                                }}
-                                starStyle={{ borderRadius: 80 }}
-                                enableHalfStar={false}
-                                enableSwiping={false}
-                                animationConfig={{ delay: 0, duration: 0 }}
-                                color={"#FFB800"}
-                              />
-                            </VStack>
-                          );
-                        })}
+                                  starStyle={{ borderRadius: 80 }}
+                                  enableHalfStar={false}
+                                  enableSwiping={false}
+                                  animationConfig={{ delay: 0, duration: 0 }}
+                                  color={"#FFB800"}
+                                />
+                              </VStack>
+                            );
+                          })}
+                      </VStack>
                     </VStack>
-                  </VStack>
-                  <VStack space={"12px"}>
-                    <InputForm
-                      type="text"
-                      placeholder="Softskills"
-                      onChange={(e) => setSoftskill(e)}
-                      InputRightElement={
-                        <Pressable
-                          onPress={() =>
-                            adicionarSoftskill({
-                              nome: softskill,
-                              nivel_experiencia: 1,
-                            })
-                          }
-                          bg={"none"}
-                          rounded={"full"}
-                          h={"30px"}
-                          display={"flex"}
-                          flexDirection={"row"}
-                          alignItems={"center"}
-                          pr={"20px"}
-                        >
-                          <IconMais />
-                          <Text
-                            color={"#2E2E2E"}
-                            fontFamily={"Outfit-600"}
-                            pl={"10px"}
+                    <VStack space={"12px"}>
+                      <InputForm
+                        type="text"
+                        placeholder="Softskills"
+                        onChange={(e) => setSoftskill(e)}
+                        InputRightElement={
+                          <Pressable
+                            onPress={() =>
+                              adicionarSoftskill({
+                                nome: softskill,
+                                nivel_experiencia: 1,
+                              })
+                            }
+                            bg={"none"}
+                            rounded={"full"}
+                            h={"30px"}
+                            display={"flex"}
+                            flexDirection={"row"}
+                            alignItems={"center"}
+                            pr={"20px"}
                           >
-                            Adicionar
-                          </Text>
-                        </Pressable>
-                      }
-                    />
-
-                    <VStack space={"15px"}>
-                      {softskillsAtuais &&
-                        softskillsAtuais.map((softskill) => {
-                          return (
-                            <VStack
-                              direction={"column"}
-                              bg={"#6D3BBF"}
-                              rounded={"12px"}
-                              py={"12px"}
-                              px={"20px"}
-                              key={softskill.id}
-                              space={"8px"}
+                            <IconMais />
+                            <Text
+                              color={"#2E2E2E"}
+                              fontFamily={"Outfit-600"}
+                              pl={"10px"}
                             >
-                              <Flex
-                                direction="row"
-                                alignItems={"center"}
-                                justifyContent={"space-between"}
+                              Adicionar
+                            </Text>
+                          </Pressable>
+                        }
+                      />
+
+                      <VStack space={"15px"}>
+                        {softskillsAtuais &&
+                          softskillsAtuais.map((softskill) => {
+                            return (
+                              <VStack
+                                direction={"column"}
+                                bg={"#6D3BBF"}
+                                rounded={"12px"}
+                                py={"12px"}
+                                px={"20px"}
+                                key={softskill.id}
+                                space={"8px"}
                               >
-                                <Text
-                                  fontSize={"16px"}
-                                  fontWeight={"medium"}
-                                  color={"white"}
+                                <Flex
+                                  direction="row"
+                                  alignItems={"center"}
+                                  justifyContent={"space-between"}
                                 >
-                                  {softskill.softskill.nome}
-                                </Text>
-                                <Pressable
-                                  onPress={() => {
+                                  <Text
+                                    fontSize={"16px"}
+                                    fontWeight={"medium"}
+                                    color={"white"}
+                                  >
+                                    {softskill.softskill.nome}
+                                  </Text>
+                                  <Pressable
+                                    onPress={() => {
+                                      api
+                                        .delete(
+                                          "/usuarios/softskills/" + softskill.id
+                                        )
+                                        .then(() => refetchSoftSkill());
+                                    }}
+                                    bg={"none"}
+                                    rounded={"full"}
+                                    maxW={"10px"}
+                                  >
+                                    <IconClose />
+                                  </Pressable>
+                                </Flex>
+                                <StarRating
+                                  rating={softskill.nivel_experiencia}
+                                  onChange={(e) => {
                                     api
-                                      .delete(
-                                        "/usuarios/softskills/" + softskill.id
+                                      .patch(
+                                        "/usuarios/softskills/" + softskill.id,
+                                        {
+                                          nivel_experiencia: e,
+                                        }
                                       )
                                       .then(() => refetchSoftSkill());
                                   }}
-                                  bg={"none"}
-                                  rounded={"full"}
-                                  maxW={"10px"}
-                                >
-                                  <IconClose />
-                                </Pressable>
-                              </Flex>
-                              <StarRating
-                                rating={softskill.nivel_experiencia}
-                                onChange={(e) => {
-                                  api
-                                    .patch(
-                                      "/usuarios/softskills/" + softskill.id,
-                                      {
-                                        nivel_experiencia: e,
-                                      }
-                                    )
-                                    .then(() => refetchSoftSkill());
-                                }}
-                                starStyle={{ borderRadius: 80 }}
-                                enableHalfStar={false}
-                                enableSwiping={false}
-                                animationConfig={{ delay: 0, duration: 0 }}
-                                color={"#FFB800"}
-                              />
-                            </VStack>
-                          );
-                        })}
+                                  starStyle={{ borderRadius: 80 }}
+                                  enableHalfStar={false}
+                                  enableSwiping={false}
+                                  animationConfig={{ delay: 0, duration: 0 }}
+                                  color={"#FFB800"}
+                                />
+                              </VStack>
+                            );
+                          })}
+                      </VStack>
                     </VStack>
-                  </VStack>
-                </>
-              )}
-            </VStack>
+                  </>
+                )}
+              </VStack>
+            </KeyboardAvoidingView>
           </Modal.Body>
           <Modal.Footer>
             <Button.Group space={2}>

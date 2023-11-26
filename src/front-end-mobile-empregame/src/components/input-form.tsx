@@ -1,4 +1,4 @@
-import { Input } from "native-base";
+import { Input, KeyboardAvoidingView } from "native-base";
 import { KeyboardTypeOptions } from "react-native";
 
 export const InputForm = (props: {

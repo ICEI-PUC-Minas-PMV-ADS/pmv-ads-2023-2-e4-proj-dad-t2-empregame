@@ -1,4 +1,4 @@
-import { FlatList, Spinner, View } from "native-base";
+import { Box, FlatList, Spinner, View } from "native-base";
 import CardVaga from "../../../components/card-vaga";
 import { useCallback, useEffect, useState } from "react";
 import { useFetch } from "../../../utils/hooks/useFetch";
@@ -53,6 +53,7 @@ export const VagasInteressei = ({ navigation }: any) => {
         </View>
       ) : (
         <FlatList
+          ItemSeparatorComponent={() => <Box h={"20px"} />}
           paddingX={"15px"}
           paddingTop={"20px"}
           refreshControl={

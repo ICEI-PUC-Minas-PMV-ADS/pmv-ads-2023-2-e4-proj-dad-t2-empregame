@@ -24,6 +24,8 @@ import {
 } from "./icons";
 import { GestureResponderEvent } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { EditarVaga } from "../pages/App/Feed/MinhasVagas/EditarVaga";
+import { CandidatosInteressados } from "../pages/App/Feed/MinhasVagas/CandidatosInteressados";
 
 const CardVaga = (props: {
   vaga?: IVaga | null;
@@ -80,25 +82,20 @@ const CardVaga = (props: {
       bg={"white"}
       width={"100%"}
     >
-      <VStack justifyContent={"space-between"}>
-        <HStack
-          display={"flex"}
-          flexDirection={"row"}
-          space={"15px"}
-          alignItems={"center"}
+      <HStack space={"15px"} alignItems={"center"}>
+        <IconMaleta />
+        <Text
+          fontFamily={"Outfit-500"}
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          color={"#2E2E2E"}
+          pr={"35px"}
         >
-          <IconMaleta />
-          <Text
-            fontFamily={"Outfit-500"}
-            fontSize={"20px"}
-            fontWeight={"bold"}
-            color={"#2E2E2E"}
-          >
-            {props.vaga?.nome}
-          </Text>
-        </HStack>
-      </VStack>
-      <HStack space={"8px"} flexDirection={"row"}>
+          {props.vaga?.nome}
+        </Text>
+      </HStack>
+
+      <HStack space={"8px"} flexWrap={"wrap"}>
         {props.vaga?.vaga_hardskill?.map((hardskill) => (
           <Box
             key={hardskill.id}
@@ -106,6 +103,7 @@ const CardVaga = (props: {
             py={"5px"}
             px={"10px"}
             rounded={"full"}
+            mb={"10px"}
           >
             <Text
               fontSize={"14px"}
@@ -124,6 +122,7 @@ const CardVaga = (props: {
             py={"5px"}
             px={"10px"}
             rounded={"full"}
+            mb={"10px"}
           >
             <Text
               fontSize={"14px"}
@@ -358,54 +357,18 @@ const CardVaga = (props: {
       )}
       {user?.tipo === "RECRUTADOR" && route.name !== "Feed" && (
         <>
-          <Button
-            onPress={() => {}}
-            bg={"#6D3BBF"}
-            borderColor={"#6D3BBF"}
-            borderWidth={"2px"}
-            rounded={"full"}
-            py={"10px"}
-            px={"25px"}
-            w={"full"}
-          >
-            <HStack space={"10px"} alignItems={"center"}>
-              <IconCoracao fill={"#FF5757"} borderColor={"#6D3BBF"} />
-              <Text
-                fontFamily={"Outfit-500"}
-                color={"white"}
-                textAlign={"center"}
-                fontSize={"18px"}
-                fontWeight={"semibold"}
-              >
-                {props.vaga?.vaga_candidato?.length} Candidatos Interessados
-              </Text>
-            </HStack>
-          </Button>
+          <CandidatosInteressados
+            idVaga={props.vaga?.id}
+            qtdCandidatosInteressados={props.vaga?.vaga_candidato?.length}
+          />
           <VStack space={"25px"}>
             <HStack space={"8px"} w={"full"}>
-              <Button
-                onPress={() => {}}
-                bg={"white"}
-                borderColor={"#6D3BBF"}
-                borderWidth={"2px"}
-                rounded={"full"}
-                py={"10px"}
-                px={"25px"}
-                flex={1}
-              >
-                <HStack space={"10px"} alignItems={"center"}>
-                  <IconEdit />
-                  <Text
-                    fontFamily={"Outfit-500"}
-                    color={"#6D3BBF"}
-                    fontWeight={"semibold"}
-                    textAlign={"center"}
-                    fontSize={"18px"}
-                  >
-                    Editar
-                  </Text>
-                </HStack>
-              </Button>
+              <EditarVaga
+                vaga={props.vaga}
+                refetch={() => {
+                  props.refetch();
+                }}
+              />
               <Button
                 onPress={() => {
                   if (props.vaga?.situacao === "ATIVO") {
@@ -431,7 +394,11 @@ const CardVaga = (props: {
                   alignItems={"center"}
                   color={props.vaga?.situacao === "ATIVO" ? "#6D3BBF" : "white"}
                 >
-                  <IconDesativarVaga />
+                  <IconDesativarVaga
+                    fill={
+                      props.vaga?.situacao === "ATIVO" ? "#6D3BBF" : "white"
+                    }
+                  />
                   <Text
                     color={
                       props.vaga?.situacao === "ATIVO" ? "#6D3BBF" : "white"

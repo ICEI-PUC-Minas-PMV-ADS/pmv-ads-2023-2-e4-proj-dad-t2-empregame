@@ -16,7 +16,6 @@ import { useState } from "react";
 import CardVaga from "../components/CardVaga";
 import { useAppContext } from "@/utils/hooks/useContext";
 import ModalPublicarVaga from "../components/ModalPublicarVaga";
-import ModalChat from "../components/ModalChat";
 
 const MinhasVagas = () => {
   const {

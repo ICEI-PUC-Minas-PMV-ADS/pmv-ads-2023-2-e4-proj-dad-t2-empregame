@@ -4,10 +4,16 @@ import { Chat } from "../pages/App/Feed/Chat";
 import { Perfil } from "../pages/App/Perfil/Perfil";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LogoEmpregameMenor } from "../components/logo";
-import { IconVagas, IconVagasInteressei } from "../components/icons";
+import {
+  IconCandidatos,
+  IconVagas,
+  IconVagasInteressei,
+} from "../components/icons";
 import { VagasInteressei } from "../pages/App/Feed/VagasInteressei";
 import { MenuHeader } from "../components/menu-header";
 import { useAuth } from "../context/auth";
+import { MinhasVagas } from "../pages/App/Feed/MinhasVagas/MinhasVagas";
+import { BuscarCandidatos } from "../pages/App/Feed/BuscarCandidatos";
 
 const AppStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -86,7 +92,7 @@ function TabNavegation({ navigation }: any) {
         },
         tabBarLabelStyle: {
           fontFamily: "Outfit-600",
-          fontSize: 14,
+          fontSize: 12,
         },
         headerLeft: () => {
           return (
@@ -119,13 +125,34 @@ function TabNavegation({ navigation }: any) {
           tabBarIcon: ({ color }) => <IconVagas color={color} />,
         }}
       />
-      <Tab.Screen
-        name="Interessei"
-        component={VagasInteressei}
-        options={{
-          tabBarIcon: ({ color }) => <IconVagasInteressei color={color} />,
-        }}
-      />
+      {user?.tipo === "CANDIDATO" && (
+        <Tab.Screen
+          name="Interessei"
+          component={VagasInteressei}
+          options={{
+            tabBarIcon: ({ color }) => <IconVagasInteressei color={color} />,
+          }}
+        />
+      )}
+
+      {user?.tipo === "RECRUTADOR" && (
+        <>
+          <Tab.Screen
+            name="Minhas Vagas"
+            component={MinhasVagas}
+            options={{
+              tabBarIcon: ({ color }) => <IconVagasInteressei color={color} />,
+            }}
+          />
+          <Tab.Screen
+            name="Candidatos"
+            component={BuscarCandidatos}
+            options={{
+              tabBarIcon: ({ color }) => <IconCandidatos color={color} />,
+            }}
+          />
+        </>
+      )}
     </Tab.Navigator>
   );
 }
