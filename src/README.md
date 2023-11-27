@@ -48,6 +48,28 @@ $ yarn install
 $ yarn dev
 ```
 
+## Instalação do Front-end Mobile da Aplicação
+
+-- Instalação (necessário ter instalado o NodeJS e Yarn no computador)
+
+```bash
+$ yarn install
+```
+
+- Start da Aplicação em Desenvolvimento Local no aplicativo Expo
+
+```bash
+$ yarn expo start
+```
+
+Depois acesso o aplicativo Expo Go e escaneie o QRCode.
+
+- Start da Aplicação em Desenvolvimento Local no navegador
+
+```bash
+$ yarn expo start --web
+```
+
 Após realizar os comandos, basta acessar a url http://localhost:3000/
 
 ## Histórico de versões do Back-end
@@ -69,6 +91,16 @@ Após realizar os comandos, basta acessar a url http://localhost:3000/
 ## Histórico de versões do Front-End Web
 
 ### [1.0.0] - 08/10/2023
+
+#### Adicionado
+
+- Todas as telas da aplicação
+- Ligação com banco de dados em produção
+- Esquema de autenticação completo
+
+## Histórico de versões do Front-End Mobile
+
+### [1.0.0] - 26/11/2023
 
 #### Adicionado
 
