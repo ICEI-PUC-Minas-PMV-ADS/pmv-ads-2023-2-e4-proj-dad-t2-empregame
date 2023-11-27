@@ -87,7 +87,9 @@ O registro de teste de usabilidade de software desempenha um papel importante na
 
 # MOBILE
 
---
+![1](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/dcb69af2-443a-4745-a4b4-02c035969817)
+
+![2](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/7838dfbd-417a-4370-af04-da08621cf5b8)
 
 
 ## 8. Teste: Alteração de Senha Recrutador
@@ -178,7 +180,7 @@ O registro de teste de usabilidade de software desempenha um papel importante na
 
 ## 6. Teste: Chat
 
-## 7. Teste: Exclusão do Usuário
+## 7. Teste: Exclusão do Candidato
 
 # WEB
 
@@ -189,9 +191,12 @@ O registro de teste de usabilidade de software desempenha um papel importante na
 
 # MOBILE
 
+![c1](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/31dc7d85-7edd-4e79-90ae-c611dbd4ad6d)
+
+![c](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/f7f0a785-d8f7-437b-8e30-9d03b9203f76)
 
 
-## 8. Teste: Alteração de Senha Usuário
+## 8. Teste: Alteração de Senha Candidato
 
 # WEB
 
