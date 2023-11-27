@@ -1,12 +1,34 @@
 import { AlertDialog, Button, Text } from "native-base";
 import { useRef, useState } from "react";
+import { useMutation } from "../../../utils/hooks/useMutation";
+import Toast from "react-native-toast-message";
+import { useAuth } from "../../../context/auth";
 
 export const ExcluirConta = () => {
+  const { deslogarSubmit } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const onClose = () => setIsOpen(false);
 
   const cancelRef = useRef(null);
+
+  const { mutate: mutateExcluirConta, isFetching: isFetchingExcluirConta } =
+    useMutation<void>("/usuarios", {
+      method: "DELETE",
+      onSuccess: () => {
+        Toast.show({
+          text1: "Conta excluída com sucesso!",
+          text2: "Você será desconectado",
+          type: "success",
+        });
+        deslogarSubmit();
+        onClose();
+      },
+      onError: (err) => {
+        if (err.response?.data)
+          Toast.show({ text1: err.response.data.message, type: "error" });
+      },
+    });
   return (
     <>
       <Button bg={"none"} w={"full"} py={1} onPress={() => setIsOpen(!isOpen)}>
@@ -35,7 +57,13 @@ export const ExcluirConta = () => {
               >
                 Cancelar
               </Button>
-              <Button colorScheme="danger" onPress={onClose}>
+              <Button
+                colorScheme="danger"
+                onPress={() => {
+                  onClose();
+                  mutateExcluirConta();
+                }}
+              >
                 Excluir
               </Button>
             </Button.Group>

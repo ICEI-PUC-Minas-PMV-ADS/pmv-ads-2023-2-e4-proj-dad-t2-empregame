@@ -8,7 +8,7 @@ No diagrama de fluxo apresentado a seguir, demonstramos com detalhes o fluxo par
 
 ![Diagrama de Fluxo da Aplicação](img/diagrama-fluxo.png)
 
-## Wireframes
+## Wireframes Web
 
 Cada uma das telas representadas nos fluxos será detalhada nos itens que seguem. [Clicando aqui](https://www.figma.com/file/g0qeIRLtNufDiLjtuHEUXB/EmpregaMe?type=design&node-id=1%3A2&mode=design&t=dyVQ5HyXvHk7HR8y-1), é possível acessar o Wireframe criado na plataforma Figma.
 
@@ -103,3 +103,47 @@ Cada uma das telas representadas nos fluxos será detalhada nos itens que seguem
 - Tela Redefinição de Senha
 
 ![Tela Redefiniçaõ se Senha](img/wireframes/codigo-esqueceu-senha.png)
+
+# Wireframes Mobile
+
+Cada uma das telas representadas nos fluxos será detalhada nos itens que seguem. [Clicando aqui](https://www.figma.com/file/g0qeIRLtNufDiLjtuHEUXB/EmpregaMe?type=design&node-id=1%3A2&mode=design&t=dyVQ5HyXvHk7HR8y-1), é possível acessar o Wireframe criado na plataforma Figma.
+
+- Tela Inicial
+
+![Tela Inicial](img/wireframes-mobile/wireframe-login.png)
+
+- Tela Alterar Senha
+
+![Tela Alterar Senha](img/wireframes-mobile/wireframe-esquecisenha-1.png)
+
+- Tela Token
+
+![Tela Token](img/wireframes-mobile/wireframe-esquecisenha-2.png)
+
+- Tela de Cadastro do Candidato
+
+![Tela de Cadastro do Candidato](img/wireframes-mobile/wireframe-cadastro-candidato.png)
+
+- Tela de Cadastro do Recrutador
+
+![Tela de Cadastro do Recrutador](img/wireframes-mobile/wireframe-cadastro-recrutador.png)
+
+- Tela de Perfil
+
+![Tela de Perfil do Candidato](img/wireframes-mobile/wireframe-perfil.png)
+
+- Tela de Feed
+
+![Tela de feed de Candidatos](img/wireframes-mobile/wireframe-feed.png)
+
+- Tela de Busca por Candidatos
+
+![Tela de Busca por Candidatos](img/wireframes-mobile/wireframe-candidatos.png)
+
+- Tela de Feed de Minhas Vagas
+
+![Tela de Feed de Vagas](img/wireframes-mobile/wireframe-minhas-vagas.png)
+
+- Tela de Vagas que Interessei
+
+![Tela de Match](img/wireframes-mobile/wireframe-interessei.png)

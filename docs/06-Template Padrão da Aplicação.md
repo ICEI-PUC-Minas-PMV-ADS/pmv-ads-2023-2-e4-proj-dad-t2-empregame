@@ -100,40 +100,40 @@ O template padrão do aplicativo vai seguir a estrutura do Wireframe elaborado n
 
 - Tela Inicial
 
-![Tela Inicial](img/templates-ui/inicio.png)
+![Tela Inicial](img/templates-ui-mobile/tela-login.png)
 
 - Tela Alterar Senha
 
-![Tela Alterar Senha](img/templates-ui/EsqueciSenha.png)
+![Tela Alterar Senha](img/templates-ui-mobile/tela-esquecisenha1.png)
 
 - Tela Token
 
-![Tela Token](img/templates-ui/Token.png)
+![Tela Token](img/templates-ui-mobile/tela-esquecisenha2.png)
 
 - Tela de Cadastro do Candidato
 
-![Tela de Cadastro do Candidato](img/templates-ui/CadastroCandidato.png)
+![Tela de Cadastro do Candidato](img/templates-ui-mobile/tela-cadastro-candidato.png)
 
 - Tela de Cadastro do Recrutador
 
-![Tela de Cadastro do Recrutador](img/templates-ui/CadastroRecrutador.png)
+![Tela de Cadastro do Recrutador](img/templates-ui-mobile/tela-cadastro-recrutador.png)
 
-- Tela de Perfil do Candidato
+- Tela de Perfil
 
-![Tela de Perfil do Candidato](img/templates-ui/PerfilCandidato.png)
+![Tela de Perfil do Candidato](img/templates-ui-mobile/tela-perfil.png)
 
-- Tela de feed de Candidatos
+- Tela de Feed
 
-![Tela de feed de Candidatos](img/templates-ui/feedCandidato.png)
+![Tela de feed de Candidatos](img/templates-ui-mobile/tela-feed.png)
 
 - Tela de Busca por Candidatos
 
-![Tela de Busca por Candidatos](img/templates-ui/buscaCandidato.png)
+![Tela de Busca por Candidatos](img/templates-ui-mobile/tela-candidatos.png)
 
-- Tela de Feed de Vagas
+- Tela de Feed de Minhas Vagas
 
-![Tela de Feed de Vagas](img/templates-ui/feedVagas.png)
+![Tela de Feed de Vagas](img/templates-ui-mobile/tela-minhas-vagas.png)
 
-- Tela de Match
+- Tela de Vagas que Interessei
 
-![Tela de Match](img/templates-ui/Match.png)
+![Tela de Match](img/templates-ui-mobile/tela-interessei.png)
