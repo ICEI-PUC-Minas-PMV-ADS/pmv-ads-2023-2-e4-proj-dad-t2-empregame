@@ -4,7 +4,7 @@ O teste de usabilidade permite avaliar a qualidade da interface com o usuário d
 
 #Plano de testes para Recrutadores
 
-# Teste: Tela de Cadastro de Recrutadores
+## 1. Teste: Tela de Cadastro de Recrutadores
 
 **Objetivo:** Verificar se a tela de cadastro de recrutadores está funcionando corretamente e permite que os recrutadores se inscrevam no site.
 
@@ -102,6 +102,39 @@ Espera-se que o chat funcione de maneira adequada e que os seguintes resultados 
 
 
 -------------------------------------------------------------------------------------------------
+
+## 7. Teste: Exclusão do Recrutador
+
+**Objetivo:** Verificar a funcionalidade de exclusão do perfil do recrutador.
+
+**Passos:**
+1. Abra o navegador e acesse a página de perfil do recrutador.
+3. Clicar em "Excluir conta".
+4. Apar3cerá uma janela de confirmação da exclusão do perfil: "VocÊ tem certeza que deseja deletar a sua conta?
+5. Clicar em "Excluir"
+   
+**Resultado Esperado:**
+Resultado Esperado:  O recrutador será redirecionado para a página principal da aplicação com uma mensagem confirmação de "Conta excluída com sucesso! Você será desconectado".
+
+
+-------------------------------------------------------------------------------------------------
+
+## 8. Teste: Alteração de Senha Recrutador
+
+**Objetivo:** Verificar a funcionalidade de alteração de senha recrutador.
+
+**Passos:**
+1. Abra o navegador e acesse a página de perfil do recrutador.
+3. Clicar em "Alterar senha".
+4. Aparecerá uma janela de confirmação da exclusão do perfil: "VocÊ tem certeza que deseja deletar a sua conta?
+5. Clicar em "Excluir"
+   
+**Resultado Esperado:**
+O sistema deve fornecer uma confirmação de "Senha atualizada com sucesso!"
+
+
+-------------------------------------------------------------------------------------------------
+
 
 #Plano de testes para Candidatos
 
@@ -201,6 +234,36 @@ Espera-se que o chat funcione de maneira adequada e que os seguintes resultados 
 - O chat proporciona uma experiência de comunicação satisfatória entre os usuários.
 
 
+-------------------------------------------------------------------------------------------------
+
+## 7. Teste: Exclusão do Usuário
+
+**Objetivo:** Verificar a funcionalidade de exclusão do perfil do recrutador.
+
+**Passos:**
+1. Abra o navegador e acesse a página de perfil do recrutador.
+3. Clicar em "Excluir conta".
+4. Apar3cerá uma janela de confirmação da exclusão do perfil: "VocÊ tem certeza que deseja deletar a sua conta?
+5. Clicar em "Excluir"
+   
+**Resultado Esperado:**
+Resultado Esperado:  O recrutador será redirecionado para a página principal da aplicação com uma mensagem confirmação de "Conta excluída com sucesso! Você será desconectado".
+
+
+-------------------------------------------------------------------------------------------------
+
+## 8. Teste: Alteração de Senha Usuário
+
+**Objetivo:** Verificar a funcionalidade de alteração de senha recrutador.
+
+**Passos:**
+1. Abra o navegador e acesse a página de perfil do recrutador.
+3. Clicar em "Alterar senha".
+4. Aparecerá uma janela de confirmação da exclusão do perfil: "VocÊ tem certeza que deseja deletar a sua conta?
+5. Clicar em "Excluir"
+   
+**Resultado Esperado:**
+O sistema deve fornecer uma confirmação de "Senha atualizada com sucesso!"
 -------------------------------------------------------------------------------------------------
 
 
