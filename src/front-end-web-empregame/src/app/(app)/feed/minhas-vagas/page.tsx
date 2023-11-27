@@ -16,7 +16,6 @@ import { useState } from "react";
 import CardVaga from "../components/CardVaga";
 import { useAppContext } from "@/utils/hooks/useContext";
 import ModalPublicarVaga from "../components/ModalPublicarVaga";
-import ModalChat from "../components/ModalChat";
 
 const MinhasVagas = () => {
   const {
@@ -128,7 +127,10 @@ const MinhasVagas = () => {
             borderColor={"#2E2E2E"}
           >
             {filterHardskills?.map((hardskill) => (
-              <option key={hardskill.id + hardskill.nome}>
+              <option
+                key={hardskill.id + hardskill.nome}
+                value={hardskill.nome}
+              >
                 {hardskill.nome}
               </option>
             ))}
@@ -151,7 +153,10 @@ const MinhasVagas = () => {
             borderColor={"#2E2E2E"}
           >
             {filterSoftskills?.map((softskill) => (
-              <option key={softskill.id + softskill.nome}>
+              <option
+                key={softskill.id + softskill.nome}
+                value={softskill.nome}
+              >
                 {softskill.nome}
               </option>
             ))}

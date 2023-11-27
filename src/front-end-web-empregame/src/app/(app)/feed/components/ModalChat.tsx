@@ -1,6 +1,5 @@
-import { IMatch } from "@/interface/IMatch";
 import { IMensagem } from "@/interface/IMensagem";
-import { IVaga, IVagaCandidato } from "@/interface/IVaga";
+import { IVagaCandidato } from "@/interface/IVaga";
 import { useAppContext } from "@/utils/hooks/useContext";
 import { useFetch } from "@/utils/hooks/useFetch";
 import { useMutation } from "@/utils/hooks/useMutation";
@@ -116,6 +115,7 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
               >
                 {mensagens?.map((msg) => (
                   <Box
+                    key={msg.id}
                     maxW={"80%"}
                     alignSelf={
                       msg.id_usuario === usuario?.id ? "flex-end" : "flex-start"

@@ -93,3 +93,47 @@ O template padrão do site vai seguir a estrutura do Wireframe elaborado na seç
 - Tela Redefinição de Senha
 
 ![Tela Redefiniçaõ se Senha](img/templates-ui/codigo-esqueceu-senha.png)
+
+# Template Mobile da Aplicação
+
+O template padrão do aplicativo vai seguir a estrutura do Wireframe elaborado na seção anterior, sendo composto pelas seguintes telas:
+
+- Tela Inicial
+
+![Tela Inicial](img/templates-ui/inicio.png)
+
+- Tela Alterar Senha
+
+![Tela Alterar Senha](img/templates-ui/EsqueciSenha.png)
+
+- Tela Token
+
+![Tela Token](img/templates-ui/Token.png)
+
+- Tela de Cadastro do Candidato
+
+![Tela de Cadastro do Candidato](img/templates-ui/CadastroCandidato.png)
+
+- Tela de Cadastro do Recrutador
+
+![Tela de Cadastro do Recrutador](img/templates-ui/CadastroRecrutador.png)
+
+- Tela de Perfil do Candidato
+
+![Tela de Perfil do Candidato](img/templates-ui/PerfilCandidato.png)
+
+- Tela de feed de Candidatos
+
+![Tela de feed de Candidatos](img/templates-ui/feedCandidato.png)
+
+- Tela de Busca por Candidatos
+
+![Tela de Busca por Candidatos](img/templates-ui/buscaCandidato.png)
+
+- Tela de Feed de Vagas
+
+![Tela de Feed de Vagas](img/templates-ui/feedVagas.png)
+
+- Tela de Match
+
+![Tela de Match](img/templates-ui/Match.png)

@@ -22,7 +22,13 @@ Usamos Docker e Docker Compose para simplificar a implantação local de nossa a
 Next Framework de desenvolvimento FrontEnd baseado em React:
 Utilizamos o Next Framework que possui como base o React para desenvolvimento da interface do FrontEnd, envio das requisições e renderização da página para o usuário.
 
-Chakra UI:
+Biblioteca Chakra UI:
+Biblioteca utilizada para agilizar o desenvolvimento da interface, pois fornece diversos componentes personalizáveis.
+
+React Native - mobile
+Framework utilizado para desenvolvimento móvel que utiliza JavaScript e React para criar aplicativos nativos.
+
+Biblioteca Native Base - mobile
 Biblioteca utilizada para agilizar o desenvolvimento da interface, pois fornece diversos componentes personalizáveis.
 
 ![arquitetura](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/550095fa-797e-48e2-b75c-b440b3c9f60b)

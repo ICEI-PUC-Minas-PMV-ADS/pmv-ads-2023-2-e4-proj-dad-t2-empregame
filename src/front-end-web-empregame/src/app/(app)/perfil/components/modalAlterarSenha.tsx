@@ -1,9 +1,6 @@
 import { ButtonPrimary } from "@/components/button-primary";
-import { InputForm } from "@/components/input-form";
 import { InputPassword } from "@/components/input-password";
-import { IUsuario } from "@/interface/IUsuario";
 import { useMutation } from "@/utils/hooks/useMutation";
-import { numberToPhone } from "@/utils/regex/numberToPhone";
 import {
   Button,
   Modal,
@@ -15,11 +12,7 @@ import {
   useToast,
   Image,
   ModalBody,
-  SimpleGrid,
   Flex,
-  InputGroup,
-  InputRightElement,
-  Text,
   ModalFooter,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -27,7 +20,6 @@ import { useState } from "react";
 const ModalAlterarSenha = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [atualSenha, setAtualSenha] = useState<string>("");
   const [novaSenha, setNovaSenha] = useState<string>("");
 
