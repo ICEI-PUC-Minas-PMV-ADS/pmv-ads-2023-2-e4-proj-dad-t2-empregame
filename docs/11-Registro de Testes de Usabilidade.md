@@ -52,6 +52,7 @@ Espera-se que, ao usar as opções de filtro, o sistema apresente resultados pre
 **Resultado Esperado:**
 As informações editadas devem ser refletidas corretamente no perfil do recrutador, e o sistema deve fornecer uma confirmação de "Informações atualizadas com sucesso".
 
+
 ## 6. Teste: Chat
 
 ## 7. Teste: Exclusão do Recrutador
@@ -60,9 +61,9 @@ As informações editadas devem ser refletidas corretamente no perfil do recruta
 
 ![2  Exclusao feita com sucesso](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/c425074e-fceb-4de0-8588-fe7452a63c9a)
 
-
 **Resultado Esperado:**
 O sistema deve fornecer uma confirmação de "Conta excluída com sucesso! Você será desconectado".
+
 
 ## 8. Teste: Alteração de Senha Recrutador
 
@@ -74,6 +75,67 @@ O sistema deve fornecer uma confirmação de "Conta excluída com sucesso! Você
 O sistema deve fornecer uma confirmação de "Senha atualizada com sucesso!"
 
 
+# CANDIDATO
+
+## 1. Teste: Tela de Cadastro de Candidatos
+
+![1-foto](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/93d9cdc1-311e-414c-bdcd-d73757be6f2f)
+
+![2-foto](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/37a81851-014d-4feb-ab6c-09a77f691fce)
+
+**Resultado Esperado:**
+O sistema deve armazenar as informações do candidato no banco de dados, criando um novo perfil de candidato.
 
 
+## 2. Teste: Tela de Login de Usuários
 
+![1](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/e9c7d090-4c64-44ef-916b-bb42b4963d0b)
+
+![2](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/585c37cb-b2d4-4baf-ad21-967c1db2e7a1)
+
+**Resultado Esperado:**
+Se as informações estiverem corretas, o sistema deve redirecionar o recrutador para a página inicial do sistema.
+
+## 3. Teste: "Esqueceu a Senha?"
+
+## 4. Teste: Utilizar Filtro de Pesquisa das Vagas
+
+![1-fotor-20231126221811](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/b740de59-381c-403e-9b32-882154d096f4)
+
+![2-fotor-20231126221755](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/bfcffc98-1af0-47fc-b7ad-4905fd859d54)
+
+![3-fotor-20231126221736](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/a757b689-290f-4d3d-ac07-78ce66d8ff8f)
+
+**Resultado Esperado:**
+Espera-se que, ao usar as opções de filtro, o sistema apresente resultados precisos de acordo com os critérios selecionados. Os resultados devem corresponder aos filtros aplicados.
+
+## 5. Teste: Editar Tela Perfil do Candidato
+
+![1  Editar perfil usuário-fotor-2023112622216](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/f733ac09-2148-4c75-a398-dda2fef8de7e)
+
+![2  Alteracoes feitas com sucesso usuario-fotor-20231126222031](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/2ebb0522-7a97-416a-b843-5708a4da63d4)
+
+**Resultado Esperado:**
+As informações editadas devem ser refletidas corretamente no perfil do candidato, e o sistema deve fornecer uma confirmação de "Informações atualizadas com sucesso".
+
+
+## 6. Teste: Chat
+
+## 7. Teste: Exclusão do Usuário
+
+![1  Excluir conta usuario-fotor-20231126222412](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/e8ac5f87-c722-40c5-af7d-2530fb9f83bc)
+
+![2  Exclusao feita com sucesso usuario-fotor-20231126222352](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/48d56a70-1d5e-40b7-bc44-257577a3b18e)
+
+**Resultado Esperado:**
+Resultado Esperado:  O recrutador será redirecionado para a página principal da aplicação com uma mensagem confirmação de "Conta excluída com sucesso! Você será desconectado".
+
+
+## 8. Teste: Alteração de Senha Usuário
+
+![1  Perfil alterar senha-fotor-2023112622298](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/fc8bcfea-9031-4e25-92ce-e9666b1d6993)
+
+![2  Senha salva com sucesso-fotor-20231126222849](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/bfa69e7b-6930-4e8e-9dad-2ad219995c6d)
+
+**Resultado Esperado:**
+O sistema deve fornecer uma confirmação de "Senha atualizada com sucesso!"
