@@ -31,11 +31,12 @@ Se as informações estiverem corretas, o sistema deve redirecionar o recrutador
 
 ## 4. Teste: Utilizar Filtro de Pesquisa das Vagas
 
-![1-](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/b3b1f672-be8c-47da-8e77-266fba51b87d)
+![1-fotor-20231126215836](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/02a22309-dab0-4537-9188-6030420386ac)
 
 ![2-](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/5bb425b4-509b-4c31-b9f6-e38e6db31cfd)
 
-![3-](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/27f7b041-0a58-46cc-be09-86727f35d141)
+![3-fotor-20231126215910](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame/assets/112032850/15a3add6-d171-4ec3-afc2-27c24bddd940)
+
 
 **Resultado Esperado:**
 Espera-se que, ao usar as opções de filtro, o sistema apresente resultados precisos de acordo com os critérios selecionados. Os resultados devem corresponder aos filtros aplicados.
