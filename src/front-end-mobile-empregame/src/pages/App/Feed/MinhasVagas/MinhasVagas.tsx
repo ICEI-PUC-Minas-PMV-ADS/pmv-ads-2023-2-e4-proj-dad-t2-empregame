@@ -1,4 +1,13 @@
-import { Box, FlatList, Spinner, View } from "native-base";
+import {
+  Box,
+  FlatList,
+  HStack,
+  Input,
+  Select,
+  Spinner,
+  VStack,
+  View,
+} from "native-base";
 
 import { useCallback, useEffect, useState } from "react";
 
@@ -9,10 +18,14 @@ import { IVaga } from "../../../../interface/IVaga";
 import CardVaga from "../../../../components/card-vaga";
 import { useAuth } from "../../../../context/auth";
 import { CadastrarVaga } from "./CadastrarVaga";
+import { IconLupa } from "../../../../components/icons";
+import { SelectSecondary } from "../../../../components/select-secondary";
 
 export const MinhasVagas = ({ navigation }: any) => {
   const { user } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
+  const setHardskillFilter = new Set();
+  const setSoftskillFilter = new Set();
   const [pesquisa, setPesquisa] = useState<string | null>(null);
   const [hardskill, setHardskill] = useState<string | null>(null);
   const [softskill, setSoftskill] = useState<string | null>(null);
@@ -46,15 +59,88 @@ export const MinhasVagas = ({ navigation }: any) => {
     });
   }, []);
 
+  const { data: hardskills } = useFetch<IHardskill[]>("/hardskills", {
+    onError: (err) => {
+      if (err.response?.data)
+        Toast.show({ text1: err.response.data.message, type: "error" });
+    },
+  });
+
+  const filterHardskills = hardskills?.filter((hardskill) => {
+    const duplicatedHardskills = setHardskillFilter.has(hardskill.nome);
+    setHardskillFilter.add(hardskill.nome);
+    return !duplicatedHardskills;
+  });
+
+  const { data: softskills } = useFetch<ISoftskill[]>("/softskills", {
+    onError: (err) => {
+      if (err.response?.data)
+        Toast.show({ text1: err.response.data.message, type: "error" });
+    },
+  });
+
+  const filterSoftskills = softskills?.filter((softskill) => {
+    const duplicatedSoftskills = setSoftskillFilter.has(softskill.nome);
+    setSoftskillFilter.add(softskill.nome);
+    return !duplicatedSoftskills;
+  });
+
   return (
     <View flex={1}>
-      {isFetching == true ? (
+      <CadastrarVaga refetch={refetch} />
+      <VStack space={"18px"} paddingX={"15px"} paddingBottom={"20px"}>
+        <Input
+          fontFamily={"Outfit-500"}
+          placeholder={"Pesquisar Vaga"}
+          onChangeText={(e) => setPesquisa(e)}
+          py={"10px"}
+          px={"25px"}
+          placeholderTextColor={"#ADADAD"}
+          color={"#2E2E2E"}
+          backgroundColor={"white"}
+          rounded={"full"}
+          fontSize={"16px"}
+          fontWeight={"medium"}
+          InputRightElement={
+            <Box paddingRight={"20px"}>
+              <IconLupa />
+            </Box>
+          }
+        />
+        <HStack space={"10px"}>
+          <SelectSecondary
+            placeholder="Hardskill"
+            onValueChange={(e) => setHardskill(e)}
+          >
+            {filterHardskills?.map((hardskill) => (
+              <Select.Item
+                key={hardskill.id + hardskill.nome}
+                value={hardskill.nome}
+                label={hardskill.nome}
+              />
+            ))}
+          </SelectSecondary>
+          <SelectSecondary
+            placeholder="SoftSkill"
+            onValueChange={(e) => setSoftskill(e)}
+          >
+            {filterSoftskills?.map((softskill) => (
+              <Select.Item
+                key={softskill.id + softskill.nome}
+                value={softskill.nome}
+                label={softskill.nome}
+              />
+            ))}
+          </SelectSecondary>
+        </HStack>
+      </VStack>
+
+      {isFetching ? (
         <View flex={1} justifyContent={"center"}>
           <Spinner size="lg" />
         </View>
       ) : (
         <>
-          <CadastrarVaga refetch={refetch} />
           <FlatList
             ItemSeparatorComponent={() => <Box h={"20px"} />}
             paddingX={"15px"}

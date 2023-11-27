@@ -275,11 +275,11 @@ export const IconLink2 = (props: SvgProps) => (
   </Svg>
 );
 
-export const IconInteressei = (props: SvgProps) => (
-  <Svg width={18} height={18} fill="none" {...props}>
+export const IconInteressei = (props: { fill: string }) => (
+  <Svg width={18} height={18}>
     <G clipPath="url(#a)">
       <Path
-        fill="#fff"
+        fill={props.fill}
         d="m9.042 8.408 6.03 5.039L10.8 16.65a3 3 0 0 1-3.6 0L2.6 13.2a2.252 2.252 0 0 0-1.35-.45h-.5A.75.75 0 0 1 0 12V3.703c0-.381.284-.699.663-.741 1.018-.114 1.934-.522 2.872-1.068 1.348-.694 3.117-.447 4.212.579l.463.444-3.006 2.934c-.804.804-.933 2.075-.298 2.953a2.33 2.33 0 0 0 1.833.944c.595 0 1.165-.234 1.578-.647l.725-.694v.001Zm5.924-6.514c-1.268-.634-2.849-.47-3.981.41L6.257 6.92c-.278.279-.341.725-.135 1.01a.751.751 0 0 0 1.145.101L9.98 5.458c.712-.675 1.743.403 1.037 1.084l-.885.823 6.444 5.386h.673A.75.75 0 0 0 18 12V3.677a.753.753 0 0 0-.63-.736c-1.271-.23-2.404-1.047-2.404-1.047Z"
       />
     </G>
@@ -299,6 +299,22 @@ export const IconCandidato = (props: SvgProps) => (
     <Defs>
       <ClipPath id="a">
         <Path fill="#fff" d="M0 0h31v30H0z" />
+      </ClipPath>
+    </Defs>
+  </Svg>
+);
+
+export const IconLupa = (props: SvgProps) => (
+  <Svg width={13} height={14} fill="none" {...props}>
+    <G clipPath="url(#a)">
+      <Path
+        fill="#A4A4A4"
+        d="M12.762 12.116 10.246 9.6A5.69 5.69 0 1 0 9.1 10.746l2.517 2.517a.81.81 0 1 0 1.145-1.146Zm-7.05-1.856a4.049 4.049 0 1 1 0-8.098 4.049 4.049 0 0 1 0 8.098Z"
+      />
+    </G>
+    <Defs>
+      <ClipPath id="a">
+        <Path fill="#fff" d="M0 .5h13v13H0z" />
       </ClipPath>
     </Defs>
   </Svg>

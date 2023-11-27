@@ -18,6 +18,7 @@ export const SelectSecondary = (props: {
       rounded={"full"}
       fontSize={"16px"}
       fontWeight={"medium"}
+      flex={1}
       dropdownIcon={
         <Box paddingRight={"15px"}>
           <DropdownIcon fill="#2E2E2E" />

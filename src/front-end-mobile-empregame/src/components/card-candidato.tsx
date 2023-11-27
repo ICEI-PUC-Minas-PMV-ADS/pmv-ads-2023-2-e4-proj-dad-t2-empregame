@@ -16,7 +16,6 @@ const CardCandidato = (props: {
   candidato: IUsuario;
   onPressUsuario: ((event: GestureResponderEvent) => void) | null | undefined;
 }) => {
-  const router = useRoute();
   return (
     <VStack
       direction={"column"}

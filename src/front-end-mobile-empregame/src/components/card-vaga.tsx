@@ -26,6 +26,7 @@ import { GestureResponderEvent } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { EditarVaga } from "../pages/App/Feed/MinhasVagas/EditarVaga";
 import { CandidatosInteressados } from "../pages/App/Feed/MinhasVagas/CandidatosInteressados";
+import { Chat } from "../pages/App/Feed/Chat";
 
 const CardVaga = (props: {
   vaga?: IVaga | null;
@@ -328,29 +329,7 @@ const CardVaga = (props: {
                 </Text>
               </HStack>
 
-              <Button
-                onPress={props.onPressChat}
-                bg={"white"}
-                borderColor={"#6D3BBF"}
-                borderWidth={"2px"}
-                rounded={"full"}
-                py={"10px"}
-                px={"25px"}
-                flex={1}
-              >
-                <HStack space={"10px"} alignItems={"center"}>
-                  <IconChat />
-                  <Text
-                    fontFamily={"Outfit-500"}
-                    color={"#6D3BBF"}
-                    fontSize={"18px"}
-                    fontWeight={"semibold"}
-                    textAlign={"center"}
-                  >
-                    Chat
-                  </Text>
-                </HStack>
-              </Button>
+              <Chat match={isMatch} />
             </HStack>
           )}
         </VStack>

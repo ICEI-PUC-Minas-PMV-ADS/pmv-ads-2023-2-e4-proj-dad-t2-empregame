@@ -30,7 +30,6 @@ import {
 } from "../../../../components/icons";
 import { ButtonPrimary } from "../../../../components/button-primary";
 import { SelectSecondary } from "../../../../components/select-secondary";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Platform } from "react-native";
 
 export const CadastrarVaga = (props: { refetch: () => void }) => {

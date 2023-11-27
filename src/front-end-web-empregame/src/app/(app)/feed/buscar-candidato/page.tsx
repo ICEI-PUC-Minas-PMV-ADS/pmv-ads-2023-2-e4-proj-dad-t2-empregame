@@ -75,7 +75,7 @@ const BuscarCandidato = () => {
       </Flex>
       <Flex width={"20%"} direction={"column"} gap={"18px"}>
         <Text color={"#5A2DA4"} fontSize={"18px"} fontWeight={"semibold"}>
-          Pesquisar Vaga
+          Pesquisar Candidato
         </Text>
         <InputGroup marginBottom={"10px"}>
           <Input
@@ -97,7 +97,7 @@ const BuscarCandidato = () => {
           </InputRightElement>
         </InputGroup>
         <Text color={"#5A2DA4"} fontSize={"18px"} fontWeight={"semibold"}>
-          Filtrar Vagas
+          Filtrar Candidatos
         </Text>
         <InputGroup flexDirection={"column"} gap={"5px"}>
           <Text fontSize={"16px"} color={"#2E2E2E"} fontWeight={"medium"}>
@@ -116,7 +116,10 @@ const BuscarCandidato = () => {
             borderColor={"#2E2E2E"}
           >
             {filterHardskills?.map((hardskill) => (
-              <option key={hardskill.id + hardskill.nome}>
+              <option
+                key={hardskill.id + hardskill.nome}
+                value={hardskill.nome}
+              >
                 {hardskill.nome}
               </option>
             ))}
@@ -139,7 +142,10 @@ const BuscarCandidato = () => {
             borderColor={"#2E2E2E"}
           >
             {filterSoftskills?.map((softskill) => (
-              <option key={softskill.id + softskill.nome}>
+              <option
+                key={softskill.id + softskill.nome}
+                value={softskill.nome}
+              >
                 {softskill.nome}
               </option>
             ))}

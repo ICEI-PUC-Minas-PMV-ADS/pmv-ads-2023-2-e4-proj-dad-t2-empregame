@@ -117,7 +117,10 @@ const Feed = () => {
             borderColor={"#2E2E2E"}
           >
             {filterHardskills?.map((hardskill) => (
-              <option key={hardskill.id + hardskill.nome}>
+              <option
+                key={hardskill.id + hardskill.nome}
+                value={hardskill.nome}
+              >
                 {hardskill.nome}
               </option>
             ))}
@@ -140,7 +143,10 @@ const Feed = () => {
             borderColor={"#2E2E2E"}
           >
             {filterSoftskills?.map((softskill) => (
-              <option key={softskill.id + softskill.nome}>
+              <option
+                key={softskill.id + softskill.nome}
+                value={softskill.nome}
+              >
                 {softskill.nome}
               </option>
             ))}

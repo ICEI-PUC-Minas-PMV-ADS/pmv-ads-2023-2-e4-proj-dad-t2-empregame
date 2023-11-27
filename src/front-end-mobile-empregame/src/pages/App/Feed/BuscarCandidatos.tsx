@@ -6,7 +6,7 @@ import { IVaga } from "../../../interface/IVaga";
 import Toast from "react-native-toast-message";
 import { RefreshControl } from "react-native";
 import { IUsuario } from "../../../interface/IUsuario";
-import CardCandidato from "../../../components/cardcandidato";
+import CardCandidato from "../../../components/card-candidato";
 
 export const BuscarCandidatos = ({ navigation }: any) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -33,12 +33,6 @@ export const BuscarCandidatos = ({ navigation }: any) => {
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
-  }, []);
-
-  useEffect(() => {
-    navigation.addListener("focus", () => {
-      refetch();
-    });
   }, []);
 
   return (

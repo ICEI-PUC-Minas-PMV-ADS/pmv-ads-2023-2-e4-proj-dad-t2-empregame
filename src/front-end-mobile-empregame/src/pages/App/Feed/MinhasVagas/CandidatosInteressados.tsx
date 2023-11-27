@@ -1,25 +1,46 @@
-import { Button, HStack, Modal, Pressable, Text, VStack } from "native-base";
-import { useState } from "react";
 import {
-  IconChat,
+  Box,
+  Button,
+  FlatList,
+  HStack,
+  Modal,
+  Pressable,
+  Spinner,
+  Text,
+  VStack,
+  View,
+} from "native-base";
+import React, { useCallback, useState } from "react";
+import {
   IconCoracao,
   IconInteressei,
-  IconLink2,
 } from "../../../../components/icons";
 import { IVagaCandidato } from "../../../../interface/IVaga";
 import { useFetch } from "../../../../utils/hooks/useFetch";
 import { api } from "../../../../utils/services/api";
+import { RefreshControl } from "react-native";
+import { Chat } from "../Chat";
 
 export const CandidatosInteressados = (props: {
   qtdCandidatosInteressados: number | undefined;
   idVaga: number | undefined;
-  navigation?: any;
 }) => {
   const [showModal, setShowModal] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const { data: candidatosInteressados, refetch: refetchList } = useFetch<
-    IVagaCandidato[]
-  >("/vagas/match/" + props.idVaga);
+  const {
+    data: candidatosInteressados,
+    refetch: refetchList,
+    isFetching,
+  } = useFetch<IVagaCandidato[]>("/vagas/match/" + props.idVaga);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetchList();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   return (
     <>
@@ -56,118 +77,103 @@ export const CandidatosInteressados = (props: {
             </Text>
           </Modal.Header>
           <Modal.Body>
-            <VStack space={"10px"}>
-              {candidatosInteressados?.map((candidato) => {
-                return (
-                  <HStack
-                    key={candidato.id}
-                    borderRadius={"10px"}
-                    bg={"#F6F0FF"}
-                    justifyContent={"space-between"}
-                    alignItems={"center"}
-                    py={"10px"}
-                    px={"18px"}
-                  >
-                    <VStack space={"5px"}>
-                      <Text
-                        fontFamily={"Outfit-600"}
-                        color={"#2E2E2E"}
-                        fontWeight={"bold"}
-                        fontSize={"18px"}
+            <View flex={1}>
+              {isFetching ? (
+                <View flex={1} justifyContent={"center"}>
+                  <Spinner size="lg" />
+                </View>
+              ) : (
+                <FlatList
+                  ItemSeparatorComponent={() => <Box h={"20px"} />}
+                  refreshControl={
+                    <RefreshControl
+                      refreshing={refreshing}
+                      onRefresh={onRefresh}
+                    />
+                  }
+                  ListFooterComponent={() => <View height={210}></View>}
+                  data={candidatosInteressados}
+                  keyExtractor={() => (Math.random() * 100).toString()}
+                  renderItem={({ item }) => {
+                    return (
+                      <VStack
+                        key={item.id}
+                        borderRadius={"10px"}
+                        bg={"#F6F0FF"}
+                        py={"20px"}
+                        px={"25px"}
+                        space={"15px"}
                       >
-                        {candidato.usuario?.nome}
-                      </Text>
-                      <Pressable onPress={() => {}}>
-                        <HStack space={"10px"}>
+                        <HStack
+                          space={"5px"}
+                          justifyContent={"space-between"}
+                          alignItems={"center"}
+                        >
                           <Text
                             fontFamily={"Outfit-600"}
                             color={"#2E2E2E"}
                             fontWeight={"bold"}
-                            fontSize={"14px"}
-                          >
-                            Ver Perfil
-                          </Text>
-                          <IconLink2 />
-                        </HStack>
-                      </Pressable>
-                    </VStack>
-                    <VStack space={"10px"}>
-                      {candidato.match === true && (
-                        <Button
-                          onPress={() => {}}
-                          bg={"white"}
-                          borderColor={"#6D3BBF"}
-                          borderWidth={"2px"}
-                          rounded={"full"}
-                          py={"10px"}
-                          px={"25px"}
-                          flex={1}
-                        >
-                          <HStack space={"10px"} alignItems={"center"}>
-                            <IconChat />
-                            <Text
-                              fontFamily={"Outfit-500"}
-                              color={"#6D3BBF"}
-                              fontSize={"18px"}
-                              fontWeight={"semibold"}
-                              textAlign={"center"}
-                            >
-                              Chat
-                            </Text>
-                          </HStack>
-                        </Button>
-                      )}
-
-                      <Button
-                        onPress={() => {
-                          if (candidato.match === false) {
-                            api
-                              .patch("/vagas/match/" + candidato.id, {
-                                match: true,
-                              })
-                              .then(() => {
-                                refetchList();
-                              });
-                          } else {
-                            api
-                              .patch("/vagas/match/" + candidato.id, {
-                                match: false,
-                              })
-                              .then(() => {
-                                refetchList();
-                              });
-                          }
-                        }}
-                        bg={candidato.match === true ? "#5A2DA4" : "white"}
-                        borderColor={"#5A2DA4"}
-                        borderWidth={"2px"}
-                        rounded={"full"}
-                        py={"10px"}
-                        px={"25px"}
-                        w={"full"}
-                      >
-                        <HStack space={"10px"}>
-                          <Text
-                            fontFamily={"Outfit-500"}
-                            color={
-                              candidato.match === true ? "white" : "#5A2DA4"
-                            }
                             fontSize={"18px"}
-                            fontWeight={"semibold"}
-                            textAlign={"center"}
                           >
-                            Interessei
+                            {item.usuario?.nome}
                           </Text>
-                          <IconInteressei />
                         </HStack>
-                      </Button>
-                    </VStack>
-                  </HStack>
-                );
-              })}
-            </VStack>
+                        <VStack space={"10px"}>
+                          {item.match === true && <Chat match={item} />}
+
+                          <Button
+                            onPress={() => {
+                              if (item.match === false) {
+                                api
+                                  .patch("/vagas/match/" + item.id, {
+                                    match: true,
+                                  })
+                                  .then(() => {
+                                    refetchList();
+                                  });
+                              } else {
+                                api
+                                  .patch("/vagas/match/" + item.id, {
+                                    match: false,
+                                  })
+                                  .then(() => {
+                                    refetchList();
+                                  });
+                              }
+                            }}
+                            bg={item.match === true ? "#5A2DA4" : "white"}
+                            borderColor={"#5A2DA4"}
+                            borderWidth={"2px"}
+                            rounded={"full"}
+                            py={"8px"}
+                            px={"25px"}
+                            w={"full"}
+                          >
+                            <HStack space={"10px"} alignItems={"center"}>
+                              <Text
+                                fontFamily={"Outfit-500"}
+                                color={
+                                  item.match === true ? "white" : "#5A2DA4"
+                                }
+                                fontSize={"18px"}
+                                fontWeight={"semibold"}
+                                textAlign={"center"}
+                              >
+                                Interessei
+                              </Text>
+                              <IconInteressei
+                                fill={item.match === true ? "white" : "#5A2DA4"}
+                              />
+                            </HStack>
+                          </Button>
+                        </VStack>
+                      </VStack>
+                    );
+                  }}
+                />
+              )}
+            </View>
           </Modal.Body>
-          <Modal.Footer></Modal.Footer>
         </Modal.Content>
       </Modal>
     </>
