@@ -58,9 +58,10 @@ export const ExcluirConta = () => {
                 Cancelar
               </Button>
               <Button
+                isLoading={isFetchingExcluirConta}
+                isLoadingText="Excluindo"
                 colorScheme="danger"
                 onPress={() => {
-                  onClose();
                   mutateExcluirConta();
                 }}
               >
