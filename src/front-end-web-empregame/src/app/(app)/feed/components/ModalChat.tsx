@@ -20,9 +20,11 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const ModalChat = (props: { match?: IVagaCandidato }) => {
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
@@ -42,7 +44,6 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
       method: "POST",
       onSuccess: () => {
         refetch();
-        setNewMensagem("");
       },
       onError: (err) => {
         toast({ title: err.message, status: "error" });
@@ -89,14 +90,18 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
                 Conversando com{" "}
                 {usuario?.id === props.match?.id_usuario ? (
                   <Link
-                    href={"/perfil?id=" + props.match?.vaga?.usuario.id}
+                    onClick={() =>
+                      router.push("/perfil?id=" + props.match?.vaga?.usuario.id)
+                    }
                     target="_blank"
                   >
                     {props.match?.vaga?.usuario.nome}
                   </Link>
                 ) : (
                   <Link
-                    href={"/perfil?id=" + props.match?.usuario?.id}
+                    onClick={() =>
+                      router.push("/perfil?id=" + props.match?.usuario?.id)
+                    }
                     target="_blank"
                   >
                     {props.match?.usuario?.nome}
@@ -113,31 +118,38 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
                 overflow={"auto"}
                 maxH={"600px"}
               >
-                {mensagens?.map((msg) => (
-                  <Box
-                    key={msg.id}
-                    maxW={"80%"}
-                    alignSelf={
-                      msg.id_usuario === usuario?.id ? "flex-end" : "flex-start"
-                    }
-                    bg={msg.id_usuario === usuario?.id ? "#6D3BBF" : "#F1E9FF"}
-                    px={"15px"}
-                    py={"10px"}
-                    color={msg.id_usuario === usuario?.id ? "white" : "#2E2E2E"}
-                    fontSize={"14px"}
-                    fontWeight={"medium"}
-                    rounded={
-                      msg.id_usuario === usuario?.id
-                        ? "11px 11px 0px 11px"
-                        : "11px 11px 11px 0px"
-                    }
-                    textAlign={
-                      msg.id_usuario === usuario?.id ? "right" : "left"
-                    }
-                  >
-                    {msg.conteudo}
-                  </Box>
-                ))}
+                {mensagens &&
+                  mensagens.map((msg) => (
+                    <Box
+                      key={msg.id}
+                      maxW={"80%"}
+                      alignSelf={
+                        msg.id_usuario === usuario?.id
+                          ? "flex-end"
+                          : "flex-start"
+                      }
+                      bg={
+                        msg.id_usuario === usuario?.id ? "#6D3BBF" : "#F1E9FF"
+                      }
+                      px={"15px"}
+                      py={"10px"}
+                      color={
+                        msg.id_usuario === usuario?.id ? "white" : "#2E2E2E"
+                      }
+                      fontSize={"14px"}
+                      fontWeight={"medium"}
+                      rounded={
+                        msg.id_usuario === usuario?.id
+                          ? "11px 11px 0px 11px"
+                          : "11px 11px 11px 0px"
+                      }
+                      textAlign={
+                        msg.id_usuario === usuario?.id ? "right" : "left"
+                      }
+                    >
+                      {msg.conteudo}
+                    </Box>
+                  ))}
               </Flex>
 
               <Flex gap={"10px"}>
@@ -166,12 +178,14 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
                   fontSize={"16px"}
                   fontWeight={"regular"}
                   _hover={{ boxShadow: "lg" }}
+                  value={newMensagem}
                   onClick={() => {
                     mutateNovaMensagem({
                       conteudo: newMensagem,
                       id_usuario: usuario?.id,
                       id_vaga_candidato: props.match?.id,
                     });
+                    setNewMensagem("");
                   }}
                 >
                   Enviar
