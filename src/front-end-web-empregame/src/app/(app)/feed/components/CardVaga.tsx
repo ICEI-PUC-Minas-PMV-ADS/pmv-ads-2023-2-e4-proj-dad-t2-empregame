@@ -11,13 +11,14 @@ import {
   Link,
 } from "@chakra-ui/react";
 import dayjs from "dayjs";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import ModalCandidatosInteressados from "./ModalCandidatosInteressados";
 import ModalChat from "./ModalChat";
 import ModalEditarVaga from "./ModalEditarVaga";
 
 const CardVaga = (props: { vaga?: IVaga | null; refetch: () => void }) => {
+  const router = useRouter();
   const {
     state: { usuario },
   } = useAppContext();
@@ -94,7 +95,7 @@ const CardVaga = (props: { vaga?: IVaga | null; refetch: () => void }) => {
           </Box>
         )}
       </Flex>
-      <Flex gap={"8px"} alignItems={"center"}>
+      <Flex gap={"8px"} alignItems={"center"} flexWrap={"wrap"}>
         {props.vaga?.vaga_hardskill?.map((hardskill) => (
           <Box
             key={hardskill.id}
@@ -286,7 +287,7 @@ const CardVaga = (props: { vaga?: IVaga | null; refetch: () => void }) => {
         <Text color={"#868686"} fontSize={"13px"} fontWeight={"normal"}>
           Publicado por{" "}
           <Link
-            href={"/perfil?id=" + props.vaga?.id_usuario}
+            onClick={() => router.push("/perfil?id=" + props.vaga?.id_usuario)}
             target="_blank"
             color={"#535353"}
             fontWeight={"medium"}

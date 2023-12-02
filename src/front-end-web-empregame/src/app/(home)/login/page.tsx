@@ -14,11 +14,15 @@ import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { useAppContext } from "@/utils/hooks/useContext";
 import { InputPassword } from "@/components/input-password";
+import { isEmail } from "@/utils/validator/isEmail";
 
 const Login = () => {
   const { state: usuario, dispatch: dispatchAppContext } = useAppContext();
   const toast = useToast();
   const router = useRouter();
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
   const [cookie, setCookie] = useCookies([authToken.nome]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
@@ -31,6 +35,36 @@ const Login = () => {
   }, [usuario, router, cookie]);
 
   const loginSubmit = async () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (!email)
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail",
+      });
+
+    if (!isEmail(email))
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail corretamente",
+      });
+
+    if (!senha)
+      erros.push({
+        field: "senha",
+        message: "Preencha o campo Senha",
+      });
+
+    if (erros.length > 0) {
+      toast({
+        title: "Campos incompletos/incorretos",
+        status: "error",
+      });
+      return setErrors(erros);
+    }
+
     setIsLoading(true);
     await api
       .post("/auth/login", {
@@ -58,6 +92,10 @@ const Login = () => {
       });
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    setErrors([]);
+  }, [senha, email]);
 
   return (
     <Box
@@ -89,6 +127,7 @@ const Login = () => {
               type="email"
               placeholder="E-mail"
               onChange={(e) => setEmail(e.target.value)}
+              messageError={errors.find((e) => e.field === "email")?.message}
             />
             <Flex direction={"column"} gap={"5px"}>
               <InputPassword
@@ -97,6 +136,7 @@ const Login = () => {
                 }}
                 placeholder="Senha"
                 onChange={(e) => setSenha(e.target.value)}
+                messageError={errors.find((e) => e.field === "senha")?.message}
               />
               <Link
                 fontSize={"14px"}

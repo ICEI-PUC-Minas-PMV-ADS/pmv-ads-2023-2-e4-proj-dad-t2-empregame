@@ -8,7 +8,6 @@ import {
   Flex,
   Heading,
   Image,
-  InputGroup,
   InputRightElement,
   SimpleGrid,
   Text,
@@ -17,12 +16,11 @@ import {
 
 import { Link } from "@chakra-ui/next-js";
 import { InputForm } from "@/components/input-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonPrimary } from "@/components/button-primary";
 import { ButtonSelect } from "@/components/button-select";
 import { api } from "@/utils/services/api";
 import { AxiosError } from "axios";
-
 import { IUsuario } from "@/interface/IUsuario";
 import { useAppContext } from "@/utils/hooks/useContext";
 import { useCookies } from "react-cookie";
@@ -30,11 +28,15 @@ import { authToken } from "@/utils/config/authToken";
 import { useRouter } from "next/navigation";
 import { numberToPhone } from "@/utils/regex/numberToPhone";
 import { InputPassword } from "@/components/input-password";
+import { isEmail } from "@/utils/validator/isEmail";
 
 const Cadastro = () => {
   const { dispatch: dispatchAppContext } = useAppContext();
   const toast = useToast();
   const router = useRouter();
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
   const [cookie, setCookie] = useCookies([authToken.nome]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [tipo, setTipo] = useState<"RECRUTADOR" | "CANDIDATO">("CANDIDATO");
@@ -79,6 +81,42 @@ const Cadastro = () => {
   };
 
   const cadastrar = async () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (!nome)
+      erros.push({ field: "nome", message: "Preencha o campo Nome Completo" });
+    if (!email)
+      erros.push({ field: "email", message: "Preencha o campo E-mail" });
+    if (!isEmail(email))
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail corretamente",
+      });
+    if (!senha)
+      erros.push({ field: "senha", message: "Preencha o campo Senha" });
+    if (telefone && telefone.length < 14)
+      erros.push({ field: "telefone", message: "Telefone incorreto" });
+    if (tipo === "CANDIDATO" && listHardskill.length <= 0)
+      erros.push({
+        field: "hardskill",
+        message: "Adicione pelo menos uma HardSkill",
+      });
+    if (tipo === "CANDIDATO" && listSoftskill.length <= 0)
+      erros.push({
+        field: "softskill",
+        message: "Adicione pelo menos uma SoftSkill",
+      });
+
+    if (erros.length > 0) {
+      toast({
+        title: "Campos incompletos/incorretos",
+        status: "error",
+      });
+      return setErrors(erros);
+    }
+
     setIsLoading(true);
     try {
       await api
@@ -153,12 +191,20 @@ const Cadastro = () => {
             statusCode: number;
             message: string;
           }>;
+          toast({
+            title: error.message,
+            status: "error",
+          });
         });
       setIsLoading(false);
     } catch {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    setErrors([]);
+  }, [nome, senha, email, telefone, listHardskill, listSoftskill]);
 
   return (
     <Box
@@ -211,21 +257,27 @@ const Cadastro = () => {
                 type="text"
                 placeholder="Nome *"
                 onChange={(e) => setNome(e.target.value)}
+                messageError={errors.find((e) => e.field === "nome")?.message}
               />
               <InputForm
                 type="email"
                 placeholder="E-mail *"
                 onChange={(e) => setEmail(e.target.value)}
+                messageError={errors.find((e) => e.field === "email")?.message}
               />
               <InputPassword
                 placeholder="Senha *"
                 onChange={(e) => setSenha(e.target.value)}
+                messageError={errors.find((e) => e.field === "senha")?.message}
               />
               <InputForm
                 type="tel"
                 placeholder="Telefone"
                 value={telefone}
                 onChange={(e) => setTelefone(numberToPhone(e.target.value))}
+                messageError={
+                  errors.find((e) => e.field === "telefone")?.message
+                }
               />
               {tipo === "CANDIDATO" && (
                 <>
@@ -245,35 +297,40 @@ const Cadastro = () => {
             {tipo === "CANDIDATO" && (
               <>
                 <Flex direction={"column"} gap={"12px"}>
-                  <InputGroup>
-                    <InputForm
-                      type="text"
-                      placeholder="Hardskills"
-                      onChange={(e) => setHardskill(e.target.value)}
-                    />
-                    <InputRightElement w={"25%"}>
-                      <Button
-                        onClick={() =>
-                          adicionarHardskill({
-                            id: Math.random() * 100,
-                            nome: hardskill,
-                            nivel_experiencia: 1,
-                          })
-                        }
-                        bg={"none"}
-                        rounded={"full"}
-                        h={"30px"}
-                        color={"#2E2E2E"}
-                      >
-                        <Image
-                          src="./icons/icon-mais.svg"
-                          pr={"10px"}
-                          alt="icone mais"
-                        />
-                        Adicionar
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
+                  <InputForm
+                    type="text"
+                    placeholder="Hardskills *"
+                    onChange={(e) => setHardskill(e.target.value)}
+                    value={hardskill}
+                    InputRightElement={
+                      <InputRightElement w={"25%"}>
+                        <Button
+                          onClick={() => {
+                            adicionarHardskill({
+                              id: Math.random() * 100,
+                              nome: hardskill,
+                              nivel_experiencia: 1,
+                            });
+                            setHardskill("");
+                          }}
+                          bg={"none"}
+                          rounded={"full"}
+                          h={"30px"}
+                          color={"#2E2E2E"}
+                        >
+                          <Image
+                            src="./icons/icon-mais.svg"
+                            pr={"10px"}
+                            alt="icone mais"
+                          />
+                          Adicionar
+                        </Button>
+                      </InputRightElement>
+                    }
+                    messageError={
+                      errors.find((e) => e.field === "hardskill")?.message
+                    }
+                  />
 
                   <SimpleGrid columns={2} gap={"15px"}>
                     {listHardskill.map((hardskill) => (
@@ -358,35 +415,40 @@ const Cadastro = () => {
                   </SimpleGrid>
                 </Flex>
                 <Flex direction={"column"} gap={"12px"}>
-                  <InputGroup>
-                    <InputForm
-                      type="text"
-                      placeholder="Softskills"
-                      onChange={(e) => setSoftskill(e.target.value)}
-                    />
-                    <InputRightElement w={"25%"}>
-                      <Button
-                        onClick={() =>
-                          adicionarSoftskill({
-                            id: Math.random() * 100,
-                            nome: softskill,
-                            nivel_experiencia: 1,
-                          })
-                        }
-                        bg={"none"}
-                        rounded={"full"}
-                        h={"30px"}
-                        color={"#2E2E2E"}
-                      >
-                        <Image
-                          src="./icons/icon-mais.svg"
-                          pr={"10px"}
-                          alt="icone mais"
-                        />
-                        Adicionar
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
+                  <InputForm
+                    type="text"
+                    placeholder="Softskills *"
+                    onChange={(e) => setSoftskill(e.target.value)}
+                    value={softskill}
+                    InputRightElement={
+                      <InputRightElement w={"25%"}>
+                        <Button
+                          onClick={() => {
+                            adicionarSoftskill({
+                              id: Math.random() * 100,
+                              nome: softskill,
+                              nivel_experiencia: 1,
+                            });
+                            setSoftskill("");
+                          }}
+                          bg={"none"}
+                          rounded={"full"}
+                          h={"30px"}
+                          color={"#2E2E2E"}
+                        >
+                          <Image
+                            src="./icons/icon-mais.svg"
+                            pr={"10px"}
+                            alt="icone mais"
+                          />
+                          Adicionar
+                        </Button>
+                      </InputRightElement>
+                    }
+                    messageError={
+                      errors.find((e) => e.field === "softskill")?.message
+                    }
+                  />
 
                   <SimpleGrid columns={2} gap={"15px"}>
                     {listSoftskill.map((softskill) => {

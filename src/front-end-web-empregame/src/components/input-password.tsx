@@ -1,56 +1,58 @@
 import {
-  Box,
   Button,
+  Flex,
   Input,
   InputGroup,
   InputRightElement,
+  Text,
 } from "@chakra-ui/react";
-import {
-  ChangeEventHandler,
-  HTMLInputTypeAttribute,
-  KeyboardEventHandler,
-  useState,
-} from "react";
+import { ChangeEventHandler, KeyboardEventHandler, useState } from "react";
 
 export const InputPassword = (props: {
   placeholder: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   value?: string | number | readonly string[];
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
+  messageError?: string;
 }) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   return (
-    <InputGroup>
-      <Input
-        onKeyDown={props.onKeyDown}
-        placeholder={props.placeholder}
-        onChange={props.onChange}
-        py={"10px"}
-        px={"25px"}
-        _placeholder={{ color: "#ADADAD" }}
-        color={"#2E2E2E"}
-        bg={"white"}
-        rounded={"full"}
-        fontSize={"16px"}
-        fontWeight={"medium"}
-        focusBorderColor={"#5A2DA4"}
-        type={show ? "text" : "password"}
-        value={props.value}
-      />
-      <InputRightElement width="3.5rem">
-        <Button
-          h="1.75rem"
-          size="sm"
-          onClick={handleClick}
+    <Flex flexDirection={"column"}>
+      <InputGroup>
+        <Input
+          onKeyDown={props.onKeyDown}
+          placeholder={props.placeholder}
+          onChange={props.onChange}
+          py={"10px"}
+          px={"25px"}
+          _placeholder={{ color: "#ADADAD" }}
+          color={"#2E2E2E"}
+          bg={"white"}
           rounded={"full"}
-          bg={"none"}
-          _hover={{ bg: "none" }}
-        >
-          <IconOlhoSenha fill={show ? "#7345D6" : "#C4B5D2"} />
-        </Button>
-      </InputRightElement>
-    </InputGroup>
+          fontSize={"16px"}
+          fontWeight={"medium"}
+          focusBorderColor={"#5A2DA4"}
+          type={show ? "text" : "password"}
+          value={props.value}
+        />
+        <InputRightElement width="3.5rem">
+          <Button
+            h="1.75rem"
+            size="sm"
+            onClick={handleClick}
+            rounded={"full"}
+            bg={"none"}
+            _hover={{ bg: "none" }}
+          >
+            <IconOlhoSenha fill={show ? "#7345D6" : "#C4B5D2"} />
+          </Button>
+        </InputRightElement>
+      </InputGroup>
+      <Text color={"red.400"} fontSize={"14px"}>
+        {props.messageError}
+      </Text>
+    </Flex>
   );
 };
 
