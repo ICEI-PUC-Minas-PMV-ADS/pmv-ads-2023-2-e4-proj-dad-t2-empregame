@@ -20,23 +20,32 @@ const CardCandidato = (props: {
     <VStack
       direction={"column"}
       w={"full"}
-      py={"25px"}
-      px={"30px"}
+      py={"20px"}
+      px={"20px"}
       space={"25px"}
       borderWidth={"1px"}
       borderColor={"#E1E1E1"}
       rounded={"13px"}
       bg={"white"}
     >
-      <HStack justifyContent={"space-between"}>
+      <HStack justifyContent={"space-between"} alignItems={"center"}>
         <HStack space={"15px"} alignItems={"center"}>
           <IconCandidato />
-          <Text fontSize={"20px"} fontWeight={"bold"} color={"#5A2DA4"}>
+          <Text
+            fontSize={"20px"}
+            fontWeight={"bold"}
+            color={"#5A2DA4"}
+            maxW={"180px"}
+          >
             {props.candidato.nome}
           </Text>
         </HStack>
         <Pressable onPress={props.onPressUsuario}>
-          <HStack space={"10px"}>
+          <HStack
+            space={"10px"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             <Text
               fontFamily={"Outfit-600"}
               color={"#2E2E2E"}

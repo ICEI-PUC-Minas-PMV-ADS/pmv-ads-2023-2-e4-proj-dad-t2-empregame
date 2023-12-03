@@ -10,15 +10,14 @@ import {
   Button,
   HStack,
   Input,
-  Link,
   Modal,
-  ScrollView,
+  Spinner,
   Text,
   VStack,
+  View,
 } from "native-base";
-import { IconChat } from "../../../components/icons";
 
-export const Chat = (props: { match?: IVagaCandidato }) => {
+export const Chat = (props: { match?: IVagaCandidato }, router: any) => {
   const [showModal, setShowModal] = useState(false);
   const { user } = useAuth();
 
@@ -26,7 +25,7 @@ export const Chat = (props: { match?: IVagaCandidato }) => {
 
   const { data: mensagens, refetch } = useFetch<IMensagem[]>(
     "/mensagens/" + props.match?.id,
-    { enable: !!showModal }
+    { delay: 1000, enable: showModal }
   );
 
   const { mutate: mutateNovaMensagem, isFetching: isFetchingNovaMensagem } =
@@ -34,7 +33,6 @@ export const Chat = (props: { match?: IVagaCandidato }) => {
       method: "POST",
       onSuccess: () => {
         refetch();
-        setNewMensagem("");
       },
       onError: (err) => {
         Toast.show({ text1: err.message, type: "error" });
@@ -73,52 +71,61 @@ export const Chat = (props: { match?: IVagaCandidato }) => {
               <Text color={"#5A2DA4"} fontWeight={"bold"} fontSize={"20px"}>
                 {props.match?.vaga?.nome}
               </Text>
-              <Text color={"#606060"} fontWeight={"regular"} fontSize={"16px"}>
-                Conversando com{" "}
+              <Text>
                 {user?.id === props.match?.id_usuario ? (
-                  <Link href={"/perfil?id=" + props.match?.vaga?.usuario.id}>
-                    {props.match?.vaga?.usuario.nome}
-                  </Link>
+                  <Text
+                    color={"#606060"}
+                    fontWeight={"regular"}
+                    fontFamily={"Outfit-600"}
+                  >
+                    Conversando com {props.match?.vaga?.usuario.nome}
+                  </Text>
                 ) : (
-                  <Link href={"/perfil?id=" + props.match?.usuario?.id}>
-                    {props.match?.usuario?.nome}
-                  </Link>
+                  <Text
+                    color={"#606060"}
+                    fontWeight={"regular"}
+                    fontFamily={"Outfit-600"}
+                  >
+                    Conversando com {props.match?.usuario?.nome}
+                  </Text>
                 )}
               </Text>
             </Box>
           </Modal.Header>
           <Modal.Body>
-            <VStack direction={"column"} space={"30px"}>
-              <VStack
-                direction={"column"}
-                space={"10px"}
-                overflow={"auto"}
-                maxH={"600px"}
-              >
-                {mensagens?.map((msg) => (
-                  <Box
-                    key={msg.id}
-                    maxW={"80%"}
-                    alignSelf={
-                      msg.id_usuario === user?.id ? "flex-end" : "flex-start"
-                    }
-                    bg={msg.id_usuario === user?.id ? "#6D3BBF" : "#F1E9FF"}
-                    px={"15px"}
-                    py={"10px"}
+            <VStack space={"10px"}>
+              {mensagens?.map((msg) => (
+                <Box
+                  key={msg.id}
+                  maxW={"80%"}
+                  alignSelf={
+                    msg.id_usuario === user?.id ? "flex-end" : "flex-start"
+                  }
+                  bg={msg.id_usuario === user?.id ? "#6D3BBF" : "#F1E9FF"}
+                  px={"15px"}
+                  py={"10px"}
+                  rounded={
+                    msg.id_usuario === user?.id
+                      ? "11px 11px 0px 11px"
+                      : "11px 11px 11px 0px"
+                  }
+                >
+                  <Text
+                    fontFamily={"Outfit-500"}
                     color={msg.id_usuario === user?.id ? "white" : "#2E2E2E"}
                     fontSize={"14px"}
                     fontWeight={"medium"}
-                    rounded={
-                      msg.id_usuario === user?.id
-                        ? "11px 11px 0px 11px"
-                        : "11px 11px 11px 0px"
-                    }
                     textAlign={msg.id_usuario === user?.id ? "right" : "left"}
                   >
                     {msg.conteudo}
-                  </Box>
-                ))}
-              </VStack>
+                  </Text>
+                </Box>
+              ))}
+              {isFetchingNovaMensagem && (
+                <View py={"15px"} justifyContent={"center"}>
+                  <Spinner size="lg" />
+                </View>
+              )}
             </VStack>
           </Modal.Body>
           <Modal.Footer>
@@ -129,6 +136,7 @@ export const Chat = (props: { match?: IVagaCandidato }) => {
                 borderColor={"#2E2E2E"}
                 placeholder={"Digite aqui"}
                 onChangeText={(e) => setNewMensagem(e)}
+                value={newMensagem}
                 flex={1}
               ></Input>
               <Button
@@ -147,6 +155,7 @@ export const Chat = (props: { match?: IVagaCandidato }) => {
                     id_usuario: user?.id,
                     id_vaga_candidato: props.match?.id,
                   });
+                  setNewMensagem("");
                 }}
               >
                 Enviar

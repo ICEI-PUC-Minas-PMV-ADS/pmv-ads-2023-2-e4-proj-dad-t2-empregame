@@ -11,7 +11,7 @@ import {
   View,
 } from "native-base";
 import React, { useCallback, useState } from "react";
-import { IconInteressei } from "../../../../components/icons";
+import { IconInteressei, IconLink2 } from "../../../../components/icons";
 import { IVagaCandidato } from "../../../../interface/IVaga";
 import { useFetch } from "../../../../utils/hooks/useFetch";
 import { api } from "../../../../utils/services/api";
@@ -76,6 +76,29 @@ export const CandidatosInteressados = ({ route, navigation }: any) => {
                     >
                       {item.usuario?.nome}
                     </Text>
+                    <Pressable
+                      onPress={() =>
+                        navigation.navigate("Perfil", {
+                          idusuario: item.id_usuario,
+                        })
+                      }
+                    >
+                      <HStack
+                        space={"10px"}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                      >
+                        <Text
+                          fontFamily={"Outfit-600"}
+                          color={"#2E2E2E"}
+                          fontWeight={"bold"}
+                          fontSize={"14px"}
+                        >
+                          Ver Perfil
+                        </Text>
+                        <IconLink2 />
+                      </HStack>
+                    </Pressable>
                   </HStack>
                   <VStack space={"10px"}>
                     {item.match === true && <Chat match={item} />}
