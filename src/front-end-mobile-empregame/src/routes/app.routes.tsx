@@ -14,6 +14,7 @@ import { MenuHeader } from "../components/menu-header";
 import { useAuth } from "../context/auth";
 import { MinhasVagas } from "../pages/App/Feed/MinhasVagas/MinhasVagas";
 import { BuscarCandidatos } from "../pages/App/Feed/BuscarCandidatos";
+import { CandidatosInteressados } from "../pages/App/Feed/MinhasVagas/CandidatosInteressados";
 
 const AppStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,7 +32,7 @@ const AppRoutes = () => {
         component={TabNavegation}
       />
       <AppStack.Screen
-        name="Chat"
+        name="Candidatos Interessados"
         options={{
           headerStyle: {
             backgroundColor: "#6D3BBF",
@@ -44,7 +45,7 @@ const AppRoutes = () => {
           headerTintColor: "#FFFFFF",
           headerTitleAlign: "center",
         }}
-        component={Chat}
+        component={CandidatosInteressados}
       />
       <AppStack.Screen
         name="Perfil"

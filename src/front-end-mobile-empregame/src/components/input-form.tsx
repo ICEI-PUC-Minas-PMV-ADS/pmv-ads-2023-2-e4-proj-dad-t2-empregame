@@ -1,4 +1,4 @@
-import { Input, KeyboardAvoidingView, Text, VStack } from "native-base";
+import { Input, Text, VStack } from "native-base";
 import { KeyboardTypeOptions } from "react-native";
 
 export const InputForm = (props: {
@@ -9,10 +9,14 @@ export const InputForm = (props: {
   keyboardType?: KeyboardTypeOptions | undefined;
   InputRightElement?: JSX.Element | JSX.Element[] | undefined;
   messageError?: string;
+  multiline?: boolean;
+  numberOfLines?: number;
 }) => {
   return (
     <VStack>
       <Input
+        multiline={props.multiline}
+        numberOfLines={props.numberOfLines}
         fontFamily={"Outfit-500"}
         placeholder={props.placeholder}
         onChangeText={props.onChange}
@@ -21,7 +25,7 @@ export const InputForm = (props: {
         placeholderTextColor={"#ADADAD"}
         color={"#2E2E2E"}
         backgroundColor={"white"}
-        rounded={"full"}
+        rounded={props.multiline ? "10px" : "full"}
         fontSize={"16px"}
         fontWeight={"medium"}
         type={props.type}
