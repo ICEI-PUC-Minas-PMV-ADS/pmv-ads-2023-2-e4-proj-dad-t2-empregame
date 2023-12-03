@@ -35,8 +35,8 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
   const [newMensagem, setNewMensagem] = useState<string>("");
 
   const { data: mensagens, refetch } = useFetch<IMensagem[]>(
-    "/mensagens/" + props.match?.id
-    /* { interval: 1000, enable: isOpen } */
+    "/mensagens/" + props.match?.id,
+    { interval: 1000, enable: isOpen }
   );
 
   const { mutate: mutateNovaMensagem, isFetching: isFetchingNovaMensagem } =
