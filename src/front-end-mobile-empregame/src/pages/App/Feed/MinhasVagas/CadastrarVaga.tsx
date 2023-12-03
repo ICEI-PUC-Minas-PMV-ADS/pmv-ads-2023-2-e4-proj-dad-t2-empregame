@@ -10,7 +10,7 @@ import {
   TextArea,
   VStack,
 } from "native-base";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { useFetch } from "../../../../utils/hooks/useFetch";
 import { api } from "../../../../utils/services/api";
@@ -21,7 +21,6 @@ import {
   IVagaSoftSkill,
 } from "../../../../interface/IVaga";
 import { InputForm } from "../../../../components/input-form";
-import { SelectPrimary } from "../../../../components/select-primary";
 import { numberToBRL } from "../../../../utils/regex/numberToBRL";
 import {
   IconClose,
@@ -34,6 +33,9 @@ import { Platform } from "react-native";
 
 export const CadastrarVaga = (props: { refetch: () => void }) => {
   const [showModal, setShowModal] = useState(false);
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
   const [nomeVaga, setNomeVaga] = useState<string>("");
   const [descricao, setDescricao] = useState<string>("");
   const [beneficios, setBeneficios] = useState<string>("");
@@ -136,6 +138,51 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
     });
 
   const publicarVaga = () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (!nomeVaga)
+      erros.push({
+        field: "nomeVaga",
+        message: "Preencha o campo Nome da Vaga",
+      });
+    if (descricao === "")
+      erros.push({ field: "descricao", message: "Preencha o campo Descrição" });
+    if (!empresa)
+      erros.push({ field: "empresa", message: "Preencha o campo Empresa" });
+    if (!estadoEmpresa)
+      erros.push({
+        field: "estadoEmpresa",
+        message: "Preencha o campo Estado",
+      });
+    if (!cidadeEmpresa)
+      erros.push({
+        field: "cidadeEmpresa",
+        message: "Preencha o campo Cidade",
+      });
+    if (!salario)
+      erros.push({ field: "salario", message: "Preencha o campo Salário" });
+
+    if (listHardskill.length <= 0)
+      erros.push({
+        field: "hardskill",
+        message: "Adicione pelo menos uma HardSkill",
+      });
+    if (listSoftskill.length <= 0)
+      erros.push({
+        field: "softskill",
+        message: "Adicione pelo menos uma SoftSkill",
+      });
+
+    if (erros.length > 0) {
+      Toast.show({
+        text1: "Campos incompletos/incorretos",
+        type: "error",
+      });
+      return setErrors(erros);
+    }
+
     mutateCriarVaga({
       nome: nomeVaga,
       descricao: descricao,
@@ -147,6 +194,18 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
       situacao: "ATIVO",
     });
   };
+
+  useEffect(() => {
+    setErrors([]);
+  }, [
+    nomeVaga,
+    descricao,
+    empresa,
+    estadoEmpresa,
+    cidadeEmpresa,
+    listHardskill,
+    listSoftskill,
+  ]);
 
   return (
     <>
@@ -189,15 +248,28 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
                   type="text"
                   placeholder="Nome da Vaga *"
                   onChange={(e) => setNomeVaga(e)}
+                  messageError={
+                    errors.find((e) => e.field === "nomeVaga")?.message
+                  }
                 />
-                <TextArea
-                  fontFamily={"Outfit-500"}
-                  fontSize={"16px"}
-                  borderRadius={"14px"}
-                  placeholder="Descrição *"
-                  onChange={(e: any) => setDescricao(e.currentTarget.value)}
-                  autoCompleteType={undefined}
-                />
+                <VStack>
+                  <TextArea
+                    fontFamily={"Outfit-500"}
+                    fontSize={"16px"}
+                    borderRadius={"14px"}
+                    placeholder="Descrição *"
+                    onChange={(e: any) => setDescricao(e.currentTarget.value)}
+                    autoCompleteType={undefined}
+                  />
+                  {descricao === "" ? (
+                    <Text color={"red.400"} fontSize={"14px"}>
+                      {errors.find((e) => e.field === "descricao")?.message}
+                    </Text>
+                  ) : (
+                    ""
+                  )}
+                </VStack>
+
                 <TextArea
                   fontFamily={"Outfit-500"}
                   fontSize={"16px"}
@@ -211,6 +283,9 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
                   type="text"
                   placeholder="Empresa *"
                   onChange={(e) => setEmpresa(e)}
+                  messageError={
+                    errors.find((e) => e.field === "empresa")?.message
+                  }
                 />
                 <InputForm
                   type="text"
@@ -218,12 +293,18 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
                   value={salario}
                   keyboardType="number-pad"
                   onChange={(e) => setSalario(numberToBRL(e))}
+                  messageError={
+                    errors.find((e) => e.field === "salario")?.message
+                  }
                 />
                 <SelectSecondary
                   placeholder="Estado *"
                   onValueChange={(e) => {
                     setEstadoEmpresa(e);
                   }}
+                  messageError={
+                    errors.find((e) => e.field === "estadoEmpresa")?.message
+                  }
                 >
                   {estados &&
                     estados.map((e) => (
@@ -233,6 +314,9 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
                 <SelectSecondary
                   placeholder="Cidade *"
                   onValueChange={(e) => setCidadeEmpresa(e)}
+                  messageError={
+                    errors.find((e) => e.field === "cidadeEmpresa")?.message
+                  }
                 >
                   {cidades &&
                     cidades.map((c) => (
@@ -243,16 +327,18 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
                 <VStack space={"12px"}>
                   <InputForm
                     type="text"
-                    placeholder="Hardskills"
+                    placeholder="Hardskills *"
                     onChange={(e) => setHardskill(e)}
+                    value={hardskill}
                     InputRightElement={
                       <Pressable
-                        onPress={() =>
+                        onPress={() => {
                           adicionarHardskill({
                             id: Math.random() * 100,
                             nome: hardskill,
-                          })
-                        }
+                          });
+                          setHardskill("");
+                        }}
                         bg={"none"}
                         rounded={"full"}
                         h={"30px"}
@@ -270,6 +356,9 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
                           Adicionar
                         </Text>
                       </Pressable>
+                    }
+                    messageError={
+                      errors.find((e) => e.field === "hardskill")?.message
                     }
                   />
 
@@ -322,14 +411,16 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
                       type="text"
                       placeholder="Softskills"
                       onChange={(e) => setSoftskill(e)}
+                      value={softskill}
                       InputRightElement={
                         <Pressable
-                          onPress={() =>
+                          onPress={() => {
                             adicionarSoftskill({
                               id: Math.random() * 100,
                               nome: softskill,
-                            })
-                          }
+                            });
+                            setSoftskill("");
+                          }}
                           bg={"none"}
                           rounded={"full"}
                           h={"30px"}
@@ -347,6 +438,9 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
                             Adicionar
                           </Text>
                         </Pressable>
+                      }
+                      messageError={
+                        errors.find((e) => e.field === "softskill")?.message
                       }
                     />
 

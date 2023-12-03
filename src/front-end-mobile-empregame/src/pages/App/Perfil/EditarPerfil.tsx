@@ -7,7 +7,7 @@ import {
   Text,
   VStack,
 } from "native-base";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { useMutation } from "../../../utils/hooks/useMutation";
 import { ButtonPrimary } from "../../../components/button-primary";
@@ -23,6 +23,7 @@ import {
 import { useFetch } from "../../../utils/hooks/useFetch";
 import { api } from "../../../utils/services/api";
 import { Platform } from "react-native";
+import { isEmail } from "../../../utils/validator/isEmail";
 
 export const EditarPerfil = (props: {
   usuario: IUsuario;
@@ -31,6 +32,9 @@ export const EditarPerfil = (props: {
   const [showModal, setShowModal] = useState(false);
   const userAtual = props.usuario;
 
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
   const [nome, setNome] = useState<string>(userAtual.nome);
   const [email, setEmail] = useState<string | undefined | null>(
     userAtual.email
@@ -115,6 +119,48 @@ export const EditarPerfil = (props: {
   });
 
   const atualizarDados = () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (!nome)
+      erros.push({ field: "nome", message: "Preencha o campo Nome Completo" });
+    if (!email)
+      erros.push({ field: "email", message: "Preencha o campo E-mail" });
+    if (email && !isEmail(email))
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail corretamente",
+      });
+    if (telefone && telefone.length < 14)
+      erros.push({ field: "telefone", message: "Telefone incorreto" });
+    if (
+      userAtual.tipo === "CANDIDATO" &&
+      hardskillsAtuais &&
+      hardskillsAtuais.length <= 0
+    )
+      erros.push({
+        field: "hardskill",
+        message: "Adicione pelo menos uma HardSkill",
+      });
+    if (
+      userAtual.tipo === "CANDIDATO" &&
+      softskillsAtuais &&
+      softskillsAtuais.length <= 0
+    )
+      erros.push({
+        field: "softskill",
+        message: "Adicione pelo menos uma SoftSkill",
+      });
+
+    if (erros.length > 0) {
+      Toast.show({
+        text1: "Campos incompletos/incorretos",
+        type: "error",
+      });
+      return setErrors(erros);
+    }
+
     mutateAtualizarUsuario({
       nome: nome,
       email: email,
@@ -124,6 +170,10 @@ export const EditarPerfil = (props: {
       portfolio: portfolio,
     });
   };
+
+  useEffect(() => {
+    setErrors([]);
+  }, [nome, email, telefone, hardskillsAtuais, softskillsAtuais]);
 
   return (
     <>
@@ -152,6 +202,7 @@ export const EditarPerfil = (props: {
                   placeholder="Nome *"
                   value={nome}
                   onChange={(e) => setNome(e)}
+                  messageError={errors.find((e) => e.field === "nome")?.message}
                 />
                 <InputForm
                   keyboardType="email-address"
@@ -159,6 +210,9 @@ export const EditarPerfil = (props: {
                   placeholder="E-mail *"
                   value={email ? email : ""}
                   onChange={(e) => setEmail(e)}
+                  messageError={
+                    errors.find((e) => e.field === "email")?.message
+                  }
                 />
                 <InputForm
                   keyboardType="phone-pad"
@@ -166,6 +220,9 @@ export const EditarPerfil = (props: {
                   placeholder="Telefone"
                   value={telefone ? telefone : ""}
                   onChange={(e) => setTelefone(numberToPhone(e))}
+                  messageError={
+                    errors.find((e) => e.field === "telefone")?.message
+                  }
                 />
                 {userAtual.tipo === "CANDIDATO" && (
                   <>
@@ -197,14 +254,16 @@ export const EditarPerfil = (props: {
                         type="text"
                         placeholder="Hardskills"
                         onChange={(e) => setHardskill(e)}
+                        value={hardskill}
                         InputRightElement={
                           <Pressable
-                            onPress={() =>
+                            onPress={() => {
                               adicionarHardskill({
                                 nome: hardskill,
                                 nivel_experiencia: 1,
-                              })
-                            }
+                              });
+                              setHardskill("");
+                            }}
                             bg={"none"}
                             rounded={"full"}
                             h={"30px"}
@@ -222,6 +281,9 @@ export const EditarPerfil = (props: {
                               Adicionar
                             </Text>
                           </Pressable>
+                        }
+                        messageError={
+                          errors.find((e) => e.field === "hardskill")?.message
                         }
                       />
 
@@ -293,14 +355,16 @@ export const EditarPerfil = (props: {
                         type="text"
                         placeholder="Softskills"
                         onChange={(e) => setSoftskill(e)}
+                        value={softskill}
                         InputRightElement={
                           <Pressable
-                            onPress={() =>
+                            onPress={() => {
                               adicionarSoftskill({
                                 nome: softskill,
                                 nivel_experiencia: 1,
-                              })
-                            }
+                              });
+                              setSoftskill("");
+                            }}
                             bg={"none"}
                             rounded={"full"}
                             h={"30px"}
@@ -318,6 +382,9 @@ export const EditarPerfil = (props: {
                               Adicionar
                             </Text>
                           </Pressable>
+                        }
+                        messageError={
+                          errors.find((e) => e.field === "softskill")?.message
                         }
                       />
 

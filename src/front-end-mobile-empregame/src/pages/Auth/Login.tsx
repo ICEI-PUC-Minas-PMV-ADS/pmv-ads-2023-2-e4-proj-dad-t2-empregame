@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Flex, Text, VStack, View } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { InputForm } from "../../components/input-form";
@@ -6,12 +6,55 @@ import { InputPassword } from "../../components/input-password";
 import { ButtonPrimary } from "../../components/button-primary";
 import { useAuth } from "../../context/auth";
 import { LogoEmpregame } from "../../components/logo";
+import Toast from "react-native-toast-message";
+import { isEmail } from "../../utils/validator/isEmail";
 
 export const Login = ({ navigation }: any) => {
   const { loginSubmit } = useAuth();
 
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
+
+  const pressLogin = () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (!email)
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail",
+      });
+
+    if (!isEmail(email))
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail corretamente",
+      });
+
+    if (!senha)
+      erros.push({
+        field: "senha",
+        message: "Preencha o campo Senha",
+      });
+
+    if (erros.length > 0) {
+      Toast.show({
+        text1: "Campos incompletos/incorretos",
+        type: "error",
+      });
+      return setErrors(erros);
+    }
+
+    loginSubmit(email, senha);
+  };
+
+  useEffect(() => {
+    setErrors([]);
+  }, [senha, email]);
 
   return (
     <View flex={1} flexDirection={"column"}>
@@ -29,7 +72,7 @@ export const Login = ({ navigation }: any) => {
         }}
       />
       <Flex
-        flex={4}
+        flex={3}
         padding={"35px"}
         justifyContent={"center"}
         alignItems={"center"}
@@ -44,6 +87,7 @@ export const Login = ({ navigation }: any) => {
           onChange={(e) => {
             setEmail(e);
           }}
+          messageError={errors.find((e) => e.field === "email")?.message}
         />
         <VStack>
           <InputPassword
@@ -51,6 +95,7 @@ export const Login = ({ navigation }: any) => {
             onChange={(e) => {
               setSenha(e);
             }}
+            messageError={errors.find((e) => e.field === "senha")?.message}
           />
           <Button
             variant={"link"}
@@ -65,10 +110,7 @@ export const Login = ({ navigation }: any) => {
           </Button>
         </VStack>
 
-        <ButtonPrimary
-          buttonText="Acessar"
-          onPress={() => loginSubmit(email, senha)}
-        />
+        <ButtonPrimary buttonText="Acessar" onPress={() => pressLogin()} />
         <Button
           variant={"link"}
           onPress={() => {
