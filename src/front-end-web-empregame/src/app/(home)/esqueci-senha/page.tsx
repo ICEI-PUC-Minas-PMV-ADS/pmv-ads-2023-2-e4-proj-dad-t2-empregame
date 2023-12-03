@@ -14,16 +14,20 @@ import {
 } from "@chakra-ui/react";
 
 import { InputForm } from "@/components/input-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonPrimary } from "@/components/button-primary";
 import { api } from "@/utils/services/api";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { InputPassword } from "@/components/input-password";
+import { isEmail } from "@/utils/validator/isEmail";
 
 const EsqueciSenha = () => {
   const toast = useToast();
   const router = useRouter();
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [codigo, setCodigo] = useState<string>("");
@@ -31,6 +35,42 @@ const EsqueciSenha = () => {
   const [step, setStep] = useState<1 | 2>(1);
 
   const submitResetSenha = async () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (step === 1 && !email)
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail",
+      });
+
+    if (step === 1 && !isEmail(email))
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail corretamente",
+      });
+
+    if (step === 2 && !codigo)
+      erros.push({
+        field: "codigo",
+        message: "Preencha o campo Código",
+      });
+
+    if (step === 2 && !senha)
+      erros.push({
+        field: "senha",
+        message: "Preencha o campo Senha",
+      });
+
+    if (erros.length > 0) {
+      toast({
+        title: "Campos incompletos/incorretos",
+        status: "error",
+      });
+      return setErrors(erros);
+    }
+
     setIsLoading(true);
     await api
       .post("/auth/redefinir-senha", {
@@ -83,6 +123,10 @@ const EsqueciSenha = () => {
       });
   };
 
+  useEffect(() => {
+    setErrors([]);
+  }, [senha, email, codigo]);
+
   return (
     <Box
       bgGradient={"linear-gradient(82deg, #7345D6 39.13%, #DA4FE2 112.59%)"}
@@ -119,6 +163,9 @@ const EsqueciSenha = () => {
                   type="email"
                   placeholder="E-mail"
                   onChange={(e) => setEmail(e.target.value)}
+                  messageError={
+                    errors.find((e) => e.field === "email")?.message
+                  }
                 />
               </Box>
             )}
@@ -141,23 +188,31 @@ const EsqueciSenha = () => {
                     Reenviar código
                   </Button>
                 </Text>
-                <HStack w={"full"} display={"flex"} justifyContent={"center"}>
-                  <PinInput
-                    onChange={(e) => setCodigo(e)}
-                    placeholder="0"
-                    size={"lg"}
-                  >
-                    <PinInputField bg={"white"} />
-                    <PinInputField bg={"white"} />
-                    <PinInputField bg={"white"} />
-                    <PinInputField bg={"white"} />
-                    <PinInputField bg={"white"} />
-                    <PinInputField bg={"white"} />
-                  </PinInput>
-                </HStack>
+                <Flex flexDirection={"column"}>
+                  <HStack w={"full"} display={"flex"} justifyContent={"center"}>
+                    <PinInput
+                      onChange={(e) => setCodigo(e)}
+                      placeholder="0"
+                      size={"lg"}
+                    >
+                      <PinInputField bg={"white"} />
+                      <PinInputField bg={"white"} />
+                      <PinInputField bg={"white"} />
+                      <PinInputField bg={"white"} />
+                      <PinInputField bg={"white"} />
+                      <PinInputField bg={"white"} />
+                    </PinInput>
+                  </HStack>
+                  <Text color={"red.400"} fontSize={"14px"}>
+                    {errors.find((e) => e.field === "codigo")?.message}
+                  </Text>
+                </Flex>
                 <InputPassword
                   placeholder="Nova senha"
                   onChange={(e) => setSenha(e.target.value)}
+                  messageError={
+                    errors.find((e) => e.field === "senha")?.message
+                  }
                 />
               </Flex>
             )}

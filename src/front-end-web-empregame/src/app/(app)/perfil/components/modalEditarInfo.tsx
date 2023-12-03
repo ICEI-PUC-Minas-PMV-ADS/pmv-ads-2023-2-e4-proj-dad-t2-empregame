@@ -10,6 +10,7 @@ import { useFetch } from "@/utils/hooks/useFetch";
 import { useMutation } from "@/utils/hooks/useMutation";
 import { numberToPhone } from "@/utils/regex/numberToPhone";
 import { api } from "@/utils/services/api";
+import { isEmail } from "@/utils/validator/isEmail";
 import {
   Button,
   Modal,
@@ -28,7 +29,7 @@ import {
   Text,
   ModalFooter,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
 const ModalEditarInformacao = (props: {
@@ -41,6 +42,9 @@ const ModalEditarInformacao = (props: {
   const userAtual = props.usuario;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
   const [nome, setNome] = useState<string>(userAtual.nome);
   const [email, setEmail] = useState<string | undefined | null>(
     userAtual.email
@@ -125,6 +129,48 @@ const ModalEditarInformacao = (props: {
   });
 
   const atualizarDados = () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (!nome)
+      erros.push({ field: "nome", message: "Preencha o campo Nome Completo" });
+    if (!email)
+      erros.push({ field: "email", message: "Preencha o campo E-mail" });
+    if (email && !isEmail(email))
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail corretamente",
+      });
+    if (telefone && telefone.length < 14)
+      erros.push({ field: "telefone", message: "Telefone incorreto" });
+    if (
+      userAtual.tipo === "CANDIDATO" &&
+      hardskillsAtuais &&
+      hardskillsAtuais.length <= 0
+    )
+      erros.push({
+        field: "hardskill",
+        message: "Adicione pelo menos uma HardSkill",
+      });
+    if (
+      userAtual.tipo === "CANDIDATO" &&
+      softskillsAtuais &&
+      softskillsAtuais.length <= 0
+    )
+      erros.push({
+        field: "softskill",
+        message: "Adicione pelo menos uma SoftSkill",
+      });
+
+    if (erros.length > 0) {
+      toast({
+        title: "Campos incompletos/incorretos",
+        status: "error",
+      });
+      return setErrors(erros);
+    }
+
     mutateAtualizarUsuario({
       nome: nome,
       email: email,
@@ -134,6 +180,10 @@ const ModalEditarInformacao = (props: {
       portfolio: portfolio,
     });
   };
+
+  useEffect(() => {
+    setErrors([]);
+  }, [nome, email, telefone, hardskillsAtuais, softskillsAtuais]);
 
   return (
     <>
@@ -165,18 +215,25 @@ const ModalEditarInformacao = (props: {
                   placeholder="Nome *"
                   value={nome}
                   onChange={(e) => setNome(e.target.value)}
+                  messageError={errors.find((e) => e.field === "nome")?.message}
                 />
                 <InputForm
                   type="email"
                   placeholder="E-mail *"
                   value={email ? email : ""}
                   onChange={(e) => setEmail(e.target.value)}
+                  messageError={
+                    errors.find((e) => e.field === "email")?.message
+                  }
                 />
                 <InputForm
                   type="tel"
                   placeholder="Telefone"
                   value={telefone ? telefone : ""}
                   onChange={(e) => setTelefone(numberToPhone(e.target.value))}
+                  messageError={
+                    errors.find((e) => e.field === "telefone")?.message
+                  }
                 />
                 {userAtual.tipo === "CANDIDATO" && (
                   <>
@@ -204,34 +261,39 @@ const ModalEditarInformacao = (props: {
               {userAtual.tipo === "CANDIDATO" && (
                 <>
                   <Flex direction={"column"} gap={"12px"}>
-                    <InputGroup>
-                      <InputForm
-                        type="text"
-                        placeholder="Hardskills"
-                        onChange={(e) => setHardskill(e.target.value)}
-                      />
-                      <InputRightElement w={"25%"}>
-                        <Button
-                          onClick={() =>
-                            adicionarHardskill({
-                              nome: hardskill,
-                              nivel_experiencia: 1,
-                            })
-                          }
-                          bg={"none"}
-                          rounded={"full"}
-                          h={"30px"}
-                          color={"#2E2E2E"}
-                        >
-                          <Image
-                            src="./icons/icon-mais.svg"
-                            pr={"10px"}
-                            alt="icone mais"
-                          />
-                          Adicionar
-                        </Button>
-                      </InputRightElement>
-                    </InputGroup>
+                    <InputForm
+                      type="text"
+                      placeholder="Hardskills *"
+                      onChange={(e) => setHardskill(e.target.value)}
+                      value={hardskill}
+                      messageError={
+                        errors.find((e) => e.field === "hardskill")?.message
+                      }
+                      InputRightElement={
+                        <InputRightElement w={"25%"}>
+                          <Button
+                            onClick={() => {
+                              adicionarHardskill({
+                                nome: hardskill,
+                                nivel_experiencia: 1,
+                              });
+                              setHardskill("");
+                            }}
+                            bg={"none"}
+                            rounded={"full"}
+                            h={"30px"}
+                            color={"#2E2E2E"}
+                          >
+                            <Image
+                              src="./icons/icon-mais.svg"
+                              pr={"10px"}
+                              alt="icone mais"
+                            />
+                            Adicionar
+                          </Button>
+                        </InputRightElement>
+                      }
+                    />
 
                     <SimpleGrid columns={2} gap={"15px"}>
                       {hardskillsAtuais &&
@@ -322,34 +384,39 @@ const ModalEditarInformacao = (props: {
                     </SimpleGrid>
                   </Flex>
                   <Flex direction={"column"} gap={"12px"}>
-                    <InputGroup>
-                      <InputForm
-                        type="text"
-                        placeholder="Softskills"
-                        onChange={(e) => setSoftskill(e.target.value)}
-                      />
-                      <InputRightElement w={"25%"}>
-                        <Button
-                          onClick={() =>
-                            adicionarSoftskill({
-                              nome: softskill,
-                              nivel_experiencia: 1,
-                            })
-                          }
-                          bg={"none"}
-                          rounded={"full"}
-                          h={"30px"}
-                          color={"#2E2E2E"}
-                        >
-                          <Image
-                            src="./icons/icon-mais.svg"
-                            pr={"10px"}
-                            alt="icone mais"
-                          />
-                          Adicionar
-                        </Button>
-                      </InputRightElement>
-                    </InputGroup>
+                    <InputForm
+                      type="text"
+                      placeholder="Softskills *"
+                      onChange={(e) => setSoftskill(e.target.value)}
+                      value={softskill}
+                      messageError={
+                        errors.find((e) => e.field === "softskill")?.message
+                      }
+                      InputRightElement={
+                        <InputRightElement w={"25%"}>
+                          <Button
+                            onClick={() => {
+                              adicionarSoftskill({
+                                nome: softskill,
+                                nivel_experiencia: 1,
+                              });
+                              setSoftskill("");
+                            }}
+                            bg={"none"}
+                            rounded={"full"}
+                            h={"30px"}
+                            color={"#2E2E2E"}
+                          >
+                            <Image
+                              src="./icons/icon-mais.svg"
+                              pr={"10px"}
+                              alt="icone mais"
+                            />
+                            Adicionar
+                          </Button>
+                        </InputRightElement>
+                      }
+                    />
 
                     <SimpleGrid columns={2} gap={"15px"}>
                       {softskillsAtuais &&

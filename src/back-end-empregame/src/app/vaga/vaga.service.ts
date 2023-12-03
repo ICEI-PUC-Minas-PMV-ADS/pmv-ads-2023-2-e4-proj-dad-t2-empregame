@@ -64,7 +64,17 @@ export class VagaService {
           vaga_softskill: {
             include: { softskill: { select: { nome: true } } },
           },
-          vaga_candidato: true,
+          vaga_candidato: {
+            include: {
+              usuario: { select: { nome: true, id: true } },
+              vaga: {
+                select: {
+                  nome: true,
+                  usuario: { select: { nome: true, id: true } },
+                },
+              },
+            },
+          },
           usuario: { select: { nome: true, id: true } },
         },
       });
