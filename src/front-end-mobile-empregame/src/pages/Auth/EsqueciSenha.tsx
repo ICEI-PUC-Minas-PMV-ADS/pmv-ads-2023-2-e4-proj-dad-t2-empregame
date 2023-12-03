@@ -1,22 +1,62 @@
 import { AxiosError } from "axios";
 import { LinearGradient } from "expo-linear-gradient";
 import { Box, Button, Flex, HStack, Text, VStack, View } from "native-base";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../utils/services/api";
 import Toast from "react-native-toast-message";
 import { InputForm } from "../../components/input-form";
 import { ButtonPrimary } from "../../components/button-primary";
 import { InputPassword } from "../../components/input-password";
 import { IconVoltar } from "../../components/icons";
+import { isEmail } from "../../utils/validator/isEmail";
 
 export const EsqueciSenha = ({ navigation }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
   const [email, setEmail] = useState<string>("");
   const [codigo, setCodigo] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
   const [step, setStep] = useState<1 | 2>(1);
 
   const submitResetSenha = async () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (step === 1 && !email)
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail",
+      });
+
+    if (step === 1 && !isEmail(email))
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail corretamente",
+      });
+
+    if (step === 2 && !codigo)
+      erros.push({
+        field: "codigo",
+        message: "Preencha o campo Código",
+      });
+
+    if (step === 2 && !senha)
+      erros.push({
+        field: "senha",
+        message: "Preencha o campo Senha",
+      });
+
+    if (erros.length > 0) {
+      Toast.show({
+        text1: "Campos incompletos/incorretos",
+        type: "error",
+      });
+      return setErrors(erros);
+    }
+
     setIsLoading(true);
     await api
       .post("/auth/redefinir-senha", {
@@ -68,6 +108,11 @@ export const EsqueciSenha = ({ navigation }: any) => {
         Toast.show({ text1: error.message, type: "error" });
       });
   };
+
+  useEffect(() => {
+    setErrors([]);
+  }, [senha, email, codigo]);
+
   return (
     <View flex={1}>
       <LinearGradient
@@ -128,6 +173,7 @@ export const EsqueciSenha = ({ navigation }: any) => {
                 keyboardType="email-address"
                 placeholder="E-mail"
                 onChange={(e) => setEmail(e)}
+                messageError={errors.find((e) => e.field === "email")?.message}
               />
             </Box>
           )}
@@ -140,27 +186,32 @@ export const EsqueciSenha = ({ navigation }: any) => {
               >
                 Informe o código que recebeu no e-mail e a nova senha
               </Text>
-              <Text
-                fontFamily={"Outfit-600"}
-                fontWeight={"semibold"}
-                color={"white"}
-              >
-                Não chegou?
+              <HStack alignItems={"center"}>
+                <Text
+                  fontFamily={"Outfit-600"}
+                  fontWeight={"semibold"}
+                  color={"white"}
+                >
+                  Não chegou?
+                </Text>
                 <Button bg={"none"} onPress={() => reenviarResetSenha()}>
                   <Text fontFamily={"Outfit-600"} color={"white"}>
                     Reenviar código
                   </Text>
                 </Button>
-              </Text>
+              </HStack>
+
               <InputForm
                 type="text"
                 keyboardType="number-pad"
                 placeholder="Código"
                 onChange={(e) => setCodigo(e)}
+                messageError={errors.find((e) => e.field === "codigo")?.message}
               />
               <InputPassword
                 placeholder="Nova senha"
                 onChange={(e) => setSenha(e)}
+                messageError={errors.find((e) => e.field === "senha")?.message}
               />
             </VStack>
           )}

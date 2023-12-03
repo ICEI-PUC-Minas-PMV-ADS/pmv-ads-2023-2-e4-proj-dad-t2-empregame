@@ -10,7 +10,7 @@ import {
   TextArea,
   VStack,
 } from "native-base";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { useFetch } from "../../../../utils/hooks/useFetch";
 import { api } from "../../../../utils/services/api";
@@ -32,6 +32,9 @@ export const EditarVaga = (props: {
   refetch: () => void;
 }) => {
   const [showModal, setShowModal] = useState(false);
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
   const [nomeVaga, setNomeVaga] = useState<string>(props.vaga?.nome || "");
   const [descricao, setDescricao] = useState<string>(
     props.vaga?.descricao || ""
@@ -127,6 +130,51 @@ export const EditarVaga = (props: {
     });
 
   const publicarVaga = () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (!nomeVaga)
+      erros.push({
+        field: "nomeVaga",
+        message: "Preencha o campo Nome da Vaga",
+      });
+    if (descricao === "")
+      erros.push({ field: "descricao", message: "Preencha o campo Descrição" });
+    if (!empresa)
+      erros.push({ field: "empresa", message: "Preencha o campo Empresa" });
+    if (!estadoEmpresa)
+      erros.push({
+        field: "estadoEmpresa",
+        message: "Preencha o campo Estado",
+      });
+    if (!cidadeEmpresa)
+      erros.push({
+        field: "cidadeEmpresa",
+        message: "Preencha o campo Cidade",
+      });
+    if (!salario)
+      erros.push({ field: "salario", message: "Preencha o campo Salário" });
+
+    if (hardskillsAtuais && hardskillsAtuais.length <= 0)
+      erros.push({
+        field: "hardskill",
+        message: "Adicione pelo menos uma HardSkill",
+      });
+    if (softskillsAtuais && softskillsAtuais.length <= 0)
+      erros.push({
+        field: "softskill",
+        message: "Adicione pelo menos uma SoftSkill",
+      });
+
+    if (erros.length > 0) {
+      Toast.show({
+        text1: "Campos incompletos/incorretos",
+        type: "error",
+      });
+      return setErrors(erros);
+    }
+
     mutateAtualizarVaga({
       nome: nomeVaga,
       descricao: descricao,
@@ -138,6 +186,18 @@ export const EditarVaga = (props: {
       situacao: "ATIVO",
     });
   };
+
+  useEffect(() => {
+    setErrors([]);
+  }, [
+    nomeVaga,
+    descricao,
+    empresa,
+    estadoEmpresa,
+    cidadeEmpresa,
+    hardskillsAtuais,
+    softskillsAtuais,
+  ]);
 
   return (
     <>
@@ -184,16 +244,29 @@ export const EditarVaga = (props: {
                   placeholder="Nome da Vaga *"
                   value={nomeVaga}
                   onChange={(e) => setNomeVaga(e)}
+                  messageError={
+                    errors.find((e) => e.field === "nomeVaga")?.message
+                  }
                 />
-                <TextArea
-                  fontFamily={"Outfit-500"}
-                  fontSize={"16px"}
-                  borderRadius={"14px"}
-                  placeholder="Descrição *"
-                  value={descricao}
-                  onChange={(e: any) => setDescricao(e.currentTarget.value)}
-                  autoCompleteType={undefined}
-                />
+                <VStack>
+                  <TextArea
+                    fontFamily={"Outfit-500"}
+                    fontSize={"16px"}
+                    borderRadius={"14px"}
+                    placeholder="Descrição *"
+                    value={descricao}
+                    onChange={(e: any) => setDescricao(e.currentTarget.value)}
+                    autoCompleteType={undefined}
+                  />
+                  {descricao === "" ? (
+                    <Text color={"red.400"} fontSize={"14px"}>
+                      {errors.find((e) => e.field === "descricao")?.message}
+                    </Text>
+                  ) : (
+                    ""
+                  )}
+                </VStack>
+
                 <TextArea
                   fontFamily={"Outfit-500"}
                   fontSize={"16px"}
@@ -208,6 +281,9 @@ export const EditarVaga = (props: {
                   placeholder="Empresa *"
                   value={empresa}
                   onChange={(e) => setEmpresa(e)}
+                  messageError={
+                    errors.find((e) => e.field === "empresa")?.message
+                  }
                 />
                 <InputForm
                   type="text"
@@ -215,6 +291,9 @@ export const EditarVaga = (props: {
                   value={salario}
                   keyboardType="number-pad"
                   onChange={(e) => setSalario(numberToBRL(e))}
+                  messageError={
+                    errors.find((e) => e.field === "salario")?.message
+                  }
                 />
                 <SelectSecondary
                   placeholder="Estado *"
@@ -222,6 +301,9 @@ export const EditarVaga = (props: {
                   onValueChange={(e) => {
                     setEstadoEmpresa(e);
                   }}
+                  messageError={
+                    errors.find((e) => e.field === "estadoEmpresa")?.message
+                  }
                 >
                   {estados &&
                     estados.map((e) => (
@@ -232,6 +314,9 @@ export const EditarVaga = (props: {
                   placeholder="Cidade *"
                   defaultValue={cidadeEmpresa}
                   onValueChange={(e) => setCidadeEmpresa(e)}
+                  messageError={
+                    errors.find((e) => e.field === "cidadeEmpresa")?.message
+                  }
                 >
                   {cidades &&
                     cidades.map((c) => (
@@ -244,13 +329,15 @@ export const EditarVaga = (props: {
                     type="text"
                     placeholder="Hardskills"
                     onChange={(e) => setHardskill(e)}
+                    value={hardskill}
                     InputRightElement={
                       <Pressable
-                        onPress={() =>
+                        onPress={() => {
                           adicionarHardskill({
                             nome: hardskill,
-                          })
-                        }
+                          });
+                          setHardskill("");
+                        }}
                         bg={"none"}
                         rounded={"full"}
                         h={"30px"}
@@ -268,6 +355,9 @@ export const EditarVaga = (props: {
                           Adicionar
                         </Text>
                       </Pressable>
+                    }
+                    messageError={
+                      errors.find((e) => e.field === "hardskill")?.message
                     }
                   />
 
@@ -319,13 +409,15 @@ export const EditarVaga = (props: {
                       type="text"
                       placeholder="Softskills"
                       onChange={(e) => setSoftskill(e)}
+                      value={softskill}
                       InputRightElement={
                         <Pressable
-                          onPress={() =>
+                          onPress={() => {
                             adicionarSoftskill({
                               nome: softskill,
-                            })
-                          }
+                            });
+                            setSoftskill("");
+                          }}
                           bg={"none"}
                           rounded={"full"}
                           h={"30px"}
@@ -343,6 +435,9 @@ export const EditarVaga = (props: {
                             Adicionar
                           </Text>
                         </Pressable>
+                      }
+                      messageError={
+                        errors.find((e) => e.field === "softskill")?.message
                       }
                     />
 

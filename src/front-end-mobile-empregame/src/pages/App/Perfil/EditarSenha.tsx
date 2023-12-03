@@ -1,5 +1,5 @@
 import { Button, Modal, Text, VStack } from "native-base";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { useMutation } from "../../../utils/hooks/useMutation";
 import { InputPassword } from "../../../components/input-password";
@@ -7,6 +7,11 @@ import { ButtonPrimary } from "../../../components/button-primary";
 
 export const EditarSenha = () => {
   const [showModal, setShowModal] = useState(false);
+
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
+
   const [atualSenha, setAtualSenha] = useState<string>("");
   const [novaSenha, setNovaSenha] = useState<string>("");
 
@@ -27,11 +32,39 @@ export const EditarSenha = () => {
     });
 
   const atualizarDados = () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (!atualSenha)
+      erros.push({
+        field: "atualSenha",
+        message: "Preencha o campo Senha Atual",
+      });
+    if (!novaSenha)
+      erros.push({
+        field: "novaSenha",
+        message: "Preencha o campo Nova Senha",
+      });
+
+    if (erros.length > 0) {
+      Toast.show({
+        text1: "Campos incompletos/incorretos",
+        type: "error",
+      });
+      return setErrors(erros);
+    }
+
     mutateAtualizarSenha({
       senha_atual: atualSenha,
       senha_nova: novaSenha,
     });
   };
+
+  useEffect(() => {
+    setErrors([]);
+  }, [novaSenha, atualSenha]);
+
   return (
     <>
       <Button bg={"none"} w={"full"} py={1} onPress={() => setShowModal(true)}>
@@ -53,10 +86,16 @@ export const EditarSenha = () => {
               <InputPassword
                 placeholder="Senha Atual"
                 onChange={(e) => setAtualSenha(e)}
+                messageError={
+                  errors.find((e) => e.field === "atualSenha")?.message
+                }
               />
               <InputPassword
                 placeholder="Nova Senha"
                 onChange={(e) => setNovaSenha(e)}
+                messageError={
+                  errors.find((e) => e.field === "novaSenha")?.message
+                }
               />
             </VStack>
           </Modal.Body>

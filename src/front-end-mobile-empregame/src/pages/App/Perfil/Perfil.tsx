@@ -7,6 +7,7 @@ import {
   Menu,
   Pressable,
   ScrollView,
+  Spinner,
   Text,
   VStack,
   View,
@@ -29,12 +30,13 @@ export const Perfil = ({ route, navigation }: any) => {
   const { user } = useAuth();
   const idusuario = route.params.idusuario;
 
-  const { data: usuario, refetch } = useFetch<IUsuario>(
-    "/usuarios/" + idusuario,
-    {
-      method: "GET",
-    }
-  );
+  const {
+    data: usuario,
+    refetch,
+    isFetching,
+  } = useFetch<IUsuario>("/usuarios/" + idusuario, {
+    method: "GET",
+  });
 
   return (
     <>
@@ -51,325 +53,331 @@ export const Perfil = ({ route, navigation }: any) => {
           height: "100%",
         }}
       />
-      <ScrollView>
-        <View px={"30px"} py={"40px"}>
-          <HStack
-            alignItems={"center"}
-            justifyContent={"space-between"}
-            w={"full"}
-          >
-            <Button
-              marginY={"20px"}
-              alignSelf={"flex-start"}
-              bg={"none"}
-              rounded={"full"}
-              onPress={() => {
-                navigation.goBack();
-              }}
+      {isFetching == true ? (
+        <View flex={1} justifyContent={"center"}>
+          <Spinner size="lg" color={"#6D3BBF"} />
+        </View>
+      ) : (
+        <ScrollView>
+          <View px={"30px"} py={"40px"}>
+            <HStack
+              alignItems={"center"}
+              justifyContent={"space-between"}
+              w={"full"}
             >
-              <HStack space={"10px"} alignItems={"center"}>
-                <IconVoltar />
-                <Text fontFamily={"Outfit-500"} color={"white"}>
-                  Voltar
-                </Text>
-              </HStack>
-            </Button>
-            {user?.id === usuario?.id && (
-              <Menu
-                alignSelf={"flex-end"}
-                placement="bottom left"
-                w="250px"
-                marginRight={3}
-                background={"#6D3BBF"}
-                trigger={(triggerProps) => {
-                  return (
-                    <Pressable accessibilityLabel="Menu" {...triggerProps}>
-                      <IconHamburguer
-                        style={{ marginVertical: 15, marginHorizontal: 10 }}
-                      />
-                    </Pressable>
-                  );
+              <Button
+                marginY={"20px"}
+                alignSelf={"flex-start"}
+                bg={"none"}
+                rounded={"full"}
+                onPress={() => {
+                  navigation.goBack();
                 }}
               >
-                {usuario && (
-                  <Menu.Item>
-                    <EditarPerfil
-                      usuario={usuario}
-                      refetch={() => {
-                        refetch();
-                      }}
-                    />
-                  </Menu.Item>
-                )}
-                <Menu.Item>
-                  <EditarSenha />
-                </Menu.Item>
-                <Menu.Item>
-                  <ExcluirConta />
-                </Menu.Item>
-              </Menu>
-            )}
-          </HStack>
-          <VStack direction={"column"} space={"32px"} width={"100%"}>
-            <VStack space={"15px"} direction={"column"}>
-              <Text
-                fontFamily={"Outfit-500"}
-                color={"white"}
-                fontWeight={"semibold"}
-                fontSize={"36px"}
-              >
-                {usuario?.nome}
-              </Text>
-              <Box
-                bg={"#5a2da4"}
-                padding={"8px 25px"}
-                rounded={"full"}
-                maxWidth={"200px"}
-              >
-                <Text
-                  color={"white"}
-                  textAlign={"center"}
-                  fontSize={"16px"}
-                  fontWeight={"semibold"}
-                  fontFamily={"Outfit-500"}
+                <HStack space={"10px"} alignItems={"center"}>
+                  <IconVoltar />
+                  <Text fontFamily={"Outfit-500"} color={"white"}>
+                    Voltar
+                  </Text>
+                </HStack>
+              </Button>
+              {user?.id === usuario?.id && (
+                <Menu
+                  alignSelf={"flex-end"}
+                  placement="bottom left"
+                  w="250px"
+                  marginRight={3}
+                  background={"#6D3BBF"}
+                  trigger={(triggerProps) => {
+                    return (
+                      <Pressable accessibilityLabel="Menu" {...triggerProps}>
+                        <IconHamburguer
+                          style={{ marginVertical: 15, marginHorizontal: 10 }}
+                        />
+                      </Pressable>
+                    );
+                  }}
                 >
-                  {usuario?.tipo}
+                  {usuario && (
+                    <Menu.Item>
+                      <EditarPerfil
+                        usuario={usuario}
+                        refetch={() => {
+                          refetch();
+                        }}
+                      />
+                    </Menu.Item>
+                  )}
+                  <Menu.Item>
+                    <EditarSenha />
+                  </Menu.Item>
+                  <Menu.Item>
+                    <ExcluirConta />
+                  </Menu.Item>
+                </Menu>
+              )}
+            </HStack>
+            <VStack direction={"column"} space={"32px"} width={"100%"}>
+              <VStack space={"15px"} direction={"column"}>
+                <Text
+                  fontFamily={"Outfit-500"}
+                  color={"white"}
+                  fontWeight={"semibold"}
+                  fontSize={"36px"}
+                >
+                  {usuario?.nome}
                 </Text>
-              </Box>
-            </VStack>
-            <Divider />
-            <VStack space={"20px"}>
-              {usuario?.telefone && (
-                <Box>
+                <Box
+                  bg={"#5a2da4"}
+                  padding={"8px 25px"}
+                  rounded={"full"}
+                  maxWidth={"200px"}
+                >
                   <Text
                     color={"white"}
+                    textAlign={"center"}
                     fontSize={"16px"}
-                    fontFamily={"Outfit-500"}
-                    fontWeight={"normal"}
-                  >
-                    Telefone
-                  </Text>
-                  <Text
-                    color={"white"}
-                    fontSize={"16px"}
-                    fontFamily={"Outfit-500"}
                     fontWeight={"semibold"}
+                    fontFamily={"Outfit-500"}
                   >
-                    {usuario.telefone}
+                    {usuario?.tipo}
                   </Text>
                 </Box>
-              )}
-              {usuario?.email && (
-                <Box color={"white"} fontSize={"16px"}>
-                  <Text
-                    color={"white"}
-                    fontSize={"16px"}
-                    fontFamily={"Outfit-500"}
-                    fontWeight={"normal"}
-                  >
-                    E-mail
-                  </Text>
-                  <Text
-                    color={"white"}
-                    fontSize={"16px"}
-                    fontFamily={"Outfit-500"}
-                    fontWeight={"semibold"}
-                  >
-                    {usuario.email}
-                  </Text>
-                </Box>
-              )}
-              {usuario?.github && (
-                <Box color={"white"} fontSize={"16px"}>
-                  <Text
-                    color={"white"}
-                    fontSize={"16px"}
-                    fontFamily={"Outfit-500"}
-                    fontWeight={"normal"}
-                  >
-                    GitHub
-                  </Text>
-                  <Link href={usuario.github}>
+              </VStack>
+              <Divider />
+              <VStack space={"20px"}>
+                {usuario?.telefone && (
+                  <Box>
                     <Text
-                      fontWeight={"semibold"}
-                      display={"flex"}
-                      alignItems={"center"}
                       color={"white"}
                       fontSize={"16px"}
                       fontFamily={"Outfit-500"}
+                      fontWeight={"normal"}
                     >
-                      {usuario.github.replace("https://", "")} {"  "}
-                      <IconLink />
+                      Telefone
                     </Text>
-                  </Link>
-                </Box>
-              )}
-              {usuario?.portfolio && (
-                <Box color={"white"} fontSize={"16px"}>
-                  <Text
-                    color={"white"}
-                    fontSize={"16px"}
-                    fontFamily={"Outfit-500"}
-                    fontWeight={"normal"}
-                  >
-                    Portifólio
-                  </Text>
-                  <Link href={usuario.portfolio}>
                     <Text
-                      fontWeight={"semibold"}
-                      display={"flex"}
-                      alignItems={"center"}
                       color={"white"}
                       fontSize={"16px"}
                       fontFamily={"Outfit-500"}
-                    >
-                      {usuario.portfolio.replace("https://", "")} {"  "}
-                      <IconLink />
-                    </Text>
-                  </Link>
-                </Box>
-              )}
-              {usuario?.linkedin && (
-                <Box color={"white"} fontSize={"16px"}>
-                  <Text
-                    color={"white"}
-                    fontSize={"16px"}
-                    fontFamily={"Outfit-500"}
-                    fontWeight={"normal"}
-                  >
-                    Linkedin
-                  </Text>
-                  <Link href={usuario.linkedin}>
-                    <Text
                       fontWeight={"semibold"}
-                      display={"flex"}
-                      alignItems={"center"}
+                    >
+                      {usuario.telefone}
+                    </Text>
+                  </Box>
+                )}
+                {usuario?.email && (
+                  <Box color={"white"} fontSize={"16px"}>
+                    <Text
                       color={"white"}
                       fontSize={"16px"}
                       fontFamily={"Outfit-500"}
+                      fontWeight={"normal"}
                     >
-                      {usuario.linkedin.replace("https://", "")} {"  "}
-                      <IconLink />
+                      E-mail
                     </Text>
-                  </Link>
-                </Box>
+                    <Text
+                      color={"white"}
+                      fontSize={"16px"}
+                      fontFamily={"Outfit-500"}
+                      fontWeight={"semibold"}
+                    >
+                      {usuario.email}
+                    </Text>
+                  </Box>
+                )}
+                {usuario?.github && (
+                  <Box color={"white"} fontSize={"16px"}>
+                    <Text
+                      color={"white"}
+                      fontSize={"16px"}
+                      fontFamily={"Outfit-500"}
+                      fontWeight={"normal"}
+                    >
+                      GitHub
+                    </Text>
+                    <Link href={usuario.github}>
+                      <Text
+                        fontWeight={"semibold"}
+                        display={"flex"}
+                        alignItems={"center"}
+                        color={"white"}
+                        fontSize={"16px"}
+                        fontFamily={"Outfit-500"}
+                      >
+                        {usuario.github.replace("https://", "")} {"  "}
+                        <IconLink />
+                      </Text>
+                    </Link>
+                  </Box>
+                )}
+                {usuario?.portfolio && (
+                  <Box color={"white"} fontSize={"16px"}>
+                    <Text
+                      color={"white"}
+                      fontSize={"16px"}
+                      fontFamily={"Outfit-500"}
+                      fontWeight={"normal"}
+                    >
+                      Portifólio
+                    </Text>
+                    <Link href={usuario.portfolio}>
+                      <Text
+                        fontWeight={"semibold"}
+                        display={"flex"}
+                        alignItems={"center"}
+                        color={"white"}
+                        fontSize={"16px"}
+                        fontFamily={"Outfit-500"}
+                      >
+                        {usuario.portfolio.replace("https://", "")} {"  "}
+                        <IconLink />
+                      </Text>
+                    </Link>
+                  </Box>
+                )}
+                {usuario?.linkedin && (
+                  <Box color={"white"} fontSize={"16px"}>
+                    <Text
+                      color={"white"}
+                      fontSize={"16px"}
+                      fontFamily={"Outfit-500"}
+                      fontWeight={"normal"}
+                    >
+                      Linkedin
+                    </Text>
+                    <Link href={usuario.linkedin}>
+                      <Text
+                        fontWeight={"semibold"}
+                        display={"flex"}
+                        alignItems={"center"}
+                        color={"white"}
+                        fontSize={"16px"}
+                        fontFamily={"Outfit-500"}
+                      >
+                        {usuario.linkedin.replace("https://", "")} {"  "}
+                        <IconLink />
+                      </Text>
+                    </Link>
+                  </Box>
+                )}
+              </VStack>
+              {usuario?.tipo === "CANDIDATO" && (
+                <>
+                  <Divider />
+                  <VStack space={"45px"}>
+                    <Box width={"full"}>
+                      <Text
+                        color={"white"}
+                        fontSize={"16px"}
+                        fontFamily={"Outfit-500"}
+                        paddingBottom={"5px"}
+                      >
+                        Hardskills
+                      </Text>
+
+                      <VStack space={"12px"}>
+                        {usuario?.usuario_hardskill?.map((hardskill) => (
+                          <VStack
+                            key={hardskill.id + hardskill.hardskill.nome}
+                            direction={"column"}
+                            bg={"#6D3BBF"}
+                            rounded={"12px"}
+                            py={"12px"}
+                            px={"20px"}
+                            width={"full"}
+                            space={"8px"}
+                          >
+                            <Text
+                              fontSize={"16px"}
+                              fontWeight={"medium"}
+                              color={"white"}
+                              fontFamily={"Outfit-500"}
+                            >
+                              {hardskill.hardskill.nome}
+                            </Text>
+
+                            <HStack space={"8px"}>
+                              {[...Array(5)].map((star, index) => {
+                                const currentRating = index + 1;
+                                return (
+                                  <Box key={index}>
+                                    <IconStar
+                                      fill={
+                                        currentRating <=
+                                        hardskill.nivel_experiencia
+                                          ? "#FFB800"
+                                          : "white"
+                                      }
+                                    />
+                                  </Box>
+                                );
+                              })}
+                            </HStack>
+                          </VStack>
+                        ))}
+                      </VStack>
+                    </Box>
+
+                    <Box width={"full"}>
+                      <Text
+                        fontFamily={"Outfit-500"}
+                        color={"white"}
+                        fontSize={"16px"}
+                        paddingBottom={"5px"}
+                      >
+                        Softskills
+                      </Text>
+                      <VStack space={"12px"}>
+                        {usuario?.usuario_softskill?.map((softskill) => (
+                          <VStack
+                            key={softskill.id + softskill.softskill.nome}
+                            direction={"column"}
+                            bg={"#6D3BBF"}
+                            rounded={"12px"}
+                            py={"12px"}
+                            px={"20px"}
+                            width={"full"}
+                            space={"8px"}
+                          >
+                            <Text
+                              fontSize={"16px"}
+                              fontWeight={"medium"}
+                              color={"white"}
+                              fontFamily={"Outfit-500"}
+                            >
+                              {softskill.softskill.nome}
+                            </Text>
+
+                            <HStack space={"8px"}>
+                              {[...Array(5)].map((star, index) => {
+                                const currentRating = index + 1;
+                                return (
+                                  // eslint-disable-next-line react/jsx-key
+                                  <Box key={index}>
+                                    <IconStar
+                                      fill={
+                                        currentRating <=
+                                        softskill.nivel_experiencia
+                                          ? "#FFB800"
+                                          : "white"
+                                      }
+                                    />
+                                  </Box>
+                                );
+                              })}
+                            </HStack>
+                          </VStack>
+                        ))}
+                      </VStack>
+                    </Box>
+                  </VStack>
+                </>
               )}
             </VStack>
-            {usuario?.tipo === "CANDIDATO" && (
-              <>
-                <Divider />
-                <VStack space={"45px"}>
-                  <Box width={"full"}>
-                    <Text
-                      color={"white"}
-                      fontSize={"16px"}
-                      fontFamily={"Outfit-500"}
-                      paddingBottom={"5px"}
-                    >
-                      Hardskills
-                    </Text>
-
-                    <VStack space={"12px"}>
-                      {usuario?.usuario_hardskill?.map((hardskill) => (
-                        <VStack
-                          key={hardskill.id + hardskill.hardskill.nome}
-                          direction={"column"}
-                          bg={"#6D3BBF"}
-                          rounded={"12px"}
-                          py={"12px"}
-                          px={"20px"}
-                          width={"full"}
-                          space={"8px"}
-                        >
-                          <Text
-                            fontSize={"16px"}
-                            fontWeight={"medium"}
-                            color={"white"}
-                            fontFamily={"Outfit-500"}
-                          >
-                            {hardskill.hardskill.nome}
-                          </Text>
-
-                          <HStack space={"8px"}>
-                            {[...Array(5)].map((star, index) => {
-                              const currentRating = index + 1;
-                              return (
-                                <Box key={index}>
-                                  <IconStar
-                                    fill={
-                                      currentRating <=
-                                      hardskill.nivel_experiencia
-                                        ? "#FFB800"
-                                        : "white"
-                                    }
-                                  />
-                                </Box>
-                              );
-                            })}
-                          </HStack>
-                        </VStack>
-                      ))}
-                    </VStack>
-                  </Box>
-
-                  <Box width={"full"}>
-                    <Text
-                      fontFamily={"Outfit-500"}
-                      color={"white"}
-                      fontSize={"16px"}
-                      paddingBottom={"5px"}
-                    >
-                      Softskills
-                    </Text>
-                    <VStack space={"12px"}>
-                      {usuario?.usuario_softskill?.map((softskill) => (
-                        <VStack
-                          key={softskill.id + softskill.softskill.nome}
-                          direction={"column"}
-                          bg={"#6D3BBF"}
-                          rounded={"12px"}
-                          py={"12px"}
-                          px={"20px"}
-                          width={"full"}
-                          space={"8px"}
-                        >
-                          <Text
-                            fontSize={"16px"}
-                            fontWeight={"medium"}
-                            color={"white"}
-                            fontFamily={"Outfit-500"}
-                          >
-                            {softskill.softskill.nome}
-                          </Text>
-
-                          <HStack space={"8px"}>
-                            {[...Array(5)].map((star, index) => {
-                              const currentRating = index + 1;
-                              return (
-                                // eslint-disable-next-line react/jsx-key
-                                <Box key={index}>
-                                  <IconStar
-                                    fill={
-                                      currentRating <=
-                                      softskill.nivel_experiencia
-                                        ? "#FFB800"
-                                        : "white"
-                                    }
-                                  />
-                                </Box>
-                              );
-                            })}
-                          </HStack>
-                        </VStack>
-                      ))}
-                    </VStack>
-                  </Box>
-                </VStack>
-              </>
-            )}
-          </VStack>
-        </View>
-      </ScrollView>
+          </View>
+        </ScrollView>
+      )}
     </>
   );
 };

@@ -14,7 +14,7 @@ import {
   View,
 } from "native-base";
 import { SelectPrimary } from "../../components/select-primary";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../../utils/services/api";
 import { AxiosError } from "axios";
 import { useAuth } from "../../context/auth";
@@ -27,10 +27,14 @@ import StarRating from "react-native-star-rating-widget";
 import { ButtonPrimary } from "../../components/button-primary";
 import { IconMais, IconClose, IconVoltar } from "../../components/icons";
 import { Platform } from "react-native";
+import { isEmail } from "../../utils/validator/isEmail";
 
 export const Cadastro = ({ navigation }: any) => {
   const { loginSubmit } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState<{ field: string; message: string }[]>(
+    []
+  );
   const [tipo, setTipo] = useState<"RECRUTADOR" | "CANDIDATO">("CANDIDATO");
   const [nome, setNome] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -73,6 +77,42 @@ export const Cadastro = ({ navigation }: any) => {
   };
 
   const cadastrar = async () => {
+    const erros: { field: string; message: string }[] = [];
+
+    setErrors([]);
+
+    if (!nome)
+      erros.push({ field: "nome", message: "Preencha o campo Nome Completo" });
+    if (!email)
+      erros.push({ field: "email", message: "Preencha o campo E-mail" });
+    if (!isEmail(email))
+      erros.push({
+        field: "email",
+        message: "Preencha o campo E-mail corretamente",
+      });
+    if (!senha)
+      erros.push({ field: "senha", message: "Preencha o campo Senha" });
+    if (telefone && telefone.length < 14)
+      erros.push({ field: "telefone", message: "Telefone incorreto" });
+    if (tipo === "CANDIDATO" && listHardskill.length <= 0)
+      erros.push({
+        field: "hardskill",
+        message: "Adicione pelo menos uma HardSkill",
+      });
+    if (tipo === "CANDIDATO" && listSoftskill.length <= 0)
+      erros.push({
+        field: "softskill",
+        message: "Adicione pelo menos uma SoftSkill",
+      });
+
+    if (erros.length > 0) {
+      Toast.show({
+        text1: "Campos incompletos/incorretos",
+        type: "error",
+      });
+      return setErrors(erros);
+    }
+
     setIsLoading(true);
     try {
       await api
@@ -137,6 +177,10 @@ export const Cadastro = ({ navigation }: any) => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    setErrors([]);
+  }, [nome, senha, email, telefone, listHardskill, listSoftskill]);
 
   return (
     <View flex={1}>
@@ -205,16 +249,23 @@ export const Cadastro = ({ navigation }: any) => {
                   type="text"
                   placeholder="Nome *"
                   onChange={(e) => setNome(e)}
+                  messageError={errors.find((e) => e.field === "nome")?.message}
                 />
                 <InputForm
                   keyboardType="email-address"
                   type="text"
                   placeholder="E-mail *"
                   onChange={(e) => setEmail(e)}
+                  messageError={
+                    errors.find((e) => e.field === "email")?.message
+                  }
                 />
                 <InputPassword
                   placeholder="Senha *"
                   onChange={(e) => setSenha(e)}
+                  messageError={
+                    errors.find((e) => e.field === "senha")?.message
+                  }
                 />
                 <InputForm
                   keyboardType="phone-pad"
@@ -222,6 +273,9 @@ export const Cadastro = ({ navigation }: any) => {
                   placeholder="Telefone"
                   value={telefone}
                   onChange={(e) => setTelefone(numberToPhone(e))}
+                  messageError={
+                    errors.find((e) => e.field === "telefone")?.message
+                  }
                 />
                 {tipo === "CANDIDATO" && (
                   <>
@@ -243,17 +297,19 @@ export const Cadastro = ({ navigation }: any) => {
                   <VStack space={"12px"}>
                     <InputForm
                       type="text"
-                      placeholder="Hardskills"
+                      placeholder="Hardskills *"
                       onChange={(e) => setHardskill(e)}
+                      value={hardskill}
                       InputRightElement={
                         <Pressable
-                          onPress={() =>
+                          onPress={() => {
                             adicionarHardskill({
                               id: Math.random() * 100,
                               nome: hardskill,
                               nivel_experiencia: 1,
-                            })
-                          }
+                            });
+                            setHardskill("");
+                          }}
                           bg={"none"}
                           rounded={"full"}
                           h={"30px"}
@@ -271,6 +327,9 @@ export const Cadastro = ({ navigation }: any) => {
                             Adicionar
                           </Text>
                         </Pressable>
+                      }
+                      messageError={
+                        errors.find((e) => e.field === "hardskill")?.message
                       }
                     />
 
@@ -341,17 +400,19 @@ export const Cadastro = ({ navigation }: any) => {
                   <VStack space={"12px"}>
                     <InputForm
                       type="text"
-                      placeholder="Softskills"
+                      placeholder="Softskills *"
                       onChange={(e) => setSoftskill(e)}
+                      value={softskill}
                       InputRightElement={
                         <Pressable
-                          onPress={() =>
+                          onPress={() => {
                             adicionarSoftskill({
                               id: Math.random() * 100,
                               nome: softskill,
                               nivel_experiencia: 1,
-                            })
-                          }
+                            });
+                            setSoftskill("");
+                          }}
                           bg={"none"}
                           rounded={"full"}
                           h={"30px"}
@@ -369,6 +430,9 @@ export const Cadastro = ({ navigation }: any) => {
                             Adicionar
                           </Text>
                         </Pressable>
+                      }
+                      messageError={
+                        errors.find((e) => e.field === "softskill")?.message
                       }
                     />
 
