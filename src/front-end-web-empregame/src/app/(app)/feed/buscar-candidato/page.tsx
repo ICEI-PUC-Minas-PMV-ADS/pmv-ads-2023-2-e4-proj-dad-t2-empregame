@@ -9,6 +9,7 @@ import {
   Image,
   Text,
   useToast,
+  CircularProgress,
 } from "@chakra-ui/react";
 import CardCandidato from "../components/CardCandidato";
 import { useState } from "react";
@@ -23,14 +24,17 @@ const BuscarCandidato = () => {
   const [hardskill, setHardskill] = useState<string | null>(null);
   const [softskill, setSoftskill] = useState<string | null>(null);
 
-  const { data: candidatos } = useFetch<IUsuario[]>("/usuarios/candidatos", {
-    params: { pesquisa, hardskill, softskill, situacao: "ATIVO" },
-    itensRefresh: [pesquisa, hardskill, softskill],
-    onError: (err) => {
-      if (err.response?.data)
-        toast({ title: err.response.data.message, status: "error" });
-    },
-  });
+  const { data: candidatos, isFetching } = useFetch<IUsuario[]>(
+    "/usuarios/candidatos",
+    {
+      params: { pesquisa, hardskill, softskill, situacao: "ATIVO" },
+      itensRefresh: [pesquisa, hardskill, softskill],
+      onError: (err) => {
+        if (err.response?.data)
+          toast({ title: err.response.data.message, status: "error" });
+      },
+    }
+  );
 
   const { data: hardskills } = useFetch<IHardskill[]>("/hardskills", {
     onError: (err) => {
@@ -60,19 +64,26 @@ const BuscarCandidato = () => {
 
   return (
     <>
-      <Flex
-        width={"60%"}
-        direction={"column"}
-        gap={"20px"}
-        alignItems={"center"}
-      >
-        {candidatos?.map((candidato) => (
-          <CardCandidato
-            key={candidato.id + candidato.nome}
-            candidato={candidato}
-          />
-        ))}
-      </Flex>
+      {isFetching ? (
+        <Flex justifyContent={"center"} pt={"200px"}>
+          <CircularProgress isIndeterminate color="#5A2DA4" />
+        </Flex>
+      ) : (
+        <Flex
+          width={"60%"}
+          direction={"column"}
+          gap={"20px"}
+          alignItems={"center"}
+        >
+          {candidatos?.map((candidato) => (
+            <CardCandidato
+              key={candidato.id + candidato.nome}
+              candidato={candidato}
+            />
+          ))}
+        </Flex>
+      )}
+
       <Flex width={"20%"} direction={"column"} gap={"18px"}>
         <Text color={"#5A2DA4"} fontSize={"18px"} fontWeight={"semibold"}>
           Pesquisar Candidato

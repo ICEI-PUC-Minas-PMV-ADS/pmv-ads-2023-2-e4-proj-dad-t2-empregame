@@ -181,6 +181,8 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
                   fontSize={"16px"}
                   fontWeight={"regular"}
                   _hover={{ boxShadow: "lg" }}
+                  isLoading={isFetchingNovaMensagem}
+                  loadingText={"Enviando"}
                   onClick={() => {
                     mutateNovaMensagem({
                       conteudo: newMensagem,

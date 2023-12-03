@@ -13,6 +13,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           gap={"50px"}
           justifyContent={"space-between"}
           paddingY={"60px"}
+          minHeight={"1000px"}
         >
           <NavFeed />
           {children}
