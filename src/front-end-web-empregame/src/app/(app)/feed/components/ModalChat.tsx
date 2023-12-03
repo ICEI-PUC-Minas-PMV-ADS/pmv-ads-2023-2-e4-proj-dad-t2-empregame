@@ -158,6 +158,7 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
                   border={"1px"}
                   borderColor={"#2E2E2E"}
                   placeholder={"Digite aqui"}
+                  value={newMensagem}
                   onChange={(e) => setNewMensagem(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -166,6 +167,7 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
                         id_usuario: usuario?.id,
                         id_vaga_candidato: props.match?.id,
                       });
+                      setNewMensagem("");
                     }
                   }}
                 ></Input>
@@ -178,7 +180,6 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
                   fontSize={"16px"}
                   fontWeight={"regular"}
                   _hover={{ boxShadow: "lg" }}
-                  value={newMensagem}
                   onClick={() => {
                     mutateNovaMensagem({
                       conteudo: newMensagem,
