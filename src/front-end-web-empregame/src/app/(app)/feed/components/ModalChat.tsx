@@ -35,8 +35,8 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
   const [newMensagem, setNewMensagem] = useState<string>("");
 
   const { data: mensagens, refetch } = useFetch<IMensagem[]>(
-    "/mensagens/" + props.match?.id,
-    { interval: 1000, enable: isOpen }
+    "/mensagens/" + props.match?.id
+    /* { interval: 1000, enable: isOpen } */
   );
 
   const { mutate: mutateNovaMensagem, isFetching: isFetchingNovaMensagem } =
@@ -113,43 +113,44 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
           <ModalBody paddingBottom={"20px"}>
             <Flex direction={"column"} gap={"30px"}>
               <Flex
-                direction={"column"}
-                gap={"10px"}
                 overflow={"auto"}
                 maxH={"600px"}
+                direction={"column-reverse"}
               >
-                {mensagens &&
-                  mensagens.map((msg) => (
-                    <Box
-                      key={msg.id}
-                      maxW={"80%"}
-                      alignSelf={
-                        msg.id_usuario === usuario?.id
-                          ? "flex-end"
-                          : "flex-start"
-                      }
-                      bg={
-                        msg.id_usuario === usuario?.id ? "#6D3BBF" : "#F1E9FF"
-                      }
-                      px={"15px"}
-                      py={"10px"}
-                      color={
-                        msg.id_usuario === usuario?.id ? "white" : "#2E2E2E"
-                      }
-                      fontSize={"14px"}
-                      fontWeight={"medium"}
-                      rounded={
-                        msg.id_usuario === usuario?.id
-                          ? "11px 11px 0px 11px"
-                          : "11px 11px 11px 0px"
-                      }
-                      textAlign={
-                        msg.id_usuario === usuario?.id ? "right" : "left"
-                      }
-                    >
-                      {msg.conteudo}
-                    </Box>
-                  ))}
+                <Flex direction={"column"} gap={"10px"} px={"10px"}>
+                  {mensagens &&
+                    mensagens.map((msg) => (
+                      <Box
+                        key={msg.id}
+                        maxW={"80%"}
+                        alignSelf={
+                          msg.id_usuario === usuario?.id
+                            ? "flex-end"
+                            : "flex-start"
+                        }
+                        bg={
+                          msg.id_usuario === usuario?.id ? "#6D3BBF" : "#F1E9FF"
+                        }
+                        px={"15px"}
+                        py={"10px"}
+                        color={
+                          msg.id_usuario === usuario?.id ? "white" : "#2E2E2E"
+                        }
+                        fontSize={"14px"}
+                        fontWeight={"medium"}
+                        rounded={
+                          msg.id_usuario === usuario?.id
+                            ? "11px 11px 0px 11px"
+                            : "11px 11px 11px 0px"
+                        }
+                        textAlign={
+                          msg.id_usuario === usuario?.id ? "right" : "left"
+                        }
+                      >
+                        {msg.conteudo}
+                      </Box>
+                    ))}
+                </Flex>
               </Flex>
 
               <Flex gap={"10px"}>
