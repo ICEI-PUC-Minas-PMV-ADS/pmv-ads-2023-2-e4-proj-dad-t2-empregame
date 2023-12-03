@@ -157,7 +157,14 @@ export const MinhasVagas = ({ navigation }: any) => {
                   refetch={() => refetch}
                   onPressChat={() => navigation.navigate("Chat")}
                   onPressUsuario={() =>
-                    navigation.navigate("Perfil", { idusuario: item.id })
+                    navigation.navigate("Perfil", {
+                      idusuario: item.id_usuario,
+                    })
+                  }
+                  onPressInteressados={() =>
+                    navigation.navigate("Candidatos Interessados", {
+                      idvaga: item.id,
+                    })
                   }
                 />
               );

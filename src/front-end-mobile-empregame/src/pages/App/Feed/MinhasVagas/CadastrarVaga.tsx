@@ -131,6 +131,9 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
         props.refetch();
         Toast.show({ text1: "Vaga publicada com sucesso!", type: "success" });
         setShowModal(false);
+        setSalario("");
+        setListHardskill([]);
+        setListSoftskill([]);
       },
       onError: (err) => {
         Toast.show({ text1: err.message, type: "error" });
@@ -147,7 +150,7 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
         field: "nomeVaga",
         message: "Preencha o campo Nome da Vaga",
       });
-    if (descricao === "")
+    if (!descricao)
       erros.push({ field: "descricao", message: "Preencha o campo Descrição" });
     if (!empresa)
       erros.push({ field: "empresa", message: "Preencha o campo Empresa" });
@@ -252,31 +255,22 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
                     errors.find((e) => e.field === "nomeVaga")?.message
                   }
                 />
-                <VStack>
-                  <TextArea
-                    fontFamily={"Outfit-500"}
-                    fontSize={"16px"}
-                    borderRadius={"14px"}
-                    placeholder="Descrição *"
-                    onChange={(e: any) => setDescricao(e.currentTarget.value)}
-                    autoCompleteType={undefined}
-                  />
-                  {descricao === "" ? (
-                    <Text color={"red.400"} fontSize={"14px"}>
-                      {errors.find((e) => e.field === "descricao")?.message}
-                    </Text>
-                  ) : (
-                    ""
-                  )}
-                </VStack>
-
-                <TextArea
-                  fontFamily={"Outfit-500"}
-                  fontSize={"16px"}
-                  borderRadius={"14px"}
+                <InputForm
+                  type="text"
+                  placeholder="Descrição *"
+                  multiline={true}
+                  numberOfLines={3}
+                  onChange={(e) => setDescricao(e)}
+                  messageError={
+                    errors.find((e) => e.field === "descricao")?.message
+                  }
+                />
+                <InputForm
+                  type="text"
                   placeholder="Benefícios"
-                  onChange={(e: any) => setBeneficios(e.currentTarget.value)}
-                  autoCompleteType={undefined}
+                  multiline={true}
+                  numberOfLines={3}
+                  onChange={(e) => setBeneficios(e)}
                 />
 
                 <InputForm

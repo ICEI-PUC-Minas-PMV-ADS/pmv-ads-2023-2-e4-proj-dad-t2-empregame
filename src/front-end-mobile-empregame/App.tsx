@@ -1,11 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeBaseProvider } from "native-base";
-import React from "react";
+import React, { useEffect } from "react";
 import { useFonts } from "expo-font";
 import Routes from "./src/routes";
 import { AuthProvider } from "./src/context/auth";
 import Toast from "react-native-toast-message";
+import { LogBox } from "react-native";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,6 +23,12 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
+
+  useEffect(() => {
+    LogBox.ignoreLogs([
+      "In React 18, SSRProvider is not necessary and is a noop. You can remove it from your app.",
+    ]);
+  }, []);
 
   return (
     <NavigationContainer>

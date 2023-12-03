@@ -7,7 +7,6 @@ import {
   Button,
   Divider,
   HStack,
-  Link,
   Pressable,
   Text,
   VStack,
@@ -18,14 +17,11 @@ import {
   IconPerson,
   IconCoracao,
   IconMatch,
-  IconChat,
-  IconEdit,
   IconDesativarVaga,
 } from "./icons";
 import { GestureResponderEvent } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { EditarVaga } from "../pages/App/Feed/MinhasVagas/EditarVaga";
-import { CandidatosInteressados } from "../pages/App/Feed/MinhasVagas/CandidatosInteressados";
 import { Chat } from "../pages/App/Feed/Chat";
 
 const CardVaga = (props: {
@@ -33,6 +29,10 @@ const CardVaga = (props: {
   refetch: () => void;
   onPressChat: ((event: GestureResponderEvent) => void) | null | undefined;
   onPressUsuario: ((event: GestureResponderEvent) => void) | null | undefined;
+  onPressInteressados?:
+    | ((event: GestureResponderEvent) => void)
+    | null
+    | undefined;
 }) => {
   const { user } = useAuth();
   const route = useRoute();
@@ -336,10 +336,29 @@ const CardVaga = (props: {
       )}
       {user?.tipo === "RECRUTADOR" && route.name !== "Feed" && (
         <>
-          <CandidatosInteressados
-            idVaga={props.vaga?.id}
-            qtdCandidatosInteressados={props.vaga?.vaga_candidato?.length}
-          />
+          <Button
+            onPress={props.onPressInteressados}
+            bg={"#6D3BBF"}
+            borderColor={"#6D3BBF"}
+            borderWidth={"2px"}
+            rounded={"full"}
+            py={"10px"}
+            px={"25px"}
+            w={"full"}
+          >
+            <HStack space={"10px"} alignItems={"center"}>
+              <IconCoracao fill={"#FF5757"} borderColor={"#6D3BBF"} />
+              <Text
+                fontFamily={"Outfit-500"}
+                color={"white"}
+                textAlign={"center"}
+                fontSize={"18px"}
+                fontWeight={"semibold"}
+              >
+                {props.vaga?.vaga_candidato?.length} Candidatos Interessados
+              </Text>
+            </HStack>
+          </Button>
           <VStack space={"25px"}>
             <HStack space={"8px"} w={"full"}>
               <EditarVaga
