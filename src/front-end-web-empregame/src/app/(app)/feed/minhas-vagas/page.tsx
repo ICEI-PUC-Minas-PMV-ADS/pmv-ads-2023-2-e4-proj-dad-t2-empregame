@@ -11,6 +11,7 @@ import {
   Select,
   Image,
   Text,
+  CircularProgress,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import CardVaga from "../components/CardVaga";
@@ -28,7 +29,11 @@ const MinhasVagas = () => {
   const [hardskill, setHardskill] = useState<string | null>(null);
   const [softskill, setSoftskill] = useState<string | null>(null);
 
-  const { data: vagas, refetch } = useFetch<IVaga[]>("/vagas", {
+  const {
+    data: vagas,
+    refetch,
+    isFetching,
+  } = useFetch<IVaga[]>("/vagas", {
     params: { pesquisa, hardskill, softskill },
     itensRefresh: [pesquisa, hardskill, softskill],
     onError: (err) => {
@@ -69,21 +74,28 @@ const MinhasVagas = () => {
 
   return (
     <>
-      <Flex
-        width={"60%"}
-        direction={"column"}
-        gap={"20px"}
-        alignItems={"center"}
-      >
-        <ModalPublicarVaga refetch={() => refetch()} />
-        {vagasFiltradas?.map((vaga) => (
-          <CardVaga
-            key={vaga.id + vaga.nome}
-            vaga={vaga}
-            refetch={() => refetch()}
-          />
-        ))}
-      </Flex>
+      {isFetching ? (
+        <Flex justifyContent={"center"} pt={"200px"}>
+          <CircularProgress isIndeterminate color="#5A2DA4" />
+        </Flex>
+      ) : (
+        <Flex
+          width={"60%"}
+          direction={"column"}
+          gap={"20px"}
+          alignItems={"center"}
+        >
+          <ModalPublicarVaga refetch={() => refetch()} />
+          {vagasFiltradas?.map((vaga) => (
+            <CardVaga
+              key={vaga.id + vaga.nome}
+              vaga={vaga}
+              refetch={() => refetch()}
+            />
+          ))}
+        </Flex>
+      )}
+
       <Flex width={"20%"} direction={"column"} gap={"18px"}>
         <Text color={"#5A2DA4"} fontSize={"18px"} fontWeight={"semibold"}>
           Pesquisar Vaga

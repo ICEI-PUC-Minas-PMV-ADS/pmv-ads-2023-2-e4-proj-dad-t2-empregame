@@ -2,8 +2,10 @@
 
 import { Link } from "@chakra-ui/next-js";
 import { Container, Divider, Flex, Image } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
+  const router = useRouter();
   return (
     <header id="home">
       <Container maxW={"1366px"}>
@@ -12,7 +14,12 @@ export const Header = () => {
           justifyContent={"space-between"}
           height={"140px"}
         >
-          <Image src="./logo-empregame.svg" alt="logo" />
+          <Image
+            src="./logo-empregame.svg"
+            alt="logo"
+            onClick={() => router.push("/")}
+            cursor={"pointer"}
+          />
 
           <Flex gap={"70px"} alignItems={"center"}>
             <Link

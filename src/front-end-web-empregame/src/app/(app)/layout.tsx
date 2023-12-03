@@ -2,7 +2,6 @@
 
 import { authToken } from "@/utils/config/authToken";
 import { useAppContext } from "@/utils/hooks/useContext";
-import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 import { Header } from "./components/Header";

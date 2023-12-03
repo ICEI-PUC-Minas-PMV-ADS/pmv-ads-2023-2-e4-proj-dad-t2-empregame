@@ -12,6 +12,7 @@ import {
   Flex,
   Divider,
   SimpleGrid,
+  CircularProgress,
 } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppContext } from "@/utils/hooks/useContext";
@@ -29,245 +30,263 @@ const Perfil = () => {
 
   const idUsuario = query.get("id");
 
-  const { data: usuario, refetch } = useFetch<IUsuario>(
-    "/usuarios/" + idUsuario,
-    {
-      method: "GET",
-      onSuccess: (data) => {
-        if (usuarioLogado?.id === data.data.id)
-          dispatchAppContext({ payload: data.data, type: "SET_USUARIO" });
-      },
-    }
-  );
+  const {
+    data: usuario,
+    refetch,
+    isFetching,
+  } = useFetch<IUsuario>("/usuarios/" + idUsuario, {
+    method: "GET",
+    onSuccess: (data) => {
+      if (usuarioLogado?.id === data.data.id)
+        dispatchAppContext({ payload: data.data, type: "SET_USUARIO" });
+    },
+  });
 
   return (
     <Box
       bgGradient={"linear-gradient(82deg, #7345D6 39.13%, #DA4FE2 112.59%)"}
       py={"40px"}
+      minH={"800px"}
     >
-      <Container maxW={"1366px"} h={"full"} paddingY={"70px"}>
-        <Flex
-          justifyContent={"space-between"}
-          gap={"40px"}
-          width={"100%"}
-          marginBottom={"75px"}
-        >
-          <Button
-            bg={"none"}
-            gap={"10px"}
-            color={"white"}
-            _hover={{ bg: "#6d3bbf" }}
-            rounded={"full"}
-            onClick={() => router.back()}
+      {isFetching ? (
+        <Flex justifyContent={"center"} alignItems={"center"} minH={"800px"}>
+          <CircularProgress isIndeterminate color="#6d3bbf" />
+        </Flex>
+      ) : (
+        <Container maxW={"1366px"} h={"full"} paddingY={"70px"}>
+          <Flex
+            justifyContent={"space-between"}
+            gap={"40px"}
+            width={"100%"}
+            marginBottom={"75px"}
           >
-            <Image src={"./icons/icon-back.svg"} alt="icone voltar" />
-            Voltar
-          </Button>
-          {usuarioLogado?.id === usuario?.id && (
-            <Flex gap={"40px"}>
-              {usuario && (
-                <ModalEditarInformacao
-                  usuario={usuario}
-                  refetch={() => {
-                    refetch();
-                  }}
-                />
-              )}
-              {usuario && <ModalAlterarSenha />}
-              {usuario && <DialogExcluirConta />}
-            </Flex>
-          )}
-        </Flex>
-        <Flex direction={"column"} gap={"32px"} width={"100%"}>
-          <Flex gap={"15px"} direction={"column"}>
-            <Text color={"white"} fontWeight={"semibold"} fontSize={"48px"}>
-              {usuario?.nome}
-            </Text>
-            <Box
-              bg={"#5a2da4"}
-              textColor={"white"}
-              fontSize={"16px"}
-              fontWeight={"semibold"}
-              padding={"8px 25px"}
+            <Button
+              bg={"none"}
+              gap={"10px"}
+              color={"white"}
+              _hover={{ bg: "#6d3bbf" }}
               rounded={"full"}
-              maxWidth={"200px"}
-              textAlign={"center"}
+              onClick={() => router.back()}
             >
-              {usuario?.tipo}
-            </Box>
-          </Flex>
-          <Divider />
-          <SimpleGrid columns={5} spacing={"20px"}>
-            {usuario?.telefone && (
-              <Box color={"white"} fontSize={"16px"}>
-                <Text fontWeight={"normal"}>Telefone</Text>
-                <Text fontWeight={"semibold"}>{usuario.telefone}</Text>
-              </Box>
-            )}
-            {usuario?.email && (
-              <Box color={"white"} fontSize={"16px"}>
-                <Text fontWeight={"normal"}>E-mail</Text>
-                <Text fontWeight={"semibold"}>{usuario.email}</Text>
-              </Box>
-            )}
-            {usuario?.github && (
-              <Box color={"white"} fontSize={"16px"}>
-                <Text fontWeight={"normal"}>GitHub</Text>
-                <a href={usuario.github} target="_blank">
-                  <Text
-                    fontWeight={"semibold"}
-                    display={"flex"}
-                    alignItems={"center"}
-                  >
-                    {usuario.github.replace("https://", "")}
-                    <Image
-                      src="./icons/icon-share.svg"
-                      alt="icon redirecionavel"
-                      paddingLeft={"10px"}
-                    />
-                  </Text>
-                </a>
-              </Box>
-            )}
-            {usuario?.portfolio && (
-              <Box color={"white"} fontSize={"16px"}>
-                <Text fontWeight={"normal"}>Portifólio</Text>
-                <a href={usuario.portfolio} target="_blank">
-                  <Text
-                    fontWeight={"semibold"}
-                    display={"flex"}
-                    alignItems={"center"}
-                  >
-                    {usuario.portfolio.replace("https://", "")}
-                    <Image
-                      src="./icons/icon-share.svg"
-                      alt="icon redirecionavel"
-                      paddingLeft={"10px"}
-                    />
-                  </Text>
-                </a>
-              </Box>
-            )}
-            {usuario?.linkedin && (
-              <Box color={"white"} fontSize={"16px"}>
-                <Text fontWeight={"normal"}>Linkedin</Text>
-                <a href={usuario.linkedin} target="_blank">
-                  <Text
-                    fontWeight={"semibold"}
-                    display={"flex"}
-                    alignItems={"center"}
-                  >
-                    {usuario.linkedin.replace("https://", "")}
-                    <Image
-                      src="./icons/icon-share.svg"
-                      alt="icon redirecionavel"
-                      paddingLeft={"10px"}
-                    />
-                  </Text>
-                </a>
-              </Box>
-            )}
-          </SimpleGrid>
-          {usuario?.tipo === "CANDIDATO" && (
-            <>
-              <Divider />
-              <Flex gap={"45px"}>
-                <Box width={"full"}>
-                  <Text color={"white"} fontSize={"16px"} paddingBottom={"5px"}>
-                    Hardskills
-                  </Text>
-
-                  <SimpleGrid columns={2} spacing={"12px"}>
-                    {usuario?.usuario_hardskill?.map((hardskill) => (
-                      <Flex
-                        key={hardskill.id + hardskill.hardskill.nome}
-                        direction={"column"}
-                        bg={"#6D3BBF"}
-                        rounded={"12px"}
-                        py={"12px"}
-                        px={"20px"}
-                        width={"full"}
-                        gap={"8px"}
-                      >
-                        <Text
-                          fontSize={"16px"}
-                          fontWeight={"medium"}
-                          color={"white"}
-                        >
-                          {hardskill.hardskill.nome}
-                        </Text>
-
-                        <Flex gap={"8px"}>
-                          {[...Array(5)].map((star, index) => {
-                            const currentRating = index + 1;
-                            return (
-                              <label key={index}>
-                                <IconStar
-                                  fill={
-                                    currentRating <= hardskill.nivel_experiencia
-                                      ? "#FFB800"
-                                      : "white"
-                                  }
-                                />
-                              </label>
-                            );
-                          })}
-                        </Flex>
-                      </Flex>
-                    ))}
-                  </SimpleGrid>
-                </Box>
-
-                <Box width={"full"}>
-                  <Text color={"white"} fontSize={"16px"} paddingBottom={"5px"}>
-                    Softskills
-                  </Text>
-                  <SimpleGrid columns={2} spacing={"12px"}>
-                    {usuario?.usuario_softskill?.map((softskill) => (
-                      <Flex
-                        key={softskill.id + softskill.softskill.nome}
-                        direction={"column"}
-                        bg={"#6D3BBF"}
-                        rounded={"12px"}
-                        py={"12px"}
-                        px={"20px"}
-                        width={"full"}
-                        gap={"8px"}
-                      >
-                        <Text
-                          fontSize={"16px"}
-                          fontWeight={"medium"}
-                          color={"white"}
-                        >
-                          {softskill.softskill.nome}
-                        </Text>
-
-                        <Flex gap={"8px"}>
-                          {[...Array(5)].map((star, index) => {
-                            const currentRating = index + 1;
-                            return (
-                              // eslint-disable-next-line react/jsx-key
-                              <label key={index}>
-                                <IconStar
-                                  fill={
-                                    currentRating <= softskill.nivel_experiencia
-                                      ? "#FFB800"
-                                      : "white"
-                                  }
-                                />
-                              </label>
-                            );
-                          })}
-                        </Flex>
-                      </Flex>
-                    ))}
-                  </SimpleGrid>
-                </Box>
+              <Image src={"./icons/icon-back.svg"} alt="icone voltar" />
+              Voltar
+            </Button>
+            {usuarioLogado?.id === usuario?.id && (
+              <Flex gap={"40px"}>
+                {usuario && (
+                  <ModalEditarInformacao
+                    usuario={usuario}
+                    refetch={() => {
+                      refetch();
+                    }}
+                  />
+                )}
+                {usuario && <ModalAlterarSenha />}
+                {usuario && <DialogExcluirConta />}
               </Flex>
-            </>
-          )}
-        </Flex>
-      </Container>
+            )}
+          </Flex>
+          <Flex direction={"column"} gap={"32px"} width={"100%"}>
+            <Flex gap={"15px"} direction={"column"}>
+              <Text color={"white"} fontWeight={"semibold"} fontSize={"48px"}>
+                {usuario?.nome}
+              </Text>
+              <Box
+                bg={"#5a2da4"}
+                textColor={"white"}
+                fontSize={"16px"}
+                fontWeight={"semibold"}
+                padding={"8px 25px"}
+                rounded={"full"}
+                maxWidth={"200px"}
+                textAlign={"center"}
+              >
+                {usuario?.tipo}
+              </Box>
+            </Flex>
+            <Divider />
+            <SimpleGrid columns={5} spacing={"20px"}>
+              {usuario?.telefone && (
+                <Box color={"white"} fontSize={"16px"}>
+                  <Text fontWeight={"normal"}>Telefone</Text>
+                  <Text fontWeight={"semibold"}>{usuario.telefone}</Text>
+                </Box>
+              )}
+              {usuario?.email && (
+                <Box color={"white"} fontSize={"16px"}>
+                  <Text fontWeight={"normal"}>E-mail</Text>
+                  <Text fontWeight={"semibold"}>{usuario.email}</Text>
+                </Box>
+              )}
+              {usuario?.github && (
+                <Box color={"white"} fontSize={"16px"}>
+                  <Text fontWeight={"normal"}>GitHub</Text>
+                  <a href={usuario.github} target="_blank">
+                    <Text
+                      fontWeight={"semibold"}
+                      display={"flex"}
+                      alignItems={"center"}
+                    >
+                      {usuario.github.replace("https://", "")}
+                      <Image
+                        src="./icons/icon-share.svg"
+                        alt="icon redirecionavel"
+                        paddingLeft={"10px"}
+                      />
+                    </Text>
+                  </a>
+                </Box>
+              )}
+              {usuario?.portfolio && (
+                <Box color={"white"} fontSize={"16px"}>
+                  <Text fontWeight={"normal"}>Portifólio</Text>
+                  <a href={usuario.portfolio} target="_blank">
+                    <Text
+                      fontWeight={"semibold"}
+                      display={"flex"}
+                      alignItems={"center"}
+                    >
+                      {usuario.portfolio.replace("https://", "")}
+                      <Image
+                        src="./icons/icon-share.svg"
+                        alt="icon redirecionavel"
+                        paddingLeft={"10px"}
+                      />
+                    </Text>
+                  </a>
+                </Box>
+              )}
+              {usuario?.linkedin && (
+                <Box color={"white"} fontSize={"16px"}>
+                  <Text fontWeight={"normal"}>Linkedin</Text>
+                  <a href={usuario.linkedin} target="_blank">
+                    <Text
+                      fontWeight={"semibold"}
+                      display={"flex"}
+                      alignItems={"center"}
+                    >
+                      {usuario.linkedin.replace("https://", "")}
+                      <Image
+                        src="./icons/icon-share.svg"
+                        alt="icon redirecionavel"
+                        paddingLeft={"10px"}
+                      />
+                    </Text>
+                  </a>
+                </Box>
+              )}
+            </SimpleGrid>
+            {usuario?.tipo === "CANDIDATO" && (
+              <>
+                <Divider />
+                <Flex gap={"45px"}>
+                  <Box width={"full"}>
+                    <Text
+                      color={"white"}
+                      fontSize={"16px"}
+                      paddingBottom={"5px"}
+                    >
+                      Hardskills
+                    </Text>
+
+                    <SimpleGrid columns={2} spacing={"12px"}>
+                      {usuario?.usuario_hardskill?.map((hardskill) => (
+                        <Flex
+                          key={hardskill.id + hardskill.hardskill.nome}
+                          direction={"column"}
+                          bg={"#6D3BBF"}
+                          rounded={"12px"}
+                          py={"12px"}
+                          px={"20px"}
+                          width={"full"}
+                          gap={"8px"}
+                        >
+                          <Text
+                            fontSize={"16px"}
+                            fontWeight={"medium"}
+                            color={"white"}
+                          >
+                            {hardskill.hardskill.nome}
+                          </Text>
+
+                          <Flex gap={"8px"}>
+                            {[...Array(5)].map((star, index) => {
+                              const currentRating = index + 1;
+                              return (
+                                <label key={index}>
+                                  <IconStar
+                                    fill={
+                                      currentRating <=
+                                      hardskill.nivel_experiencia
+                                        ? "#FFB800"
+                                        : "white"
+                                    }
+                                  />
+                                </label>
+                              );
+                            })}
+                          </Flex>
+                        </Flex>
+                      ))}
+                    </SimpleGrid>
+                  </Box>
+
+                  <Box width={"full"}>
+                    <Text
+                      color={"white"}
+                      fontSize={"16px"}
+                      paddingBottom={"5px"}
+                    >
+                      Softskills
+                    </Text>
+                    <SimpleGrid columns={2} spacing={"12px"}>
+                      {usuario?.usuario_softskill?.map((softskill) => (
+                        <Flex
+                          key={softskill.id + softskill.softskill.nome}
+                          direction={"column"}
+                          bg={"#6D3BBF"}
+                          rounded={"12px"}
+                          py={"12px"}
+                          px={"20px"}
+                          width={"full"}
+                          gap={"8px"}
+                        >
+                          <Text
+                            fontSize={"16px"}
+                            fontWeight={"medium"}
+                            color={"white"}
+                          >
+                            {softskill.softskill.nome}
+                          </Text>
+
+                          <Flex gap={"8px"}>
+                            {[...Array(5)].map((star, index) => {
+                              const currentRating = index + 1;
+                              return (
+                                // eslint-disable-next-line react/jsx-key
+                                <label key={index}>
+                                  <IconStar
+                                    fill={
+                                      currentRating <=
+                                      softskill.nivel_experiencia
+                                        ? "#FFB800"
+                                        : "white"
+                                    }
+                                  />
+                                </label>
+                              );
+                            })}
+                          </Flex>
+                        </Flex>
+                      ))}
+                    </SimpleGrid>
+                  </Box>
+                </Flex>
+              </>
+            )}
+          </Flex>
+        </Container>
+      )}
     </Box>
   );
 };
