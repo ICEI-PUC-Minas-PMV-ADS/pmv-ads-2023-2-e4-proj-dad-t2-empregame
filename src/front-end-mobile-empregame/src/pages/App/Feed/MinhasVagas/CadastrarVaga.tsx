@@ -409,7 +409,7 @@ export const CadastrarVaga = (props: { refetch: () => void }) => {
                   <VStack space={"12px"}>
                     <InputForm
                       type="text"
-                      placeholder="Softskills"
+                      placeholder="Softskills *"
                       onChange={(e) => setSoftskill(e)}
                       value={softskill}
                       InputRightElement={
