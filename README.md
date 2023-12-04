@@ -23,7 +23,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 
 Documentação da API: https://empregame.onrender.com/api-doc
 
-Aplicação Web: https://main.d1u0i9hjfixfac.amplifyapp.com/
+Aplicação Web: https://app.empregame.online
 
 Aplicação Mobile para Instalação (.apk): https://sgapucminasbr-my.sharepoint.com/:u:/g/personal/1401789_sga_pucminas_br/ETXX79_1SQZHv4Kim7WEeTYBjlPBp_ZnpLfbWt2d1RUAaw?e=Ygmi7n
 
