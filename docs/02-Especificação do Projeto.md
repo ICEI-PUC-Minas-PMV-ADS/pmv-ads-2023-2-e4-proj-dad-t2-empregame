@@ -82,12 +82,9 @@ Processo de cadastro para candidatos e recrutadores em BPMN 2.0
 
 ## Indicadores de Desempenho
 
-Apresente aqui os principais indicadores de desempenho e algumas metas para o processo. Atenção: as informações necessárias para gerar os indicadores devem estar contempladas no diagrama de classe. Colocar no mínimo 5 indicadores.
+Na tabela abaixo temos indicadores de desempenho utilizados no projeto:
 
-Usar o seguinte modelo:
-
-![Indicadores de Desempenho](img/02-indic-desemp.png)
-Obs.: todas as informações para gerar os indicadores devem estar no diagrama de classe a ser apresentado a posteriori.
+![Indicadores de Desempenho](img/indicador-desempenho.jpg)
 
 ## Requisitos
 
