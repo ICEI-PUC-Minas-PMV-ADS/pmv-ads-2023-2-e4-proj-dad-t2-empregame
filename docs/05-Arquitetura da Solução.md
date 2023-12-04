@@ -45,6 +45,7 @@ O diagrama de classes é uma representação gráfica que visualiza a estrutura 
 - Banco de dados: PostgresSQL e Redis
 - Desenvolvimento BackEnd: NestJS, Prisma, NodeJS
 - Desenvolvimento FrontEnd: NextJS, React e Chakra UI
+- Desenvolvimento FronEnd Mobile: React Native, Expo e NativeBase
 - Ferramentas de Desenho de Tela e diagrama: Figma, Miro.
 - Infraestrutura: Docker, Render (Hospedagem dos Serviços do BackEnd e do Banco de dados), AWS (Hospedagem FrontEnd) e Umbler (Servidor de e-mail)
 
