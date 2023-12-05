@@ -150,12 +150,14 @@ export const Chat = (props: { match?: IVagaCandidato }, router: any) => {
                 isLoading={isFetchingNovaMensagem}
                 isLoadingText="Enviando"
                 onPress={() => {
-                  mutateNovaMensagem({
-                    conteudo: newMensagem,
-                    id_usuario: user?.id,
-                    id_vaga_candidato: props.match?.id,
-                  });
-                  setNewMensagem("");
+                  if (newMensagem) {
+                    mutateNovaMensagem({
+                      conteudo: newMensagem,
+                      id_usuario: user?.id,
+                      id_vaga_candidato: props.match?.id,
+                    });
+                    setNewMensagem("");
+                  }
                 }}
               >
                 Enviar

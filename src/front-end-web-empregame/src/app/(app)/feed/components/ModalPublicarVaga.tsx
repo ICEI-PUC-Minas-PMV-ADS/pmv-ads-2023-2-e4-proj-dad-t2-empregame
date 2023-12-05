@@ -56,12 +56,32 @@ const ModalPublicarVaga = (props: { refetch: () => void }) => {
     }[]
   >([]);
 
-  const adicionarHardskill = (hardskill: { id: number; nome: string }) => {
-    setListHardskill((old) => [...old, hardskill]);
+  const adicionarHardskill = (newHardskill: { id: number; nome: string }) => {
+    if (!hardskill) {
+      setErrors((old) => [
+        ...old,
+        {
+          field: "hardskill",
+          message: "Preecha o campo para adicionar a Hardskill",
+        },
+      ]);
+    } else {
+      setListHardskill((old) => [...old, newHardskill]);
+    }
   };
 
-  const adicionarSoftskill = (softskill: { id: number; nome: string }) => {
-    setListSoftskill((old) => [...old, softskill]);
+  const adicionarSoftskill = (newSoftskill: { id: number; nome: string }) => {
+    if (!softskill) {
+      setErrors((old) => [
+        ...old,
+        {
+          field: "softskill",
+          message: "Preecha o campo para adicionar a Softskill",
+        },
+      ]);
+    } else {
+      setListSoftskill((old) => [...old, newSoftskill]);
+    }
   };
 
   const { data: estados } = useFetch<
