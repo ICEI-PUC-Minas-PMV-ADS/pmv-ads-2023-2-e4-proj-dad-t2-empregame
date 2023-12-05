@@ -69,48 +69,68 @@ const ModalEditarInformacao = (props: {
     IUsuarioHardSkill[]
   >("/usuarios/hardskills/" + userAtual.id);
 
-  const adicionarHardskill = (hardskill: {
+  const adicionarHardskill = (newHardskill: {
     nome: string;
     nivel_experiencia: number;
   }) => {
-    api
-      .post("/hardskills", {
-        nome: hardskill.nome,
-      })
-      .then((data: { data: { id: number } }) => {
-        const idHardskill = data.data.id;
-        api
-          .post("/usuarios/hardskills", {
-            nivel_experiencia: hardskill.nivel_experiencia,
-            id_usuario: userAtual.id,
-            id_hardskill: idHardskill,
-          })
-          .then(() => refetchHardSkill());
-      });
+    if (!hardskill) {
+      setErrors((old) => [
+        ...old,
+        {
+          field: "hardskill",
+          message: "Preecha o campo para adicionar a Hardskill",
+        },
+      ]);
+    } else {
+      api
+        .post("/hardskills", {
+          nome: newHardskill.nome,
+        })
+        .then((data: { data: { id: number } }) => {
+          const idHardskill = data.data.id;
+          api
+            .post("/usuarios/hardskills", {
+              nivel_experiencia: newHardskill.nivel_experiencia,
+              id_usuario: userAtual.id,
+              id_hardskill: idHardskill,
+            })
+            .then(() => refetchHardSkill());
+        });
+    }
   };
 
   const { data: softskillsAtuais, refetch: refetchSoftSkill } = useFetch<
     IUsuarioSoftSkill[]
   >("/usuarios/softskills/" + userAtual.id);
 
-  const adicionarSoftskill = (softskill: {
+  const adicionarSoftskill = (newSoftskill: {
     nome: string;
     nivel_experiencia: number;
   }) => {
-    api
-      .post("/softskills", {
-        nome: softskill.nome,
-      })
-      .then((data: { data: { id: number } }) => {
-        const idSoftskill = data.data.id;
-        api
-          .post("/usuarios/softskills", {
-            nivel_experiencia: softskill.nivel_experiencia,
-            id_usuario: userAtual.id,
-            id_softskill: idSoftskill,
-          })
-          .then(() => refetchSoftSkill());
-      });
+    if (!softskill) {
+      setErrors((old) => [
+        ...old,
+        {
+          field: "softskill",
+          message: "Preecha o campo para adicionar a Softskill",
+        },
+      ]);
+    } else {
+      api
+        .post("/softskills", {
+          nome: newSoftskill.nome,
+        })
+        .then((data: { data: { id: number } }) => {
+          const idSoftskill = data.data.id;
+          api
+            .post("/usuarios/softskills", {
+              nivel_experiencia: newSoftskill.nivel_experiencia,
+              id_usuario: userAtual.id,
+              id_softskill: idSoftskill,
+            })
+            .then(() => refetchSoftSkill());
+        });
+    }
   };
 
   const {

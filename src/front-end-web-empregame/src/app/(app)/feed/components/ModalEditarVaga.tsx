@@ -61,40 +61,60 @@ const ModalEditarVaga = (props: {
     IVagaHardSkill[]
   >("/vagas/hardskills/" + props.vaga?.id);
 
-  const adicionarHardskill = (hardskill: { nome: string }) => {
-    api
-      .post("/hardskills", {
-        nome: hardskill.nome,
-      })
-      .then((data: { data: { id: number } }) => {
-        const idHardskill = data.data.id;
-        api
-          .post("/vagas/hardskills", {
-            id_vaga: props.vaga?.id,
-            id_hardskill: idHardskill,
-          })
-          .then(() => refetchHardSkill());
-      });
+  const adicionarHardskill = (newHardskill: { nome: string }) => {
+    if (!hardskill) {
+      setErrors((old) => [
+        ...old,
+        {
+          field: "hardskill",
+          message: "Preecha o campo para adicionar a Hardskill",
+        },
+      ]);
+    } else {
+      api
+        .post("/hardskills", {
+          nome: newHardskill.nome,
+        })
+        .then((data: { data: { id: number } }) => {
+          const idHardskill = data.data.id;
+          api
+            .post("/vagas/hardskills", {
+              id_vaga: props.vaga?.id,
+              id_hardskill: idHardskill,
+            })
+            .then(() => refetchHardSkill());
+        });
+    }
   };
 
   const { data: softskillsAtuais, refetch: refetchSoftSkill } = useFetch<
     IVagaSoftSkill[]
   >("/vagas/softskills/" + props.vaga?.id);
 
-  const adicionarSoftskill = (softskill: { nome: string }) => {
-    api
-      .post("/softskills", {
-        nome: softskill.nome,
-      })
-      .then((data: { data: { id: number } }) => {
-        const idSoftskill = data.data.id;
-        api
-          .post("/vagas/softskills", {
-            id_vaga: props.vaga?.id,
-            id_softskill: idSoftskill,
-          })
-          .then(() => refetchSoftSkill());
-      });
+  const adicionarSoftskill = (newSoftskill: { nome: string }) => {
+    if (!softskill) {
+      setErrors((old) => [
+        ...old,
+        {
+          field: "softskill",
+          message: "Preecha o campo para adicionar a Softskill",
+        },
+      ]);
+    } else {
+      api
+        .post("/softskills", {
+          nome: newSoftskill.nome,
+        })
+        .then((data: { data: { id: number } }) => {
+          const idSoftskill = data.data.id;
+          api
+            .post("/vagas/softskills", {
+              id_vaga: props.vaga?.id,
+              id_softskill: idSoftskill,
+            })
+            .then(() => refetchSoftSkill());
+        });
+    }
   };
 
   const { data: estados } = useFetch<

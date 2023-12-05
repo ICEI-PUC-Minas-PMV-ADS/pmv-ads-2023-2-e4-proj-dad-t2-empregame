@@ -162,7 +162,7 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
                   value={newMensagem}
                   onChange={(e) => setNewMensagem(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") {
+                    if (e.key === "Enter" && newMensagem) {
                       mutateNovaMensagem({
                         conteudo: newMensagem,
                         id_usuario: usuario?.id,
@@ -184,12 +184,14 @@ const ModalChat = (props: { match?: IVagaCandidato }) => {
                   isLoading={isFetchingNovaMensagem}
                   loadingText={"Enviando"}
                   onClick={() => {
-                    mutateNovaMensagem({
-                      conteudo: newMensagem,
-                      id_usuario: usuario?.id,
-                      id_vaga_candidato: props.match?.id,
-                    });
-                    setNewMensagem("");
+                    if (newMensagem) {
+                      mutateNovaMensagem({
+                        conteudo: newMensagem,
+                        id_usuario: usuario?.id,
+                        id_vaga_candidato: props.match?.id,
+                      });
+                      setNewMensagem("");
+                    }
                   }}
                 >
                   Enviar
