@@ -35,7 +35,7 @@ const CardCandidato = (props: { candidato: IUsuario }) => {
         </Button>
       </Flex>
 
-      <Flex gap={"8px"} alignItems={"center"}>
+      <Flex gap={"8px"} alignItems={"center"} flexWrap={"wrap"}>
         {props.candidato.usuario_hardskill?.map((hardskill) => (
           <Box
             key={hardskill.id + hardskill.hardskill.nome}
