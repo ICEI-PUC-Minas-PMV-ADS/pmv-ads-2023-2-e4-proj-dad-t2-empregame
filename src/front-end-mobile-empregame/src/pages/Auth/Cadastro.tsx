@@ -60,20 +60,40 @@ export const Cadastro = ({ navigation }: any) => {
     }[]
   >([]);
 
-  const adicionarHardskill = (hardskill: {
+  const adicionarHardskill = (newHardskill: {
     id: number;
     nome: string;
     nivel_experiencia: number;
   }) => {
-    setListHardskill((old) => [...old, hardskill]);
+    if (!hardskill) {
+      setErrors((old) => [
+        ...old,
+        {
+          field: "hardskill",
+          message: "Preecha o campo para adicionar a Hardskill",
+        },
+      ]);
+    } else {
+      setListHardskill((old) => [...old, newHardskill]);
+    }
   };
 
-  const adicionarSoftskill = (softskill: {
+  const adicionarSoftskill = (newSoftskill: {
     id: number;
     nome: string;
     nivel_experiencia: number;
   }) => {
-    setListSoftskill((old) => [...old, softskill]);
+    if (!softskill) {
+      setErrors((old) => [
+        ...old,
+        {
+          field: "softskill",
+          message: "Preecha o campo para adicionar a Softskill",
+        },
+      ]);
+    } else {
+      setListSoftskill((old) => [...old, newSoftskill]);
+    }
   };
 
   const cadastrar = async () => {
