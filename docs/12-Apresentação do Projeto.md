@@ -15,7 +15,7 @@ Toda a identidade visual foi elaborada e construída a partir de diversas relaç
 O logotipo da plataforma possui em suas características todo o propósito da EmpregaMe e a interligação com o público-alvo. Dessa forma, eis o significado da:
 
 - Maleta: Utilizado para simbolizar os trabalhadores em geral, mostrando ao usuário qual público nossa aplicação irá atender;
-- 
+
 - Marca: Nome da plataforma, construída pensada em trazer aproximação do público e para facilitar a identificação do objetivo da aplicação. No nome “EmpregaMe” foi utilizado a fonte Outfit.
 
 - A fonte possue extremidades mais fechadas nas letras, que traz à marca a sensação de seriedade e evolução que se conecta diretamente ao propósito da EmpregaMe: ser uma aplicação que trará segurança e inovação, pensando em tornar a busca por empregos na área de tecnologia mais eficiente, eficaz e gratificante para todos os envolvidos.
