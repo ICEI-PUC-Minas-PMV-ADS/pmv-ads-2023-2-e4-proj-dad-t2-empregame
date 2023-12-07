@@ -1,27 +1,39 @@
 # Apresentação
 
-<span style="color:red">Pré-requisitos: Todos os demais artefatos</span>
+## EmpregaMe
 
-Conjunto de slides em um arquivo PowerPoint ou PDF com a apresentação do projeto contemplando todos os itens trabalhados nos demais artefatos.
+Somos uma plataforma focada em unir recrutadores e candidatos em busca de oportunidades na empolgante indústria da tecnologia. Aqui, a nossa missão é simples, mas poderosa: tornar a busca por empregos na área de tecnologia mais eficiente, eficaz e gratificante para todos os envolvidos.
 
-## Título do Projeto
+## Identidade Visual
 
-Nome e marca do projeto
+Toda a identidade visual foi elaborada e construída a partir de diversas relações de sentimentos que queríamos transmitir ao usuário. Esses sentimentos foram bem definidos e representados por cores, formas e imagens que serão apresentados a seguir:
 
-## Identidade Visual (Marca, Design)
+![Identidade PetsCar](/docs/img/identidade-empregame.png)
 
-O grupo deve ter o cuidado em utilizar figuras, imagens, e cores dentro do contexto da solução proposta, de forma a manter a temática do problema.
+### Logotipo
 
-> **Links Úteis**:
-> - [10 dicas de design para slides](https://rockcontent.com/blog/design-para-slides/)
-> - [7 dicas de design para criar apresentações de PowerPoint incríveis e eficientes](https://www.shutterstock.com/pt/blog/7-dicas-de-design-para-criar-apresentacoes-de-powerpoint-incriveis-e-eficientes)
-> - [Especialista do TED dá 10 dicas para criar slides eficazes e bonitos](https://soap.com.br/blog/especialista-do-ted-da-10-dicas-para-criar-slides-eficazes-e-bonitos)
+O logotipo da plataforma possui em suas características todo o propósito da EmpregaMe e a interligação com o público-alvo. Dessa forma, eis o significado da:
+
+Maleta: Utilizado para simbolizar os trabalhadores em geral, mostrando ao usuário qual público nossa aplicação irá atender;
+Marca: Nome da plataforma, construída pensada em trazer aproximação do público e para facilitar a identificação do objetivo da aplicação.
+No nome “EmpregaMe” foi utilizado a fonte Outfit.
+
+A fonte possue extremidades mais fechadas nas letras, que traz à marca a sensação de seriedade e evolução que se conecta diretamente ao propósito da EmpregaMe: ser uma aplicação que trará segurança e inovação, pensando em tornar a busca por empregos na área de tecnologia mais eficiente, eficaz e gratificante para todos os envolvidos.
+
+### Paleta de Cores
+
+A paleta de cores idealizada para o projeto tem como base as cores roxo e preto.
+
+Os tons de cor roxo produz conhecimento, transformação. Propicia o encontro da razão com a emoção, de forma consciente.
+
+Já o preto foi utilizado para trazer contrastes e sombra a marca.
+
+### Imagens
+
+As imagens utilizadas no projeto foram usadas com um propósito: conseguir a identificação do público-alvo.
+
+Também tomamos cuidado em utilizar imagens para representação visual de funções do sistema, como os ícones dos menus e da tela inicial. Dessa forma, os usuários possuem uma experiência mais fluida e acessível no aplicativo.
 
 ## Conjunto de Slides (Estrutura)
 
-O grupo deve distribuir de forma coerente o conteúdo a ser apresentado, dentro do tempo determinado. Importante ressaltar a importância da descrição clara de todo o andamento do projeto, insumos gerados e requisitos atendidos.
- 
-> **Links Úteis**:
-> - [A regra 10-20-30 para apresentações de sucesso](https://revistapegn.globo.com/Noticias/noticia/2014/07/regra-10-20-30-para-apresentacoes-de-sucesso.html)
-> - [Top Tips for Effective Presentations](https://www.skillsyouneed.com/present/presentation-tips.html)
-> - [How to make a great presentation](https://www.ted.com/playlists/574/how_to_make_a_great_presentation)
+[Slide - Apresentação Aplicativo PetsCar](/presentation/EmpregaMe%20-%20Apresentação%20Slide.pdf)
