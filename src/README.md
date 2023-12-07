@@ -50,7 +50,7 @@ $ yarn dev
 
 ## Instalação do Front-end Mobile da Aplicação
 
--- Instalação (necessário ter instalado o NodeJS e Yarn no computador)
+- Instalação (necessário ter instalado o NodeJS e Yarn no computador)
 
 ```bash
 $ yarn install
