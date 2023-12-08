@@ -1,15 +1,83 @@
 # Programação de Funcionalidades
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Especificação do Projeto</a></span>, <a href="3-Projeto de Interface.md"> Projeto de Interface</a>, <a href="4-Metodologia.md"> Metodologia</a>, <a href="3-Projeto de Interface.md"> Projeto de Interface</a>, <a href="5-Arquitetura da Solução.md"> Arquitetura da Solução</a>
+Nesta seção são apresentadas as telas desenvolvidas pelo grupo para cada uma das funcionalidades do sistema.
 
-Implementação do sistema descritas por meio dos requisitos funcionais e/ou não funcionais. Deve relacionar os requisitos atendidos os artefatos criados (código fonte) além das estruturas de dados utilizadas e as instruções para acesso e verificação da implementação que deve estar funcional no ambiente de hospedagem.
+![image](img/telas-funcionalidades/)
 
-Para cada requisito funcional, pode ser entregue um artefato desse tipo
+### Tela Home
 
-> **Links Úteis**:
->
-> - [Trabalhando com HTML5 Local Storage e JSON](https://www.devmedia.com.br/trabalhando-com-html5-local-storage-e-json/29045)
-> - [JSON Tutorial](https://www.w3resource.com/JSON)
-> - [JSON Data Set Sample](https://opensource.adobe.com/Spry/samples/data_region/JSONDataSetSample.html)
-> - [JSON - Introduction (W3Schools)](https://www.w3schools.com/js/js_json_intro.asp)
-> - [JSON Tutorial (TutorialsPoint)](https://www.tutorialspoint.com/json/index.htm)
+![image](img/telas-funcionalidades/home-page.png)
+
+![image](img/telas-funcionalidades/sobre-nos.png)
+
+![image](img/telas-funcionalidades/contato.png)
+
+### Tela de Login
+
+![image](img/telas-funcionalidades/login.png)
+
+### Tela de Cadastro
+
+![image](img/telas-funcionalidades/cadastro-candidato.png)
+
+![image](img/telas-funcionalidades/cadastro-recrutador.png)
+
+### Tela Esqueci a Senha
+
+![image](img/telas-funcionalidades/esqueceu-senha.png)
+
+![image](img/telas-funcionalidades/codigo-esqueceu-senha.png)
+
+### Tela Feed Recrutador
+
+![image](img/telas-funcionalidades/feed-recrutador.png)
+
+### Tela Minhas Vagas Recrutador
+
+![image](img/telas-funcionalidades/minhas-vagas-recrutador.png)
+
+![image](img/telas-funcionalidades/publicar-vaga-recrutador.png)
+
+![image](img/telas-funcionalidades/editar-vaga-recrutador.png)
+
+### Tela Busca por Candidato Recrutador
+
+![image](img/telas-funcionalidades/busca-por-candidato.png)
+
+### Tela Ver Perfil Candidato
+
+![image](img/telas-funcionalidades/perfil-candidato.png)
+
+### Tela Perfil Recrutador
+
+![image](img/telas-funcionalidades/ver-perfil-recrutador.png)
+
+![image](img/telas-funcionalidades/editar-info-recrutador.png)
+
+![image](img/telas-funcionalidades/alterar-senha-recrutador.png)
+
+![image](img/telas-funcionalidades/excluir-conta-recrutador.png)
+
+### Tela Perfil Candidato
+
+![image](img/telas-funcionalidades/perfil-real-candidato.png)
+
+![image](img/telas-funcionalidades/editar-info-candidato.png)
+
+### Tela Feed Candidato
+
+![image](img/telas-funcionalidades/feed-candidato.png)
+
+### Tela Vagas Interessei Candidato
+
+![image](img/telas-funcionalidades/vagas-interessei-candidato.png)
+
+### Tela Candidatos Interessados Recrutador
+
+![image](img/telas-funcionalidades/modal-candidatos-interessados-recrutador.png)
+
+### Tela Chat
+
+![image](img/telas-funcionalidades/chat-recrutador.png)
+
+![image](img/telas-funcionalidades/chat-candidato.png)
