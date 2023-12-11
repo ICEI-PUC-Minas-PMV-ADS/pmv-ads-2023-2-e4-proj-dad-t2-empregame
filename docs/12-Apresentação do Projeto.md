@@ -36,4 +36,5 @@ Também tomamos cuidado em utilizar imagens para representação visual de funç
 
 ## Conjunto de Slides (Estrutura)
 
-[Slide - Apresentação Aplicativo PetsCar](/presentation/EmpregaMe%20-%20Apresentação%20Slide.pdf)
+[Slide - Apresentação EmpregaMe](/presentation/EmpregaMe%20-%20Apresentação%20Slide.pdf)
+[Vídeo - Apresentação EmpregaMe](/presentation/Vídeo%20de%20Apresentação%20-%20EmpregaMe.mp4)
