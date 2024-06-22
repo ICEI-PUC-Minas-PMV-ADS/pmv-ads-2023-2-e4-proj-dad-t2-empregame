@@ -1,0 +1,22 @@
+message: Please cite this software using these metadata.
+title: EmpregaME
+authors:
+  - family-names: Gonçalves dos Santos
+    given-names: Jessica
+  - family-names: Jorges da Silva
+    given-names: João Paulo
+  - family-names: Teixeira Barbosa Contin
+    given-names: Mariano
+  - family-names: Terra da Silva
+    given-names: Thiago
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Vilela Cardoso
+    given-names: Leonardo
+keywords:
+  - Emprego
+  - Cargos
+  - RH
+repository-code: https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t2-empregame.git
+version: 1.0.0
+date-released: 2023-11-26
